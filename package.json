@@ -2,7 +2,12 @@
   "name": "react-native-pmo",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
+  "private": true,
   "scripts": {
+    "typecheck": "tsc --noEmit",
+    "eslint": "eslint *.ts *.js src",
+    "prettier": "prettier --check *.ts *.js src",
+    "depcheck": "depcheck .",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -10,9 +15,22 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "eslintConfig": {
+    "root": true,
+    "extends": "@bitovi/eslint-config/react",
+    "settings": {
+      "import/ignore": ["node_modules/react-native/index\\.js$"]
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "trailingComma": "all"
+  },
   "jest": {
     "preset": "jest-expo",
-    "setupFilesAfterEnv": ["<rootDir>/jest-setup.ts"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest-setup.ts"
+    ],
     "transformIgnorePatterns": [
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
     ]
@@ -33,10 +51,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@bitovi/eslint-config": "^1.7.0",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.4.3",
     "@types/react": "~18.2.45",
+    "depcheck": "^1.4.7",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
     "typescript": "^5.1.3"
-  },
-  "private": true
+  }
 }

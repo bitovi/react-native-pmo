@@ -1,0 +1,12 @@
+ignore-dirs:
+  - /dist
+ignores:
+  # internals
+  - "@types/*"
+  - "@babel/core"
+  - "@testing-library/*"
+  - expo-*
+
+  # Used, but not with `import`
+  - react-native-safe-area-context
+  - react-native-screens

@@ -1,0 +1,39 @@
+name: Verify and Publish
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+      - name: ESLint
+        run: npm run eslint
+      - name: Prettier
+        run: npm run prettier
+      - name: depcheck
+        run: npm run depcheck
+
+      - name: Test
+        env:
+          PUBLIC_PMO_API: ${{ vars.PMO_API }}
+        run: npm run test
+
+      # - name: Build
+      #   env:
+      #     PUBLIC_PMO_API: ${{ vars.PMO_API }}
+      #   run: npm run build

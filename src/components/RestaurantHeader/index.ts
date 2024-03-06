@@ -1,1 +1,1 @@
-export { default } from "./RestaurantHeader";
+export { default } from "./RestaurantHeader"
