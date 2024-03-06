@@ -1,16 +1,16 @@
-import type { FC } from "react"
-import type { StaticParamList } from "@react-navigation/native"
-import { createStaticNavigation } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { registerRootComponent } from "expo"
-import Home from "./screens/Home"
-import OrderCreate from "./screens/OrderCreate"
-import StateList from "./screens/StateList"
-import CityList from "./screens/CityList"
-import RestaurantList from "./screens/RestaurantList"
-import RestaurantDetails from "./screens/RestaurantDetails"
-import ThemeProvider from "./theme"
+import type { FC } from "react";
+import type { StaticParamList } from "@react-navigation/native";
+import { createStaticNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { registerRootComponent } from "expo";
+import Home from "./screens/Home";
+import OrderCreate from "./screens/OrderCreate";
+import StateList from "./screens/StateList";
+import CityList from "./screens/CityList";
+import RestaurantList from "./screens/RestaurantList";
+import RestaurantDetails from "./screens/RestaurantDetails";
+import ThemeProvider from "./theme";
 
 const StateListNavigation = createNativeStackNavigator({
   initialRouteName: "StateList",
@@ -46,7 +46,7 @@ const StateListNavigation = createNativeStackNavigator({
       },
     },
   },
-})
+});
 
 const RootBottomNavigation = createBottomTabNavigator({
   initialRouteName: "Home",
@@ -65,9 +65,9 @@ const RootBottomNavigation = createBottomTabNavigator({
       },
     },
   },
-})
+});
 
-type RootStackParamList = StaticParamList<typeof StateListNavigation>
+type RootStackParamList = StaticParamList<typeof StateListNavigation>;
 
 // Creating global  types for the navigation props to avoid importing them in every file
 declare global {
@@ -77,16 +77,16 @@ declare global {
   }
 }
 
-const Navigation = createStaticNavigation(RootBottomNavigation)
+const Navigation = createStaticNavigation(RootBottomNavigation);
 
 const App: FC = () => {
   return (
     <ThemeProvider>
       <Navigation />
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 
-registerRootComponent(App)
+registerRootComponent(App);

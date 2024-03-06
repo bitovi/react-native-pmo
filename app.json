@@ -15,19 +15,30 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bitovi.reactnativepmo"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.bitovi.reactnativepmo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-     
-    ]
+      "expo-router",
+      "@react-native-google-signin/google-signin"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "fa3f90ae-24fa-4af4-bbe6-ab4fbd1b85de"
+      }
+    }
   }
 }

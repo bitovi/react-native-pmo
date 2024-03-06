@@ -1,13 +1,13 @@
-import type { FC } from "react"
-import type { TextProps } from "react-native"
-import { Text, StyleSheet } from "react-native"
-import type { Theme } from "../../theme/theme"
-import useTheme from "../../theme/useTheme"
+import type { FC } from "react";
+import type { TextProps } from "react-native";
+import { Text, StyleSheet } from "react-native";
+import type { Theme } from "../../theme/theme";
+import useTheme from "../../theme/useTheme";
 
 type Props = TextProps & {
-  variant?: keyof Theme["textStyles"]
-  color?: keyof Theme["colors"]
-}
+  variant?: keyof Theme["textStyles"];
+  color?: keyof Theme["colors"];
+};
 
 const Typography: FC<Props> = ({
   style,
@@ -15,7 +15,7 @@ const Typography: FC<Props> = ({
   color,
   children,
 }) => {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
   return (
     <Text
       style={StyleSheet.compose(style, {
@@ -25,7 +25,7 @@ const Typography: FC<Props> = ({
     >
       {children}
     </Text>
-  )
-}
+  );
+};
 
-export default Typography
+export default Typography;
