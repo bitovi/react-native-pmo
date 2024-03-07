@@ -7,6 +7,7 @@ import Home from "./screens/Home"
 import OrderCreate from "./screens/OrderCreate"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantDetails from "./screens/RestaurantDetails"
+import ThemeProvider from "./theme"
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: "Home",
@@ -51,7 +52,11 @@ declare global {
 const Navigation = createStaticNavigation(RootStack)
 
 const App: FC = () => {
-  return <Navigation />
+  return (
+    <ThemeProvider>
+      <Navigation />
+    </ThemeProvider>
+  )
 }
 
 export default App
