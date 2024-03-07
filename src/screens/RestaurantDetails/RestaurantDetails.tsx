@@ -1,9 +1,10 @@
 import type { FC } from "react"
-import { Button, StyleSheet, Text, View } from "react-native"
+import { Button, StyleSheet, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import RestaurantHeader from "../../components/RestaurantHeader"
 import { restaurantWithAddress } from "../../components/RestaurantHeader/mocks"
 import type { StaticScreenProps } from "@react-navigation/native"
+import { Box } from "../../components"
 
 type Props = StaticScreenProps<{
   id: string
@@ -14,7 +15,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   const navigation = useNavigation()
 
   return (
-    <View style={styles.container}>
+    <Box style={styles.container}>
       <Text>Details for Restaurant {id}</Text>
       <RestaurantHeader restaurant={restaurantWithAddress} />
       <Button
@@ -23,7 +24,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
           navigation.navigate("OrderCreate", { restaurantId: id })
         }}
       />
-    </View>
+    </Box>
   )
 }
 

@@ -7,6 +7,7 @@ import Home from "./screens/Home"
 import OrderCreate from "./screens/OrderCreate"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantDetails from "./screens/RestaurantDetails"
+import ThemeProvider from "./theme"
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: "Home",
@@ -44,14 +45,18 @@ type RootStackParamList = StaticParamList<typeof RootStack>
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootStackParamList { }
   }
 }
 
 const Navigation = createStaticNavigation(RootStack)
 
 const App: FC = () => {
-  return <Navigation />
+  return (
+    <ThemeProvider>
+      <Navigation />
+    </ThemeProvider>
+  )
 }
 
 export default App
