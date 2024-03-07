@@ -1,20 +1,23 @@
-import type { FC } from "react";
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import type { FC } from "react"
+import { Button, FlatList, StyleSheet, Text, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 
 const RestaurantList: FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   return (
     <View style={styles.container}>
       <Text>Restaurant List:</Text>
       <FlatList
-        data={[{ id: "1", name: "Restaurant 1" }, { id: "2", name: "Restaurant 2" }]}
+        data={[
+          { id: "1", name: "Restaurant 1" },
+          { id: "2", name: "Restaurant 2" },
+        ]}
         renderItem={({ item }) => (
           <Button
             title={item.name}
             onPress={() => {
-              navigation.navigate('RestaurantDetails', { id: item.id });
+              navigation.navigate("RestaurantDetails", { id: item.id })
             }}
           />
         )}
@@ -22,7 +25,7 @@ const RestaurantList: FC = () => {
         keyExtractor={(item) => item.id}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
   },
   list: {
     maxHeight: 200,
-  }
-});
+  },
+})
 
 export default RestaurantList

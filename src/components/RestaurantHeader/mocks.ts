@@ -1,4 +1,4 @@
-import type { Restaurant } from "../../services/restaurant/interfaces";
+import type { Restaurant } from "../../services/restaurant/interfaces"
 
 export const restaurantWithoutAddress: Restaurant = {
   _id: "3ZOZyTY1LH26LnVw",
@@ -39,7 +39,7 @@ export const restaurantWithoutAddress: Restaurant = {
   },
   name: "Test Restaurant",
   slug: "poutine-palace",
-};
+}
 
 export const restaurantWithAddress = {
   ...restaurantWithoutAddress,
@@ -49,4 +49,4 @@ export const restaurantWithAddress = {
     state: "TS",
     zip: "12345",
   },
-};
+}

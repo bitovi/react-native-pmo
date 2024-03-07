@@ -1,9 +1,9 @@
-import type { FC } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { Button, StyleSheet, Text, View } from "react-native";
+import type { FC } from "react"
+import { useNavigation } from "@react-navigation/native"
+import { Button, StyleSheet, Text, View } from "react-native"
 
 const Home: FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   return (
     <View style={styles.container}>
@@ -13,7 +13,7 @@ const Home: FC = () => {
         onPress={() => navigation.navigate("RestaurantList")}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-});
+})
 
 export default Home

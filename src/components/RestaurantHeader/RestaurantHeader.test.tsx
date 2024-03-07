@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react-native";
-import RestaurantHeader from "./RestaurantHeader";
-import { restaurantWithAddress, restaurantWithoutAddress } from "./mocks";
+import { render, screen } from "@testing-library/react-native"
+import RestaurantHeader from "./RestaurantHeader"
+import { restaurantWithAddress, restaurantWithoutAddress } from "./mocks"
 
 describe("RestaurantHeader component", () => {
   it("renders the restaurant name", () => {

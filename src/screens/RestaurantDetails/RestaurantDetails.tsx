@@ -1,17 +1,17 @@
-import type { FC } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import RestaurantHeader from '../../components/RestaurantHeader';
-import { restaurantWithAddress } from "../../components/RestaurantHeader/mocks";
-import type { StaticScreenProps } from '@react-navigation/native';
+import type { FC } from "react"
+import { Button, StyleSheet, Text, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import RestaurantHeader from "../../components/RestaurantHeader"
+import { restaurantWithAddress } from "../../components/RestaurantHeader/mocks"
+import type { StaticScreenProps } from "@react-navigation/native"
 
 type Props = StaticScreenProps<{
-  id: string;
+  id: string
 }>
 
 const RestaurantDetails: FC<Props> = ({ route }) => {
-  const { id } = route.params;
-  const navigation = useNavigation();
+  const { id } = route.params
+  const navigation = useNavigation()
 
   return (
     <View style={styles.container}>
@@ -20,11 +20,11 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
       <Button
         title="Place an order"
         onPress={() => {
-          navigation.navigate('OrderCreate', { restaurantId: id });
+          navigation.navigate("OrderCreate", { restaurantId: id })
         }}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-});
+})
 
 export default RestaurantDetails
