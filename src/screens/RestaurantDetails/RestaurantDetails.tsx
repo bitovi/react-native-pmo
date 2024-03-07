@@ -15,7 +15,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Restaurant Details for Restaurant {id}</Text>
+      <Text>Details for Restaurant {id}</Text>
       <RestaurantHeader restaurant={restaurantWithAddress} />
       <Button
         title="Place an order"
