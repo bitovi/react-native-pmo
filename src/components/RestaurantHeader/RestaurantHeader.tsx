@@ -26,7 +26,6 @@ const RestaurantHeader: React.FC<{ restaurant: Restaurant }> = ({
           Hours: M-F 10am-11pm
           <Text style={styles.openNow}>Open Now</Text>
         </Text>
-        {"\n"}
       </ImageBackground>
     </View>
   )

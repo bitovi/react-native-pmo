@@ -1,59 +1,8 @@
-import type { Restaurant } from "../../services/restaurant"
-
 import { render, screen } from "@testing-library/react-native"
 import RestaurantHeader from "./RestaurantHeader"
+import { restaurantWithAddress, restaurantWithoutAddress } from "./mocks"
 
 describe("RestaurantHeader component", () => {
-  const restaurantWithoutAddress: Restaurant = {
-    _id: "3ZOZyTY1LH26LnVw",
-    images: {
-      banner: "banner-image.jpg",
-      owner: "owner-image.jpg",
-      thumbnail: "thumbnail-image.jpg",
-    },
-    menu: {
-      lunch: [
-        {
-          name: "Crab Pancakes with Sorrel Syrup",
-          price: 35.99,
-        },
-        {
-          name: "Steamed Mussels",
-          price: 21.99,
-        },
-        {
-          name: "Spinach Fennel Watercress Ravioli",
-          price: 35.99,
-        },
-      ],
-      dinner: [
-        {
-          name: "Gunthorp Chicken",
-          price: 21.99,
-        },
-        {
-          name: "Herring in Lavender Dill Reduction",
-          price: 45.99,
-        },
-        {
-          name: "Chicken with Tomato Carrot Chutney Sauce",
-          price: 45.99,
-        },
-      ],
-    },
-    name: "Test Restaurant",
-    slug: "poutine-palace",
-  }
-  const restaurantWithAddress = {
-    ...restaurantWithoutAddress,
-    address: {
-      street: "123 Test St",
-      city: "Testville",
-      state: "TS",
-      zip: "12345",
-    },
-  }
-
   it("renders the restaurant name", () => {
     render(<RestaurantHeader restaurant={restaurantWithAddress} />)
     expect(screen.getByText(/Test Restaurant/)).toBeOnTheScreen()
