@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react-native";
-import { Restaurant } from "../../services/restaurant/interfaces";
 import RestaurantHeader from "./RestaurantHeader";
 import { restaurantWithAddress, restaurantWithoutAddress } from "./mocks";
 

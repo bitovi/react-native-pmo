@@ -2,7 +2,7 @@
   "name": "react-native-pmo",
   "version": "1.0.0",
   "private": true,
-  "main": "App.tsx",
+  "main": "src/App.tsx",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "eslint": "eslint *.ts *.js src",

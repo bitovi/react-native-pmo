@@ -1,9 +1,9 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { Button, FlatList, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const RestaurantList: FC = () => {
-const navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>

@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react-native"
 
-import App from "./App"
+import Home from "./Home"
 
 describe("<App />", () => {
   it("renders", () => {
-    render(<App />)
-    expect(screen.getByText(/place my order/i)).toBeOnTheScreen()
+    render(<Home />)
+    expect(screen.getByText(/home/i)).toBeOnTheScreen()
   })
 })

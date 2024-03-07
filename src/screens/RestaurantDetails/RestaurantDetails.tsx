@@ -1,10 +1,15 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import RestaurantHeader from '../../components/RestaurantHeader';
 import { restaurantWithAddress } from "../../components/RestaurantHeader/mocks";
+import type { StaticScreenProps } from '@react-navigation/native';
 
-const RestaurantDetails: FC = ({ route }) => {
+type Props = StaticScreenProps<{
+  id: string;
+}>
+
+const RestaurantDetails: FC<Props> = ({ route }) => {
   const { id } = route.params;
   const navigation = useNavigation();
 

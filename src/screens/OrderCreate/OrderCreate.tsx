@@ -1,7 +1,12 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import type { StaticScreenProps } from '@react-navigation/native';
 
-const OrderCreate: FC = ({ route }) => {
+type Props = StaticScreenProps<{
+  restaurantId: string;
+}>
+
+const OrderCreate: FC<Props> = ({ route }) => {
   const { restaurantId } = route.params;
 
   return (

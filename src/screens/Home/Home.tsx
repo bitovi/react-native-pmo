@@ -1,5 +1,5 @@
+import type { FC } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { FC } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
 const Home: FC = () => {
