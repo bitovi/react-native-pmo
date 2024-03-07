@@ -11,6 +11,8 @@ describe("App", () => {
     fireEvent.press(screen.getByText(/restaurant 1/i))
     expect(screen.getByText(/details for restaurant 1/i)).toBeOnTheScreen()
     fireEvent.press(screen.getByText(/place an order/i))
-    expect(screen.getByText(/place an order for restaurant 1/i)).toBeOnTheScreen()
+    expect(
+      screen.getByText(/place an order for restaurant 1/i),
+    ).toBeOnTheScreen()
   })
 })
