@@ -1,16 +1,22 @@
-import type { FC } from "react";
-import type { ViewProps } from "react-native";
-import { StyleSheet, View } from "react-native";
-import type { Theme } from "../../theme/theme";
-import useTheme from "../../theme/useTheme";
+import type { FC } from "react"
+import type { ViewProps } from "react-native"
+import { StyleSheet, View } from "react-native"
+import type { Theme } from "../../theme/theme"
+import useTheme from "../../theme/useTheme"
 
 type Props = ViewProps & {
-  margin?: keyof Theme["spacing"],
-  padding?: keyof Theme["spacing"],
+  margin?: keyof Theme["spacing"]
+  padding?: keyof Theme["spacing"]
 }
 
-const Box: FC<Props> = ({ margin, padding, style, children, ...restOfProps }) => {
-  const { theme } = useTheme();
+const Box: FC<Props> = ({
+  margin,
+  padding,
+  style,
+  children,
+  ...restOfProps
+}) => {
+  const { theme } = useTheme()
 
   return (
     <View
@@ -22,7 +28,7 @@ const Box: FC<Props> = ({ margin, padding, style, children, ...restOfProps }) =>
     >
       {children}
     </View>
-  );
+  )
 }
 
 export default Box
