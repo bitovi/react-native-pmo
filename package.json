@@ -6,7 +6,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "eslint": "eslint *.ts *.js src",
-    "prettier": "prettier --write *.ts *.js src",
+    "prettier": "prettier --check *.ts *.js src",
     "depcheck": "depcheck .",
     "start": "expo start",
     "android": "expo start --android",
