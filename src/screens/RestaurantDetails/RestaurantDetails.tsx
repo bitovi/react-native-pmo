@@ -7,21 +7,21 @@ import type { StaticScreenProps } from "@react-navigation/native"
 import { Box } from "../../components"
 
 type Props = StaticScreenProps<{
-  id: string
+  slug: string
 }>
 
 const RestaurantDetails: FC<Props> = ({ route }) => {
-  const { id } = route.params
+  const { slug } = route.params
   const navigation = useNavigation()
 
   return (
     <Box style={styles.container}>
-      <Text>Details for Restaurant {id}</Text>
+      <Text>Details for Restaurant {slug}</Text>
       <RestaurantHeader restaurant={restaurantWithAddress} />
       <Button
         title="Place an order"
         onPress={() => {
-          navigation.navigate("OrderCreate", { restaurantId: id })
+          navigation.navigate("OrderCreate", { restaurantId: slug })
         }}
       />
     </Box>
