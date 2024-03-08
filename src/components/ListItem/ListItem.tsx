@@ -1,8 +1,6 @@
 import type { ComponentProps, FC, ReactNode } from "react"
 import type { StyleProp, ViewStyle } from "react-native"
 import { Image, Pressable, StyleSheet } from "react-native"
-import type { Theme } from "../../theme/theme"
-import useTheme from "../../theme/useTheme"
 import Box from "../Box"
 
 type Props = ComponentProps<typeof Box> & {
@@ -21,11 +19,10 @@ const ListItem: FC<Props> = ({
 }) => {
   return (
     <Pressable onPress={onPress}>
-      <Box
-        style={StyleSheet.compose(style, styles.container)}
-        {...restOfProps}
-      >
-        {image && <Image source={{ uri: image }} style={{ width: 48, height: 48 }} />}
+      <Box style={StyleSheet.compose(style, styles.container)} {...restOfProps}>
+        {image && (
+          <Image source={{ uri: image }} style={{ width: 48, height: 48 }} />
+        )}
         {children}
       </Box>
     </Pressable>

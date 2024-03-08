@@ -25,7 +25,7 @@ const Box: FC<Props> = ({
       style={StyleSheet.compose(style, {
         margin: margin && theme.spacing[margin],
         padding: padding && theme.spacing[padding],
-        ...(fullWidth ? { width: "100%" } : {})
+        ...(fullWidth ? { width: "100%" } : {}),
       })}
       {...restOfProps}
     >

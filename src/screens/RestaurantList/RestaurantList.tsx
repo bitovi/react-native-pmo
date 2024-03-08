@@ -3,7 +3,11 @@ import { useState } from "react"
 import { Button, FlatList, StyleSheet, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import ListItem from "../../components/ListItem/ListItem"
-import { useCities, useRestaurants, useStates } from "../../services/restaurant/hook"
+import {
+  useCities,
+  useRestaurants,
+  useStates,
+} from "../../services/restaurant/hook"
 import { Box, Typography } from "../../components"
 
 const RestaurantList: FC = () => {
@@ -41,14 +45,17 @@ const RestaurantList: FC = () => {
 
   return (
     <Box style={styles.container}>
-      <Box margin='m'>
-        <Typography variant="h2">Restaurants in {city} {state}</Typography>
+      <Box margin="m">
+        <Typography variant="h2">
+          Restaurants in {city} {state}
+        </Typography>
       </Box>
       <Box fullWidth padding="m">
         <Typography variant="h2">Select a state:</Typography>
-        {isPendingStates
-          ? <Typography variant="h4">Loading...</Typography>
-          : <FlatList
+        {isPendingStates ? (
+          <Typography variant="h4">Loading...</Typography>
+        ) : (
+          <FlatList
             style={styles.options}
             data={states}
             renderItem={({ item: stateItem }) => (
@@ -59,14 +66,15 @@ const RestaurantList: FC = () => {
             )}
             keyExtractor={(item) => item.short}
           />
-        }
+        )}
       </Box>
       {state && (
         <Box fullWidth padding="m">
           <Typography variant="h2">Select a city:</Typography>
-          {isPendingCities
-            ? <Typography variant="h4">Loading...</Typography>
-            : <FlatList
+          {isPendingCities ? (
+            <Typography variant="h4">Loading...</Typography>
+          ) : (
+            <FlatList
               style={styles.options}
               data={cities}
               renderItem={({ item: cityItem }) => (
@@ -77,20 +85,25 @@ const RestaurantList: FC = () => {
               )}
               keyExtractor={(item) => item.name}
             />
-          }
+          )}
         </Box>
       )}
       {city && (
         <Box fullWidth padding="m">
           <Typography variant="h2">Restaurants:</Typography>
-          {isPending
-            ? <Typography variant="h4">Loading...</Typography>
-            : <FlatList
+          {isPending ? (
+            <Typography variant="h4">Loading...</Typography>
+          ) : (
+            <FlatList
               data={data}
               renderItem={({ item: restaurant }) => (
                 <ListItem
                   image={restaurant.images.thumbnail}
-                  onPress={() => navigation.navigate("RestaurantDetails", { slug: restaurant.slug })}
+                  onPress={() =>
+                    navigation.navigate("RestaurantDetails", {
+                      slug: restaurant.slug,
+                    })
+                  }
                 >
                   <Text>{restaurant.name}</Text>
                 </ListItem>
@@ -98,7 +111,7 @@ const RestaurantList: FC = () => {
               style={styles.list}
               keyExtractor={(item) => item._id}
             />
-          }
+          )}
         </Box>
       )}
     </Box>
