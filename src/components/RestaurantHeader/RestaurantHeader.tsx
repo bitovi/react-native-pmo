@@ -10,7 +10,7 @@ const RestaurantHeader: React.FC<{ restaurant: Restaurant }> = ({
     <View style={styles.restaurantHeader}>
       <ImageBackground source={{ uri: `url(/${restaurant.images.banner})` }}>
         <View style={styles.background}></View>
-        <Typography variant="h2">{restaurant.name}</Typography>
+        <Typography variant="heading">{restaurant.name}</Typography>
         {restaurant.address && (
           <Text style={styles.address}>
             {restaurant.address.street}

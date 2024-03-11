@@ -3,7 +3,7 @@ import Typography from "./Typography"
 
 describe("Typography component", () => {
   it("renders 'Hello' when given input", () => {
-    render(<Typography variant={"h3"}>Hello!</Typography>)
+    render(<Typography variant={"body"}>Hello!</Typography>)
     expect(screen.getByText(/Hello/)).toBeOnTheScreen()
   })
 })
