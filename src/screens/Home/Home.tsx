@@ -10,7 +10,7 @@ const Home: FC = () => {
     <Box margin={"m"} padding={"s"} style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../../assets/homepage-hero.jpeg")}
+        source={require("place-my-order-assets/images/homepage-hero.jpg")}
       />
       <Typography variant="heading">
         Ordering food has never been easier
