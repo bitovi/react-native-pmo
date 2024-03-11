@@ -10,7 +10,7 @@ export async function apiRequest<Data = never, Params = unknown>({
   try {
     const query = params ? stringifyQuery(params) : ""
     const response = await fetch(
-      `${process.env.PUBLIC_PMO_API}${path}?${query}`,
+      `${process.env.EXPO_PUBLIC_PMO_API}${path}?${query}`,
       {
         method,
       },
