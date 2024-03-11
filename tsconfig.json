@@ -18,7 +18,7 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "useDefineForClassFields": true,
+    "useDefineForClassFields": true
   },
   "include": ["*.ts", "src"],
   "exclude": ["node_modules"]

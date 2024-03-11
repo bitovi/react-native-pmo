@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native"
 import type { StaticScreenProps } from "@react-navigation/native"
 
 type Props = StaticScreenProps<{
-  restaurantId: string
+  restaurantId?: string
 }>
 
 const OrderCreate: FC<Props> = ({ route }) => {

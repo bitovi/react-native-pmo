@@ -22,7 +22,9 @@
     "root": true,
     "extends": "@bitovi/eslint-config/react",
     "settings": {
-      "import/ignore": ["node_modules/react-native/index\\.js$"]
+      "import/ignore": [
+        "node_modules/react-native/index\\.js$"
+      ]
     }
   },
   "prettier": {
@@ -39,8 +41,9 @@
     ]
   },
   "dependencies": {
-    "@react-navigation/native": "^7.0.0-alpha.11",
-    "@react-navigation/native-stack": "^7.0.0-alpha.12",
+    "@react-navigation/bottom-tabs": "^7.0.0-alpha.17",
+    "@react-navigation/native": "^7.0.0-alpha.14",
+    "@react-navigation/native-stack": "^7.0.0-alpha.15",
     "@types/jest": "^29.5.12",
     "expo": "~50.0.8",
     "expo-constants": "~15.4.5",
