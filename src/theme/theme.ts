@@ -1,3 +1,5 @@
+import type { TextStyle } from "react-native"
+
 const palette = {
   purple: "#5A31F4",
   green: "#0ECD9D",
@@ -20,6 +22,16 @@ export const theme = {
     m: 16,
     l: 24,
     xl: 40,
+  },
+  textStyles: {
+    heading: {
+      fontSize: 50,
+      fontWeight: "500" as TextStyle["fontWeight"],
+    },
+    body: {
+      fontSize: 21,
+      fontWeight: "normal" as TextStyle["fontWeight"],
+    },
   },
 }
 
