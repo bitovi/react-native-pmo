@@ -7,11 +7,13 @@ import useTheme from "../../theme/useTheme"
 type Props = ViewProps & {
   margin?: keyof Theme["spacing"]
   padding?: keyof Theme["spacing"]
+  fullWidth?: boolean
 }
 
 const Box: FC<Props> = ({
   margin,
   padding,
+  fullWidth,
   style,
   children,
   ...restOfProps
@@ -23,6 +25,7 @@ const Box: FC<Props> = ({
       style={StyleSheet.compose(style, {
         margin: margin && theme.spacing[margin],
         padding: padding && theme.spacing[padding],
+        ...(fullWidth ? { width: "100%" } : {}),
       })}
       {...restOfProps}
     >
