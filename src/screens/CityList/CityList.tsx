@@ -1,20 +1,18 @@
 import type { FC } from "react"
-
 import { FlatList, StyleSheet, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import type { StaticScreenProps } from "@react-navigation/native"
-import { useRestaurants } from "../../services/restaurant/hook"
+import { useCities } from "../../services/restaurant/hook"
 import { Box, Press, Typography } from "../../components"
 
 type Props = StaticScreenProps<{
   state: string
-  city: string
 }>
 
-const RestaurantList: FC<Props> = ({ route }) => {
-  const { state, city } = route.params
+const CityList: FC<Props> = ({ route }) => {
+  const { state } = route.params
   const navigation = useNavigation()
-  const { data, error, isPending } = useRestaurants(state, city)
+  const { data: cities, error, isPending } = useCities(state || "")
 
   if (error) {
     return (
@@ -34,34 +32,29 @@ const RestaurantList: FC<Props> = ({ route }) => {
 
   return (
     <Box padding="m" style={styles.container}>
-      <Typography variant="heading">
-        Restaurants in {city}, {state}
-      </Typography>
-      <Box fullWidth padding="m">
-        <Typography variant="body">Restaurants:</Typography>
-        <FlatList
-          data={data}
-          renderItem={({ item: restaurant }) => (
-            <Press
-              title={restaurant.name}
-              onPress={() =>
-                navigation.navigate("RestaurantDetails", {
-                  slug: restaurant.slug,
-                })
-              }
-            ></Press>
-          )}
-          style={styles.options}
-          keyExtractor={(item) => item._id}
-        />
-      </Box>
+      <Typography variant="heading">Select a City: </Typography>
+      <FlatList
+        style={styles.options}
+        data={cities}
+        renderItem={({ item: cityItem }) => (
+          <Press
+            title={cityItem.name}
+            onPress={() =>
+              navigation.navigate("RestaurantList", {
+                state,
+                city: cityItem.name,
+              })
+            }
+          />
+        )}
+        keyExtractor={(item) => item.name}
+      />
     </Box>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     flex: 1,
     backgroundColor: "#fdf",
     alignItems: "center",
@@ -73,4 +66,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default RestaurantList
+export default CityList

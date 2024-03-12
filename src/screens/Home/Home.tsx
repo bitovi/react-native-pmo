@@ -21,7 +21,7 @@ const Home: FC = () => {
       </Typography>
       <Press
         title="Choose a restaurant"
-        onPress={() => navigation.navigate("RestaurantList")}
+        onPress={() => navigation.navigate("StateList")}
       />
     </Box>
   )
