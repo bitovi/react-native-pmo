@@ -6,7 +6,6 @@ import type { StaticScreenProps } from "@react-navigation/native"
 import { useRestaurants } from "../../services/restaurant/hook"
 import { Box, Press, Typography } from "../../components"
 
-
 type Props = StaticScreenProps<{
   state: string
   city: string
@@ -16,7 +15,6 @@ const RestaurantList: FC<Props> = ({ route }) => {
   const { state, city } = route.params
   const navigation = useNavigation()
   const { data, error, isPending } = useRestaurants(state, city)
-
 
   if (error) {
     return (
@@ -35,7 +33,6 @@ const RestaurantList: FC<Props> = ({ route }) => {
   }
 
   return (
-
     <Box padding="m" style={styles.container}>
       <Typography variant="heading">
         Restaurants in {city}, {state}
@@ -58,7 +55,6 @@ const RestaurantList: FC<Props> = ({ route }) => {
           keyExtractor={(item) => item._id}
         />
       </Box>
-
     </Box>
   )
 }
@@ -73,11 +69,6 @@ const styles = StyleSheet.create({
     overflow: "scroll",
   },
   options: {
-    flexDirection: "row",
-  },
-  options: {
-    maxHeight: 200,
-    width: "100%",
     flexDirection: "row",
   },
 })
