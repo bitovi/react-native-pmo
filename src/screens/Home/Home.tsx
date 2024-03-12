@@ -7,7 +7,7 @@ const Home: FC = () => {
   const navigation = useNavigation()
 
   return (
-    <Box margin={"m"} padding={"s"} style={styles.container}>
+    <Box padding={"s"} style={styles.container}>
       <Image
         style={styles.image}
         source={require("place-my-order-assets/images/homepage-hero.jpg")}
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#eee",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
   },
   image: { width: 350, height: 400 },

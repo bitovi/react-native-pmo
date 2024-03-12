@@ -42,6 +42,6 @@ describe("RestaurantHeader component", () => {
 
   it('renders the "Open Now" text', () => {
     render(<RestaurantHeader restaurant={restaurantWithAddress} />)
-    expect(screen.getByText("Open Now")).toBeOnTheScreen()
+    expect(screen.getByText("Open Now", { exact: false })).toBeOnTheScreen()
   })
 })

@@ -1,10 +1,10 @@
 import type { FC } from "react"
-import { Button, StyleSheet, Text } from "react-native"
+import { StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import RestaurantHeader from "../../components/RestaurantHeader"
-import { restaurantWithAddress } from "../../components/RestaurantHeader/mocks"
 import type { StaticScreenProps } from "@react-navigation/native"
-import { Box } from "../../components"
+import { Box, Press, Typography } from "../../components"
+import { useRestaurant } from "../../services/restaurant/hook"
 
 type Props = StaticScreenProps<{
   slug: string
@@ -13,12 +13,31 @@ type Props = StaticScreenProps<{
 const RestaurantDetails: FC<Props> = ({ route }) => {
   const { slug } = route.params
   const navigation = useNavigation()
+  const { data: restaurant, error, isPending } = useRestaurant(slug)
+
+  if (error) {
+    return (
+      <Box padding="s" style={styles.container}>
+        <Typography variant="heading">
+          Error loading restaurant details: {"\n"}
+        </Typography>
+        <Typography variant="body">{error.message}</Typography>
+      </Box>
+    )
+  }
+
+  if (isPending) {
+    return (
+      <Box padding="s" style={styles.container}>
+        <Typography variant="heading">Loading…</Typography>
+      </Box>
+    )
+  }
 
   return (
     <Box style={styles.container}>
-      <Text>Details for Restaurant {slug}</Text>
-      <RestaurantHeader restaurant={restaurantWithAddress} />
-      <Button
+      <RestaurantHeader restaurant={restaurant} />
+      <Press
         title="Place an order"
         onPress={() => {
           navigation.navigate("OrderCreate", { restaurantId: slug })
