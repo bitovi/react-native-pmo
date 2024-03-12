@@ -6,17 +6,31 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { registerRootComponent } from "expo"
 import Home from "./screens/Home"
 import OrderCreate from "./screens/OrderCreate"
+import StateList from "./screens/StateList"
+import CityList from "./screens/CityList"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantDetails from "./screens/RestaurantDetails"
 import ThemeProvider from "./theme"
 
-const RestaurantListNavigation = createNativeStackNavigator({
-  initialRouteName: "RestaurantList",
+const StateListNavigation = createNativeStackNavigator({
+  initialRouteName: "StateList",
   screens: {
+    StateList: {
+      screen: StateList,
+      options: {
+        title: "States",
+      },
+    },
+    CityList: {
+      screen: CityList,
+      options: {
+        title: "Cities",
+      },
+    },
     RestaurantList: {
       screen: RestaurantList,
       options: {
-        title: "Restaurant List",
+        title: "Restaurants",
       },
     },
     RestaurantDetails: {
@@ -43,17 +57,17 @@ const RootBottomNavigation = createBottomTabNavigator({
         title: "Home",
       },
     },
-    RestaurantList: {
-      screen: RestaurantListNavigation,
+    StateList: {
+      screen: StateListNavigation,
       options: {
-        title: "Restaurant List",
+        title: "Find a Restaurant",
         headerShown: false,
       },
     },
   },
 })
 
-type RootStackParamList = StaticParamList<typeof RestaurantListNavigation>
+type RootStackParamList = StaticParamList<typeof StateListNavigation>
 
 // Creating global  types for the navigation props to avoid importing them in every file
 declare global {
