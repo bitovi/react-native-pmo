@@ -12,3 +12,4 @@ ignores:
   # Used, but not with `import`
   - react-native-safe-area-context
   - react-native-screens
+  - "identity-obj-proxy"
