@@ -1,5 +1,4 @@
 import type { Restaurant } from "../../services/restaurant"
-
 import { ImageBackground, StyleSheet, View } from "react-native"
 import Typography from "../Typography"
 
