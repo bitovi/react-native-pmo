@@ -1,14 +1,10 @@
-import type { Restaurant } from "../../services/restaurant";
-
-import { ImageBackground, StyleSheet, View, Text } from "react-native";
-import Typography from "../Typography";
-
-import { ImageBackground, StyleSheet, View } from "react-native";
-import Typography from "../Typography";
+import type { Restaurant } from "../../services/restaurant"
+import { ImageBackground, StyleSheet, View } from "react-native"
+import Typography from "../Typography"
 
 type Props = {
-  restaurant: Restaurant | null;
-};
+  restaurant: Restaurant | null
+}
 
 const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
   return (
@@ -37,8 +33,8 @@ const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
         </Typography>
       </ImageBackground>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   restaurantHeader: {
@@ -59,6 +55,6 @@ const styles = StyleSheet.create({
   address: {},
   hoursPrice: {},
   openNow: {},
-});
+})
 
-export default RestaurantHeader;
+export default RestaurantHeader

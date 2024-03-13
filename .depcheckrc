@@ -5,7 +5,9 @@ ignores:
   - "@types/*"
   - "@babel/core"
   - "@testing-library/*"
-  - expo-*
+  - "expo-*"
+  - "@react-native-google-signin/google-signin"
+  - "react-native-web"
 
   # Used, but not with `import`
   - react-native-safe-area-context
