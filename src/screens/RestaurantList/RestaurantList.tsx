@@ -1,6 +1,5 @@
 import type { FC } from "react"
-
-import { FlatList, StyleSheet, Text } from "react-native"
+import { FlatList, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { useRestaurants } from "../../services/restaurant/hook"
@@ -18,54 +17,49 @@ const RestaurantList: FC<Props> = ({ route }) => {
 
   if (error) {
     return (
-      <Box style={styles.container}>
-        <Text>Error: {error.message}</Text>
+      <Box padding="s" style={styles.container}>
+        <Typography variant="heading">
+          Error loading restaurants: {"\n"}
+        </Typography>
+        <Typography variant="body">{error.message}</Typography>
       </Box>
     )
   }
 
   if (isPending) {
     return (
-      <Box style={styles.container}>
-        <Text>Loading...</Text>
+      <Box padding="s" style={styles.container}>
+        <Typography variant="heading">Loading…</Typography>
       </Box>
     )
   }
 
   return (
-    <Box padding="m" style={styles.container}>
-      <Typography variant="heading">
-        Restaurants in {city}, {state}
-      </Typography>
-      <Box fullWidth padding="m">
-        <Typography variant="body">Restaurants:</Typography>
-        <FlatList
-          data={data}
-          renderItem={({ item: restaurant }) => (
-            <Press
-              title={restaurant.name}
-              onPress={() =>
-                navigation.navigate("RestaurantDetails", {
-                  slug: restaurant.slug,
-                })
-              }
-            ></Press>
-          )}
-          style={styles.options}
-          keyExtractor={(item) => item._id}
-        />
-      </Box>
+    <Box padding="s" style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={({ item: restaurant }) => (
+          <Press
+            title={restaurant.name}
+            onPress={() =>
+              navigation.navigate("RestaurantDetails", {
+                slug: restaurant.slug,
+              })
+            }
+          ></Press>
+        )}
+        style={styles.options}
+        keyExtractor={(item) => item._id}
+      />
     </Box>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     flex: 1,
     backgroundColor: "#fdf",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
     overflow: "scroll",
   },
   options: {

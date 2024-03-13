@@ -1,31 +1,37 @@
 import type { Restaurant } from "../../services/restaurant"
 
-import { ImageBackground, StyleSheet, View, Text } from "react-native"
+import { ImageBackground, StyleSheet, View } from "react-native"
 import Typography from "../Typography"
 
-const RestaurantHeader: React.FC<{ restaurant: Restaurant }> = ({
-  restaurant,
-}) => {
+type Props = {
+  restaurant: Restaurant | null
+}
+
+const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
   return (
     <View style={styles.restaurantHeader}>
-      <ImageBackground source={{ uri: `url(/${restaurant.images.banner})` }}>
+      <ImageBackground
+        source={{
+          uri: `${process.env.EXPO_PUBLIC_PMO_ASSETS}/${restaurant?.images.banner}`,
+        }}
+      >
         <View style={styles.background}></View>
-        <Typography variant="heading">{restaurant.name}</Typography>
-        {restaurant.address && (
-          <Text style={styles.address}>
+        <Typography color="background" variant="heading">
+          {restaurant?.name}
+        </Typography>
+        {restaurant?.address && (
+          <Typography color="background" variant="body">
             {restaurant.address.street}
             {"\n"}
             {restaurant.address.city}, {restaurant.address.state}{" "}
             {restaurant.address.zip}
-          </Text>
+          </Typography>
         )}
-
-        <Text style={styles.hoursPrice}>
+        <Typography color="background" variant="body">
           $$$
           {"\n"}
-          Hours: M-F 10am-11pm
-          <Text style={styles.openNow}>Open Now</Text>
-        </Text>
+          Hours: M-F 10am-11pm {"\n"}Open Now
+        </Typography>
       </ImageBackground>
     </View>
   )

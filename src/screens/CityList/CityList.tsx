@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { FlatList, StyleSheet, Text } from "react-native"
+import { FlatList, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { useCities } from "../../services/restaurant/hook"
@@ -16,23 +16,23 @@ const CityList: FC<Props> = ({ route }) => {
 
   if (error) {
     return (
-      <Box style={styles.container}>
-        <Text>Error: {error.message}</Text>
+      <Box padding="s" style={styles.container}>
+        <Typography variant="heading">Error loading cities: {"\n"}</Typography>
+        <Typography variant="body">{error.message}</Typography>
       </Box>
     )
   }
 
   if (isPending) {
     return (
-      <Box style={styles.container}>
-        <Text>Loading...</Text>
+      <Box padding="s" style={styles.container}>
+        <Typography variant="heading">Loading…</Typography>
       </Box>
     )
   }
 
   return (
     <Box padding="m" style={styles.container}>
-      <Typography variant="heading">Select a City: </Typography>
       <FlatList
         style={styles.options}
         data={cities}
@@ -57,8 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fdf",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
     overflow: "scroll",
   },
   options: {
