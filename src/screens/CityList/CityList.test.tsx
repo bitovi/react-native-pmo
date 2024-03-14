@@ -7,7 +7,7 @@ import * as hook from "../../services/restaurant/hook"
 import CityList from "./CityList"
 
 describe("CityList component", () => {
-  // Mock the hooks and components used in StateList
+  // Mock the hooks and components used in CityList
 
   const mockCitiesResponse = {
     data: [
