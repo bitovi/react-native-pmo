@@ -1,26 +1,14 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react-native"
+import { render, screen } from "@testing-library/react-native"
+import { createStaticNavigation } from "@react-navigation/native"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
-import App from "./App"
+import * as hook from "../../services/restaurant/hook"
 
-describe("App", () => {
-  const mockStateResponse = {
-    data: [
-      { short: "MI", name: "Michigan" },
-      { short: "WI", name: "Wisconsin" },
-      { short: "IL", name: "Illinois" },
-    ],
-  }
-  const mockCitiesResponse = {
-    data: [
-      { name: "Detroit", state: "MI" },
-      { name: "Ann Arbor", state: "MI" },
-    ],
-  }
+import RestaurantList from "./RestaurantList"
+
+describe("RestaurantList component", () => {
+  // Mock the hooks and components used in RestaurantList
+
   const mockRestaurantsResponse = {
     data: [
       {
@@ -94,59 +82,56 @@ describe("App", () => {
     ],
   }
 
-  // Mocking the global fetch function
-  const mockFetch = jest.fn()
-
-  global.fetch = mockFetch
-
+  let useRestaurants: jest.SpyInstance<ReturnType<typeof hook.useRestaurants>>
   beforeEach(() => {
-    mockFetch.mockClear()
+    jest.resetAllMocks()
+    useRestaurants = jest.spyOn(hook, "useRestaurants")
   })
 
-  afterEach(() => {
-    mockFetch.mockClear()
+  const mockStackNavigator = createNativeStackNavigator({
+    initialRouteName: "RestaurantList",
+    screens: {
+      StateList: {
+        screen: RestaurantList,
+        initialParams: { state: "", city: "" },
+        options: {
+          title: "Restaurants",
+        },
+      },
+    },
   })
 
-  it("renders and navigates without issue", async () => {
-    mockFetch
-      .mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockStateResponse),
-        statusText: "OK",
-        status: 200,
-      })
-      .mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockCitiesResponse),
-        statusText: "OK",
-        status: 200,
-      })
-      .mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockRestaurantsResponse),
-        statusText: "OK",
-        status: 200,
-      })
+  const MockRestaurantNavigation = createStaticNavigation(mockStackNavigator)
 
-    render(<App />)
-    expect(
-      screen.getByText(/Ordering food has never been easier/i),
-    ).toBeOnTheScreen()
-    fireEvent.press(screen.getByText(/Choose a restaurant/i))
-    await waitFor(() => {
-      expect(screen.getByText(/Michigan/i, { exact: false })).toBeOnTheScreen()
+  it("renders restaurant List", () => {
+    useRestaurants.mockReturnValue({
+      ...mockRestaurantsResponse,
+      error: null,
+      isPending: false,
     })
-    fireEvent.press(screen.getByText(/Michigan/i))
 
-    await waitFor(() => {
-      expect(screen.getByText(/Detroit/i, { exact: false })).toBeOnTheScreen()
-    })
-    fireEvent.press(screen.getByText(/Detroit/i))
+    render(<MockRestaurantNavigation />)
+    expect(screen.getByText(/Bagel Restaurant/i)).toBeOnTheScreen()
+    expect(screen.getByText(/Brunch Barn/i)).toBeOnTheScreen()
+  })
 
-    await waitFor(() => {
-      expect(
-        screen.getByText(/Bagel Restaurant/i, { exact: false }),
-      ).toBeOnTheScreen()
+  it("renders loading restaurant", () => {
+    useRestaurants.mockReturnValue({ data: null, error: null, isPending: true })
+
+    render(<MockRestaurantNavigation />)
+
+    expect(screen.getByText(/Loading…/i)).toBeOnTheScreen()
+  })
+  it("renders error restaurant", () => {
+    useRestaurants.mockReturnValue({
+      data: null,
+      error: { name: "Oops", message: "This is the error" },
+      isPending: false,
     })
+
+    render(<MockRestaurantNavigation />)
+
+    expect(screen.getByText(/Error loading restaurants:/)).toBeOnTheScreen()
+    expect(screen.getByText(/This is the error/)).toBeOnTheScreen()
   })
 })

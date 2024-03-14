@@ -13,7 +13,7 @@ afterEach(() => {
   mockFetch.mockClear()
 })
 
-describe.skip("apiRequest function", () => {
+describe("apiRequest function", () => {
   it("should handle a successful request", async () => {
     // Mock the fetch response
     mockFetch.mockResolvedValueOnce({
@@ -30,7 +30,7 @@ describe.skip("apiRequest function", () => {
 
     expect(response).toEqual({ data: { message: "success" }, error: null })
     expect(mockFetch).toHaveBeenCalledWith(
-      `${process.env.PUBLIC_PMO_API}/test?`,
+      `${process.env.EXPO_PUBLIC_PMO_API}/test?`,
       { method: "GET" },
     )
   })

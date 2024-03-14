@@ -30,7 +30,8 @@ jobs:
 
       - name: Test
         env:
-          PUBLIC_PMO_API: ${{ vars.PMO_API }}
+          EXPO_PUBLIC_PMO_API: ${{ vars.PMO_API }}
+          EXPO_PUBLIC_PMO_ASSETS: ${{ vars.PMO_ASSETS }}
         run: npm run test
 
       # - name: Build
