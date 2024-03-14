@@ -4,8 +4,6 @@ import { NavigationContainer } from "@react-navigation/native"
 import Home from "./Home"
 
 describe("Home component", () => {
-  // Mock the hooks and components used in StateList
-
   it("renders Home Page", async () => {
     render(
       <NavigationContainer>
