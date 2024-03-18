@@ -19,7 +19,6 @@ const OrderCreate: FC<Props> = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#eef",
     alignItems: "center",
     justifyContent: "center",
   },

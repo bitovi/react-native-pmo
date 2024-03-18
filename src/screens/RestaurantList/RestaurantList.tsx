@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { FlatList, StyleSheet } from "react-native"
+import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { useRestaurants } from "../../services/restaurant/hook"
@@ -17,7 +17,7 @@ const RestaurantList: FC<Props> = ({ route }) => {
 
   if (error) {
     return (
-      <Box padding="s" style={styles.container}>
+      <Box padding="s">
         <Typography variant="heading">
           Error loading restaurants: {"\n"}
         </Typography>
@@ -28,14 +28,14 @@ const RestaurantList: FC<Props> = ({ route }) => {
 
   if (isPending) {
     return (
-      <Box padding="s" style={styles.container}>
+      <Box padding="s">
         <Typography variant="heading">Loading…</Typography>
       </Box>
     )
   }
 
   return (
-    <Box padding="s" style={styles.container}>
+    <Box padding="s">
       <FlatList
         data={data}
         renderItem={({ item: restaurant }) => (
@@ -48,23 +48,10 @@ const RestaurantList: FC<Props> = ({ route }) => {
             }
           ></Press>
         )}
-        style={styles.options}
         keyExtractor={(item) => item._id}
       />
     </Box>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fdf",
-    alignItems: "flex-start",
-    overflow: "scroll",
-  },
-  options: {
-    flexDirection: "row",
-  },
-})
 
 export default RestaurantList

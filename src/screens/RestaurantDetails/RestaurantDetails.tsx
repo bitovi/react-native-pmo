@@ -50,7 +50,6 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#dff",
     alignItems: "center",
     justifyContent: "center",
   },

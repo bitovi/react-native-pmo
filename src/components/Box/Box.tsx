@@ -22,11 +22,13 @@ const Box: FC<Props> = ({
 
   return (
     <View
-      style={StyleSheet.compose(style, {
+      style={StyleSheet.compose({
+        overflow: "scroll",
+        display: "flex",
         margin: margin && theme.spacing[margin],
         padding: padding && theme.spacing[padding],
         ...(fullWidth ? { width: "100%" } : {}),
-      })}
+      }, style)}
       {...restOfProps}
     >
       {children}

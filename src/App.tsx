@@ -11,6 +11,7 @@ import CityList from "./screens/CityList"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantDetails from "./screens/RestaurantDetails"
 import ThemeProvider from "./theme"
+import { Box } from "./components"
 
 const StateListNavigation = createNativeStackNavigator({
   initialRouteName: "StateList",
@@ -57,7 +58,7 @@ const RootBottomNavigation = createBottomTabNavigator({
         title: "Home",
       },
     },
-    StateList: {
+    StateListStack: {
       screen: StateListNavigation,
       options: {
         title: "Find a Restaurant",
@@ -67,13 +68,13 @@ const RootBottomNavigation = createBottomTabNavigator({
   },
 })
 
-type RootStackParamList = StaticParamList<typeof StateListNavigation>
+type RootStackParamList = StaticParamList<typeof StateListNavigation> & StaticParamList<typeof RootBottomNavigation>
 
 // Creating global  types for the navigation props to avoid importing them in every file
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootStackParamList { }
   }
 }
 
@@ -82,7 +83,9 @@ const Navigation = createStaticNavigation(RootBottomNavigation)
 const App: FC = () => {
   return (
     <ThemeProvider>
-      <Navigation />
+      <Box style={{ width: "100%", height: "100%", overflow: "scroll" }}>
+        <Navigation />
+      </Box>
     </ThemeProvider>
   )
 }

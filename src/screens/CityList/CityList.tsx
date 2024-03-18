@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { FlatList, StyleSheet } from "react-native"
+import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { useCities } from "../../services/restaurant/hook"
@@ -16,7 +16,7 @@ const CityList: FC<Props> = ({ route }) => {
 
   if (error) {
     return (
-      <Box padding="s" style={styles.container}>
+      <Box padding="s">
         <Typography variant="heading">Error loading cities: {"\n"}</Typography>
         <Typography variant="body">{error.message}</Typography>
       </Box>
@@ -25,19 +25,19 @@ const CityList: FC<Props> = ({ route }) => {
 
   if (isPending) {
     return (
-      <Box padding="s" style={styles.container}>
+      <Box padding="s">
         <Typography variant="heading">Loading…</Typography>
       </Box>
     )
   }
 
   return (
-    <Box padding="m" style={styles.container}>
+    <Box padding="m">
       <FlatList
-        style={styles.options}
         data={cities}
         renderItem={({ item: cityItem }) => (
           <Press
+            style={{ margin: 0 }}
             title={cityItem.name}
             onPress={() =>
               navigation.navigate("RestaurantList", {
@@ -52,17 +52,5 @@ const CityList: FC<Props> = ({ route }) => {
     </Box>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fdf",
-    alignItems: "flex-start",
-    overflow: "scroll",
-  },
-  options: {
-    flexDirection: "row",
-  },
-})
 
 export default CityList

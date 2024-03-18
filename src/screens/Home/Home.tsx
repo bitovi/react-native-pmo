@@ -21,7 +21,10 @@ const Home: FC = () => {
       </Typography>
       <Press
         title="Choose a restaurant"
-        onPress={() => navigation.navigate("StateList")}
+        onPress={() => navigation.reset({
+          index: 0,
+          routes: [{ name: 'StateListStack' }],
+        })}
       />
     </Box>
   )
@@ -29,6 +32,7 @@ const Home: FC = () => {
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
     flex: 1,
     backgroundColor: "#eee",
     alignItems: "flex-start",
