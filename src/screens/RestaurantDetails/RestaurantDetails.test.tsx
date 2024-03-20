@@ -37,7 +37,7 @@ describe("RestaurantDetails component", () => {
         <RestaurantDetails route={{ params: { slug: "test" } }} />
       </NavigationContainer>,
     )
-    expect(screen.getByText(/Loading…/i)).toBeOnTheScreen()
+    expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
 
   it("renders error state", () => {

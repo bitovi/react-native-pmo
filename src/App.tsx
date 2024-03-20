@@ -11,6 +11,7 @@ import CityList from "./screens/CityList"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantDetails from "./screens/RestaurantDetails"
 import ThemeProvider from "./theme"
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
 
 const StateListNavigation = createNativeStackNavigator({
   initialRouteName: "StateList",
@@ -57,7 +58,7 @@ const RootBottomNavigation = createBottomTabNavigator({
         title: "Home",
       },
     },
-    StateList: {
+    StateListStack: {
       screen: StateListNavigation,
       options: {
         title: "Find a Restaurant",
@@ -67,7 +68,8 @@ const RootBottomNavigation = createBottomTabNavigator({
   },
 })
 
-type RootStackParamList = StaticParamList<typeof StateListNavigation>
+type RootStackParamList = StaticParamList<typeof StateListNavigation> &
+  StaticParamList<typeof RootBottomNavigation>
 
 // Creating global  types for the navigation props to avoid importing them in every file
 declare global {
@@ -81,9 +83,18 @@ const Navigation = createStaticNavigation(RootBottomNavigation)
 
 const App: FC = () => {
   return (
-    <ThemeProvider>
-      <Navigation />
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <SafeAreaView
+          style={{
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          <Navigation />
+        </SafeAreaView>
+      </ThemeProvider>
+    </SafeAreaProvider>
   )
 }
 

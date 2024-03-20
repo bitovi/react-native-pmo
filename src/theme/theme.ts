@@ -1,21 +1,29 @@
 import type { TextStyle } from "react-native"
 
 const palette = {
-  purple: "#5A31F4",
-  green: "#0ECD9D",
-  red: "#CD0E61",
-  black: "#0B0B0B",
-  white: "#F0F2F3",
+  purple: "#3a4478",
+  green: "#50804F",
+  red: "#ca2f35",
+  black: "#222222",
+  white: "#FFFFFF",
+  offWhite: "#F0F2F3",
+  lightGray: "#E0E2E3",
 }
 
 export const theme = {
   colors: {
-    background: palette.white,
+    background: palette.offWhite,
+    border: palette.lightGray,
     foreground: palette.black,
-    primary: palette.purple,
+    primary: palette.red,
+    secondary: palette.purple,
     success: palette.green,
     danger: palette.red,
     failure: palette.red,
+    card: palette.white,
+    shadow: palette.black,
+    text: palette.black,
+    textLight: palette.white,
   },
   spacing: {
     s: 8,
@@ -25,11 +33,14 @@ export const theme = {
   },
   textStyles: {
     heading: {
-      fontSize: 50,
+      fontSize: 24,
+      fontWeight: "500" as TextStyle["fontWeight"],
+    },
+    title: {
+      fontSize: 21,
       fontWeight: "500" as TextStyle["fontWeight"],
     },
     body: {
-      fontSize: 21,
       fontWeight: "normal" as TextStyle["fontWeight"],
     },
   },

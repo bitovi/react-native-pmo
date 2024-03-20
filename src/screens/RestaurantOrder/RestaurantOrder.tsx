@@ -1,11 +1,18 @@
 import type { FC } from "react"
 import { useState } from "react"
-import { FlatList, StyleSheet, Switch } from "react-native"
+import { ScrollView, Switch } from "react-native"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { useRestaurant } from "../../services/restaurant/hook"
-import { Box, Typography, Press } from "../../components"
-import type { Item } from "../../services/restaurant"
+import {
+  Box,
+  Typography,
+  Press,
+  FormTextField,
+  Loading,
+} from "../../components"
 import RestaurantHeader from "../../components/RestaurantHeader"
+import Card from "../../components/Card"
+import useTheme from "../../theme/useTheme"
 
 type Props = StaticScreenProps<{
   restaurantId: string
@@ -14,6 +21,7 @@ type Props = StaticScreenProps<{
 type OrderItems = Record<string, number>
 
 const RestaurantOrder: FC<Props> = ({ route }) => {
+  const { theme } = useTheme()
   const { restaurantId } = route.params
 
   const { data: restaurant, error, isPending } = useRestaurant(restaurantId)
@@ -41,15 +49,6 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
     })
   }
 
-  const setValue = (key: string, value: string) => {
-    return setNewOrder((newOrder) => {
-      return {
-        ...newOrder,
-        [key]: value,
-      }
-    })
-  }
-
   const selectedCount = Object.values(items).length
   const subtotal = calculateTotal(items)
 
@@ -58,9 +57,10 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
       return total + itemPrice
     }, 0)
   }
+
   if (error) {
     return (
-      <Box padding="s" style={styles.container}>
+      <Box padding="s">
         <Typography variant="heading">
           Error loading restaurant order: {"\n"}
         </Typography>
@@ -70,98 +70,112 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
   }
 
   if (isPending) {
+    return <Loading />
+  }
+
+  if (!restaurant) {
     return (
-      <Box padding="s" style={styles.container}>
-        <Typography variant="heading">Loading…</Typography>
+      <Box padding="s">
+        <Typography variant="heading">Restaurant not found</Typography>
       </Box>
     )
   }
 
   return (
-    <Box style={styles.container}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      alwaysBounceVertical={false}
+    >
       <RestaurantHeader restaurant={restaurant} />
-      <Box style={styles.container}>
-        <Typography variant="heading">
-          Order from {restaurant?.name}!
-        </Typography>
+      <Box padding="s">
+        <Typography variant="heading">Order from {restaurant.name}!</Typography>
 
-        <form onSubmit={(event) => handleSubmit(event)}>
-          {subtotal === 0 ? (
-            <p className="info text-error">Please choose an item.</p>
-          ) : (
-            <p className="info text-success">{selectedCount} selected.</p>
-          )}
+        {subtotal === 0 ? (
+          <Typography>Please choose an item.</Typography>
+        ) : (
+          <Typography>{selectedCount} items selected.</Typography>
+        )}
 
-          <Typography variant="heading">Lunch Menu</Typography>
-          <FlatList
-            data={restaurant?.menu.lunch}
-            renderItem={({ name, price }) => {
-              ;<>
-                <Switch
-                  onValueChange={setItem(name, price)}
-                  value={name in items}
-                ></Switch>
-                <Typography variant="body">
-                  {name} {price}
-                </Typography>
-              </>
-            }}
-          />
+        <Card headline="Lunch Menu">
+          {restaurant.menu.lunch.map(({ name, price }) => (
+            <Box
+              key={name}
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginVertical: 8,
+              }}
+            >
+              <Typography variant="body">
+                {name}
+                {"\n"}
+                {price}
+              </Typography>
+              <Switch
+                onValueChange={(value) => setItem(name, value, price)}
+                value={name in items}
+                thumbColor="white"
+                trackColor={{
+                  true: theme.colors.success,
+                  false: theme.colors.background,
+                }}
+              ></Switch>
+            </Box>
+          ))}
+        </Card>
 
-          <Typography variant="heading">Dinner Menu</Typography>
-          <FlatList
-            data={restaurant?.menu.dinner}
-            renderItem={({ name, price }) => {
-              ;<>
-                <Switch
-                  onValueChange={setItem(name, price)}
-                  value={name in items}
-                ></Switch>
-                <Typography variant="body">
-                  {name} {price}
-                </Typography>
-              </>
-            }}
-          />
+        <Card headline="Dinner Menu">
+          {restaurant.menu.dinner.map(({ name, price }) => (
+            <Box
+              key={name}
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginVertical: 8,
+              }}
+            >
+              <Typography variant="body">
+                {name}
+                {"\n"}
+                {price}
+              </Typography>
+              <Switch
+                onValueChange={(value) => setItem(name, value, price)}
+                value={name in items}
+                thumbColor="white"
+                trackColor={{
+                  true: theme.colors.success,
+                  false: theme.colors.background,
+                }}
+              ></Switch>
+            </Box>
+          ))}
+        </Card>
 
-          <FormTextField
-            label="Name"
-            onChange={setName}
-            type="text"
-            value={name}
-          />
+        <Card headline="Order Details">
+          <FormTextField label="Name" onChange={setName} value={name} />
           <FormTextField
             label="Address"
             onChange={setAddress}
-            type="text"
             value={address}
           />
-          <FormTextField
-            label="Phone"
-            onChange={setPhone}
-            type="tel"
-            value={phone}
-          />
+          <FormTextField label="Phone" onChange={setPhone} value={phone} />
+        </Card>
 
-          <Box>
-            <Typography variant="heading">
-              Total: ${subtotal ? subtotal.toFixed(2) : "0.00"}
-            </Typography>
-            <Press title="Place My Order!" onPress={handleSubmit} />
-          </Box>
-        </form>
+        <Box padding="s">
+          <Typography variant="heading">
+            Total: ${subtotal ? subtotal.toFixed(2) : "0.00"}
+          </Typography>
+        </Box>
+        <Box padding="s">
+          <Press title="Place My Order!" onPress={handleSubmit} />
+        </Box>
+        <Box padding="l">{/* Keyboard space */}</Box>
       </Box>
-    </Box>
+    </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#eef",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-})
 
 export default RestaurantOrder
