@@ -1,7 +1,8 @@
 import type { FC } from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ScrollView, Switch } from "react-native"
 import type { StaticScreenProps } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 import { useRestaurant } from "../../services/restaurant/hook"
 import {
   Box,
@@ -10,7 +11,6 @@ import {
   FormTextField,
   Loading,
 } from "../../components"
-import RestaurantHeader from "../../components/RestaurantHeader"
 import Card from "../../components/Card"
 import useTheme from "../../theme/useTheme"
 
@@ -22,6 +22,7 @@ type OrderItems = Record<string, number>
 
 const RestaurantOrder: FC<Props> = ({ route }) => {
   const { theme } = useTheme()
+  const navigation = useNavigation()
   const { restaurantId } = route.params
 
   const { data: restaurant, error, isPending } = useRestaurant(restaurantId)
@@ -30,6 +31,12 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
   const [items, setItems] = useState<OrderItems>({})
   const [name, setName] = useState<string>("")
   const [phone, setPhone] = useState<string>("")
+
+  useEffect(() => {
+    if (restaurant) {
+      navigation.setOptions({ title: `Order from ${restaurant.name}` })
+    }
+  }, [restaurant, navigation])
 
   const handleSubmit = () => {
     alert("Order submitted!")
@@ -86,16 +93,7 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
       showsVerticalScrollIndicator={false}
       alwaysBounceVertical={false}
     >
-      <RestaurantHeader restaurant={restaurant} />
       <Box padding="s">
-        <Typography variant="heading">Order from {restaurant.name}!</Typography>
-
-        {subtotal === 0 ? (
-          <Typography>Please choose an item.</Typography>
-        ) : (
-          <Typography>{selectedCount} items selected.</Typography>
-        )}
-
         <Card headline="Lunch Menu">
           {restaurant.menu.lunch.map(({ name, price }) => (
             <Box
@@ -165,10 +163,19 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
         </Card>
 
         <Box padding="s">
+          {subtotal === 0 ? (
+            <Typography>Please choose an item.</Typography>
+          ) : (
+            <Typography>{selectedCount} items selected.</Typography>
+          )}
+        </Box>
+
+        <Box padding="s">
           <Typography variant="heading">
             Total: ${subtotal ? subtotal.toFixed(2) : "0.00"}
           </Typography>
         </Box>
+
         <Box padding="s">
           <Press title="Place My Order!" onPress={handleSubmit} />
         </Box>

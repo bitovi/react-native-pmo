@@ -29,3 +29,16 @@ npm run start
 ```
 
 The build will start and display a QR code in your terminal. Android users can scan the code from the Expo Go app. iOS users should use the camera app to scan the code, which will then open in Expo Go.
+
+## Links to documentation
+
+### Core libraries
+
+- [React Native](https://reactnative.dev/docs/components-and-apis)
+- [Expo Framework](https://docs.expo.dev/)
+- [React Navigation](https://reactnavigation.org/docs/7.x/getting-started)
+
+### Icons
+
+- [Icon component](https://docs.expo.dev/guides/icons/)
+- [Available icon list](https://ionic.io/ionicons)

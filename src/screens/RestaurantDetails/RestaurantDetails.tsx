@@ -1,4 +1,5 @@
 import type { FC } from "react"
+import { useEffect } from "react"
 import { StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import RestaurantHeader from "../../components/RestaurantHeader"
@@ -14,6 +15,12 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   const { slug } = route.params
   const navigation = useNavigation()
   const { data: restaurant, error, isPending } = useRestaurant(slug)
+
+  useEffect(() => {
+    if (restaurant) {
+      navigation.setOptions({ title: `${restaurant.name}` })
+    }
+  }, [restaurant, navigation])
 
   if (error) {
     return (
