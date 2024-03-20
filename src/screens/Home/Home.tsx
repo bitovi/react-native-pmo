@@ -10,7 +10,9 @@ const Home: FC = () => {
     <Box style={styles.container}>
       <Image
         style={styles.image}
-        source={require("place-my-order-assets/images/homepage-hero.jpg")}
+        source={{
+          uri: `${process.env.EXPO_PUBLIC_PMO_ASSETS}/node_modules/place-my-order-assets/images/homepage-hero.jpg`,
+        }}
       />
       <Box padding="s">
         <Typography variant="heading">
