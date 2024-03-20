@@ -7,6 +7,11 @@ import {
 
 import App from "./App"
 
+jest.mock(
+  "react-native-safe-area-context",
+  () => jest.requireActual("react-native-safe-area-context/jest/mock").default,
+)
+
 describe("App", () => {
   const mockStateResponse = {
     data: [

@@ -54,7 +54,7 @@ describe("StateList component", () => {
 
     render(<MockStateNavigaton />)
 
-    expect(screen.getByText(/Loading…/i)).toBeOnTheScreen()
+    expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
   it("renders error state", () => {
     useStates.mockReturnValue({

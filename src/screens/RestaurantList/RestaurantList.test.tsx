@@ -120,7 +120,7 @@ describe("RestaurantList component", () => {
 
     render(<MockRestaurantNavigation />)
 
-    expect(screen.getByText(/Loading…/i)).toBeOnTheScreen()
+    expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
   it("renders error restaurant", () => {
     useRestaurants.mockReturnValue({
