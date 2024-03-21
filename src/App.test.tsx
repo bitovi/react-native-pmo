@@ -7,6 +7,11 @@ import {
 
 import App from "./App"
 
+jest.mock(
+  "react-native-safe-area-context",
+  () => jest.requireActual("react-native-safe-area-context/jest/mock").default,
+)
+
 describe("App", () => {
   const mockStateResponse = {
     data: [
@@ -133,9 +138,9 @@ describe("App", () => {
       screen.getByText(/Ordering food has never been easier/i),
     ).toBeOnTheScreen()
     fireEvent.press(screen.getByText(/Choose a restaurant/i))
-    await waitFor(() => {
-      expect(screen.getByText(/Michigan/i, { exact: false })).toBeOnTheScreen()
-    })
+    expect(
+      await screen.findByText(/Michigan/i, { exact: false }),
+    ).toBeOnTheScreen()
     fireEvent.press(screen.getByText(/Michigan/i))
 
     await waitFor(() => {

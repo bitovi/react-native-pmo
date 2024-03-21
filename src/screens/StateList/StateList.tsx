@@ -1,8 +1,8 @@
 import type { FC } from "react"
-import { FlatList, StyleSheet } from "react-native"
+import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useStates } from "../../services/restaurant/hook"
-import { Box, Press, Typography } from "../../components"
+import { Box, Loading, Press, Typography } from "../../components"
 
 const StateList: FC = () => {
   const navigation = useNavigation()
@@ -10,7 +10,7 @@ const StateList: FC = () => {
 
   if (error) {
     return (
-      <Box padding="s" style={styles.container}>
+      <Box padding="s">
         <Typography variant="heading">Error loading states: {"\n"}</Typography>
         <Typography variant="body">{error.message}</Typography>
       </Box>
@@ -18,17 +18,12 @@ const StateList: FC = () => {
   }
 
   if (isPending) {
-    return (
-      <Box padding="s" style={styles.container}>
-        <Typography variant="heading">Loading…</Typography>
-      </Box>
-    )
+    return <Loading />
   }
 
   return (
-    <Box padding="s" style={styles.container}>
+    <Box padding="s">
       <FlatList
-        style={styles.options}
         data={states}
         renderItem={({ item: stateItem }) => (
           <Press
@@ -45,17 +40,5 @@ const StateList: FC = () => {
     </Box>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fdf",
-    alignItems: "flex-start",
-    overflow: "scroll",
-  },
-  options: {
-    flexDirection: "row",
-  },
-})
 
 export default StateList

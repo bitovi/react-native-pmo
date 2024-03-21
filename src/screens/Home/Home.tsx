@@ -7,36 +7,49 @@ const Home: FC = () => {
   const navigation = useNavigation()
 
   return (
-    <Box padding={"s"} style={styles.container}>
+    <Box style={styles.container}>
       <Image
         style={styles.image}
         source={{
           uri: `${process.env.EXPO_PUBLIC_PMO_ASSETS}/node_modules/place-my-order-assets/images/homepage-hero.jpg`,
         }}
       />
-      <Typography variant="heading">
-        Ordering food has never been easier
-      </Typography>
-      <Typography variant="body">
-        We make it easier than ever to order gourmet food from your favorite
-        local restaurants.
-      </Typography>
-      <Press
-        title="Choose a restaurant"
-        onPress={() => navigation.navigate("StateList")}
-      />
+      <Box padding="s">
+        <Typography variant="heading">
+          Ordering food has never been easier
+        </Typography>
+        <Typography variant="body">
+          We make it easier than ever to order gourmet food from your favorite
+          local restaurants.
+        </Typography>
+      </Box>
+      <Box padding="s">
+        <Press
+          title="Choose a restaurant"
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "StateListStack" }],
+            })
+          }
+        />
+      </Box>
     </Box>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
     flex: 1,
     backgroundColor: "#eee",
     alignItems: "flex-start",
-    justifyContent: "center",
   },
-  image: { width: 350, height: 400 },
+  image: {
+    width: "100%",
+    height: 200,
+    marginBottom: 20,
+  },
 })
 
 export default Home

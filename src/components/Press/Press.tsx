@@ -17,7 +17,7 @@ const Press: FC<Props> = ({
   title,
   margin = "s",
   padding = "m",
-  fontSize = 18,
+  fontSize = 17,
   fontWeight = "400",
   style,
   ...restOfProps
@@ -29,11 +29,8 @@ const Press: FC<Props> = ({
       style={StyleSheet.compose(style, {
         margin: margin && theme.spacing[margin],
         padding: padding && theme.spacing[padding],
-        borderWidth: 1,
-        borderColor: "#2e6da4",
-        backgroundColor: "#337ab7",
-        borderCurve: "circular",
-        borderStyle: "solid",
+        backgroundColor: theme.colors.secondary,
+        color: theme.colors.textLight,
         borderRadius: 5,
       })}
       {...restOfProps}

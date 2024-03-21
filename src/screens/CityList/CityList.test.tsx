@@ -53,7 +53,7 @@ describe("CityList component", () => {
 
     render(<MockCityNavigation />)
 
-    expect(screen.getByText(/Loading…/i)).toBeOnTheScreen()
+    expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
   it("renders error city", () => {
     useCities.mockReturnValue({

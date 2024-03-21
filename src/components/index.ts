@@ -1,3 +1,6 @@
 export { default as Box } from "./Box"
 export { default as Typography } from "./Typography"
 export { default as Press } from "./Press"
+export { default as FormTextField } from "./FormTextField"
+export { default as RestaurantHeader } from "./RestaurantHeader"
+export { default as Loading } from "./Loading"

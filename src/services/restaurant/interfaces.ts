@@ -3,7 +3,7 @@ export interface City {
   state: string
 }
 
-interface Item {
+export interface Item {
   name: string
   price: number
 }

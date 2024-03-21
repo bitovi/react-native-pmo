@@ -1,9 +1,10 @@
 import type { FC } from "react"
+import { useEffect } from "react"
 import { StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import RestaurantHeader from "../../components/RestaurantHeader"
 import type { StaticScreenProps } from "@react-navigation/native"
-import { Box, Press, Typography } from "../../components"
+import { Box, Loading, Press, Typography } from "../../components"
 import { useRestaurant } from "../../services/restaurant/hook"
 
 type Props = StaticScreenProps<{
@@ -14,6 +15,12 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   const { slug } = route.params
   const navigation = useNavigation()
   const { data: restaurant, error, isPending } = useRestaurant(slug)
+
+  useEffect(() => {
+    if (restaurant) {
+      navigation.setOptions({ title: `${restaurant.name}` })
+    }
+  }, [restaurant, navigation])
 
   if (error) {
     return (
@@ -27,11 +34,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   }
 
   if (isPending) {
-    return (
-      <Box padding="s" style={styles.container}>
-        <Typography variant="heading">Loading…</Typography>
-      </Box>
-    )
+    return <Loading />
   }
 
   return (
@@ -48,12 +51,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#dff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  container: {},
 })
 
 export default RestaurantDetails

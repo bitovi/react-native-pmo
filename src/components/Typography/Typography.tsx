@@ -16,12 +16,16 @@ const Typography: FC<Props> = ({
   children,
 }) => {
   const { theme } = useTheme()
+
   return (
     <Text
-      style={StyleSheet.compose(style, {
-        color: color && theme.colors[color],
-        ...theme.textStyles[variant],
-      })}
+      style={StyleSheet.compose(
+        {
+          color: color && theme.colors[color],
+          ...theme.textStyles[variant],
+        },
+        style,
+      )}
     >
       {children}
     </Text>

@@ -1,6 +1,7 @@
 import type { Restaurant } from "../../services/restaurant"
-import { ImageBackground, StyleSheet, View } from "react-native"
+import { ImageBackground, StyleSheet } from "react-native"
 import Typography from "../Typography"
+import Box from "../Box"
 
 type Props = {
   restaurant: Restaurant | null
@@ -8,49 +9,62 @@ type Props = {
 
 const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
   return (
-    <View style={styles.restaurantHeader}>
+    <Box style={styles.restaurantHeader}>
       <ImageBackground
+        style={styles.hero}
         source={{
           uri: `${process.env.EXPO_PUBLIC_PMO_ASSETS}/${restaurant?.images.banner}`,
         }}
       >
-        <View style={styles.background}></View>
-        <Typography color="background" variant="heading">
-          {restaurant?.name}
-        </Typography>
+        <Box padding="m" style={styles.heroTextContainer}>
+          <Typography variant="heading" style={styles.heroText}>
+            {restaurant?.name}
+          </Typography>
+        </Box>
+      </ImageBackground>
+      <Box padding="m" style={styles.info}>
         {restaurant?.address && (
-          <Typography color="background" variant="body">
+          <Typography variant="body">
             {restaurant.address.street}
             {"\n"}
             {restaurant.address.city}, {restaurant.address.state}{" "}
             {restaurant.address.zip}
           </Typography>
         )}
-        <Typography color="background" variant="body">
+        <Typography variant="body">
           $$$
           {"\n"}
           Hours: M-F 10am-11pm {"\n"}Open Now
         </Typography>
-      </ImageBackground>
-    </View>
+      </Box>
+    </Box>
   )
 }
 
 const styles = StyleSheet.create({
   restaurantHeader: {
+    marginBottom: 5,
+  },
+  hero: {
     width: "100%",
     maxWidth: 768,
+    height: 180,
     margin: "auto",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "#eeeeee",
-    padding: 15,
-    marginBottom: 15,
-    color: "#fff",
-    textShadowColor: "rgba(0, 0, 0, 0.5)",
-    textShadowOffset: { width: 0, height: -1 },
-    textShadowRadius: 0,
+    justifyContent: "flex-end",
+    alignItems: "flex-start",
   },
+  heroText: {
+    color: "#ffffff",
+    fontSize: 32,
+  },
+  heroTextContainer: {
+    backgroundColor: "rgba(202, 47, 53, 0.8)",
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    marginBottom: 10,
+    width: "auto",
+  },
+  info: {},
   background: {},
   address: {},
   hoursPrice: {},
