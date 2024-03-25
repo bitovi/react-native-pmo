@@ -11,7 +11,7 @@ const Home: FC = () => {
       <Image
         style={styles.image}
         source={{
-          uri: `${process.env.EXPO_PUBLIC_PMO_ASSETS}/node_modules/place-my-order-assets/images/homepage-hero.jpg`,
+          uri: `${"https://place-my-order.firebaseapp.com" || process.env.EXPO_PUBLIC_PMO_ASSETS}/node_modules/place-my-order-assets/images/homepage-hero.jpg`,
         }}
       />
       <Box padding="s">

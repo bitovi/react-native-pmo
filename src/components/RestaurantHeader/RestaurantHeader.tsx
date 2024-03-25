@@ -13,7 +13,7 @@ const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
       <ImageBackground
         style={styles.hero}
         source={{
-          uri: `${process.env.EXPO_PUBLIC_PMO_ASSETS}/${restaurant?.images.banner}`,
+          uri: `${"https://place-my-order.firebaseapp.com" || process.env.EXPO_PUBLIC_PMO_ASSETS}/${restaurant?.images.banner}`,
         }}
       >
         <Box padding="m" style={styles.heroTextContainer}>
