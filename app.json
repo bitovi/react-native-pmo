@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.bitovi.reactnativepmo"
@@ -21,12 +23,20 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.bitovi.reactnativepmo"
+      "package": "com.bitovi.reactnativepmo",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDA1Dwqxq_ypDP5g1oe5d9kw26b0OWO9Xw"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "@react-native-google-signin/google-signin"],
+    "plugins": [
+      "expo-router",
+      "@react-native-google-signin/google-signin"
+    ],
     "extra": {
       "router": {
         "origin": false

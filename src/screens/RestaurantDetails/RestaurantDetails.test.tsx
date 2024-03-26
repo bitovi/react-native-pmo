@@ -36,6 +36,7 @@ describe("RestaurantDetails component", () => {
         dinner: [{ name: "yum", price: 1 }],
         lunch: [{ name: "snack", price: 2 }],
       },
+      coordinate: { latitude: 0, longitude: 0 },
     },
     isPending: false,
     error: null,

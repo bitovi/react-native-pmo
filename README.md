@@ -206,6 +206,12 @@ Alternatively, if you start up the Emulator after React DevTools is running it'l
 
 While using the emulator if you wish to use the element inspector, run the `adb shell input keyevent 82` in the terminal.
 
+### Running the local place-my-order-api server the android emulator
+
+By default, the Android emulator won't be able to access your localhost server.
+In order to connect it to the emulator run the `adb reverse tcp:7070 tcp:7070` command. 
+Make sure if you're running the place-my-order-api on a different port to replace the `7070` with `port` 
+e.g. if you're running on port 3030, run `adb reverse tcp:3030 tcp:3030`
 
 ## Links to documentation
 
