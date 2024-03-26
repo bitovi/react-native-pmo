@@ -14,7 +14,8 @@
     "web": "expo start --web",
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean": "rm -rf tsconfig.tsbuildinfo .expo dist ios android coverage"
+    "clean": "rm -rf tsconfig.tsbuildinfo .expo dist ios android coverage",
+    "react-devtools": "react-devtools"
   },
   "eslintConfig": {
     "root": true,
@@ -74,6 +75,7 @@
     "depcheck": "^1.4.7",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
+    "react-devtools": "^5.0.2",
     "typescript": "^5.1.3"
   }
 }
