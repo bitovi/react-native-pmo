@@ -48,6 +48,14 @@ You can build web locally `expo export --web` and you can build Android on EAS (
 
 I’m sure you can trigger EAS from CI, but we may need to create a generic Bitovi account. I have not researched this yet. Free accounts are limited to 1 concurrent build at a time and take ~10 minutes, so this could become a bottleneck if we want it on all PRs.
 
+### Debugging with React DevTools
+
+You can run React Devtools with `npm run react-devtools`. This will start the DevTools up which will be ready to open with Metro's in-app dev menu. In running Metro app make sure to hit press 'd' to open the dev menu in React DevTools.
+Alternatively, if you start up the Emulator after React DevTools is running it'll automatically watch the emulator. If for some reason it doesn't watch it, press 'd' on the terminal that opens for the Metro Dev server. 
+
+While using the emulator if you wish to use the element inspector, run the `adb shell input keyevent 82` in the terminal.
+
+
 ## Links to documentation
 
 ### Core libraries
