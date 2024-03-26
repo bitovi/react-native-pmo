@@ -3,8 +3,7 @@ import type { StaticParamList } from "@react-navigation/native"
 import { createStaticNavigation } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { registerRootComponent } from "expo"
-import Ionicons from "@expo/vector-icons/Ionicons"
+// import Ionicons from "@expo/vector-icons/Ionicons"
 import Home from "./screens/Home"
 import OrderCreate from "./screens/RestaurantOrder"
 import StateList from "./screens/StateList"
@@ -60,13 +59,13 @@ const RootBottomNavigation = createBottomTabNavigator({
         title: "Place My Order",
         tabBarActiveTintColor: theme.colors.secondary,
         tabBarInactiveTintColor: theme.colors.text,
-        tabBarIcon: ({ focused }) => (
-          <Ionicons
-            name="home-outline"
-            size={20}
-            color={focused ? theme.colors.secondary : theme.colors.text}
-          />
-        ),
+        // tabBarIcon: ({ focused }) => (
+        //   <Ionicons
+        //     name="home-outline"
+        //     size={20}
+        //     color={focused ? theme.colors.secondary : theme.colors.text}
+        //   />
+        // ),
       },
     },
     StateListStack: {
@@ -77,13 +76,13 @@ const RootBottomNavigation = createBottomTabNavigator({
         headerShown: false,
         tabBarActiveTintColor: theme.colors.secondary,
         tabBarInactiveTintColor: theme.colors.text,
-        tabBarIcon: ({ focused }) => (
-          <Ionicons
-            name="restaurant-outline"
-            size={20}
-            color={focused ? theme.colors.secondary : theme.colors.text}
-          />
-        ),
+        // tabBarIcon: ({ focused }) => (
+        //   <Ionicons
+        //     name="restaurant-outline"
+        //     size={20}
+        //     color={focused ? theme.colors.secondary : theme.colors.text}
+        //   />
+        // ),
       },
     },
   },
@@ -120,5 +119,3 @@ const App: FC = () => {
 }
 
 export default App
-
-registerRootComponent(App)

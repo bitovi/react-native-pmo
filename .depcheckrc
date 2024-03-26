@@ -13,3 +13,6 @@ ignores:
   - react-native-safe-area-context
   - react-native-screens
   - "identity-obj-proxy"
+
+  # Will be used after bugs are fixed
+  - "@expo/vector-icons"

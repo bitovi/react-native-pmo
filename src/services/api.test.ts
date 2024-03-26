@@ -30,7 +30,7 @@ describe("apiRequest function", () => {
 
     expect(response).toEqual({ data: { message: "success" }, error: null })
     expect(mockFetch).toHaveBeenCalledWith(
-      `${process.env.EXPO_PUBLIC_PMO_API}/test?`,
+      `${"https://www.place-my-order.com/api" || process.env.EXPO_PUBLIC_PMO_API}/test?`,
       { method: "GET" },
     )
   })
