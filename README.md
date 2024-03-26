@@ -1,5 +1,154 @@
 # Place My Order
 
+## Setup
+
+To run this repo, you must have one of these two operating systems:
+
+- macOS 12 (Monterey) or newer
+- Windows 10 (64-bit) or newer
+
+The setup steps below will walk you through installing these dependencies across both operating systems:
+
+- Node 18 or newer
+- npm 9 or newer
+- JDK 17 or equivalent
+- Android Studio
+- Android SDK
+- Android SDK Platform
+- Android Virtual Device
+
+Specific to macOS:
+
+- Homebrew
+- Watchman
+
+Specific to Windows:
+
+- Chocolatey
+- Performance (Intel ® HAXM or equivalent)
+
+### Install Node.js and npm
+
+Follow [npm’s instructions to install Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+
+### macOS
+
+Follow the [React Native CLI Quickstart](https://reactnative.dev/docs/environment-setup?guide=native&os=macos&platform=android) instructions for macOS.
+
+Be sure to follow the quickstart instructions for:
+
+- Watchman
+- Java Development Kit
+- Install Android Studio
+- Install the Android SDK
+- Configure the ANDROID_HOME environment variable
+
+#### Homebrew
+
+Follow the “Install Homebrew” instructions on [Homebrew’s website](https://brew.sh).
+
+After running the installer, follow these instructions:
+
+```
+Warning: /opt/homebrew/bin is not in your PATH.
+  Instructions on how to configure your shell for Homebrew
+  can be found in the 'Next steps' section below.
+
+==> Next steps:
+- Run this command in your terminal to add Homebrew to your PATH:
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+#### Watchman
+
+Use Homebrew to install Watchman:
+
+```
+brew install watchman
+```
+
+#### Java Development Kit
+
+Install the Java Development Kit with these commands:
+
+```
+brew tap homebrew/cask-versions
+brew install --cask zulu17
+
+# Get path to where cask was installed to double-click installer
+brew info --cask zulu17
+```
+
+> After you install the JDK, update your JAVA_HOME environment variable. If you used above steps, JDK will likely be at /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+
+#### Install Android Studio
+
+Follow the instructions in the quickstart guide.
+
+#### Install the Android SDK
+
+Follow the instructions in the quickstart guide.
+
+#### Configure the ANDROID_HOME environment variable
+
+Follow the instructions in the quickstart guide.
+
+### Windows
+
+Follow the [React Native CLI Quickstart](https://reactnative.dev/docs/environment-setup?guide=native&os=windows&platform=android) instructions for your operating system.
+
+Be sure to follow the quickstart instructions for:
+
+- JDK
+- Install Android Studio
+- Install the Android SDK
+- Configure the ANDROID_HOME environment variable
+- Add platform-tools to Path
+
+#### JDK
+
+Follow the instructions in the quickstart guide.
+
+#### Install Android Studio
+
+Follow the instructions in the quickstart guide.
+
+#### Install the Android SDK
+
+Follow the instructions in the quickstart guide.
+
+#### Configure the ANDROID_HOME environment variable
+
+Follow the instructions in the quickstart guide.
+
+#### Add platform-tools to Path
+
+Follow the instructions in the quickstart guide.
+
+### Install dependencies
+
+Clone this repo and run:
+
+```
+npm ci
+```
+
+## Running the app
+
+### Start the simulator
+
+Follow the instructions in the “Using a virtual device” section (under “Preparing the Android device”) of the quickstart guide.
+
+The Android Emulator must be running before you build the app.
+
+### Build and launch the app
+
+Run the app in the Android Emulator with:
+
+```
+npm run android
+```
+
 ## React Native vs Expo
 
 Expo is a framework on top on React Native. Expo adds additional features to make development easier and is the recommended approach by the React Native docs. You will need the docs from both projects to work on this repo.
@@ -8,27 +157,9 @@ Expo is a framework on top on React Native. Expo adds additional features to mak
 
 [Expo](https://docs.expo.dev/tutorial/introduction/)
 
-## Setup
-
-Prerequisites: Node >20, NPM
-
-### Install dependencies
-
-```
-npm install
-```
-
 ### Install Expo Go
 
-Install Expo Go on your mobile device from the appropriate app store. This will allow you to quickly run demos you find online with your mobile device. This app will not run in Expo Go because of OAuth, but many other apps will so its a useful tool to be aware of.
-
-### Emulators
-
-To run the app locally, you’ll need
-
-**iOS**: The full XCode (not just cli tools), homebrew, cocoapods (through homebrew)
-
-**Android**: Android Studio, with the latest full version pack, emulator, and set up a virtual device.
+Install Expo Go on your mobile device from the appropriate app store. This will allow you to quickly run demos you find online with your mobile device. This app will not run in Expo Go because of OAuth, but many other apps will so it’s a useful tool to be aware of.
 
 ### Running
 
