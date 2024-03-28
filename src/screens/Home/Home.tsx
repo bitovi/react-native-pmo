@@ -3,15 +3,17 @@ import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, Image } from "react-native"
 import { Box, Press, Typography } from "../../components"
 
+const ASSETS_URL = process.env.PMO_ASSETS
+
 const Home: FC = () => {
   const navigation = useNavigation()
-
+  console.warn(process.env.PMO_ASSETS)
   return (
     <Box style={styles.container}>
       <Image
         style={styles.image}
         source={{
-          uri: `${process.env.PMO_ASSETS}/node_modules/place-my-order-assets/images/homepage-hero.jpg`,
+          uri: `${ASSETS_URL}/node_modules/place-my-order-assets/images/homepage-hero.jpg`,
         }}
       />
       <Box padding="s">

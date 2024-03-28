@@ -3,6 +3,8 @@ import { ImageBackground, StyleSheet } from "react-native"
 import Typography from "../Typography"
 import Box from "../Box"
 
+const ASSETS_URL = process.env.PMO_ASSETS
+
 type Props = {
   restaurant: Restaurant | null
 }
@@ -13,7 +15,7 @@ const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
       <ImageBackground
         style={styles.hero}
         source={{
-          uri: `${"https://place-my-order.firebaseapp.com" || process.env.EXPO_PUBLIC_PMO_ASSETS}/${restaurant?.images.banner}`,
+          uri: `${ASSETS_URL}/${restaurant?.images.banner}`,
         }}
       >
         <Box padding="m" style={styles.heroTextContainer}>
