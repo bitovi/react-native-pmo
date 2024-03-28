@@ -1,4 +1,4 @@
-const BASE_URL = process.env.PMO_API
+const baseUrl = process.env.PMO_API
 
 export async function apiRequest<Data = never, Params = unknown>({
   method,
@@ -11,7 +11,7 @@ export async function apiRequest<Data = never, Params = unknown>({
 }): Promise<{ data: Data | null; error: Error | null }> {
   try {
     const query = params ? stringifyQuery(params) : ""
-    const response = await fetch(`${BASE_URL}${path}?${query}`, {
+    const response = await fetch(`${baseUrl}${path}?${query}`, {
       method,
     })
 

@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, Image } from "react-native"
 import { Box, Press, Typography } from "../../components"
 
-const ASSETS_URL = process.env.PMO_ASSETS
+const assetsUrl = process.env.PMO_ASSETS
 
 const Home: FC = () => {
   const navigation = useNavigation()
@@ -13,7 +13,7 @@ const Home: FC = () => {
       <Image
         style={styles.image}
         source={{
-          uri: `${ASSETS_URL}/node_modules/place-my-order-assets/images/homepage-hero.jpg`,
+          uri: `${assetsUrl}/node_modules/place-my-order-assets/images/homepage-hero.jpg`,
         }}
       />
       <Box padding="s">

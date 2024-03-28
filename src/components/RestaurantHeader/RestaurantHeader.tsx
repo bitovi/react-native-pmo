@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet } from "react-native"
 import Typography from "../Typography"
 import Box from "../Box"
 
-const ASSETS_URL = process.env.PMO_ASSETS
+const assetsUrl = process.env.PMO_ASSETS
 
 type Props = {
   restaurant: Restaurant | null
@@ -15,7 +15,7 @@ const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
       <ImageBackground
         style={styles.hero}
         source={{
-          uri: `${ASSETS_URL}/${restaurant?.images.banner}`,
+          uri: `${assetsUrl}/${restaurant?.images.banner}`,
         }}
       >
         <Box padding="m" style={styles.heroTextContainer}>
