@@ -19,17 +19,15 @@ The setup steps below will walk you through installing these dependencies across
 
 Specific to macOS:
 
+- Node Version Manager (nvm)
 - Homebrew
 - Watchman
 
 Specific to Windows:
 
+- NVM for Windows
 - Chocolatey
 - Performance (Intel ® HAXM or equivalent)
-
-### Install Node.js and npm
-
-Follow [npm’s instructions to install Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 ### macOS
 
@@ -43,11 +41,18 @@ Be sure to follow the quickstart instructions for:
 - Install the Android SDK
 - Configure the ANDROID_HOME environment variable
 
+#### Node.js and npm
+
+Follow [npm’s instructions to install Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+
+We recommend [using nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
+to install Node because it allows you to manage multiple versions of Node for different projects.
+
 #### Homebrew
 
 Follow the “Install Homebrew” instructions on [Homebrew’s website](https://brew.sh).
 
-After running the installer, follow these instructions:
+After running the installer, be sure to follow the instructions it prints:
 
 ```
 Warning: /opt/homebrew/bin is not in your PATH.
@@ -105,6 +110,21 @@ Be sure to follow the quickstart instructions for:
 - Configure the ANDROID_HOME environment variable
 - Add platform-tools to Path
 
+#### Node.js and npm
+
+Follow [npm’s instructions to install Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+
+We recommend [using NVM for Windows](https://github.com/coreybutler/nvm-windows?tab=readme-ov-file#overview)
+to install Node because it allows you to manage multiple versions of Node for different projects.
+
+You can also follow [Microsoft’s instructions for setting up Node.js on Windows](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
+
+For some of the instructions, you may need to [open the command prompt or PowerShell as an administrator](https://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-10/).
+
+#### Chocolatey
+
+[Install Chocolatey](https://chocolatey.org/install) before installing the JDK.
+
 #### JDK
 
 Follow the instructions in the quickstart guide.
@@ -125,6 +145,8 @@ Follow the instructions in the quickstart guide.
 
 Follow the instructions in the quickstart guide.
 
+## Running the app
+
 ### Install dependencies
 
 Clone this repo and run:
@@ -133,9 +155,7 @@ Clone this repo and run:
 npm ci
 ```
 
-## Running the app
-
-### Start the simulator
+### Start the emulator
 
 Follow the instructions in the “Using a virtual device” section (under “Preparing the Android device”) of the quickstart guide.
 
