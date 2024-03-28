@@ -6,7 +6,6 @@
     "incremental": true,
     "strict": true,
     "noEmit": true,
-
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
