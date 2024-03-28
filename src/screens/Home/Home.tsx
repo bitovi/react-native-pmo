@@ -7,7 +7,7 @@ const ASSETS_URL = process.env.PMO_ASSETS
 
 const Home: FC = () => {
   const navigation = useNavigation()
-  console.warn(process.env.PMO_ASSETS)
+
   return (
     <Box style={styles.container}>
       <Image
