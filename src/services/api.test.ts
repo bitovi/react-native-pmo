@@ -29,10 +29,9 @@ describe("apiRequest function", () => {
     })
 
     expect(response).toEqual({ data: { message: "success" }, error: null })
-    expect(mockFetch).toHaveBeenCalledWith(
-      `${"https://www.place-my-order.com/api" || process.env.EXPO_PUBLIC_PMO_API}/test?`,
-      { method: "GET" },
-    )
+    expect(mockFetch).toHaveBeenCalledWith(`${process.env.PMO_API}/test?`, {
+      method: "GET",
+    })
   })
 
   it("should handle a failed request", async () => {
