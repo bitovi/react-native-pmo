@@ -33,7 +33,6 @@ const CityList: FC<Props> = ({ route }) => {
         data={cities}
         renderItem={({ item: cityItem }) => (
           <Press
-            style={{ margin: 0 }}
             title={cityItem.name}
             onPress={() =>
               navigation.navigate("RestaurantList", {

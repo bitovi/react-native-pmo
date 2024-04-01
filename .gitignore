@@ -67,3 +67,9 @@ yarn-error.log
 
 # testing
 /coverage
+
+#expo orphans
+.expo
+
+#local db-data
+/db-data

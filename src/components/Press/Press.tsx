@@ -26,21 +26,27 @@ const Press: FC<Props> = ({
 
   return (
     <Pressable
-      style={StyleSheet.compose(style, {
-        margin: margin && theme.spacing[margin],
-        padding: padding && theme.spacing[padding],
-        backgroundColor: theme.colors.secondary,
-        color: theme.colors.textLight,
-        borderRadius: 5,
-      })}
+      style={StyleSheet.compose(
+        {
+          margin: margin && theme.spacing[margin],
+          padding: padding && theme.spacing[padding],
+          backgroundColor: theme.colors.secondary,
+          color: theme.colors.textLight,
+          borderRadius: 5,
+        },
+        style,
+      )}
       {...restOfProps}
     >
       <Text
-        style={StyleSheet.compose(style, {
-          color: "#fff",
-          fontSize,
-          fontWeight,
-        })}
+        style={StyleSheet.compose(
+          {
+            color: "#fff",
+            fontSize,
+            fontWeight,
+          },
+          style,
+        )}
       >
         {title}
       </Text>

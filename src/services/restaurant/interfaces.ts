@@ -26,9 +26,15 @@ interface Images {
   thumbnail: string
 }
 
+interface Coordinate {
+  latitude: number
+  longitude: number
+}
+
 export interface Restaurant {
   _id: string
   address?: Address
+  coordinate: Coordinate
   images: Images
   menu: Menu
   name: string
