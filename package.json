@@ -60,7 +60,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.3.1",
     "jest-expo": "~50.0.2",
-    "place-my-order-api": "^1.5.0",
+    "place-my-order-api": "^1.7.0",
     "react": "18.2.0",
     "react-native": "0.73.6",
     "react-native-dotenv": "^3.4.11",
