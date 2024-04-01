@@ -16,7 +16,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   const { slug } = route.params
   const navigation = useNavigation()
   const { data: restaurant, error, isPending } = useRestaurant(slug);
-  const { updateFavorites, favorite } = useFavorites(restaurant?._id);
+  const { updateFavorites, favorite } = useFavorites('user-id', restaurant?._id);
   useEffect(() => {
     if (restaurant) {
       navigation.setOptions({ title: `${restaurant.name}` })
