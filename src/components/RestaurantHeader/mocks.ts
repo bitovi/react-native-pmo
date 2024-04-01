@@ -37,6 +37,7 @@ export const restaurantWithoutAddress: Restaurant = {
       },
     ],
   },
+  coordinate: { latitude: 0, longitude: 0 },
   name: "Test Restaurant",
   slug: "poutine-palace",
 }

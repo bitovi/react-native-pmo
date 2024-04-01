@@ -38,6 +38,10 @@ describe("RestaurantList component", () => {
           state: "MI",
           zip: "60045",
         },
+        coordinate: {
+          latitude: 0,
+          longitude: 0,
+        },
         resources: {
           thumbnail: "api/resources/images/3-thumbnail.jpg",
           owner: "api/resources/images/4-owner.jpg",
@@ -71,6 +75,10 @@ describe("RestaurantList component", () => {
           city: "Detroit",
           state: "MI",
           zip: "60045",
+        },
+        coordinate: {
+          latitude: 0,
+          longitude: 0,
         },
         resources: {
           thumbnail: "api/resources/images/3-thumbnail.jpg",
