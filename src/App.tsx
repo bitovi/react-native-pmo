@@ -102,6 +102,7 @@ declare global {
 const Navigation = createStaticNavigation(RootBottomNavigation)
 
 const App: FC = () => {
+  console.log('loading page?')
   return (
     <SafeAreaProvider>
       <ThemeProvider>

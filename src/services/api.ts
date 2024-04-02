@@ -12,8 +12,7 @@ export async function apiRequest<Data = never, Params = unknown, Body = unknown>
   body?: Body
 }): Promise<{ data: Data | null; error: Error | null }> {
   try {
-    console.warn('api', baseUrl)
-    console.log(body)
+    // console.warn('api', baseUrl)
     const query = params ? stringifyQuery(params) : ""
     const response = await fetch(`${baseUrl}${path}?${query}`, {
       method,

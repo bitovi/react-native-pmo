@@ -16,7 +16,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   const { slug } = route.params
   const navigation = useNavigation()
   const { data: restaurant, error, isPending } = useRestaurant(slug);
-  const { updateFavorites, favorite } = useFavorites('user-id', restaurant?._id);
+  const { updateFavorites, favorite, syncWithServer } = useFavorites('user-id', restaurant?._id);
   useEffect(() => {
     if (restaurant) {
       navigation.setOptions({ title: `${restaurant.name}` })
@@ -45,6 +45,13 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
         title={favorite?.favorite ? "Remove from Favorites" : "Add to favorites"}
         onPress={() => {
           updateFavorites(restaurant!._id)
+        }}
+      >
+      </Press>
+      <Press
+        title={"sync"}
+        onPress={() => {
+          syncWithServer()
         }}
       >
       </Press>
