@@ -146,29 +146,35 @@ export function useFavorites(
           })
         }
 
-        await Promise.all(newLocalFavorites.favorites.map(async (localFavorite, index) => {
-          if (
-            new Date(localFavorites.lastSynced) < new Date(localFavorite.datetimeUpdated) &&
-            serverData.data?.findIndex(
-              (serverFavorite) => localFavorite._id === serverFavorite._id,
-            ) === -1
-          ) {
-            const { data: postRes, error } = await apiRequest<FavoriteResponse>({
-              method: "POST",
-              path: "/favorites",
-              body: {...localFavorite, datetimeUpdated: newLocalFavorites.lastSynced, _id: "something"},
-            });
-            if(error) {
-              newLocalFavorites.lastSynced = localFavorites.lastSynced;
+        await Promise.all(
+          newLocalFavorites.favorites.map(async (newLocalFavorite, index) => {
+            if (
+              new Date(localFavorites.lastSynced) <
+                new Date(newLocalFavorite.datetimeUpdated) &&
+              serverData.data?.findIndex(
+                (serverFavorite) => newLocalFavorite._id === serverFavorite._id,
+              ) === -1
+            ) {
+              const { data: postRes, error } =
+                await apiRequest<FavoriteResponse>({
+                  method: "POST",
+                  path: "/favorites",
+                  body: {
+                    ...newLocalFavorite,
+                    datetimeUpdated: newLocalFavorites.lastSynced,
+                  },
+                })
+              if (error) {
+                newLocalFavorites.lastSynced = localFavorites.lastSynced
+              }
+              if (postRes && postRes.data) {
+                newLocalFavorites.favorites[index] = { ...postRes.data }
+              }
             }
-            if(postRes && postRes.data) {
-              newLocalFavorites.favorites[index] = {...postRes.data};
-            }
-          }
-        }));
+          }),
+        )
 
         await storeData<LocalStorageFavorites>("my-favorite", newLocalFavorites)
-
       }
     }
   }
