@@ -12,6 +12,21 @@ jest.mock(
   () => jest.requireActual("react-native-safe-area-context/jest/mock").default,
 )
 
+jest.mock(
+  "./screens/StateList",
+  () => jest.requireActual("./screens/StateList").default,
+)
+
+jest.mock(
+  "./screens/CityList",
+  () => jest.requireActual("./screens/CityList").default,
+)
+
+jest.mock(
+  "./screens/RestaurantList",
+  () => jest.requireActual("./screens/RestaurantList").default,
+)
+
 describe("App", () => {
   const mockStateResponse = {
     data: [
