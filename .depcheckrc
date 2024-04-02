@@ -14,6 +14,3 @@ ignores:
   - react-native-screens
   - "identity-obj-proxy"
   - react-native-dotenv
-
-  # Will be used after bugs are fixed
-  - "@expo/vector-icons"
