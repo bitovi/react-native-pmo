@@ -22,7 +22,7 @@ const Home: FC = () => {
       setUserInfo(userInfo)
     } catch (error) {
       setUserInfo(null)
-      console.log("GoogleSignin.signIn() error", error)
+      console.error("GoogleSignin.signIn() error", error)
     }
   }
 
@@ -31,7 +31,7 @@ const Home: FC = () => {
       await GoogleSignin.signOut()
       setUserInfo(null)
     } catch (error) {
-      console.log("GoogleSignin.signOut() error", error)
+      console.error("GoogleSignin.signOut() error", error)
     }
   }
 

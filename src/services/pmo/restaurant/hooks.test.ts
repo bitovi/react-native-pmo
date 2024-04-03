@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from "@testing-library/react-native"
 import * as api from "../api"
-import { useStates, useCities, useRestaurants } from "./hook"
+import { useStates, useCities, useRestaurants } from "./hooks"
 
 describe("Hooks", () => {
   // Mock the apiRequest function

@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import RestaurantHeader from "../../components/RestaurantHeader"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { Box, Loading, Press, Typography } from "../../components"
-import { useRestaurant } from "../../services/restaurant/hook"
+import { useRestaurant } from "../../services/pmo/restaurant"
 
 type Props = StaticScreenProps<{
   slug: string

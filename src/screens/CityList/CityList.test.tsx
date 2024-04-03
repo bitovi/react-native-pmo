@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react-native"
 import { createStaticNavigation } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
-import * as hook from "../../services/restaurant/hook"
+import * as restaurant from "../../services/pmo/restaurant"
 
 import CityList from "./CityList"
 
@@ -15,10 +15,10 @@ describe("CityList component", () => {
       { name: "Ann Arbor", state: "MI" },
     ],
   }
-  let useCities: jest.SpyInstance<ReturnType<typeof hook.useCities>>
+  let useCities: jest.SpyInstance<ReturnType<typeof restaurant.useCities>>
   beforeEach(() => {
     jest.resetAllMocks()
-    useCities = jest.spyOn(hook, "useCities")
+    useCities = jest.spyOn(restaurant, "useCities")
   })
 
   const mockStackNavigator = createNativeStackNavigator({
