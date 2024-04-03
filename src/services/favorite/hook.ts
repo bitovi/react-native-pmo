@@ -27,6 +27,7 @@ export function useFavorites(
   updateFavorites: (restaurantId: Favorite["restaurantId"]) => void
   favorite: Favorite | undefined
   syncWithServer: () => void
+  localFavorites: LocalStorageFavorites | undefined
 } {
   const [response, setResponse] = useState<FavoritesResponse>({
     data: null,
@@ -145,7 +146,6 @@ export function useFavorites(
             newLocalFavorites.favorites[updateIndex] = { ...serverFavorite }
           })
         }
-
         await Promise.all(
           newLocalFavorites.favorites.map(async (newLocalFavorite, index) => {
             if (
@@ -179,5 +179,11 @@ export function useFavorites(
     }
   }
 
-  return { ...response, updateFavorites, favorite, syncWithServer }
+  return {
+    ...response,
+    updateFavorites,
+    favorite,
+    syncWithServer,
+    localFavorites,
+  }
 }

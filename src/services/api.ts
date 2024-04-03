@@ -1,10 +1,14 @@
 const baseUrl = process.env.PMO_API
 
-export async function apiRequest<Data = never, Params = unknown, Body = unknown>({
+export async function apiRequest<
+  Data = never,
+  Params = unknown,
+  Body = unknown,
+>({
   method,
   params,
   path,
-  body
+  body,
 }: {
   method: string
   params?: Params
@@ -12,14 +16,13 @@ export async function apiRequest<Data = never, Params = unknown, Body = unknown>
   body?: Body
 }): Promise<{ data: Data | null; error: Error | null }> {
   try {
-    // console.warn('api', baseUrl)
     const query = params ? stringifyQuery(params) : ""
     const response = await fetch(`${baseUrl}${path}?${query}`, {
       method,
       headers: {
         "Content-Type": "application/json",
       },
-      body: body ? JSON.stringify(body) : undefined
+      body: body ? JSON.stringify(body) : undefined,
     })
 
     const data = await response.json()
