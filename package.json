@@ -13,7 +13,7 @@
     "android": "react-native run-android",
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean": "rm -rf tsconfig.tsbuildinfo .expo coverage android/.gradle android/build android/app/build",
+    "clean": "rm -rf tsconfig.tsbuildinfo coverage android/.gradle android/build android/app/build",
     "react-devtools": "react-devtools"
   },
   "eslintConfig": {
