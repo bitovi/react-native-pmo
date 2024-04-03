@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react-native"
 
-import * as restaurant from "../../services/pmo/restaurant"
+import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
 
 import RestaurantDetails from "./RestaurantDetails"
 
@@ -19,11 +19,11 @@ describe("RestaurantDetails component", () => {
   // Mock the hooks and components used in RestaurantDetails
 
   let useRestaurant: jest.SpyInstance<
-    ReturnType<typeof restaurant.useRestaurant>
+    ReturnType<typeof restaurantHooks.useRestaurant>
   >
   beforeEach(() => {
     jest.resetAllMocks()
-    useRestaurant = jest.spyOn(restaurant, "useRestaurant")
+    useRestaurant = jest.spyOn(restaurantHooks, "useRestaurant")
   })
 
   const mockRestaurantData = {
