@@ -4,6 +4,8 @@ import { createStaticNavigation } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import Icon from "react-native-vector-icons/Ionicons"
+import { GoogleSignin } from "@react-native-google-signin/google-signin"
+
 import Home from "./screens/Home"
 import OrderCreate from "./screens/RestaurantOrder"
 import StateList from "./screens/StateList"
@@ -13,6 +15,17 @@ import RestaurantDetails from "./screens/RestaurantDetails"
 import ThemeProvider from "./theme"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
 import { theme } from "./theme/theme"
+
+type RootStackParamList = StaticParamList<typeof StateListNavigation> &
+  StaticParamList<typeof RootBottomNavigation>
+
+// Creating global  types for the navigation props to avoid importing them in every file
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
 
 const StateListNavigation = createNativeStackNavigator({
   initialRouteName: "StateList",
@@ -88,18 +101,13 @@ const RootBottomNavigation = createBottomTabNavigator({
   },
 })
 
-type RootStackParamList = StaticParamList<typeof StateListNavigation> &
-  StaticParamList<typeof RootBottomNavigation>
-
-// Creating global  types for the navigation props to avoid importing them in every file
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
-}
-
 const Navigation = createStaticNavigation(RootBottomNavigation)
+
+const googleOauthwebClientId = process.env.GOOGLE_OAUTH_CLIENT_ID
+GoogleSignin.configure({
+  scopes: ["openid", "profile", "email"],
+  webClientId: googleOauthwebClientId,
+})
 
 const App: FC = () => {
   return (
