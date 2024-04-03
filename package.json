@@ -6,14 +6,14 @@
     "api": "place-my-order-api --port 7070",
     "typecheck": "tsc --noEmit",
     "eslint": "eslint *.ts *.js src",
-    "prettier": "prettier --write *.ts *.js src",
+    "prettier": "prettier --check *.ts *.js src",
     "depcheck": "depcheck .",
     "precheck": "npm run typecheck && npm run eslint && npm run prettier && npm run test && npm run depcheck",
     "start": "react-native start",
     "android": "react-native run-android",
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean": "rm -rf tsconfig.tsbuildinfo .expo dist ios android coverage",
+    "clean": "rm -rf tsconfig.tsbuildinfo coverage android/.gradle android/build android/app/build",
     "react-devtools": "react-devtools"
   },
   "eslintConfig": {
@@ -35,6 +35,7 @@
       "\\.(jpg)$": "identity-obj-proxy"
     },
     "setupFilesAfterEnv": [
+      "./node_modules/@react-native-google-signin/google-signin/jest/build/setup.js",
       "<rootDir>/jest-setup.ts"
     ],
     "transformIgnorePatterns": [

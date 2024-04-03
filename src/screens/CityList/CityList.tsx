@@ -2,7 +2,7 @@ import type { FC } from "react"
 import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import type { StaticScreenProps } from "@react-navigation/native"
-import { useCities } from "../../services/restaurant/hook"
+import { useCities } from "../../services/pmo/restaurant"
 import { Box, Loading, Press, Typography } from "../../components"
 
 type Props = StaticScreenProps<{

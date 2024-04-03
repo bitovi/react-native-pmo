@@ -1,4 +1,4 @@
-import type { Restaurant } from "../../services/restaurant/interfaces"
+import type { Restaurant } from "../../services/pmo/restaurant"
 
 export const restaurantWithoutAddress: Restaurant = {
   _id: "3ZOZyTY1LH26LnVw",
@@ -42,7 +42,7 @@ export const restaurantWithoutAddress: Restaurant = {
   slug: "poutine-palace",
 }
 
-export const restaurantWithAddress = {
+export const restaurantWithAddress: Required<Restaurant> = {
   ...restaurantWithoutAddress,
   address: {
     street: "123 Test St",
