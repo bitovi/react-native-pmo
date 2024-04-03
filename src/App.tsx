@@ -107,6 +107,7 @@ const Navigation = createStaticNavigation(RootBottomNavigation)
 const App: FC = () => {
   const { isConnected } = useNetInfo()
   const { syncWithServer, localFavorites } = useFavorites("user-id")
+
   useEffect(() => {
     if (isConnected && localFavorites) {
       syncWithServer()
