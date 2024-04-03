@@ -4,7 +4,7 @@ import { createContext, useContext } from "react"
 
 export interface AuthContext {
   /** Initiate the Google Auth flow. Return boolean success. */
-  signIn: () => Promise<boolean>
+  signIn: () => Promise<UserInfo["user"] | false>
   /** Log the user out from Google Auth. Return boolean success. */
   signOut: () => Promise<boolean>
   /** Boolean if the user is authenticated or not. Undefined if unknown. */

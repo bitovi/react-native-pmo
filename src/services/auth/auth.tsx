@@ -20,7 +20,7 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     try {
       const userInfo = await GoogleSignin.signIn()
       setUserInfo(userInfo)
-      return true
+      return userInfo.user
     } catch (error) {
       setUserInfo(null)
       console.error("GoogleSignin.signIn() error", error)
