@@ -15,8 +15,7 @@ import type { Props as DetailsProps } from "./screens/RestaurantDetails"
 import type { Props as OrderProps } from "./screens/RestaurantOrder"
 import { Loading } from "./components"
 import { useNetInfo } from "@react-native-community/netinfo"
-import { useFavorites } from "./services/pmo/favorite/hook"        
-
+import { useFavorites } from "./services/pmo/favorite/hook"
 
 type RootStackParamList = StaticParamList<typeof StateListNavigation> &
   StaticParamList<typeof RootBottomNavigation>
