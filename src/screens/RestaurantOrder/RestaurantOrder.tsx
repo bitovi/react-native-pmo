@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { ScrollView, Switch } from "react-native"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { useNavigation } from "@react-navigation/native"
-import { useRestaurant } from "../../services/restaurant/hook"
+import { useRestaurant } from "../../services/pmo/restaurant"
 import {
   Box,
   Typography,

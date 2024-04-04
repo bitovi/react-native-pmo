@@ -4,18 +4,32 @@ import { useEffect } from "react"
 import { createStaticNavigation } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-// import Ionicons from "@expo/vector-icons/Ionicons"
+import Icon from "react-native-vector-icons/Ionicons"
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
+
+import ThemeProvider, { theme } from "./theme"
+
+import AuthProvider from "./services/auth"
+
 import Home from "./screens/Home"
 import OrderCreate from "./screens/RestaurantOrder"
 import StateList from "./screens/StateList"
 import CityList from "./screens/CityList"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantDetails from "./screens/RestaurantDetails"
-import ThemeProvider from "./theme"
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
-import { theme } from "./theme/theme"
 import { useNetInfo } from "@react-native-community/netinfo"
 import { useFavorites } from "./services/favorite/hook"
+
+type RootStackParamList = StaticParamList<typeof StateListNavigation> &
+  StaticParamList<typeof RootBottomNavigation>
+
+// Creating global  types for the navigation props to avoid importing them in every file
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
 
 const StateListNavigation = createNativeStackNavigator({
   initialRouteName: "StateList",
@@ -62,13 +76,13 @@ const RootBottomNavigation = createBottomTabNavigator({
         title: "Place My Order",
         tabBarActiveTintColor: theme.colors.secondary,
         tabBarInactiveTintColor: theme.colors.text,
-        // tabBarIcon: ({ focused }) => (
-        //   <Ionicons
-        //     name="home-outline"
-        //     size={20}
-        //     color={focused ? theme.colors.secondary : theme.colors.text}
-        //   />
-        // ),
+        tabBarIcon: ({ focused }) => (
+          <Icon
+            name="home-outline"
+            size={20}
+            color={focused ? theme.colors.secondary : theme.colors.text}
+          />
+        ),
       },
     },
     StateListStack: {
@@ -79,28 +93,17 @@ const RootBottomNavigation = createBottomTabNavigator({
         headerShown: false,
         tabBarActiveTintColor: theme.colors.secondary,
         tabBarInactiveTintColor: theme.colors.text,
-        // tabBarIcon: ({ focused }) => (
-        //   <Ionicons
-        //     name="restaurant-outline"
-        //     size={20}
-        //     color={focused ? theme.colors.secondary : theme.colors.text}
-        //   />
-        // ),
+        tabBarIcon: ({ focused }) => (
+          <Icon
+            name="restaurant-outline"
+            size={20}
+            color={focused ? theme.colors.secondary : theme.colors.text}
+          />
+        ),
       },
     },
   },
 })
-
-type RootStackParamList = StaticParamList<typeof StateListNavigation> &
-  StaticParamList<typeof RootBottomNavigation>
-
-// Creating global  types for the navigation props to avoid importing them in every file
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
-}
 
 const Navigation = createStaticNavigation(RootBottomNavigation)
 
@@ -117,14 +120,11 @@ const App: FC = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <SafeAreaView
-          style={{
-            height: "100%",
-            width: "100%",
-          }}
-        >
-          <Navigation />
-        </SafeAreaView>
+        <AuthProvider>
+          <SafeAreaView style={{ height: "100%", width: "100%" }}>
+            <Navigation />
+          </SafeAreaView>
+        </AuthProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   )

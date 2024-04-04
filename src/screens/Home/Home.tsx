@@ -1,12 +1,18 @@
 import type { FC } from "react"
+
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, Image } from "react-native"
+import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
+
+import { useAuthenticated, useAuthentication } from "../../services/auth"
 import { Box, Press, Typography } from "../../components"
 
 const assetsUrl = process.env.PMO_ASSETS
 
 const Home: FC = () => {
   const navigation = useNavigation()
+  const isAuthenticated = useAuthenticated()
+  const { signIn, signOut } = useAuthentication()
 
   return (
     <Box style={styles.container}>
@@ -35,6 +41,9 @@ const Home: FC = () => {
             })
           }
         />
+
+        {isAuthenticated && <Press title="Sign Out" onPress={signOut} />}
+        {isAuthenticated === false && <GoogleSigninButton onPress={signIn} />}
       </Box>
     </Box>
   )

@@ -8,14 +8,12 @@
     "eslint": "eslint *.ts *.js src",
     "prettier": "prettier --check *.ts *.js src",
     "depcheck": "depcheck .",
-    "ci": "npm run typecheck && npm run eslint && npm run prettier && npm run test && npm run depcheck",
-    "start": "expo start",
+    "precheck": "npm run typecheck && npm run eslint && npm run prettier && npm run test && npm run depcheck",
+    "start": "react-native start",
     "android": "react-native run-android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean": "rm -rf tsconfig.tsbuildinfo .expo dist ios android coverage",
+    "clean": "rm -rf tsconfig.tsbuildinfo coverage android/.gradle android/build android/app/build",
     "react-devtools": "react-devtools"
   },
   "eslintConfig": {
@@ -37,6 +35,7 @@
       "\\.(jpg)$": "identity-obj-proxy"
     },
     "setupFilesAfterEnv": [
+      "./node_modules/@react-native-google-signin/google-signin/jest/build/setup.js",
       "<rootDir>/jest-setup.ts"
     ],
     "transformIgnorePatterns": [
@@ -68,6 +67,7 @@
     "react-native-maps": "^1.11.3",
     "react-native-safe-area-context": "^4.9.0",
     "react-native-screens": "^3.30.1",
+    "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {
@@ -78,6 +78,7 @@
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.4.3",
     "@types/react": "~18.2.45",
+    "@types/react-native-vector-icons": "^6.4.18",
     "depcheck": "^1.4.7",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",

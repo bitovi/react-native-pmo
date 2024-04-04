@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react-native"
-import * as hook from "../../services/restaurant/hook"
+
+import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
+
 import RestaurantDetails from "./RestaurantDetails"
 
 jest.mock("@react-navigation/native", () => {
@@ -19,10 +21,12 @@ jest.mock("@react-native-async-storage/async-storage", () =>
 describe("RestaurantDetails component", () => {
   // Mock the hooks and components used in RestaurantDetails
 
-  let useRestaurant: jest.SpyInstance<ReturnType<typeof hook.useRestaurant>>
+  let useRestaurant: jest.SpyInstance<
+    ReturnType<typeof restaurantHooks.useRestaurant>
+  >
   beforeEach(() => {
     jest.resetAllMocks()
-    useRestaurant = jest.spyOn(hook, "useRestaurant")
+    useRestaurant = jest.spyOn(restaurantHooks, "useRestaurant")
   })
 
   const mockRestaurantData = {

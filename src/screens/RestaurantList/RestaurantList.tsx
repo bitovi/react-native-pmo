@@ -3,7 +3,7 @@ import { useState } from "react"
 import { FlatList, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import type { StaticScreenProps } from "@react-navigation/native"
-import { useRestaurants } from "../../services/restaurant/hook"
+import { useRestaurants } from "../../services/pmo/restaurant"
 import { Box, Loading, Press, Typography } from "../../components"
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 
