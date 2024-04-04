@@ -6,6 +6,7 @@ import RestaurantHeader from "../../components/RestaurantHeader"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { Box, Loading, Press, Typography } from "../../components"
 import { useRestaurant } from "../../services/pmo/restaurant"
+import { useFavorites } from "../../services/pmo/favorite"
 
 export type Props = StaticScreenProps<{
   slug: string
@@ -15,7 +16,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   const { slug } = route.params
   const navigation = useNavigation()
   const { data: restaurant, error, isPending } = useRestaurant(slug)
-
+  const { updateFavorites, favorite } = useFavorites("user-id", restaurant?._id)
   useEffect(() => {
     if (restaurant) {
       navigation.setOptions({ title: `${restaurant.name}` })
@@ -40,6 +41,14 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   return (
     <Box style={styles.container}>
       <RestaurantHeader restaurant={restaurant} />
+      <Press
+        title={
+          favorite?.favorite ? "Remove from Favorites" : "Add to favorites"
+        }
+        onPress={() => {
+          updateFavorites(restaurant!._id)
+        }}
+      ></Press>
       <Press
         title="Place an order"
         onPress={() => {

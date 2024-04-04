@@ -11,6 +11,17 @@ jest.mock(
   "react-native-safe-area-context",
   () => jest.requireActual("react-native-safe-area-context/jest/mock").default,
 )
+jest.mock("@react-native-async-storage/async-storage", () =>
+  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
+)
+jest.mock("@react-native-community/netinfo", () => ({
+  fetch: jest.fn(),
+  isConnected: {
+    fetch: jest.fn(),
+  },
+  isInternetReachable: jest.fn(),
+  useNetInfo: () => ({ isConnected: true }),
+}))
 
 jest.mock(
   "./screens/StateList",
@@ -33,6 +44,38 @@ describe("App", () => {
       { short: "MI", name: "Michigan" },
       { short: "WI", name: "Wisconsin" },
       { short: "IL", name: "Illinois" },
+    ],
+  }
+  const mockFavoriteResponse = {
+    data: [
+      {
+        userId: "user-id",
+        restaurantId: "WKQjvzup7QWSFXvH",
+        favorite: false,
+        datetimeUpdated: "2024-04-03T14:12:16.314Z",
+        _id: "UslYVUxnBuBwqn0s",
+      },
+      {
+        userId: "user-id",
+        restaurantId: "7iiKc0akJPYzaMyw",
+        favorite: true,
+        datetimeUpdated: "2024-04-02T20:16:18.746Z",
+        _id: "dmTvyAYw3o0xjAIk",
+      },
+      {
+        userId: "user-id",
+        restaurantId: "pvXKyvTatd7CA2C8",
+        favorite: false,
+        datetimeUpdated: "2024-04-03T14:06:52.449Z",
+        _id: "kfeUvmuPl7ab9XB0",
+      },
+      {
+        userId: "user-id",
+        restaurantId: "6p3Zi1bQHW6aPlLO",
+        favorite: true,
+        datetimeUpdated: "2024-04-03T16:33:40.035Z",
+        _id: "wpdwrsOPBrr2irvJ",
+      },
     ],
   }
   const mockCitiesResponse = {
@@ -132,6 +175,12 @@ describe("App", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve(mockStateResponse),
+        statusText: "OK",
+        status: 200,
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockFavoriteResponse),
         statusText: "OK",
         status: 200,
       })
