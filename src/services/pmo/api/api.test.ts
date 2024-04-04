@@ -31,6 +31,10 @@ describe("apiRequest function", () => {
     expect(response).toEqual({ data: { message: "success" }, error: null })
     expect(mockFetch).toHaveBeenCalledWith(`${process.env.PMO_API}/test?`, {
       method: "GET",
+      body: undefined,
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
   })
 
