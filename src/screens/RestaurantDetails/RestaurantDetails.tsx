@@ -6,7 +6,7 @@ import RestaurantHeader from "../../components/RestaurantHeader"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { Box, Loading, Press, Typography } from "../../components"
 import { useRestaurant } from "../../services/pmo/restaurant"
-import { useFavorites } from "../../services/favorite/hook"
+import { useFavorites } from "../../services/pmo/favorite"
 
 type Props = StaticScreenProps<{
   slug: string

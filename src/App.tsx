@@ -18,7 +18,7 @@ import CityList from "./screens/CityList"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantDetails from "./screens/RestaurantDetails"
 import { useNetInfo } from "@react-native-community/netinfo"
-import { useFavorites } from "./services/favorite/hook"
+import { useFavorites } from "./services/pmo/favorite/hook"
 
 type RootStackParamList = StaticParamList<typeof StateListNavigation> &
   StaticParamList<typeof RootBottomNavigation>
