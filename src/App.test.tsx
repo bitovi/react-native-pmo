@@ -14,6 +14,7 @@ jest.mock(
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
 )
+
 jest.mock("@react-native-community/netinfo", () => ({
   fetch: jest.fn(),
   isConnected: {
@@ -174,13 +175,13 @@ describe("App", () => {
     mockFetch
       .mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve(mockStateResponse),
+        json: () => Promise.resolve(mockFavoriteResponse),
         statusText: "OK",
         status: 200,
       })
       .mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve(mockFavoriteResponse),
+        json: () => Promise.resolve(mockStateResponse),
         statusText: "OK",
         status: 200,
       })
