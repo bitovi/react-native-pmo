@@ -5,7 +5,7 @@ import type { StaticScreenProps } from "@react-navigation/native"
 import { useCities } from "../../services/pmo/restaurant"
 import { Box, Loading, Press, Typography } from "../../components"
 
-type Props = StaticScreenProps<{
+export type Props = StaticScreenProps<{
   state: string
 }>
 

@@ -11,8 +11,8 @@
     "precheck": "npm run typecheck && npm run eslint && npm run prettier && npm run test && npm run depcheck",
     "start": "react-native start",
     "android": "react-native run-android",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "clean": "rm -rf tsconfig.tsbuildinfo coverage android/.gradle android/build android/app/build",
     "react-devtools": "react-devtools"
   },
@@ -40,7 +40,8 @@
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
-    ]
+    ],
+    "transform": {}
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",

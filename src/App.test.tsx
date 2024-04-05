@@ -14,6 +14,7 @@ jest.mock(
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
 )
+
 jest.mock("@react-native-community/netinfo", () => ({
   fetch: jest.fn(),
   isConnected: {
@@ -22,6 +23,21 @@ jest.mock("@react-native-community/netinfo", () => ({
   isInternetReachable: jest.fn(),
   useNetInfo: () => ({ isConnected: true }),
 }))
+
+jest.mock(
+  "./screens/StateList",
+  () => jest.requireActual("./screens/StateList").default,
+)
+
+jest.mock(
+  "./screens/CityList",
+  () => jest.requireActual("./screens/CityList").default,
+)
+
+jest.mock(
+  "./screens/RestaurantList",
+  () => jest.requireActual("./screens/RestaurantList").default,
+)
 
 describe("App", () => {
   const mockStateResponse = {
@@ -159,13 +175,13 @@ describe("App", () => {
     mockFetch
       .mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve(mockStateResponse),
+        json: () => Promise.resolve(mockFavoriteResponse),
         statusText: "OK",
         status: 200,
       })
       .mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve(mockFavoriteResponse),
+        json: () => Promise.resolve(mockStateResponse),
         statusText: "OK",
         status: 200,
       })

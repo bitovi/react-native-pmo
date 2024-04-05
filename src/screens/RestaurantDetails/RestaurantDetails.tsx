@@ -8,7 +8,7 @@ import { Box, Loading, Press, Typography } from "../../components"
 import { useRestaurant } from "../../services/pmo/restaurant"
 import { useFavorites } from "../../services/pmo/favorite"
 
-type Props = StaticScreenProps<{
+export type Props = StaticScreenProps<{
   slug: string
 }>
 
