@@ -7,7 +7,11 @@ import type { StaticScreenProps } from "@react-navigation/native"
 import { Box, Loading, Press, Typography } from "../../components"
 import { useRestaurant } from "../../services/pmo/restaurant"
 import { useFavorites } from "../../services/pmo/favorite"
-import { useAuthContext } from "../../services/auth/context"
+import {
+  useAuthenticated,
+  useUser,
+  useAuthentication,
+} from "../../services/auth"
 
 export type Props = StaticScreenProps<{
   slug: string
@@ -17,9 +21,10 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   const { slug } = route.params
   const navigation = useNavigation()
   const { data: restaurant, error, isPending } = useRestaurant(slug)
-  const { isAuthenticated, user, signIn } = useAuthContext()
+  const isAuthenticated = useAuthenticated()
+  const user = useUser()
+  const { signIn } = useAuthentication()
   const { updateFavorites, favorite } = useFavorites(user?.id, restaurant?._id)
-
   useEffect(() => {
     if (restaurant) {
       navigation.setOptions({ title: `${restaurant.name}` })
