@@ -1,21 +1,19 @@
 import type { FC } from "react"
 import type { StaticParamList } from "@react-navigation/native"
+import { Suspense, lazy } from "react"
 import { createStaticNavigation } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import Icon from "react-native-vector-icons/Ionicons"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
-
 import ThemeProvider, { theme } from "./theme"
-
 import AuthProvider from "./services/auth"
-
 import Home from "./screens/Home"
-import OrderCreate from "./screens/RestaurantOrder"
-import StateList from "./screens/StateList"
-import CityList from "./screens/CityList"
-import RestaurantList from "./screens/RestaurantList"
-import RestaurantDetails from "./screens/RestaurantDetails"
+import type { Props as CityProps } from "./screens/CityList"
+import type { Props as RestaurantListProps } from "./screens/RestaurantList"
+import type { Props as DetailsProps } from "./screens/RestaurantDetails"
+import type { Props as OrderProps } from "./screens/RestaurantOrder"
+import { Loading } from "./components"
 
 type RootStackParamList = StaticParamList<typeof StateListNavigation> &
   StaticParamList<typeof RootBottomNavigation>
@@ -28,35 +26,81 @@ declare global {
   }
 }
 
+const StateList = lazy(() => import("./screens/StateList"))
+const CityList = lazy(() => import("./screens/CityList"))
+const RestaurantList = lazy(() => import("./screens/RestaurantList"))
+const RestaurantDetails = lazy(() => import("./screens/RestaurantDetails"))
+const OrderCreate = lazy(() => import("./screens/RestaurantOrder"))
+
+const SuspenseStateList: FC = () => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <StateList />
+    </Suspense>
+  )
+}
+
+const SuspenseCityList: FC<CityProps> = ({ route }) => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <CityList route={route} />
+    </Suspense>
+  )
+}
+
+const SuspenseRestaurantList: FC<RestaurantListProps> = ({ route }) => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <RestaurantList route={route} />
+    </Suspense>
+  )
+}
+
+const SuspenseRestaurantDetails: FC<DetailsProps> = ({ route }) => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <RestaurantDetails route={route} />
+    </Suspense>
+  )
+}
+
+const SuspenseOrderCreate: FC<OrderProps> = ({ route }) => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <OrderCreate route={route} />
+    </Suspense>
+  )
+}
+
 const StateListNavigation = createNativeStackNavigator({
   initialRouteName: "StateList",
   screens: {
     StateList: {
-      screen: StateList,
+      screen: SuspenseStateList,
       options: {
         title: "Select a state",
       },
     },
     CityList: {
-      screen: CityList,
+      screen: SuspenseCityList,
       options: {
         title: "Select a city",
       },
     },
     RestaurantList: {
-      screen: RestaurantList,
+      screen: SuspenseRestaurantList,
       options: {
         title: "Select a restaurant",
       },
     },
     RestaurantDetails: {
-      screen: RestaurantDetails,
+      screen: SuspenseRestaurantDetails,
       options: {
         title: "",
       },
     },
     OrderCreate: {
-      screen: OrderCreate,
+      screen: SuspenseOrderCreate,
       options: {
         title: "",
       },

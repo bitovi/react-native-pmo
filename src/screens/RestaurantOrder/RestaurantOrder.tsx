@@ -14,7 +14,7 @@ import {
 import Card from "../../components/Card"
 import useTheme from "../../theme/useTheme"
 
-type Props = StaticScreenProps<{
+export type Props = StaticScreenProps<{
   restaurantId: string
 }>
 

@@ -7,32 +7,7 @@ import { useRestaurants } from "../../services/pmo/restaurant"
 import { Box, Loading, Press, Typography } from "../../components"
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 
-const styles = StyleSheet.create({
-  topNav: {
-    alignItems: "flex-start",
-    flexDirection: "row",
-  },
-  activeButton: {
-    margin: 0,
-    marginRight: 1,
-    minWidth: "46%",
-    textAlign: "center",
-    borderRadius: 0,
-    backgroundColor: "black",
-  },
-  viewButton: {
-    margin: 0,
-    marginRight: 1,
-    minWidth: "46%",
-    textAlign: "center",
-    borderRadius: 0,
-    backgroundColor: "white",
-    color: "black",
-  },
-  mapView: { minHeight: "100%" }, // needs a minHeight to display without error
-})
-
-type Props = StaticScreenProps<{
+export type Props = StaticScreenProps<{
   state: string
   city: string
 }>
@@ -121,5 +96,29 @@ const RestaurantList: FC<Props> = ({ route }) => {
     </>
   )
 }
+const styles = StyleSheet.create({
+  topNav: {
+    alignItems: "flex-start",
+    flexDirection: "row",
+  },
+  activeButton: {
+    margin: 0,
+    marginRight: 1,
+    minWidth: "46%",
+    textAlign: "center",
+    borderRadius: 0,
+    backgroundColor: "black",
+  },
+  viewButton: {
+    margin: 0,
+    marginRight: 1,
+    minWidth: "46%",
+    textAlign: "center",
+    borderRadius: 0,
+    backgroundColor: "white",
+    color: "black",
+  },
+  mapView: { minHeight: "100%" }, // needs a minHeight to display without error
+})
 
 export default RestaurantList
