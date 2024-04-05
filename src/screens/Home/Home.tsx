@@ -1,10 +1,17 @@
 import type { FC } from "react"
 
+import { useEffect } from "react"
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, Image } from "react-native"
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
+import { useNetInfo } from "@react-native-community/netinfo"
 
-import { useAuthenticated, useAuthentication } from "../../services/auth"
+import { useFavorites } from "../../services/pmo/favorite/hook"
+import {
+  useAuthenticated,
+  useAuthentication,
+  useUser,
+} from "../../services/auth"
 import { Box, Press, Typography } from "../../components"
 
 const assetsUrl = process.env.PMO_ASSETS
@@ -13,6 +20,15 @@ const Home: FC = () => {
   const navigation = useNavigation()
   const isAuthenticated = useAuthenticated()
   const { signIn, signOut } = useAuthentication()
+  const user = useUser()
+  const { isConnected } = useNetInfo()
+  const { syncWithServer, localFavorites } = useFavorites("user-id")
+
+  useEffect(() => {
+    if (user && isConnected && localFavorites) {
+      syncWithServer()
+    }
+  }, [isConnected, localFavorites, syncWithServer, user])
 
   return (
     <Box style={styles.container}>

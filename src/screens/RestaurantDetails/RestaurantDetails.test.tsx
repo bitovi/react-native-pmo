@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react-native"
 
 import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
+import AuthProvider from "../../services/auth"
 
 import RestaurantDetails from "./RestaurantDetails"
 
@@ -50,7 +51,11 @@ describe("RestaurantDetails component", () => {
   }
   it("renders loading state", () => {
     useRestaurant.mockReturnValue({ data: null, isPending: true, error: null })
-    render(<RestaurantDetails route={{ params: { slug: "test" } }} />)
+    render(
+      <AuthProvider>
+        <RestaurantDetails route={{ params: { slug: "test" } }} />
+      </AuthProvider>,
+    )
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
 
@@ -60,7 +65,11 @@ describe("RestaurantDetails component", () => {
       isPending: false,
       error: { name: "Error", message: "Mock error" },
     })
-    render(<RestaurantDetails route={{ params: { slug: "test" } }} />)
+    render(
+      <AuthProvider>
+        <RestaurantDetails route={{ params: { slug: "test" } }} />
+      </AuthProvider>,
+    )
     expect(
       screen.getByText(/Error loading restaurant details:/i, {
         exact: false,
@@ -71,14 +80,22 @@ describe("RestaurantDetails component", () => {
 
   it("renders the RestaurantHeader and content when data is available", () => {
     useRestaurant.mockReturnValue(mockRestaurantData)
-    render(<RestaurantDetails route={{ params: { slug: "test" } }} />)
+    render(
+      <AuthProvider>
+        <RestaurantDetails route={{ params: { slug: "test" } }} />
+      </AuthProvider>,
+    )
 
     expect(screen.getByText("Test Restaurant")).toBeOnTheScreen()
   })
 
   it("renders the RestaurantHeader and content when data is not available", () => {
     useRestaurant.mockReturnValue({ ...mockRestaurantData, data: null })
-    render(<RestaurantDetails route={{ params: { slug: "test" } }} />)
+    render(
+      <AuthProvider>
+        <RestaurantDetails route={{ params: { slug: "test" } }} />
+      </AuthProvider>,
+    )
 
     expect(screen.getByText("Place an order")).toBeOnTheScreen()
   })
