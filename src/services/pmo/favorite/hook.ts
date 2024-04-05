@@ -21,7 +21,7 @@ interface LocalStorageFavorites {
 }
 
 export function useFavorites(
-  userId: string,
+  userId?: string,
   restaurantId?: string,
 ): FavoritesResponse & {
   updateFavorites: (restaurantId: Favorite["restaurantId"]) => void
@@ -58,7 +58,9 @@ export function useFavorites(
         isPending: false,
       })
     }
-    fetchData()
+    if (userId) {
+      fetchData()
+    }
   }, [userId])
 
   useEffect(() => {

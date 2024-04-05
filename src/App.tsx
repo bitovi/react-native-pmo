@@ -1,6 +1,5 @@
 import type { FC } from "react"
 import type { StaticParamList } from "@react-navigation/native"
-import { useEffect } from "react"
 import { createStaticNavigation } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -17,8 +16,6 @@ import StateList from "./screens/StateList"
 import CityList from "./screens/CityList"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantDetails from "./screens/RestaurantDetails"
-import { useNetInfo } from "@react-native-community/netinfo"
-import { useFavorites } from "./services/pmo/favorite/hook"
 
 type RootStackParamList = StaticParamList<typeof StateListNavigation> &
   StaticParamList<typeof RootBottomNavigation>
@@ -108,15 +105,6 @@ const RootBottomNavigation = createBottomTabNavigator({
 const Navigation = createStaticNavigation(RootBottomNavigation)
 
 const App: FC = () => {
-  const { isConnected } = useNetInfo()
-  const { syncWithServer, localFavorites } = useFavorites("user-id")
-
-  useEffect(() => {
-    if (isConnected && localFavorites) {
-      syncWithServer()
-    }
-  }, [isConnected, localFavorites, syncWithServer])
-
   return (
     <SafeAreaProvider>
       <ThemeProvider>
