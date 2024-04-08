@@ -22,12 +22,6 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.bitovi.reactnativepmo",
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyDA1Dwqxq_ypDP5g1oe5d9kw26b0OWO9Xw"
-        }
       }
     },
     "web": {
