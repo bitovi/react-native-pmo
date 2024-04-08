@@ -11,7 +11,7 @@ const Loading: FC = () => {
     <Box padding="l">
       <ActivityIndicator size="large" color={theme.colors.secondary} />
       <Typography variant="body" style={{ textAlign: "center", marginTop: 8 }}>
-        Loading...
+        Loading…
       </Typography>
     </Box>
   )
