@@ -169,18 +169,6 @@ Run the app in the Android Emulator with:
 npm run android
 ```
 
-## React Native vs Expo
-
-Expo is a framework on top on React Native. Expo adds additional features to make development easier and is the recommended approach by the React Native docs. You will need the docs from both projects to work on this repo.
-
-[React Native](https://reactnative.dev/docs/getting-started)
-
-[Expo](https://docs.expo.dev/tutorial/introduction/)
-
-### Install Expo Go
-
-Install Expo Go on your mobile device from the appropriate app store. This will allow you to quickly run demos you find online with your mobile device. This app will not run in Expo Go because of OAuth, but many other apps will so it’s a useful tool to be aware of.
-
 ### Running
 
 `npm run <android|ios|web>`
@@ -195,7 +183,6 @@ You can also use `npm run start` and then press `a`, `i`, or `w` to run Android,
 
 ### Building
 
-You can build web locally `expo export --web` and you can build Android on EAS (see RN docs, as you have to set up accounts). You should be able to build iOS on EAS, but it needs an active Apple Dev account with iOS access (which isn’t free, so I haven’t tested yet).
 
 I’m sure you can trigger EAS from CI, but we may need to create a generic Bitovi account. I have not researched this yet. Free accounts are limited to 1 concurrent build at a time and take ~10 minutes, so this could become a bottleneck if we want it on all PRs.
 
@@ -218,10 +205,8 @@ e.g. if you're running on port 3030, run `adb reverse tcp:3030 tcp:3030`
 ### Core libraries
 
 - [React Native](https://reactnative.dev/docs/components-and-apis)
-- [Expo Framework](https://docs.expo.dev/)
 - [React Navigation](https://reactnavigation.org/docs/7.x/getting-started)
 
 ### Icons
 
-- [Icon component](https://docs.expo.dev/guides/icons/)
 - [Available icon list](https://ionic.io/ionicons)
