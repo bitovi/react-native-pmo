@@ -16,8 +16,12 @@ const FormTextField: FC<Props> = ({ label, placeholder, value, onChange }) => {
 
   return (
     <Box style={{ marginVertical: 8 }}>
-      <Text style={{ fontSize: 10, fontWeight: "500" }}>{label}</Text>
+      <Text nativeID="formLabel" style={{ fontSize: 10, fontWeight: "500" }}>
+        {label}
+      </Text>
       <TextInput
+        accessibilityLabel="input"
+        accessibilityLabelledBy="formLabel"
         onChangeText={onChange}
         value={value}
         placeholder={placeholder}
