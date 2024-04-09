@@ -181,10 +181,6 @@ You can also use `npm run start` and then press `a`, `i`, or `w` to run Android,
 - When running Web, it just runs.
 - When running Android, run the virtual device first.
 
-### Building
-
-I’m sure you can trigger EAS from CI, but we may need to create a generic Bitovi account. I have not researched this yet. Free accounts are limited to 1 concurrent build at a time and take ~10 minutes, so this could become a bottleneck if we want it on all PRs.
-
 ### Debugging with React DevTools
 
 You can run React Devtools with `npm run react-devtools`. This will start the DevTools up which will be ready to open with Metro's in-app dev menu. In running Metro app make sure to hit press 'd' to open the dev menu in React DevTools.
