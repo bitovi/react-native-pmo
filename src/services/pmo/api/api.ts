@@ -1,4 +1,11 @@
+import { getData, storeData } from "../../storage"
+
 const baseUrl = process.env.PMO_API
+
+interface LocalStorageApiRequest<T> {
+  data: T
+  dateTime: Date
+}
 
 export async function apiRequest<
   Data = never,
@@ -17,7 +24,23 @@ export async function apiRequest<
 }): Promise<{ data: Data | null; error: Error | null }> {
   try {
     const query = params ? stringifyQuery(params) : ""
-    const response = await fetch(`${baseUrl}${path}?${query}`, {
+    const requestUrl = `${baseUrl}${path}?${query}`
+
+    const cachedResponse =
+      await getData<LocalStorageApiRequest<Data>>(requestUrl)
+    if (cachedResponse) {
+      const diff =
+        new Date().valueOf() - new Date(cachedResponse.dateTime).valueOf()
+      //Return Cached data if it's younger than one minute
+      if (diff < 60000) {
+        return {
+          data: cachedResponse.data,
+          error: null,
+        }
+      }
+    }
+
+    const response = await fetch(requestUrl, {
       method,
       headers: {
         "Content-Type": "application/json",
@@ -29,6 +52,13 @@ export async function apiRequest<
     const error = response.ok
       ? null
       : new Error(`${response.status} (${response.statusText})`)
+
+    if (method === "GET" && response.ok) {
+      storeData<LocalStorageApiRequest<Data>>(requestUrl, {
+        data: data,
+        dateTime: new Date(),
+      })
+    }
 
     return {
       data: data,
