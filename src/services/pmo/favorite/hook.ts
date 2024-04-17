@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { apiRequest } from "../api"
 import type { Favorite } from "./interfaces"
-import { storeData, getData } from "../../storage"
+import { storeData, getData } from "../../storage/storage"
 
 interface FavoritesResponse {
   data: Favorite[] | null
