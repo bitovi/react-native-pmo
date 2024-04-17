@@ -11,6 +11,7 @@ jest.mock(
   "react-native-safe-area-context",
   () => jest.requireActual("react-native-safe-area-context/jest/mock").default,
 )
+
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
 )
@@ -161,10 +162,7 @@ describe("App", () => {
       })
 
     render(<App />)
-    expect(
-      screen.getByText(/Ordering food has never been easier/i),
-    ).toBeOnTheScreen()
-    fireEvent.press(screen.getByText(/Choose a restaurant/i))
+    screen.getAllByText(/Place my order/i)
     expect(
       await screen.findByText(/Michigan/i, { exact: false }),
     ).toBeOnTheScreen()

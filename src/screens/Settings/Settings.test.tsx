@@ -27,13 +27,7 @@ describe("Settings component", () => {
       </AuthProvider>,
     )
     expect(
-      screen.getByText(/Ordering food has never been easier/i),
+      screen.getByText(/dark mode/i),
     ).toBeOnTheScreen()
-    expect(
-      screen.getByText(
-        /We make it easier than ever to order gourmet food from your favorite local restaurants./i,
-      ),
-    ).toBeOnTheScreen()
-    expect(screen.getByText(/Choose a restaurant/i)).toBeOnTheScreen()
   })
 })

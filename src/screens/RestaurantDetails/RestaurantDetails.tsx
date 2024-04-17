@@ -1,9 +1,12 @@
 import type { FC } from "react"
+import type { StackScreenProps } from "@react-navigation/stack"
+import type { RestaurantsStackParamList } from "../../App"
+
 import { useEffect } from "react"
 import { StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+
 import RestaurantHeader from "../../components/RestaurantHeader"
-import type { StaticScreenProps } from "@react-navigation/native"
 import { Box, Loading, Press, Typography } from "../../components"
 import { useRestaurant } from "../../services/pmo/restaurant"
 import { useFavorites } from "../../services/pmo/favorite"
@@ -13,9 +16,8 @@ import {
   useAuthentication,
 } from "../../services/auth"
 
-export type Props = StaticScreenProps<{
-  slug: string
-}>
+
+type Props = StackScreenProps<RestaurantsStackParamList, "RestaurantDetails">
 
 const RestaurantDetails: FC<Props> = ({ route }) => {
   const { slug } = route.params
@@ -66,7 +68,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
       <Press
         title="Place an order"
         onPress={() => {
-          navigation.navigate("OrderCreate", { restaurantId: slug })
+          navigation.navigate("OrderCreate", { slug: slug })
         }}
       />
     </Box>

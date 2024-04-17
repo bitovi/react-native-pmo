@@ -1,10 +1,9 @@
 import { render, screen } from "@testing-library/react-native"
-import { createStaticNavigation } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
 
 import CityList from "./CityList"
+import MockApp from "../../MockApp"
 
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
@@ -25,21 +24,6 @@ describe("CityList component", () => {
     useCities = jest.spyOn(restaurantHooks, "useCities")
   })
 
-  const mockStackNavigator = createNativeStackNavigator({
-    initialRouteName: "CityList",
-    screens: {
-      StateList: {
-        screen: CityList,
-        initialParams: { state: "" },
-        options: {
-          title: "Cities",
-        },
-      },
-    },
-  })
-
-  const MockCityNavigation = createStaticNavigation(mockStackNavigator)
-
   it("renders city List", () => {
     useCities.mockReturnValue({
       ...mockCitiesResponse,
@@ -47,7 +31,9 @@ describe("CityList component", () => {
       isPending: false,
     })
 
-    render(<MockCityNavigation />)
+    render(
+      <MockApp component={CityList} params={{ state: { name: 'test', short: 'test' } }} />
+    )
     expect(screen.getByText(/Detroit/i)).toBeOnTheScreen()
     expect(screen.getByText(/Ann Arbor/i)).toBeOnTheScreen()
   })
@@ -55,7 +41,9 @@ describe("CityList component", () => {
   it("renders loading city", () => {
     useCities.mockReturnValue({ data: null, error: null, isPending: true })
 
-    render(<MockCityNavigation />)
+    render(
+      <MockApp component={CityList} params={{ state: { name: 'test', short: 'test' } }} />
+    )
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
@@ -66,7 +54,9 @@ describe("CityList component", () => {
       isPending: false,
     })
 
-    render(<MockCityNavigation />)
+    render(
+      <MockApp component={CityList} params={{ state: { name: 'test', short: 'test' } }} />
+    )
 
     expect(screen.getByText(/Error loading cities:/)).toBeOnTheScreen()
     expect(screen.getByText(/This is the error/)).toBeOnTheScreen()

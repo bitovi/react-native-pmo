@@ -19,8 +19,10 @@ import { Typography } from "./components"
 import { Pressable } from "react-native"
 
 export type RestaurantsStackParamList = {
-  StateList: undefined
-  CityList: { state: State }
+  StateList: {  }
+  CityList: {
+    state: State
+  }
   RestaurantList: {
     state: State
     city: City
@@ -34,16 +36,6 @@ export type RestaurantsStackParamList = {
     state: State
     city: City
     slug: string
-  }
-}
-
-// Creating global  types for the navigation props to avoid importing them in every file
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace ReactNavigation {
-    interface RootParamList extends RestaurantsStackParamList {
-      back: string
-    }
   }
 }
 
@@ -93,7 +85,7 @@ const RestaurantsStackNavigation = () => {
 }
 
 const Tab = createBottomTabNavigator()
-const RootBottomNavigation = () => {
+export const RootNavigator: FC = () => {
   return (
     <Tab.Navigator
       initialRouteName="RestaurantsStack"
@@ -130,10 +122,10 @@ const RootBottomNavigation = () => {
   )
 }
 
-const Navigation = () => {
+const AppNavigator: FC = () => {
   return (
     <NavigationContainer>
-      <RootBottomNavigation />
+      <RootNavigator />
     </NavigationContainer>
   )
 }
@@ -144,7 +136,7 @@ const App: FC = () => {
       <ThemeProvider>
         <AuthProvider>
           <SafeAreaView style={{ height: "100%", width: "100%" }}>
-            <Navigation />
+            <AppNavigator/>
           </SafeAreaView>
         </AuthProvider>
       </ThemeProvider>

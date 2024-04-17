@@ -1,10 +1,9 @@
 import { render, screen } from "@testing-library/react-native"
-import { createStaticNavigation } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
 
 import RestaurantOrder from "./RestaurantOrder"
+import MockApp from "../../MockApp"
 
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
@@ -61,18 +60,6 @@ describe("RestaurantOrder component", () => {
     useRestaurant = jest.spyOn(restaurantHooks, "useRestaurant")
   })
 
-  const mockStackNavigator = createNativeStackNavigator({
-    initialRouteName: "RestaurantList",
-    screens: {
-      RestaurantOrder: {
-        screen: RestaurantOrder,
-        initialParams: { restaurantId: "bagel-restaurant" },
-      },
-    },
-  })
-
-  const MockRestaurantNavigation = createStaticNavigation(mockStackNavigator)
-
   it("renders restaurant order form", () => {
     useRestaurant.mockReturnValue({
       ...mockRestaurantResponse,
@@ -80,7 +67,9 @@ describe("RestaurantOrder component", () => {
       isPending: false,
     })
 
-    render(<MockRestaurantNavigation />)
+    render(
+      <MockApp component={RestaurantOrder} params={{ restaurantId: "bagel-restaurant" }} />
+    )
     expect(screen.getByText(/Lunch Menu/i)).toBeOnTheScreen()
     expect(
       screen.getByText(mockRestaurantResponse.data.menu.lunch[0].name, {
@@ -98,8 +87,9 @@ describe("RestaurantOrder component", () => {
   it("renders loading restaurant", () => {
     useRestaurant.mockReturnValue({ data: null, error: null, isPending: true })
 
-    render(<MockRestaurantNavigation />)
-
+    render(
+      <MockApp component={RestaurantOrder} params={{ restaurantId: "bagel-restaurant" }} />
+    )
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
   it("renders error restaurant", () => {
@@ -109,7 +99,9 @@ describe("RestaurantOrder component", () => {
       isPending: false,
     })
 
-    render(<MockRestaurantNavigation />)
+    render(
+      <MockApp component={RestaurantOrder} params={{ restaurantId: "bagel-restaurant" }} />
+    )
 
     expect(
       screen.getByText(/Error loading restaurant order:/),
