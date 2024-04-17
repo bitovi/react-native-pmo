@@ -2,43 +2,20 @@
   "name": "PlaceMyOrder",
   "version": "1.0.0",
   "private": true,
+  "main": "index.ts",
   "scripts": {
     "api": "place-my-order-api --port 7070",
     "typecheck": "tsc --noEmit",
-    "eslint": "eslint *.ts *.js src",
-    "prettier": "prettier --check *.ts *.js src",
+    "eslint": "eslint *.ts *.cjs src",
+    "prettier": "prettier --check *.ts *.cjs src",
     "depcheck": "depcheck .",
-    "precheck": "npm run typecheck && npm run eslint && npm run prettier && npm run test && npm run depcheck",
+    "precheck": "npm run typecheck && npm run eslint && npm run prettier && npm run depcheck && npm run test",
     "start": "react-native start",
     "android": "react-native run-android",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "clean": "rm -rf tsconfig.tsbuildinfo coverage android/.gradle android/build android/app/build",
     "react-devtools": "react-devtools"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": "@bitovi/eslint-config/react",
-    "settings": {
-      "import/ignore": [
-        "node_modules/react-native/index\\.js$"
-      ]
-    }
-  },
-  "prettier": {
-    "semi": false,
-    "trailingComma": "all"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "moduleNameMapper": {
-      "\\.(jpg)$": "identity-obj-proxy"
-    },
-    "setupFilesAfterEnv": [
-      "./node_modules/@react-native-google-signin/google-signin/jest/build/setup.js",
-      "<rootDir>/jest-setup.ts"
-    ],
-    "transform": {}
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -64,7 +41,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
-    "@bitovi/eslint-config": "^1.7.0",
+    "@bitovi/eslint-config": "^1.8.0",
     "@react-native/babel-preset": "0.73.21",
     "@react-native/metro-config": "0.73.5",
     "@testing-library/jest-native": "^5.4.3",
