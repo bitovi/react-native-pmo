@@ -1,11 +1,11 @@
-import type { ComponentPropsWithoutRef, FC } from "react"
+import type { ComponentPropsWithoutRef, FC, ReactNode } from "react"
 import { StyleSheet } from "react-native"
 import useTheme from "../../theme/useTheme"
 import Box from "../Box"
 import Typography from "../Typography"
 
 type Props = ComponentPropsWithoutRef<typeof Box> & {
-  headline?: string
+  headline?: ReactNode
 }
 
 const Card: FC<Props> = ({
@@ -21,6 +21,7 @@ const Card: FC<Props> = ({
     <Box
       style={StyleSheet.compose(
         {
+          width: "100%",
           marginVertical: theme.spacing.m,
           backgroundColor: theme.colors.card,
           shadowColor: theme.colors.shadow,
@@ -42,7 +43,11 @@ const Card: FC<Props> = ({
             borderBottomColor: theme.colors.border,
           }}
         >
-          <Typography variant="title">{headline}</Typography>
+          {typeof headline === "string" ? (
+            <Typography variant="title">{headline}</Typography>
+          ) : (
+            headline
+          )}
         </Box>
       )}
       <Box padding={padding}>{children}</Box>

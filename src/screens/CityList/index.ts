@@ -1,1 +1,1 @@
-export { default, type Props } from "./CityList"
+export { default } from "./CityList"

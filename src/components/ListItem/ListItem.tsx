@@ -2,18 +2,19 @@ import type { ComponentProps, FC, ReactNode } from "react"
 import type { StyleProp, ViewStyle } from "react-native"
 import { Image, Pressable, StyleSheet } from "react-native"
 import Box from "../Box"
+import Typography from "../Typography"
 
 type Props = ComponentProps<typeof Box> & {
   style?: StyleProp<ViewStyle>
   image?: string
-  children: ReactNode
+  title: ReactNode
   onPress?: () => void
 }
 
 const ListItem: FC<Props> = ({
   style,
   image,
-  children,
+  title,
   onPress,
   ...restOfProps
 }) => {
@@ -23,7 +24,7 @@ const ListItem: FC<Props> = ({
         {image && (
           <Image source={{ uri: image }} style={{ width: 48, height: 48 }} />
         )}
-        {children}
+        <Typography style={styles.title}>{title}</Typography>
       </Box>
     </Pressable>
   )
@@ -42,6 +43,12 @@ const styles = StyleSheet.create({
     padding: 16,
     minHeight: 48,
     width: "100%",
+  },
+  title: {
+    flex: 1,
+    marginLeft: 16,
+    fontSize: 16,
+    fontWeight: "500",
   },
 })
 

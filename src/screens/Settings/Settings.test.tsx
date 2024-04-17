@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native"
 
 import AuthProvider from "../../services/auth"
 
-import Home from "./Home"
+import Settings from "./Settings"
 
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
@@ -17,12 +17,12 @@ jest.mock("@react-native-community/netinfo", () => ({
   useNetInfo: () => ({ isConnected: true }),
 }))
 
-describe("Home component", () => {
-  it("renders Home Page", async () => {
+describe("Settings component", () => {
+  it("renders Settings Page", async () => {
     render(
       <AuthProvider>
         <NavigationContainer>
-          <Home />
+          <Settings />
         </NavigationContainer>
       </AuthProvider>,
     )

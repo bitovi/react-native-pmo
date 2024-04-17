@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { apiRequest } from "../api"
 import type { City, Restaurant, State } from "./interfaces"
 
@@ -24,6 +24,7 @@ interface StatesResponse {
   data: State[] | null
   error: Error | null
   isPending: boolean
+  retry: () => void
 }
 
 export function useCities(state: string): CitiesResponse {
@@ -115,14 +116,25 @@ export function useRestaurants(
 }
 
 export function useStates(): StatesResponse {
+  const [retries, setRetries] = useState(0)
+  const retry = useCallback(() => setRetries(() => retries + 1), [retries])
+
   const [response, setResponse] = useState<StatesResponse>({
     data: null,
     error: null,
     isPending: true,
+    retry,
   })
 
   useEffect(() => {
     const fetchData = async () => {
+      setResponse({
+        data: null,
+        error: null,
+        isPending: true,
+        retry,
+      })
+
       const { data, error } = await apiRequest<StatesResponse>({
         method: "GET",
         path: "/states",
@@ -132,10 +144,11 @@ export function useStates(): StatesResponse {
         data: data?.data || null,
         error: error,
         isPending: false,
+        retry,
       })
     }
     fetchData()
-  }, [])
+  }, [retry])
 
   return response
 }
