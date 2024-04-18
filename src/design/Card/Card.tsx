@@ -1,4 +1,5 @@
-import type { ComponentPropsWithoutRef, FC, ReactNode } from "react"
+import type { FC, ReactNode } from "react"
+import type { BoxProps } from "../Box"
 
 import { StyleSheet } from "react-native"
 
@@ -6,7 +7,7 @@ import { useTheme } from "../theme"
 import Box from "../Box"
 import Typography from "../Typography"
 
-export interface CardProps extends ComponentPropsWithoutRef<typeof Box> {
+export interface CardProps extends BoxProps {
   headline?: ReactNode
 }
 

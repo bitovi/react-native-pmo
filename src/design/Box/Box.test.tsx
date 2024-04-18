@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react-native"
 
-import Box from "./Box"
-
 import Typography from "../Typography"
+
+import Box from "./Box"
 
 describe("Box component", () => {
   it("renders children components 'Hello!' without issue", () => {

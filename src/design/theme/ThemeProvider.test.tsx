@@ -1,8 +1,11 @@
 import type { FC } from "react"
+
 import { render, screen } from "@testing-library/react-native"
-import Typography from "../Typography"
-import ThemeProvider, { useTheme } from "./ThemeProvider"
 import { View, Text } from "react-native"
+
+import Typography from "../Typography"
+
+import ThemeProvider, { useTheme } from "./ThemeProvider"
 
 describe("ThemeProvider Provider", () => {
   it("renders children", async () => {

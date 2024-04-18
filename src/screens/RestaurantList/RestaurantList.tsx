@@ -34,7 +34,7 @@ const RestaurantList: FC<Props> = ({ route }) => {
   if (error) {
     return (
       <Box padding="s">
-        <Typography variant="heading">Error loading restaurants:</Typography>{" "}
+        <Typography variant="heading">Error loading restaurants: </Typography>
         <Typography variant="body">{error.message}</Typography>
       </Box>
     )

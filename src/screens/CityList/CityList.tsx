@@ -21,7 +21,7 @@ const CityList: FC<Props> = ({ route }) => {
   if (error) {
     return (
       <Box padding="s">
-        <Typography variant="heading">Error loading cities:</Typography>{" "}
+        <Typography variant="heading">Error loading cities: </Typography>
         <Typography variant="body">{error.message}</Typography>
       </Box>
     )

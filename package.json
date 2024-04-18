@@ -9,11 +9,11 @@
     "prettier": "prettier --check *.ts *.cjs src",
     "depcheck": "depcheck .",
     "precheck": "npm run typecheck && npm run eslint && npm run prettier && npm run depcheck && npm run test",
-    "start": "react-native start -- --reset-cache",
+    "start": "react-native start --reset-cache",
     "android": "react-native run-android",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
-    "clean": "rm -rf tsconfig.tsbuildinfo coverage android/.gradle android/build android/app/build node_modules/.cache/babel-loader/*",
+    "clean": "rm -rf tsconfig.tsbuildinfo coverage android/.gradle android/build android/app/build node_modules/.cache",
     "devtools": "react-devtools",
     "api": "npm run linkLocalhost:android && place-my-order-api --port 7070",
     "linkLocalhost:android": "adb reverse tcp:7070 tcp:7070"
