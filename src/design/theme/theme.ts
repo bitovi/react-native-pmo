@@ -13,7 +13,52 @@ const palette = {
   lightGray: "#E0E2E3",
 }
 
-export const lightTheme = {
+export interface Theme {
+  colors: {
+    background: string
+    backgroundDark: string
+    border: string
+    foreground: string
+    primary: string
+    secondary: string
+    success: string
+    danger: string
+    failure: string
+    card: string
+    shadow: string
+    text: string
+    textLight: string
+    textDark: string
+    textLink: string
+  }
+  spacing: {
+    none: number
+    xs: number
+    s: number
+    m: number
+    l: number
+    xl: number
+  }
+  textStyles: {
+    heading: {
+      fontSize: TextStyle["fontSize"]
+      fontWeight: TextStyle["fontWeight"]
+    }
+    title: {
+      fontSize: TextStyle["fontSize"]
+      fontWeight: TextStyle["fontWeight"]
+    }
+    body: {
+      fontWeight: TextStyle["fontWeight"]
+    }
+    label: {
+      fontSize: TextStyle["fontSize"]
+      fontWeight: TextStyle["fontWeight"]
+    }
+  }
+}
+
+const light: Theme = {
   colors: {
     background: palette.offWhite,
     backgroundDark: palette.charcoal,
@@ -56,17 +101,20 @@ export const lightTheme = {
       fontWeight: "bold",
     },
   },
-} as const
+}
 
-export type Theme = typeof lightTheme
-
-export const darkTheme: Theme = {
-  ...lightTheme,
+const dark: Theme = {
+  ...light,
   colors: {
-    ...lightTheme.colors,
+    ...light.colors,
     background: palette.black,
     foreground: palette.white,
     textLight: palette.charcoal,
     textDark: palette.white,
   },
+}
+
+export default {
+  light,
+  dark,
 }

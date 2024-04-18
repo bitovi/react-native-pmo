@@ -14,7 +14,7 @@ type Props = {
 }
 
 const Tabs: FC<Props> = ({ options, value: activeTab, onChange }) => {
-  const { theme } = useTheme()
+  const theme = useTheme()
 
   return (
     <Box style={styles.wrapper}>

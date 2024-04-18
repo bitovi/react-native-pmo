@@ -1,13 +1,14 @@
 import type { FC } from "react"
 import type { PressableProps, ViewStyle, TextStyle } from "react-native"
-import { StyleSheet, Pressable, Text } from "react-native"
 import type { Theme } from "../theme"
+
+import { StyleSheet, Pressable, Text } from "react-native"
+
 import { useTheme } from "../theme"
 
-type Variant = "primary" | "secondary" | "text"
-type Props = PressableProps & {
+export interface PressProps extends PressableProps {
   title?: string
-  variant?: Variant
+  variant?: "primary" | "secondary" | "text"
   margin?: keyof Theme["spacing"]
   padding?: keyof Theme["spacing"]
   fontSize?: TextStyle["fontSize"]
@@ -15,7 +16,7 @@ type Props = PressableProps & {
   disabled?: boolean
 }
 
-const Press: FC<Props> = ({
+const Press: FC<PressProps> = ({
   title,
   variant,
   margin,
@@ -23,7 +24,7 @@ const Press: FC<Props> = ({
   fontSize = 20,
   fontWeight = "400",
   disabled,
-  ...restOfProps
+  ...props
 }) => {
   const theme = useTheme()
   const baseStyles = getStyles(theme, variant)
@@ -36,7 +37,7 @@ const Press: FC<Props> = ({
         opacity: disabled ? 0.5 : 1,
       })}
       disabled={disabled}
-      {...restOfProps}
+      {...props}
     >
       <Text
         style={StyleSheet.compose(baseStyles.text, {
@@ -52,7 +53,7 @@ const Press: FC<Props> = ({
 
 function getStyles(
   theme: Theme,
-  variant?: Variant,
+  variant?: PressProps["variant"],
 ): { press: ViewStyle; text: TextStyle } {
   if (variant === "text") {
     return StyleSheet.create({

@@ -11,7 +11,7 @@ type Props = {
 }
 
 const FormSwitch: FC<Props> = ({ label, value, onChange }) => {
-  const { theme } = useTheme()
+  const theme = useTheme()
 
   return (
     <Box style={styles.wrapper}>

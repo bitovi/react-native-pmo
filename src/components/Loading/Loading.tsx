@@ -5,7 +5,7 @@ import { useTheme } from "../../design/theme"
 import Typography from "../../design/Typography"
 
 const Loading: FC = () => {
-  const { theme } = useTheme()
+  const theme = useTheme()
 
   return (
     <Box padding="l">

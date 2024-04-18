@@ -39,8 +39,8 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
     return (
       <Box padding="s" style={styles.container}>
         <Typography variant="heading">
-          Error loading restaurant details: {"\n"}
-        </Typography>
+          Error loading restaurant details:
+        </Typography>{" "}
         <Typography variant="body">{error.message}</Typography>
       </Box>
     )

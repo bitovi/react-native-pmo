@@ -12,7 +12,7 @@ type Props = {
 }
 
 const FormTextField: FC<Props> = ({ label, placeholder, value, onChange }) => {
-  const { theme } = useTheme()
+  const theme = useTheme()
 
   return (
     <Box style={{ marginVertical: 8 }}>

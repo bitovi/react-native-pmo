@@ -1,19 +1,21 @@
 import type { ComponentPropsWithoutRef, FC, ReactNode } from "react"
+
 import { StyleSheet } from "react-native"
+
 import { useTheme } from "../theme"
 import Box from "../Box"
 import Typography from "../Typography"
 
-type Props = ComponentPropsWithoutRef<typeof Box> & {
+export interface CardProps extends ComponentPropsWithoutRef<typeof Box> {
   headline?: ReactNode
 }
 
-const Card: FC<Props> = ({
+const Card: FC<CardProps> = ({
   headline,
   children,
   padding = "m",
   style,
-  ...restOfProps
+  ...props
 }) => {
   const theme = useTheme()
 
@@ -33,7 +35,7 @@ const Card: FC<Props> = ({
         },
         style,
       )}
-      {...restOfProps}
+      {...props}
     >
       {headline && (
         <Box

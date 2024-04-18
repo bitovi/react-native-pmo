@@ -28,15 +28,12 @@ const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
         {restaurant?.address && (
           <Typography variant="body">
             {restaurant.address.street}
-            {"\n"}
             {restaurant.address.city}, {restaurant.address.state}{" "}
             {restaurant.address.zip}
           </Typography>
         )}
         <Typography variant="body">
-          $$$
-          {"\n"}
-          Hours: M-F 10am-11pm {"\n"}Open Now
+          $$$ Hours: M-F 10am-11pm Open Now
         </Typography>
       </Box>
     </Box>

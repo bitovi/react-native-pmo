@@ -1,52 +1,55 @@
 import type { FC } from "react"
-import { useState, createContext, useContext } from "react"
 import type { Theme } from "./theme"
-import { lightTheme, darkTheme } from "./theme"
 
-type ColorMode = "light" | "dark" | undefined
+import { useState, createContext, useContext, useMemo } from "react"
 
-export type ThemeState = {
-  theme: Theme
-  mode: ColorMode
-  setMode: (mode: ColorMode) => void
+import themes from "./theme"
+
+type Mode = keyof typeof themes
+
+interface ThemeContext {
+  mode: Mode
+  setMode: (mode: Mode) => void
 }
 
-export const ThemeContext = createContext<ThemeState>({
-  theme: lightTheme,
-  mode: undefined,
-  setMode: (value: ColorMode) => {},
-})
+export const ThemeContext = createContext<ThemeContext | undefined>(undefined)
 
-interface GlobalStateProviderProps {
-  children: React.ReactNode
-}
+const ThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [mode, setMode] = useState<Mode>("light")
 
-const ThemeProvider: FC<GlobalStateProviderProps> = ({ children }) => {
-  const [mode, setMode] = useState<ColorMode>()
+  const value = useMemo(() => ({ mode, setMode }), [mode])
 
-  return (
-    <ThemeContext.Provider
-      value={{
-        theme: mode === "dark" ? darkTheme : lightTheme,
-        mode: mode,
-        setMode: (mode: ColorMode) => setMode(mode),
-      }}
-    >
-      {children}
-    </ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
 export default ThemeProvider
 
-export function useTheme(): Theme {
+function useThemeContext(): ThemeContext {
   const context = useContext(ThemeContext)
 
-  if (typeof context === 'undefined') {
+  if (!context) {
     throw new Error(
       "Theme context cannot be accessed outside of the ThemeProvider.",
     )
   }
 
-  return context.theme
+  return context
+}
+
+export function useTheme(): Theme {
+  const { mode } = useThemeContext()
+
+  return themes[mode]
+}
+
+export function useThemeMode(): {
+  mode: Mode
+  setMode: (mode: Mode) => void
+} {
+  const { mode, setMode } = useThemeContext()
+
+  return {
+    mode,
+    setMode,
+  }
 }

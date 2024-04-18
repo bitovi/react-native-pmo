@@ -10,7 +10,7 @@ import {
   useAuthentication,
   useUser,
 } from "../../services/auth"
-import { useTheme } from "../../design/theme"
+import { useThemeMode } from "../../design/theme"
 import Box from "../../design/Box"
 import Press from "../../design/Press"
 import Typography from "../../design/Typography"
@@ -24,7 +24,7 @@ const Settings: FC = () => {
   const user = useUser()
   const { isConnected } = useNetInfo()
   const { syncWithServer, localFavorites } = useFavorites(user?.id)
-  const { mode, setMode } = useTheme()
+  const { mode, setMode } = useThemeMode()
 
   useEffect(() => {
     if (user && isConnected && localFavorites) {

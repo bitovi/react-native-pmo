@@ -19,7 +19,7 @@ type Props = StackScreenProps<RestaurantsStackParamList, "OrderCreate">
 type OrderItems = Record<string, number>
 
 const RestaurantOrder: FC<Props> = ({ route }) => {
-  const { theme } = useTheme()
+  const theme = useTheme()
   const navigation = useNavigation()
   const { slug } = route.params
 
@@ -67,8 +67,8 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
     return (
       <Box padding="s">
         <Typography variant="heading">
-          Error loading restaurant order: {"\n"}
-        </Typography>
+          Error loading restaurant order:
+        </Typography>{" "}
         <Typography variant="body">{error.message}</Typography>
       </Box>
     )
@@ -104,9 +104,7 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
               }}
             >
               <Typography variant="body">
-                {name}
-                {"\n"}
-                {price}
+                {name} {price}
               </Typography>
               <Switch
                 onValueChange={(value) => setItem(name, value, price)}
@@ -133,9 +131,7 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
               }}
             >
               <Typography variant="body">
-                {name}
-                {"\n"}
-                {price}
+                {name} {price}
               </Typography>
               <Switch
                 onValueChange={(value) => setItem(name, value, price)}

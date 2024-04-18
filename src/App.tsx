@@ -85,7 +85,7 @@ const RestaurantsStackNavigation = () => {
 
 const Tab = createBottomTabNavigator()
 export const RootTabNavigator: FC = () => {
-  const { theme } = useTheme()
+  const theme = useTheme()
 
   return (
     <Tab.Navigator
