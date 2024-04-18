@@ -19,7 +19,7 @@ import { Typography } from "./components"
 import { Pressable } from "react-native"
 
 export type RestaurantsStackParamList = {
-  StateList: {  }
+  StateList: undefined
   CityList: {
     state: State
   }
@@ -33,8 +33,6 @@ export type RestaurantsStackParamList = {
     slug: string
   }
   OrderCreate: {
-    state: State
-    city: City
     slug: string
   }
 }
@@ -85,7 +83,7 @@ const RestaurantsStackNavigation = () => {
 }
 
 const Tab = createBottomTabNavigator()
-export const RootNavigator: FC = () => {
+export const RootTabNavigator: FC = () => {
   return (
     <Tab.Navigator
       initialRouteName="RestaurantsStack"
@@ -122,10 +120,16 @@ export const RootNavigator: FC = () => {
   )
 }
 
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RestaurantsStackParamList {}
+  }
+}
+
 const AppNavigator: FC = () => {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      <RootTabNavigator />
     </NavigationContainer>
   )
 }
