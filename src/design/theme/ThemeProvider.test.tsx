@@ -1,8 +1,7 @@
 import type { FC } from "react"
-import { useContext } from "react"
 import { render, screen } from "@testing-library/react-native"
 import Typography from "../Typography"
-import ThemeProvider, { ThemeContext } from "./ThemeProvider"
+import ThemeProvider, { useTheme } from "./ThemeProvider"
 import { View, Text } from "react-native"
 
 describe("ThemeProvider Provider", () => {
@@ -19,7 +18,8 @@ describe("ThemeProvider Provider", () => {
 
 describe("ThemeContext context", () => {
   const TestComponent: FC = () => {
-    const { theme } = useContext(ThemeContext)
+    const theme = useTheme()
+
     return (
       <View>
         <Text>{theme.colors.background}</Text>
@@ -29,6 +29,7 @@ describe("ThemeContext context", () => {
 
   it("context properties are accessible", async () => {
     render(<TestComponent />)
+
     expect(screen.getByText(/#F0F2F3/)).toBeOnTheScreen()
   })
 })

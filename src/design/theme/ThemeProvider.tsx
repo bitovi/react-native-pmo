@@ -12,20 +12,20 @@ interface ThemeContext {
   setMode: (mode: Mode) => void
 }
 
-export const ThemeContext = createContext<ThemeContext | undefined>(undefined)
+const Context = createContext<ThemeContext | undefined>(undefined)
 
 const ThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mode, setMode] = useState<Mode>("light")
 
   const value = useMemo(() => ({ mode, setMode }), [mode])
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  return <Context.Provider value={value}>{children}</Context.Provider>
 }
 
 export default ThemeProvider
 
 function useThemeContext(): ThemeContext {
-  const context = useContext(ThemeContext)
+  const context = useContext(Context)
 
   if (!context) {
     throw new Error(
