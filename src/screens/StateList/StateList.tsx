@@ -6,8 +6,12 @@ import Box from "../../components/Box"
 import Loading from "../../components/Loading"
 import Press from "../../components/Press"
 import Typography from "../../components/Typography"
+import type { StackScreenProps } from "@react-navigation/stack"
+import type { RestaurantsStackParamList } from "../../App"
 
-const StateList: FC = () => {
+type Props = StackScreenProps<RestaurantsStackParamList, "StateList">
+
+const StateList: FC<Props> = () => {
   const navigation = useNavigation()
   const { data: states, error, isPending } = useStates()
 
@@ -31,11 +35,11 @@ const StateList: FC = () => {
         renderItem={({ item: stateItem }) => (
           <Press
             title={stateItem.name}
-            onPress={() =>
+            onPress={() => {
               navigation.navigate("CityList", {
-                state: stateItem.short,
+                state: stateItem,
               })
-            }
+            }}
           />
         )}
         keyExtractor={(item) => item.short}

@@ -1,152 +1,140 @@
+import "react-native-gesture-handler"
 import type { FC } from "react"
-import type { StaticParamList } from "@react-navigation/native"
-import { Suspense, lazy } from "react"
-import { createStaticNavigation } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import Icon from "react-native-vector-icons/Ionicons"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
 import ThemeProvider, { theme } from "./theme"
 import AuthProvider from "./services/auth"
-import Home from "./screens/Home"
-import type { Props as CityProps } from "./screens/CityList"
-import type { Props as RestaurantListProps } from "./screens/RestaurantList"
-import type { Props as DetailsProps } from "./screens/RestaurantDetails"
-import type { Props as OrderProps } from "./screens/RestaurantOrder"
-import Loading from "./components/Loading"
+import Settings from "./screens/Settings"
+import StateList from "./screens/StateList"
+import CityList from "./screens/CityList"
+import RestaurantDetails from "./screens/RestaurantDetails"
+import RestaurantList from "./screens/RestaurantList"
+import RestaurantOrder from "./screens/RestaurantOrder"
+import type { City, State } from "./services/pmo/restaurant"
+import Box from "./components/Box"
+import Typography from "./components/Typography"
+import { Pressable } from "react-native"
 
-type RootStackParamList = StaticParamList<typeof StateListNavigation> &
-  StaticParamList<typeof RootBottomNavigation>
-
-// Creating global  types for the navigation props to avoid importing them in every file
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+export type RestaurantsStackParamList = {
+  StateList: undefined
+  CityList: {
+    state: State
+  }
+  RestaurantList: {
+    state: State
+    city: City
+  }
+  RestaurantDetails: {
+    state: State
+    city: City
+    slug: string
+  }
+  OrderCreate: {
+    slug: string
   }
 }
 
-const StateList = lazy(() => import("./screens/StateList"))
-const CityList = lazy(() => import("./screens/CityList"))
-const RestaurantList = lazy(() => import("./screens/RestaurantList"))
-const RestaurantDetails = lazy(() => import("./screens/RestaurantDetails"))
-const OrderCreate = lazy(() => import("./screens/RestaurantOrder"))
-
-const SuspenseStateList: FC = () => {
+const RestaurantsNavigation = createStackNavigator<RestaurantsStackParamList>()
+const RestaurantsStackNavigation = () => {
   return (
-    <Suspense fallback={<Loading />}>
-      <StateList />
-    </Suspense>
+    <RestaurantsNavigation.Navigator
+      initialRouteName="StateList"
+      screenOptions={{
+        header: ({ route, navigation }) => {
+          if (!navigation.canGoBack()) return null
+
+          return (
+            <Pressable onPress={navigation.goBack}>
+              <Box
+                padding="m"
+                style={{ flexDirection: "row", gap: 8, alignItems: "center" }}
+              >
+                <Icon name="arrow-back" size={20} />
+                <Typography variant="heading">
+                  {/* @ts-ignore */}
+                  {[route.params?.city?.name, route.params?.state?.name]
+                    .filter(Boolean)
+                    .join(", ")}
+                </Typography>
+              </Box>
+            </Pressable>
+          )
+        },
+      }}
+    >
+      <RestaurantsNavigation.Screen name="StateList" component={StateList} />
+      <RestaurantsNavigation.Screen name="CityList" component={CityList} />
+      <RestaurantsNavigation.Screen
+        name="RestaurantList"
+        component={RestaurantList}
+      />
+      <RestaurantsNavigation.Screen
+        name="RestaurantDetails"
+        component={RestaurantDetails}
+      />
+      <RestaurantsNavigation.Screen
+        name="OrderCreate"
+        component={RestaurantOrder}
+      />
+    </RestaurantsNavigation.Navigator>
   )
 }
 
-const SuspenseCityList: FC<CityProps> = ({ route }) => {
+const Tab = createBottomTabNavigator()
+export const RootTabNavigator: FC = () => {
   return (
-    <Suspense fallback={<Loading />}>
-      <CityList route={route} />
-    </Suspense>
+    <Tab.Navigator
+      initialRouteName="RestaurantsStack"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused }) => {
+          let iconName = "settings"
+          if (route.name === "Settings") {
+            iconName = focused ? "settings" : "settings-outline"
+          } else if (route.name === "RestaurantsStack") {
+            iconName = focused ? "restaurant" : "restaurant-outline"
+          }
+          return (
+            <Icon
+              name={iconName}
+              size={20}
+              color={focused ? theme.colors.success : theme.colors.text}
+            />
+          )
+        },
+        tabBarActiveTintColor: theme.colors.success,
+      })}
+    >
+      <Tab.Screen
+        name="RestaurantsStack"
+        component={RestaurantsStackNavigation}
+        options={{ title: "Place My Order" }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{ title: "Settings" }}
+      />
+    </Tab.Navigator>
   )
 }
 
-const SuspenseRestaurantList: FC<RestaurantListProps> = ({ route }) => {
-  return (
-    <Suspense fallback={<Loading />}>
-      <RestaurantList route={route} />
-    </Suspense>
-  )
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    interface RootParamList extends RestaurantsStackParamList {}
+  }
 }
 
-const SuspenseRestaurantDetails: FC<DetailsProps> = ({ route }) => {
+const AppNavigator: FC = () => {
   return (
-    <Suspense fallback={<Loading />}>
-      <RestaurantDetails route={route} />
-    </Suspense>
+    <NavigationContainer>
+      <RootTabNavigator />
+    </NavigationContainer>
   )
 }
-
-const SuspenseOrderCreate: FC<OrderProps> = ({ route }) => {
-  return (
-    <Suspense fallback={<Loading />}>
-      <OrderCreate route={route} />
-    </Suspense>
-  )
-}
-
-const StateListNavigation = createNativeStackNavigator({
-  initialRouteName: "StateList",
-  screens: {
-    StateList: {
-      screen: SuspenseStateList,
-      options: {
-        title: "Select a state",
-      },
-    },
-    CityList: {
-      screen: SuspenseCityList,
-      options: {
-        title: "Select a city",
-      },
-    },
-    RestaurantList: {
-      screen: SuspenseRestaurantList,
-      options: {
-        title: "Select a restaurant",
-      },
-    },
-    RestaurantDetails: {
-      screen: SuspenseRestaurantDetails,
-      options: {
-        title: "",
-      },
-    },
-    OrderCreate: {
-      screen: SuspenseOrderCreate,
-      options: {
-        title: "",
-      },
-    },
-  },
-})
-
-const RootBottomNavigation = createBottomTabNavigator({
-  initialRouteName: "Home",
-  screens: {
-    Home: {
-      screen: Home,
-      options: {
-        title: "Place My Order",
-        tabBarActiveTintColor: theme.colors.secondary,
-        tabBarInactiveTintColor: theme.colors.text,
-        tabBarIcon: ({ focused }) => (
-          <Icon
-            name="home-outline"
-            size={20}
-            color={focused ? theme.colors.secondary : theme.colors.text}
-          />
-        ),
-      },
-    },
-    StateListStack: {
-      screen: StateListNavigation,
-      headerBackTitle: "",
-      options: {
-        title: "Find a Restaurant",
-        headerShown: false,
-        tabBarActiveTintColor: theme.colors.secondary,
-        tabBarInactiveTintColor: theme.colors.text,
-        tabBarIcon: ({ focused }) => (
-          <Icon
-            name="restaurant-outline"
-            size={20}
-            color={focused ? theme.colors.secondary : theme.colors.text}
-          />
-        ),
-      },
-    },
-  },
-})
-
-const Navigation = createStaticNavigation(RootBottomNavigation)
 
 const App: FC = () => {
   return (
@@ -154,7 +142,7 @@ const App: FC = () => {
       <ThemeProvider>
         <AuthProvider>
           <SafeAreaView style={{ height: "100%", width: "100%" }}>
-            <Navigation />
+            <AppNavigator />
           </SafeAreaView>
         </AuthProvider>
       </ThemeProvider>

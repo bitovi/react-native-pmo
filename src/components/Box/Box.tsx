@@ -11,8 +11,8 @@ type Props = ViewProps & {
 }
 
 const Box: FC<Props> = ({
-  margin,
-  padding,
+  margin = "none",
+  padding = "none",
   fullWidth,
   style,
   children,

@@ -1,7 +1,9 @@
 import type { FC } from "react"
+import type { StackScreenProps } from "@react-navigation/stack"
+import type { RestaurantsStackParamList } from "../../App"
+
 import { useEffect, useState } from "react"
 import { ScrollView, Switch } from "react-native"
-import type { StaticScreenProps } from "@react-navigation/native"
 import { useNavigation } from "@react-navigation/native"
 import { useRestaurant } from "../../services/pmo/restaurant"
 import Box from "../../components/Box"
@@ -12,18 +14,16 @@ import Loading from "../../components/Loading"
 import Card from "../../components/Card"
 import useTheme from "../../theme/useTheme"
 
-export type Props = StaticScreenProps<{
-  restaurantId: string
-}>
+type Props = StackScreenProps<RestaurantsStackParamList, "OrderCreate">
 
 type OrderItems = Record<string, number>
 
 const RestaurantOrder: FC<Props> = ({ route }) => {
   const { theme } = useTheme()
   const navigation = useNavigation()
-  const { restaurantId } = route.params
+  const { slug } = route.params
 
-  const { data: restaurant, error, isPending } = useRestaurant(restaurantId)
+  const { data: restaurant, error, isPending } = useRestaurant(slug)
 
   const [address, setAddress] = useState<string>("")
   const [items, setItems] = useState<OrderItems>({})

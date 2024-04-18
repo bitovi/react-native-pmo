@@ -1,32 +1,32 @@
 import type { FC } from "react"
-import { useState } from "react"
-import { FlatList, StyleSheet } from "react-native"
+import { Suspense, lazy, useState } from "react"
+import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import type { StaticScreenProps } from "@react-navigation/native"
 import { useRestaurants } from "../../services/pmo/restaurant"
 import Box from "../../components/Box"
 import Loading from "../../components/Loading"
 import Press from "../../components/Press"
 import Typography from "../../components/Typography"
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
+import type { StackScreenProps } from "@react-navigation/stack"
+import type { RestaurantsStackParamList } from "../../App"
+import Tabs from "../../components/Tabs/Tabs"
 
-export type Props = StaticScreenProps<{
-  state: string
-  city: string
-}>
+const Map = lazy(() => import("./components/Map"))
+
+type Props = StackScreenProps<RestaurantsStackParamList, "RestaurantList">
 
 const RestaurantList: FC<Props> = ({ route }) => {
   const navigation = useNavigation()
 
   const { state, city } = route.params
-  const { data, error, isPending } = useRestaurants(state, city)
+  const { data, error, isPending } = useRestaurants(state.short, city.name)
 
   const [tab, setTab] = useState<string>("list")
 
-  const changeView = (view: string) => setTab(view)
-
   const navigateToDetails = (slug: string) => {
     navigation.navigate("RestaurantDetails", {
+      state,
+      city,
       slug: slug,
     })
   }
@@ -48,80 +48,43 @@ const RestaurantList: FC<Props> = ({ route }) => {
 
   return (
     <>
-      <Box style={styles.topNav}>
-        <Press
-          title="List"
-          style={tab === "list" ? styles.activeButton : styles.viewButton}
-          onPress={() => changeView("list")}
-        />
-        <Press
-          title="Map"
-          style={tab === "map" ? styles.activeButton : styles.viewButton}
-          onPress={() => changeView("map")}
-        />
-      </Box>
-      {tab === "list" && (
-        <Box padding="s">
-          <FlatList
-            data={data}
-            renderItem={({ item: restaurant }) => (
-              <Press
-                title={restaurant.name}
-                onPress={() => navigateToDetails(restaurant.slug)}
-              />
-            )}
-            keyExtractor={(item) => item._id}
-          />
-        </Box>
-      )}
-      {tab === "map" && data && (
-        <MapView
-          style={styles.mapView}
-          provider={PROVIDER_GOOGLE}
-          initialRegion={{
-            ...data[0].coordinate,
-            latitudeDelta: 0.27,
-            longitudeDelta: 0.5,
-          }}
-          loadingEnabled
-        >
-          {data?.map((restaurant, index) => (
-            <Marker
-              key={index}
-              coordinate={restaurant.coordinate}
-              title={restaurant.name}
-              description={restaurant.address?.street}
-              onCalloutPress={() => navigateToDetails(restaurant.slug)}
+      <Tabs
+        options={[
+          {
+            label: "List",
+            value: "list",
+          },
+          {
+            label: "Map",
+            value: "map",
+          },
+        ]}
+        value={tab}
+        onChange={setTab}
+      />
+      <Box padding="s">
+        {tab === "list" && (
+          <Box padding="s">
+            <FlatList
+              data={data}
+              renderItem={({ item: restaurant }) => (
+                <Press
+                  title={restaurant.name}
+                  onPress={() => navigateToDetails(restaurant.slug)}
+                />
+              )}
+              keyExtractor={(item) => item._id}
             />
-          ))}
-        </MapView>
-      )}
+          </Box>
+        )}
+        {tab === "map" && data && (
+          <Suspense fallback={<Loading />}>
+            <Map data={data} navigateTo={navigateToDetails} />
+          </Suspense>
+        )}
+      </Box>
     </>
   )
 }
-const styles = StyleSheet.create({
-  topNav: {
-    alignItems: "flex-start",
-    flexDirection: "row",
-  },
-  activeButton: {
-    margin: 0,
-    marginRight: 1,
-    minWidth: "46%",
-    textAlign: "center",
-    borderRadius: 0,
-    backgroundColor: "black",
-  },
-  viewButton: {
-    margin: 0,
-    marginRight: 1,
-    minWidth: "46%",
-    textAlign: "center",
-    borderRadius: 0,
-    backgroundColor: "white",
-    color: "black",
-  },
-  mapView: { minHeight: "100%" }, // needs a minHeight to display without error
-})
 
 export default RestaurantList
