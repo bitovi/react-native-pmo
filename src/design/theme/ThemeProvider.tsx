@@ -39,14 +39,14 @@ const ThemeProvider: FC<GlobalStateProviderProps> = ({ children }) => {
 
 export default ThemeProvider
 
-export function useTheme(): ThemeState {
+export function useTheme(): Theme {
   const context = useContext(ThemeContext)
 
-  if (context === undefined) {
+  if (typeof context === 'undefined') {
     throw new Error(
       "Theme context cannot be accessed outside of the ThemeProvider.",
     )
   }
 
-  return context
+  return context.theme
 }

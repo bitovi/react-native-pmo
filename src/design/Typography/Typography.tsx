@@ -15,7 +15,7 @@ const Typography: FC<Props> = ({
   color,
   children,
 }) => {
-  const { theme } = useTheme()
+  const theme = useTheme()
 
   return (
     <Text

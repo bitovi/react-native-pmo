@@ -15,7 +15,7 @@ const Card: FC<Props> = ({
   style,
   ...restOfProps
 }) => {
-  const { theme } = useTheme()
+  const theme = useTheme()
 
   return (
     <Box

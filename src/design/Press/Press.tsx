@@ -25,7 +25,7 @@ const Press: FC<Props> = ({
   disabled,
   ...restOfProps
 }) => {
-  const { theme } = useTheme()
+  const theme = useTheme()
   const baseStyles = getStyles(theme, variant)
 
   return (

@@ -18,7 +18,7 @@ const Box: FC<Props> = ({
   children,
   ...restOfProps
 }) => {
-  const { theme } = useTheme()
+  const theme = useTheme()
 
   return (
     <View
