@@ -19,7 +19,7 @@ const FormSwitch: FC<Props> = ({ label, value, onChange }) => {
       <Switch
         onValueChange={onChange}
         value={value}
-        thumbColor={theme.colors.textLight}
+        thumbColor={theme.colors.card}
         trackColor={{
           true: theme.colors.success,
           false: theme.colors.border,

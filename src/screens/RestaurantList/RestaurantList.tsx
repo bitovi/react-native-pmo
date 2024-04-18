@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useRestaurants } from "../../services/pmo/restaurant"
 import Box from "../../design/Box"
 import Loading from "../../components/Loading"
-import Press from "../../design/Press"
+import Button from "../../design/Button"
 import Typography from "../../design/Typography"
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
@@ -66,7 +66,7 @@ const RestaurantList: FC<Props> = ({ route }) => {
             <FlatList
               data={data}
               renderItem={({ item: restaurant }) => (
-                <Press
+                <Button
                   title={restaurant.name}
                   onPress={() => navigateToDetails(restaurant.slug)}
                 />

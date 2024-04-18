@@ -13,8 +13,8 @@ export interface BoxProps extends ViewProps {
 }
 
 const Box: FC<BoxProps> = ({
-  margin = "none",
-  padding = "none",
+  margin,
+  padding,
   fullWidth,
   style,
   children,

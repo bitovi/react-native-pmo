@@ -6,7 +6,7 @@ import { StyleSheet, Pressable, Text } from "react-native"
 
 import { useTheme } from "../theme"
 
-export interface PressProps extends PressableProps {
+export interface ButtonProps extends PressableProps {
   title?: string
   variant?: "primary" | "secondary" | "text"
   margin?: keyof Theme["spacing"]
@@ -16,7 +16,7 @@ export interface PressProps extends PressableProps {
   disabled?: boolean
 }
 
-const Press: FC<PressProps> = ({
+const Button: FC<ButtonProps> = ({
   title,
   variant,
   margin,
@@ -53,7 +53,7 @@ const Press: FC<PressProps> = ({
 
 function getStyles(
   theme: Theme,
-  variant?: PressProps["variant"],
+  variant?: ButtonProps["variant"],
 ): { press: ViewStyle; text: TextStyle } {
   if (variant === "text") {
     return StyleSheet.create({
@@ -62,7 +62,9 @@ function getStyles(
         color: theme.colors.textDark,
       },
     })
-  } else if (variant === "secondary") {
+  }
+
+  if (variant === "secondary") {
     return StyleSheet.create({
       press: {
         margin: theme.spacing.s,
@@ -92,4 +94,4 @@ function getStyles(
   })
 }
 
-export default Press
+export default Button

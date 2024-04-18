@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useStates } from "../../services/pmo/restaurant"
 import Box from "../../design/Box"
 import Loading from "../../components/Loading"
-import Press from "../../design/Press"
+import Button from "../../design/Button"
 import Typography from "../../design/Typography"
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
@@ -33,7 +33,7 @@ const StateList: FC<Props> = () => {
       <FlatList
         data={states}
         renderItem={({ item: stateItem }) => (
-          <Press
+          <Button
             title={stateItem.name}
             onPress={() => {
               navigation.navigate("CityList", {

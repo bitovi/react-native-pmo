@@ -12,7 +12,7 @@ import AuthProvider, {
 } from "./auth"
 
 import { View, Text } from "react-native"
-import Press from "../../design/Press"
+import Button from "../../design/Button"
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
 
 // Mocking the global fetch function
@@ -42,7 +42,7 @@ describe("AuthProvider provider", () => {
         <Text>{user?.photo}</Text>
         <Text>{user?.givenName}</Text>
         <Text>{user?.familyName}</Text>
-        {isAuthenticated && <Press title="Sign Out" onPress={signOut} />}
+        {isAuthenticated && <Button title="Sign Out" onPress={signOut} />}
         {isAuthenticated === false && <GoogleSigninButton onPress={signIn} />}
       </View>
     )

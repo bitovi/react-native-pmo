@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native"
 import RestaurantHeader from "../../components/RestaurantHeader"
 import Box from "../../design/Box"
 import Loading from "../../components/Loading"
-import Press from "../../design/Press"
+import Button from "../../design/Button"
 import Typography from "../../design/Typography"
 import { useRestaurant } from "../../services/pmo/restaurant"
 import { useFavorites } from "../../services/pmo/favorite"
@@ -53,7 +53,7 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   return (
     <Box style={styles.container}>
       <RestaurantHeader restaurant={restaurant} />
-      <Press
+      <Button
         title={
           isAuthenticated && favorite?.favorite
             ? "Remove from Favorites"
@@ -66,8 +66,8 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
             signIn()
           }
         }}
-      ></Press>
-      <Press
+      ></Button>
+      <Button
         title="Place an order"
         onPress={() => {
           navigation.navigate("OrderCreate", { slug: slug })

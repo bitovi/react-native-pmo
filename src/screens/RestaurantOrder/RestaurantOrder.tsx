@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useRestaurant } from "../../services/pmo/restaurant"
 import Box from "../../design/Box"
 import Typography from "../../design/Typography"
-import Press from "../../design/Press"
+import Button from "../../design/Button"
 import FormTextField from "../../components/FormTextField"
 import Loading from "../../components/Loading"
 import Card from "../../design/Card"
@@ -171,7 +171,7 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
         </Box>
 
         <Box padding="s">
-          <Press title="Place My Order!" onPress={handleSubmit} />
+          <Button title="Place My Order!" onPress={handleSubmit} />
         </Box>
         <Box padding="l">{/* Keyboard space */}</Box>
       </Box>

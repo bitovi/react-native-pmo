@@ -12,7 +12,7 @@ import {
 } from "../../services/auth"
 import { useThemeMode } from "../../design/theme"
 import Box from "../../design/Box"
-import Press from "../../design/Press"
+import Button from "../../design/Button"
 import Typography from "../../design/Typography"
 import { useFavorites } from "../../services/pmo/favorite"
 import FormSwitch from "../../components/FormSwitch"
@@ -40,7 +40,7 @@ const Settings: FC = () => {
             <Typography variant="heading">
               Welcome back, {user?.name}
             </Typography>
-            <Press title="Sign Out" onPress={signOut} />
+            <Button title="Sign Out" onPress={signOut} />
           </>
         )}
         {isAuthenticated === false && <GoogleSigninButton onPress={signIn} />}

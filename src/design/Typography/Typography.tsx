@@ -7,7 +7,7 @@ import { Text, StyleSheet } from "react-native"
 import { useTheme } from "../theme"
 
 export interface TypographyProps extends TextProps {
-  variant?: keyof Theme["textStyles"]
+  variant?: keyof Theme["typography"]
   color?: keyof Theme["colors"]
 }
 
@@ -25,7 +25,7 @@ const Typography: FC<TypographyProps> = ({
       style={StyleSheet.compose(
         {
           color: color && theme.colors[color],
-          ...theme.textStyles[variant],
+          ...theme.typography[variant],
         },
         style,
       )}

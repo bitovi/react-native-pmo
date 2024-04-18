@@ -102,7 +102,7 @@ export const RootTabNavigator: FC = () => {
             <Icon
               name={iconName}
               size={20}
-              color={focused ? theme.colors.success : theme.colors.text}
+              color={focused ? theme.colors.success : theme.colors.foreground}
             />
           )
         },

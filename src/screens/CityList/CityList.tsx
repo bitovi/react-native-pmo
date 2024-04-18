@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useCities } from "../../services/pmo/restaurant"
 import Box from "../../design/Box"
 import Loading from "../../components/Loading"
-import Press from "../../design/Press"
+import Button from "../../design/Button"
 import Typography from "../../design/Typography"
 
 import type { StackScreenProps } from "@react-navigation/stack"
@@ -36,7 +36,7 @@ const CityList: FC<Props> = ({ route }) => {
       <FlatList
         data={cities}
         renderItem={({ item: cityItem }) => (
-          <Press
+          <Button
             title={cityItem.name}
             onPress={() =>
               navigation.navigate("RestaurantList", {
