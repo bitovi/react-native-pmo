@@ -12,7 +12,7 @@ import AuthProvider, {
 } from "./auth"
 
 import { View, Text } from "react-native"
-import Press from "../../components/Press"
+import Press from "../../design/Press"
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
 
 // Mocking the global fetch function

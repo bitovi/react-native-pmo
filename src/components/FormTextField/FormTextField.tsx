@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { Text, TextInput } from "react-native"
-import Box from "../Box"
+import Box from "../../design/Box"
 import useTheme from "../../theme/useTheme"
 
 type Props = {

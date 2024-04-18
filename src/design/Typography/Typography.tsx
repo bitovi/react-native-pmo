@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import type { TextProps } from "react-native"
 import { Text, StyleSheet } from "react-native"
-import type { Theme } from "../../theme/theme"
+import type { Theme } from "../../theme"
 import useTheme from "../../theme/useTheme"
 
 type Props = TextProps & {

@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import type { PressableProps, ViewStyle, TextStyle } from "react-native"
 import { StyleSheet, Pressable, Text } from "react-native"
-import type { Theme } from "../../theme/theme"
+import type { Theme } from "../../theme"
 import useTheme from "../../theme/useTheme"
 
 type Variant = "primary" | "secondary" | "text"

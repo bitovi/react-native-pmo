@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from "react"
 import { StyleSheet, Switch } from "react-native"
-import Box from "../Box"
-import Typography from "../Typography"
+import Box from "../../design/Box"
+import Typography from "../../design/Typography"
 import useTheme from "../../theme/useTheme"
 
 type Props = {

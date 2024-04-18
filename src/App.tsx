@@ -14,8 +14,8 @@ import RestaurantDetails from "./screens/RestaurantDetails"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantOrder from "./screens/RestaurantOrder"
 import type { City, State } from "./services/pmo/restaurant"
-import Box from "./components/Box"
-import Typography from "./components/Typography"
+import Box from "./design/Box"
+import Typography from "./design/Typography"
 import { Pressable } from "react-native"
 
 export type RestaurantsStackParamList = {

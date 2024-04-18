@@ -11,12 +11,12 @@ import {
   useUser,
 } from "../../services/auth"
 import useTheme from "../../theme/useTheme"
-import Box from "../../components/Box"
-import Press from "../../components/Press"
-import Typography from "../../components/Typography"
-import { useFavorites } from "../../services/pmo/favorite/hook"
-import { FormSwitch } from "../../components/FormSwitch"
-import Card from "../../components/Card"
+import Box from "../../design/Box"
+import Press from "../../design/Press"
+import Typography from "../../design/Typography"
+import { useFavorites } from "../../services/pmo/favorite"
+import FormSwitch from "../../components/FormSwitch"
+import Card from "../../design/Card"
 
 const Settings: FC = () => {
   const isAuthenticated = useAuthenticated()

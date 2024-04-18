@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import { useContext } from "react"
 import { render, screen } from "@testing-library/react-native"
-import Typography from "../components/Typography"
+import Typography from "../design/Typography"
 import ThemeProvider, { ThemeContext } from "./ThemeProvider"
 import { View, Text } from "react-native"
 

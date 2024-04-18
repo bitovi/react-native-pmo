@@ -1,7 +1,7 @@
 import type { Restaurant } from "../../services/pmo/restaurant"
 import { ImageBackground, StyleSheet } from "react-native"
-import Typography from "../Typography"
-import Box from "../Box"
+import Typography from "../../design/Typography"
+import Box from "../../design/Box"
 
 const assetsUrl = process.env.PMO_ASSETS
 

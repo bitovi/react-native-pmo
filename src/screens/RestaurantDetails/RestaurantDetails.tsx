@@ -7,10 +7,10 @@ import { StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import RestaurantHeader from "../../components/RestaurantHeader"
-import Box from "../../components/Box"
+import Box from "../../design/Box"
 import Loading from "../../components/Loading"
-import Press from "../../components/Press"
-import Typography from "../../components/Typography"
+import Press from "../../design/Press"
+import Typography from "../../design/Typography"
 import { useRestaurant } from "../../services/pmo/restaurant"
 import { useFavorites } from "../../services/pmo/favorite"
 import {

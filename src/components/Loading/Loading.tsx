@@ -1,8 +1,8 @@
 import type { FC } from "react"
-import Box from "../Box"
+import Box from "../../design/Box"
 import { ActivityIndicator } from "react-native"
 import useTheme from "../../theme/useTheme"
-import Typography from "../Typography"
+import Typography from "../../design/Typography"
 
 const Loading: FC = () => {
   const { theme } = useTheme()

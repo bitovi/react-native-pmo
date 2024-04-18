@@ -3,13 +3,13 @@ import { Suspense, lazy, useState } from "react"
 import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useRestaurants } from "../../services/pmo/restaurant"
-import Box from "../../components/Box"
+import Box from "../../design/Box"
 import Loading from "../../components/Loading"
-import Press from "../../components/Press"
-import Typography from "../../components/Typography"
+import Press from "../../design/Press"
+import Typography from "../../design/Typography"
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
-import Tabs from "../../components/Tabs/Tabs"
+import Tabs from "../../components/Tabs"
 
 const Map = lazy(() => import("./components/Map"))
 
