@@ -1,8 +1,8 @@
 import type { FC } from "react"
 import type { TextProps } from "react-native"
 import { Text, StyleSheet } from "react-native"
-import type { Theme } from "../../theme"
-import useTheme from "../../theme/useTheme"
+import type { Theme } from "../theme"
+import { useTheme } from "../theme"
 
 type Props = TextProps & {
   variant?: keyof Theme["textStyles"]

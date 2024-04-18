@@ -10,7 +10,7 @@ import {
   useAuthentication,
   useUser,
 } from "../../services/auth"
-import useTheme from "../../theme/useTheme"
+import { useTheme } from "../../design/theme"
 import Box from "../../design/Box"
 import Press from "../../design/Press"
 import Typography from "../../design/Typography"

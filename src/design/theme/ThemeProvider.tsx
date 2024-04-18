@@ -1,7 +1,7 @@
 import type { FC } from "react"
-import { useState, createContext } from "react"
+import { useState, createContext, useContext } from "react"
 import type { Theme } from "./theme"
-import { theme, darkTheme } from "./theme"
+import { lightTheme, darkTheme } from "./theme"
 
 type ColorMode = "light" | "dark" | undefined
 
@@ -12,7 +12,7 @@ export type ThemeState = {
 }
 
 export const ThemeContext = createContext<ThemeState>({
-  theme,
+  theme: lightTheme,
   mode: undefined,
   setMode: (value: ColorMode) => {},
 })
@@ -27,7 +27,7 @@ const ThemeProvider: FC<GlobalStateProviderProps> = ({ children }) => {
   return (
     <ThemeContext.Provider
       value={{
-        theme: mode === "dark" ? darkTheme : theme,
+        theme: mode === "dark" ? darkTheme : lightTheme,
         mode: mode,
         setMode: (mode: ColorMode) => setMode(mode),
       }}
@@ -38,3 +38,15 @@ const ThemeProvider: FC<GlobalStateProviderProps> = ({ children }) => {
 }
 
 export default ThemeProvider
+
+export function useTheme(): ThemeState {
+  const context = useContext(ThemeContext)
+
+  if (context === undefined) {
+    throw new Error(
+      "Theme context cannot be accessed outside of the ThemeProvider.",
+    )
+  }
+
+  return context
+}

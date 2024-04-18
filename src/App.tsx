@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import Icon from "react-native-vector-icons/Ionicons"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
-import ThemeProvider, { theme } from "./theme"
+import ThemeProvider, { useTheme } from "./design/theme"
 import AuthProvider from "./services/auth"
 import Settings from "./screens/Settings"
 import StateList from "./screens/StateList"
@@ -85,6 +85,8 @@ const RestaurantsStackNavigation = () => {
 
 const Tab = createBottomTabNavigator()
 export const RootTabNavigator: FC = () => {
+  const { theme } = useTheme()
+
   return (
     <Tab.Navigator
       initialRouteName="RestaurantsStack"

@@ -2,7 +2,7 @@ import type { FC } from "react"
 import Box from "../../design/Box"
 import { Pressable, StyleSheet } from "react-native"
 import Typography from "../../design/Typography"
-import useTheme from "../../theme/useTheme"
+import { useTheme } from "../../design/theme"
 
 type Props = {
   options: Array<{

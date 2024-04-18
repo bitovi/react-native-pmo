@@ -12,7 +12,7 @@ import Press from "../../design/Press"
 import FormTextField from "../../components/FormTextField"
 import Loading from "../../components/Loading"
 import Card from "../../design/Card"
-import useTheme from "../../theme/useTheme"
+import { useTheme } from "../../design/theme"
 
 type Props = StackScreenProps<RestaurantsStackParamList, "OrderCreate">
 

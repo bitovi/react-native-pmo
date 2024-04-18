@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, FC, ReactNode } from "react"
 import { StyleSheet } from "react-native"
-import useTheme from "../../theme/useTheme"
+import { useTheme } from "../theme"
 import Box from "../Box"
 import Typography from "../Typography"
 

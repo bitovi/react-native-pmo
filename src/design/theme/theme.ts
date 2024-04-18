@@ -13,7 +13,7 @@ const palette = {
   lightGray: "#E0E2E3",
 }
 
-export const theme = {
+export const lightTheme = {
   colors: {
     background: palette.offWhite,
     backgroundDark: palette.charcoal,
@@ -58,12 +58,12 @@ export const theme = {
   },
 } as const
 
-export type Theme = typeof theme
+export type Theme = typeof lightTheme
 
 export const darkTheme: Theme = {
-  ...theme,
+  ...lightTheme,
   colors: {
-    ...theme.colors,
+    ...lightTheme.colors,
     background: palette.black,
     foreground: palette.white,
     textLight: palette.charcoal,

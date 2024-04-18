@@ -1,8 +1,8 @@
 import type { FC } from "react"
 import type { ViewProps } from "react-native"
 import { StyleSheet, View } from "react-native"
-import type { Theme } from "../../theme"
-import useTheme from "../../theme/useTheme"
+import type { Theme } from "../theme"
+import { useTheme } from "../theme"
 
 type Props = ViewProps & {
   margin?: keyof Theme["spacing"]
