@@ -162,7 +162,10 @@ describe("App", () => {
       })
 
     render(<App />)
-    screen.getAllByText(/Place my order/i)
+
+    await waitFor(() => {
+      screen.getAllByText(/Place my order/i)
+    })
     expect(
       await screen.findByText(/Michigan/i, { exact: false }),
     ).toBeOnTheScreen()

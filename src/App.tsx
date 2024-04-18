@@ -13,6 +13,7 @@ import CityList from "./screens/CityList"
 import RestaurantDetails from "./screens/RestaurantDetails"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantOrder from "./screens/RestaurantOrder"
+import DataMigration from "./services/DataMigration"
 import type { City, State } from "./services/pmo/restaurant"
 import Box from "./components/Box"
 import { Typography } from "./components"
@@ -140,11 +141,13 @@ const App: FC = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <AuthProvider>
-          <SafeAreaView style={{ height: "100%", width: "100%" }}>
-            <AppNavigator />
-          </SafeAreaView>
-        </AuthProvider>
+        <SafeAreaView style={{ height: "100%", width: "100%" }}>
+          <DataMigration>
+            <AuthProvider>
+              <AppNavigator />
+            </AuthProvider>
+          </DataMigration>
+        </SafeAreaView>
       </ThemeProvider>
     </SafeAreaProvider>
   )
