@@ -3,8 +3,12 @@ import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useStates } from "../../services/pmo/restaurant"
 import { Box, Loading, Press, Typography } from "../../components"
+import type { StackScreenProps } from "@react-navigation/stack"
+import type { RestaurantsStackParamList } from "../../App"
 
-const StateList: FC = () => {
+type Props = StackScreenProps<RestaurantsStackParamList, "StateList">
+
+const StateList: FC<Props> = () => {
   const navigation = useNavigation()
   const { data: states, error, isPending } = useStates()
 
@@ -28,11 +32,11 @@ const StateList: FC = () => {
         renderItem={({ item: stateItem }) => (
           <Press
             title={stateItem.name}
-            onPress={() =>
+            onPress={() => {
               navigation.navigate("CityList", {
-                state: stateItem.short,
+                state: stateItem,
               })
-            }
+            }}
           />
         )}
         keyExtractor={(item) => item.short}

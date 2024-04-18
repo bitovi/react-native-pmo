@@ -57,6 +57,7 @@ yarn-error.log
 # Bundle artifact
 *.jsbundle
 *.tsbuildinfo
+.expo/
 
 # Ruby / CocoaPods
 /ios/Pods/

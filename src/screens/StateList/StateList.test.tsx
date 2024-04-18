@@ -1,10 +1,9 @@
 import { render, screen } from "@testing-library/react-native"
-import { createStaticNavigation } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
 
 import StateList from "./StateList"
+import MockApp from "../../MockApp"
 
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
@@ -12,7 +11,6 @@ jest.mock("@react-native-async-storage/async-storage", () =>
 
 describe("StateList component", () => {
   // Mock the hooks and components used in StateList
-
   const mockStateResponse = {
     data: [
       { short: "MI", name: "Michigan" },
@@ -20,25 +18,12 @@ describe("StateList component", () => {
       { short: "IL", name: "Illinois" },
     ],
   }
+
   let useStates: jest.SpyInstance<ReturnType<typeof restaurantHooks.useStates>>
   beforeEach(() => {
     jest.resetAllMocks()
     useStates = jest.spyOn(restaurantHooks, "useStates")
   })
-
-  const mockStackNavigator = createNativeStackNavigator({
-    initialRouteName: "StateList",
-    screens: {
-      StateList: {
-        screen: StateList,
-        options: {
-          title: "States",
-        },
-      },
-    },
-  })
-
-  const MockStateNavigaton = createStaticNavigation(mockStackNavigator)
 
   it("renders State List", () => {
     useStates.mockReturnValue({
@@ -47,7 +32,7 @@ describe("StateList component", () => {
       isPending: false,
     })
 
-    render(<MockStateNavigaton />)
+    render(<MockApp component={StateList} />)
     expect(screen.getByText(/Michigan/i)).toBeOnTheScreen()
     expect(screen.getByText(/Wisconsin/i)).toBeOnTheScreen()
     expect(screen.getByText(/Illinois/i)).toBeOnTheScreen()
@@ -56,7 +41,7 @@ describe("StateList component", () => {
   it("renders loading state", () => {
     useStates.mockReturnValue({ data: null, error: null, isPending: true })
 
-    render(<MockStateNavigaton />)
+    render(<MockApp component={StateList} />)
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
@@ -67,7 +52,7 @@ describe("StateList component", () => {
       isPending: false,
     })
 
-    render(<MockStateNavigaton />)
+    render(<MockApp component={StateList} />)
 
     expect(screen.getByText(/Error loading states:/)).toBeOnTheScreen()
     expect(screen.getByText(/This is the error/)).toBeOnTheScreen()

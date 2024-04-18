@@ -123,6 +123,12 @@ export function useStates(): StatesResponse {
 
   useEffect(() => {
     const fetchData = async () => {
+      setResponse({
+        data: null,
+        error: null,
+        isPending: true,
+      })
+
       const { data, error } = await apiRequest<StatesResponse>({
         method: "GET",
         path: "/states",

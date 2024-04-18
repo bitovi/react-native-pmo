@@ -1,1 +1,1 @@
-export { default, type Props } from "./RestaurantOrder"
+export { default } from "./RestaurantOrder"
