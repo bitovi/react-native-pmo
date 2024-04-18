@@ -17,6 +17,7 @@ import type { City, State } from "./services/pmo/restaurant"
 import Box from "./components/Box"
 import { Typography } from "./components"
 import { Pressable } from "react-native"
+import { FavoritesSync } from "./services/pmo/favorite"
 
 export type RestaurantsStackParamList = {
   StateList: undefined
@@ -144,6 +145,7 @@ const App: FC = () => {
           <SafeAreaView style={{ height: "100%", width: "100%" }}>
             <AppNavigator />
           </SafeAreaView>
+          <FavoritesSync />
         </AuthProvider>
       </ThemeProvider>
     </SafeAreaProvider>

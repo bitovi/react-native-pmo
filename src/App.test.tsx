@@ -40,6 +40,10 @@ jest.mock(
   () => jest.requireActual("./screens/RestaurantList").default,
 )
 
+jest.mock("./services/pmo/favorite", () => ({
+  FavoritesSync: jest.fn().mockReturnValue(null),
+}))
+
 describe("App", () => {
   const mockStateResponse = {
     data: [
