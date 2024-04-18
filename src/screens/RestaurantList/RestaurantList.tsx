@@ -4,7 +4,10 @@ import { FlatList, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { useRestaurants } from "../../services/pmo/restaurant"
-import { Box, Loading, Press, Typography } from "../../components"
+import Box from "../../components/Box"
+import Loading from "../../components/Loading"
+import Press from "../../components/Press"
+import Typography from "../../components/Typography"
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 
 export type Props = StaticScreenProps<{

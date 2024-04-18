@@ -4,13 +4,11 @@ import { ScrollView, Switch } from "react-native"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { useNavigation } from "@react-navigation/native"
 import { useRestaurant } from "../../services/pmo/restaurant"
-import {
-  Box,
-  Typography,
-  Press,
-  FormTextField,
-  Loading,
-} from "../../components"
+import Box from "../../components/Box"
+import Typography from "../../components/Typography"
+import Press from "../../components/Press"
+import FormTextField from "../../components/FormTextField"
+import Loading from "../../components/Loading"
 import Card from "../../components/Card"
 import useTheme from "../../theme/useTheme"
 

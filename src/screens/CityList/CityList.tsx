@@ -3,7 +3,10 @@ import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import type { StaticScreenProps } from "@react-navigation/native"
 import { useCities } from "../../services/pmo/restaurant"
-import { Box, Loading, Press, Typography } from "../../components"
+import Box from "../../components/Box"
+import Loading from "../../components/Loading"
+import Press from "../../components/Press"
+import Typography from "../../components/Typography"
 
 export type Props = StaticScreenProps<{
   state: string

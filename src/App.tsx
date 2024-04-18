@@ -13,7 +13,7 @@ import type { Props as CityProps } from "./screens/CityList"
 import type { Props as RestaurantListProps } from "./screens/RestaurantList"
 import type { Props as DetailsProps } from "./screens/RestaurantDetails"
 import type { Props as OrderProps } from "./screens/RestaurantOrder"
-import { Loading } from "./components"
+import Loading from "./components/Loading"
 
 type RootStackParamList = StaticParamList<typeof StateListNavigation> &
   StaticParamList<typeof RootBottomNavigation>

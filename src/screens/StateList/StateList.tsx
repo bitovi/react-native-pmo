@@ -2,7 +2,10 @@ import type { FC } from "react"
 import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useStates } from "../../services/pmo/restaurant"
-import { Box, Loading, Press, Typography } from "../../components"
+import Box from "../../components/Box"
+import Loading from "../../components/Loading"
+import Press from "../../components/Press"
+import Typography from "../../components/Typography"
 
 const StateList: FC = () => {
   const navigation = useNavigation()

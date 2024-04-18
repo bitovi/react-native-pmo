@@ -11,7 +11,9 @@ import {
   useAuthentication,
   useUser,
 } from "../../services/auth"
-import { Box, Press, Typography } from "../../components"
+import Box from "../../components/Box"
+import Press from "../../components/Press"
+import Typography from "../../components/Typography"
 import { useFavorites } from "../../services/pmo/favorite/hook"
 
 const assetsUrl = process.env.PMO_ASSETS
