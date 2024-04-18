@@ -5,17 +5,17 @@ import AuthProvider from "../../services/auth"
 
 import RestaurantDetails from "./RestaurantDetails"
 
-const params = { 
+const params = {
   state: {
-    name: 'name',
-    short: 'short'
+    name: "name",
+    short: "short",
   },
-   city: {
-    name: 'name',
-    state: 'state'
-   }, 
-   slug: "test" 
-  } as const
+  city: {
+    name: "name",
+    state: "state",
+  },
+  slug: "test",
+} as const
 
 jest.mock("@react-navigation/native", () => {
   const actualNav = jest.requireActual("@react-navigation/native")
@@ -65,6 +65,7 @@ describe("RestaurantDetails component", () => {
     useRestaurant.mockReturnValue({ data: null, isPending: true, error: null })
     render(
       <AuthProvider>
+        {/* @ts-ignore */}
         <RestaurantDetails route={{ params }} />
       </AuthProvider>,
     )
@@ -80,6 +81,7 @@ describe("RestaurantDetails component", () => {
     })
     render(
       <AuthProvider>
+        {/* @ts-ignore */}
         <RestaurantDetails route={{ params }} />
       </AuthProvider>,
     )
@@ -95,6 +97,7 @@ describe("RestaurantDetails component", () => {
     useRestaurant.mockReturnValue(mockRestaurantData)
     render(
       <AuthProvider>
+        {/* @ts-ignore */}
         <RestaurantDetails route={{ params }} />
       </AuthProvider>,
     )
@@ -106,6 +109,7 @@ describe("RestaurantDetails component", () => {
     useRestaurant.mockReturnValue({ ...mockRestaurantData, data: null })
     render(
       <AuthProvider>
+        {/* @ts-ignore */}
         <RestaurantDetails route={{ params }} />
       </AuthProvider>,
     )

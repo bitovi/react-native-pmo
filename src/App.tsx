@@ -54,6 +54,7 @@ const RestaurantsStackNavigation = () => {
               >
                 <Icon name="arrow-back" size={20} />
                 <Typography variant="heading">
+                  {/* @ts-ignore */}
                   {[route.params?.city?.name, route.params?.state?.name]
                     .filter(Boolean)
                     .join(", ")}
@@ -121,6 +122,7 @@ export const RootTabNavigator: FC = () => {
 }
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
     interface RootParamList extends RestaurantsStackParamList {}
   }
@@ -140,7 +142,7 @@ const App: FC = () => {
       <ThemeProvider>
         <AuthProvider>
           <SafeAreaView style={{ height: "100%", width: "100%" }}>
-            <AppNavigator/>
+            <AppNavigator />
           </SafeAreaView>
         </AuthProvider>
       </ThemeProvider>

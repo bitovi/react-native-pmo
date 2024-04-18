@@ -68,7 +68,10 @@ describe("RestaurantOrder component", () => {
     })
 
     render(
-      <MockApp component={RestaurantOrder} params={{ restaurantId: "bagel-restaurant" }} />
+      <MockApp
+        component={RestaurantOrder}
+        params={{ restaurantId: "bagel-restaurant" }}
+      />,
     )
     expect(screen.getByText(/Lunch Menu/i)).toBeOnTheScreen()
     expect(
@@ -88,7 +91,10 @@ describe("RestaurantOrder component", () => {
     useRestaurant.mockReturnValue({ data: null, error: null, isPending: true })
 
     render(
-      <MockApp component={RestaurantOrder} params={{ restaurantId: "bagel-restaurant" }} />
+      <MockApp
+        component={RestaurantOrder}
+        params={{ restaurantId: "bagel-restaurant" }}
+      />,
     )
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
@@ -100,7 +106,10 @@ describe("RestaurantOrder component", () => {
     })
 
     render(
-      <MockApp component={RestaurantOrder} params={{ restaurantId: "bagel-restaurant" }} />
+      <MockApp
+        component={RestaurantOrder}
+        params={{ restaurantId: "bagel-restaurant" }}
+      />,
     )
 
     expect(

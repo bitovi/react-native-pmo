@@ -32,7 +32,10 @@ describe("CityList component", () => {
     })
 
     render(
-      <MockApp component={CityList} params={{ state: { name: 'test', short: 'test' } }} />
+      <MockApp
+        component={CityList}
+        params={{ state: { name: "test", short: "test" } }}
+      />,
     )
     expect(screen.getByText(/Detroit/i)).toBeOnTheScreen()
     expect(screen.getByText(/Ann Arbor/i)).toBeOnTheScreen()
@@ -42,7 +45,10 @@ describe("CityList component", () => {
     useCities.mockReturnValue({ data: null, error: null, isPending: true })
 
     render(
-      <MockApp component={CityList} params={{ state: { name: 'test', short: 'test' } }} />
+      <MockApp
+        component={CityList}
+        params={{ state: { name: "test", short: "test" } }}
+      />,
     )
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
@@ -55,7 +61,10 @@ describe("CityList component", () => {
     })
 
     render(
-      <MockApp component={CityList} params={{ state: { name: 'test', short: 'test' } }} />
+      <MockApp
+        component={CityList}
+        params={{ state: { name: "test", short: "test" } }}
+      />,
     )
 
     expect(screen.getByText(/Error loading cities:/)).toBeOnTheScreen()

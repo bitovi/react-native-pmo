@@ -26,8 +26,6 @@ describe("Settings component", () => {
         </NavigationContainer>
       </AuthProvider>,
     )
-    expect(
-      screen.getByText(/dark mode/i),
-    ).toBeOnTheScreen()
+    expect(screen.getByText(/dark mode/i)).toBeOnTheScreen()
   })
 })

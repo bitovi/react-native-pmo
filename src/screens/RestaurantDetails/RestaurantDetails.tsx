@@ -16,7 +16,6 @@ import {
   useAuthentication,
 } from "../../services/auth"
 
-
 type Props = StackScreenProps<RestaurantsStackParamList, "RestaurantDetails">
 
 const RestaurantDetails: FC<Props> = ({ route }) => {

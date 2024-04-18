@@ -8,12 +8,12 @@ import MockApp from "../../MockApp"
 const params = {
   state: {
     short: "",
-    name: ""
+    name: "",
   },
   city: {
     name: "",
-    state: ""
-  }
+    state: "",
+  },
 }
 
 jest.mock("@react-native-async-storage/async-storage", () =>
