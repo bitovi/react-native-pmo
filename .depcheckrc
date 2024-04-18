@@ -3,13 +3,8 @@ ignore-dirs:
 ignores:
   # internals
   - "@types/*"
-  - "@babel/core"
   - "@testing-library/*"
-  - "@react-native-google-signin/google-signin"
-  - "react-native-web"
 
   # Used, but not with `import`
-  - react-native-safe-area-context
-  - react-native-screens
-  - "identity-obj-proxy"
+  - identity-obj-proxy
   - react-native-dotenv

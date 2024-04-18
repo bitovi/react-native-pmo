@@ -6,6 +6,10 @@ import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
 
 import CityList from "./CityList"
 
+jest.mock("@react-native-async-storage/async-storage", () =>
+  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
+)
+
 describe("CityList component", () => {
   // Mock the hooks and components used in CityList
 
