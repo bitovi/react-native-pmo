@@ -5,8 +5,8 @@ import AuthProvider from "./services/auth/auth"
 
 const MockNavigation = createStackNavigator()
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MockApp: FC<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: FC<any>
   params?: Partial<object | undefined>
 }> = ({ component, params }) => {
