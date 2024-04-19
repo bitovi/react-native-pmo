@@ -4,4 +4,7 @@ module.exports = {
   settings: {
     "import/ignore": ["node_modules/react-native/index\\.js$"],
   },
+  rules: {
+    "jest/prefer-hooks-in-order": "off",
+  },
 }

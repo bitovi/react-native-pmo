@@ -40,6 +40,15 @@ jest.mock(
   () => jest.requireActual("./screens/RestaurantList").default,
 )
 
+const oldFetch = global.fetch
+const mockFetch = jest.fn()
+beforeAll(() => {
+  global.fetch = mockFetch
+})
+afterAll(() => {
+  global.fetch = oldFetch
+})
+
 describe("App", () => {
   const mockStateResponse = {
     data: [
@@ -126,19 +135,6 @@ describe("App", () => {
       },
     ],
   }
-
-  // Mocking the global fetch function
-  const mockFetch = jest.fn()
-
-  global.fetch = mockFetch
-
-  beforeEach(() => {
-    mockFetch.mockClear()
-  })
-
-  afterEach(() => {
-    mockFetch.mockClear()
-  })
 
   it("renders and navigates without issue", async () => {
     mockFetch

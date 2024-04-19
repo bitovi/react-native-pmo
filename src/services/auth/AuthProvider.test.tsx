@@ -9,26 +9,22 @@ import AuthProvider, {
   useAuthenticated,
   useAuthentication,
   useUser,
-} from "./auth"
+} from "./AuthProvider"
 
 import { View, Text } from "react-native"
 import Button from "../../design/Button"
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
 
-// Mocking the global fetch function
+const oldFetch = global.fetch
 const mockFetch = jest.fn()
-
-global.fetch = mockFetch
-
-beforeEach(() => {
-  mockFetch.mockClear()
+beforeAll(() => {
+  global.fetch = mockFetch
+})
+afterAll(() => {
+  global.fetch = oldFetch
 })
 
-afterEach(() => {
-  mockFetch.mockClear()
-})
-
-describe("AuthProvider provider", () => {
+describe("AuthProvider", () => {
   const TestComponent: FC = () => {
     const isAuthenticated = useAuthenticated()
     const { signIn, signOut } = useAuthentication()
@@ -47,6 +43,7 @@ describe("AuthProvider provider", () => {
       </View>
     )
   }
+
   it("renders with provider; signs in and signs out", async () => {
     render(
       <AuthProvider>

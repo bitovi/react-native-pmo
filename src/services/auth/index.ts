@@ -1,2 +1,2 @@
-export { default } from "./auth"
-export * from "./auth"
+export { default } from "./AuthProvider"
+export * from "./AuthProvider"

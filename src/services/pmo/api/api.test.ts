@@ -4,20 +4,20 @@ import * as storage from "../../storage/storage"
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
 )
-// Mocking the global fetch function
-let mockStorage: jest.SpyInstance<ReturnType<typeof storage.getData>>
+
+const oldFetch = global.fetch
 const mockFetch = jest.fn()
-
-global.fetch = mockFetch
-
-beforeEach(() => {
-  mockFetch.mockClear()
-  mockStorage = jest.spyOn(storage, "getData")
-  mockStorage.mockResolvedValue(undefined)
+beforeAll(() => {
+  global.fetch = mockFetch
+})
+afterAll(() => {
+  global.fetch = oldFetch
 })
 
-afterEach(() => {
-  mockFetch.mockClear()
+let mockStorage: jest.SpyInstance<ReturnType<typeof storage.getData>>
+beforeEach(() => {
+  mockStorage = jest.spyOn(storage, "getData")
+  mockStorage.mockResolvedValue(undefined)
 })
 
 describe("apiRequest function", () => {

@@ -7,5 +7,5 @@ module.exports = {
     "./node_modules/@react-native-google-signin/google-signin/jest/build/setup.js",
     "<rootDir>/jest-setup.ts",
   ],
-  transform: {},
+  clearMocks: true,
 }
