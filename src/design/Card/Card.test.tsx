@@ -5,9 +5,9 @@ import Typography from "../Typography"
 import Card from "./Card"
 
 describe("Card component", () => {
-  it("renders headline and children", () => {
+  it("renders title and children", () => {
     render(
-      <Card headline="Hello!">
+      <Card title="Hello!">
         <Typography variant="body">How are you?</Typography>
       </Card>,
     )

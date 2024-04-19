@@ -10,6 +10,7 @@ import Typography from "../../design/Typography"
 
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
+import Screen from "../../design/Screen"
 
 type Props = StackScreenProps<RestaurantsStackParamList, "CityList">
 
@@ -32,23 +33,24 @@ const CityList: FC<Props> = ({ route }) => {
   }
 
   return (
-    <Box padding="m">
+    <Screen>
       <FlatList
         data={cities}
         renderItem={({ item: cityItem }) => (
           <Button
-            title={cityItem.name}
             onPress={() =>
               navigation.navigate("RestaurantList", {
                 state,
                 city: cityItem,
               })
             }
-          />
+          >
+            {cityItem.name}
+          </Button>
         )}
         keyExtractor={(item) => item.name}
       />
-    </Box>
+    </Screen>
   )
 }
 

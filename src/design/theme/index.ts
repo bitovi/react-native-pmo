@@ -1,3 +1,4 @@
-export type { Theme } from "./theme"
+export type * from "./theme"
+
 export { default } from "./ThemeProvider"
 export * from "./ThemeProvider"

@@ -18,6 +18,13 @@ import Box from "./design/Box"
 import Typography from "./design/Typography"
 import { Pressable } from "react-native"
 
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    interface RootParamList extends RestaurantsStackParamList {}
+  }
+}
+
 export type RestaurantsStackParamList = {
   StateList: undefined
   CityList: {
@@ -37,10 +44,10 @@ export type RestaurantsStackParamList = {
   }
 }
 
-const RestaurantsNavigation = createStackNavigator<RestaurantsStackParamList>()
-const RestaurantsStackNavigation = () => {
+const RestaurantsStack = createStackNavigator<RestaurantsStackParamList>()
+const RestaurantsNavigator: FC = () => {
   return (
-    <RestaurantsNavigation.Navigator
+    <RestaurantsStack.Navigator
       initialRouteName="StateList"
       screenOptions={{
         header: ({ route, navigation }) => {
@@ -65,76 +72,65 @@ const RestaurantsStackNavigation = () => {
         },
       }}
     >
-      <RestaurantsNavigation.Screen name="StateList" component={StateList} />
-      <RestaurantsNavigation.Screen name="CityList" component={CityList} />
-      <RestaurantsNavigation.Screen
+      <RestaurantsStack.Screen name="StateList" component={StateList} />
+      <RestaurantsStack.Screen name="CityList" component={CityList} />
+      <RestaurantsStack.Screen
         name="RestaurantList"
         component={RestaurantList}
       />
-      <RestaurantsNavigation.Screen
+      <RestaurantsStack.Screen
         name="RestaurantDetails"
         component={RestaurantDetails}
       />
-      <RestaurantsNavigation.Screen
-        name="OrderCreate"
-        component={RestaurantOrder}
-      />
-    </RestaurantsNavigation.Navigator>
+      <RestaurantsStack.Screen name="OrderCreate" component={RestaurantOrder} />
+    </RestaurantsStack.Navigator>
   )
 }
 
-const Tab = createBottomTabNavigator()
-export const RootTabNavigator: FC = () => {
+const AppTabs = createBottomTabNavigator()
+export const AppNavigator: FC = () => {
   const theme = useTheme()
 
   return (
-    <Tab.Navigator
+    <AppTabs.Navigator
       initialRouteName="RestaurantsStack"
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused }) => {
-          let iconName = "settings"
-          if (route.name === "Settings") {
-            iconName = focused ? "settings" : "settings-outline"
-          } else if (route.name === "RestaurantsStack") {
-            iconName = focused ? "restaurant" : "restaurant-outline"
-          }
-          return (
-            <Icon
-              name={iconName}
-              size={20}
-              color={focused ? theme.colors.success : theme.colors.foreground}
-            />
-          )
+        headerStyle: {
+          backgroundColor: theme.palette.screen.main,
         },
-        tabBarActiveTintColor: theme.colors.success,
+        headerTitleStyle: {
+          color: theme.palette.screen.contrast,
+          ...theme.typography.title,
+        },
+        tabBarStyle: {
+          backgroundColor: theme.palette.screen.main,
+        },
+        // tabBarLabelStyle: { color: theme.palette.screen.contrast },
+        tabBarActiveTintColor: theme.palette.primary.strong,
+        tabBarInactiveTintColor: theme.palette.screen.contrast,
+        tabBarIcon: ({ focused, color }) => {
+          let icon = "settings"
+          if (route.name === "Settings") {
+            icon = focused ? "settings" : "settings-outline"
+          } else if (route.name === "Restaurants") {
+            icon = focused ? "restaurant" : "restaurant-outline"
+          }
+
+          return <Icon name={icon} size={20} color={color} />
+        },
       })}
     >
-      <Tab.Screen
-        name="RestaurantsStack"
-        component={RestaurantsStackNavigation}
+      <AppTabs.Screen
+        name="Restaurants"
+        component={RestaurantsNavigator}
         options={{ title: "Place My Order" }}
       />
-      <Tab.Screen
+      <AppTabs.Screen
         name="Settings"
         component={Settings}
         options={{ title: "Settings" }}
       />
-    </Tab.Navigator>
-  )
-}
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace ReactNavigation {
-    interface RootParamList extends RestaurantsStackParamList {}
-  }
-}
-
-const AppNavigator: FC = () => {
-  return (
-    <NavigationContainer>
-      <RootTabNavigator />
-    </NavigationContainer>
+    </AppTabs.Navigator>
   )
 }
 
@@ -144,7 +140,9 @@ const App: FC = () => {
       <ThemeProvider>
         <AuthProvider>
           <SafeAreaView style={{ height: "100%", width: "100%" }}>
-            <AppNavigator />
+            <NavigationContainer>
+              <AppNavigator />
+            </NavigationContainer>
           </SafeAreaView>
         </AuthProvider>
       </ThemeProvider>

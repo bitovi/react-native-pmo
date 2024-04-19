@@ -3,7 +3,7 @@ import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
 
 import { useEffect, useState } from "react"
-import { ScrollView, Switch } from "react-native"
+import { ScrollView } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useRestaurant } from "../../services/pmo/restaurant"
 import Box from "../../design/Box"
@@ -12,14 +12,14 @@ import Button from "../../design/Button"
 import FormTextField from "../../components/FormTextField"
 import Loading from "../../components/Loading"
 import Card from "../../design/Card"
-import { useTheme } from "../../design/theme"
+import Screen from "../../design/Screen"
+import FormSwitch from "../../components/FormSwitch"
 
 type Props = StackScreenProps<RestaurantsStackParamList, "OrderCreate">
 
 type OrderItems = Record<string, number>
 
 const RestaurantOrder: FC<Props> = ({ route }) => {
-  const theme = useTheme()
   const navigation = useNavigation()
   const { slug } = route.params
 
@@ -91,62 +91,30 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
       showsVerticalScrollIndicator={false}
       alwaysBounceVertical={false}
     >
-      <Box padding="s">
-        <Card headline="Lunch Menu">
+      <Screen>
+        <Card title="Lunch Menu">
           {restaurant.menu.lunch.map(({ name, price }) => (
-            <Box
+            <FormSwitch
               key={name}
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginVertical: 8,
-              }}
-            >
-              <Typography variant="body">
-                {name} {price}
-              </Typography>
-              <Switch
-                onValueChange={(value) => setItem(name, value, price)}
-                value={name in items}
-                thumbColor="white"
-                trackColor={{
-                  true: theme.colors.success,
-                  false: theme.colors.background,
-                }}
-              ></Switch>
-            </Box>
+              label={`${name} ($${price})`}
+              value={name in items}
+              onChange={(value) => setItem(name, value, price)}
+            />
           ))}
         </Card>
 
-        <Card headline="Dinner Menu">
+        <Card title="Dinner Menu">
           {restaurant.menu.dinner.map(({ name, price }) => (
-            <Box
+            <FormSwitch
               key={name}
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginVertical: 8,
-              }}
-            >
-              <Typography variant="body">
-                {name} {price}
-              </Typography>
-              <Switch
-                onValueChange={(value) => setItem(name, value, price)}
-                value={name in items}
-                thumbColor="white"
-                trackColor={{
-                  true: theme.colors.success,
-                  false: theme.colors.background,
-                }}
-              ></Switch>
-            </Box>
+              label={`${name} ($${price})`}
+              value={name in items}
+              onChange={(value) => setItem(name, value, price)}
+            />
           ))}
         </Card>
 
-        <Card headline="Order Details">
+        <Card title="Order Details">
           <FormTextField label="Name" onChange={setName} value={name} />
           <FormTextField
             label="Address"
@@ -166,15 +134,14 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
 
         <Box padding="s">
           <Typography variant="heading">
-            Total: ${subtotal ? subtotal.toFixed(2) : "0.00"}
+            Total: ${subtotal.toFixed(2)}
           </Typography>
         </Box>
 
         <Box padding="s">
-          <Button title="Place My Order!" onPress={handleSubmit} />
+          <Button onPress={handleSubmit}>Place My Order!</Button>
         </Box>
-        <Box padding="l">{/* Keyboard space */}</Box>
-      </Box>
+      </Screen>
     </ScrollView>
   )
 }

@@ -8,6 +8,7 @@ import Button from "../../design/Button"
 import Typography from "../../design/Typography"
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
+import Screen from "../../design/Screen"
 
 type Props = StackScreenProps<RestaurantsStackParamList, "StateList">
 
@@ -29,22 +30,23 @@ const StateList: FC<Props> = () => {
   }
 
   return (
-    <Box padding="s">
+    <Screen>
       <FlatList
         data={states}
         renderItem={({ item: stateItem }) => (
           <Button
-            title={stateItem.name}
             onPress={() => {
               navigation.navigate("CityList", {
                 state: stateItem,
               })
             }}
-          />
+          >
+            {stateItem.name}
+          </Button>
         )}
         keyExtractor={(item) => item.short}
       />
-    </Box>
+    </Screen>
   )
 }
 

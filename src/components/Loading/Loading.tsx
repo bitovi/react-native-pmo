@@ -9,7 +9,7 @@ const Loading: FC = () => {
 
   return (
     <Box padding="l">
-      <ActivityIndicator size="large" color={theme.colors.secondary} />
+      <ActivityIndicator size="large" color={theme.palette.primary.main} />
       <Typography variant="body" style={{ textAlign: "center", marginTop: 8 }}>
         Loading…
       </Typography>

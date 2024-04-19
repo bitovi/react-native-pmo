@@ -6,32 +6,34 @@ import { StyleSheet, Pressable, Text } from "react-native"
 
 import { useTheme } from "../theme"
 
+type Variant = "primary" | "secondary" | "outline"
+
 export interface ButtonProps extends PressableProps {
-  title?: string
-  variant?: "primary" | "secondary" | "text"
+  variant?: Variant
   margin?: keyof Theme["spacing"]
   padding?: keyof Theme["spacing"]
   fontSize?: TextStyle["fontSize"]
   fontWeight?: TextStyle["fontWeight"]
   disabled?: boolean
+  children: string
 }
 
 const Button: FC<ButtonProps> = ({
-  title,
-  variant,
+  variant = "primary",
   margin,
   padding,
   fontSize = 20,
   fontWeight = "400",
   disabled,
+  children,
   ...props
 }) => {
   const theme = useTheme()
-  const baseStyles = getStyles(theme, variant)
+  const styles = getStyles(theme, variant)
 
   return (
     <Pressable
-      style={StyleSheet.compose(baseStyles.press, {
+      style={StyleSheet.compose(styles.pressable, {
         ...(margin ? { margin: theme.spacing[margin] } : {}),
         ...(padding ? { padding: theme.spacing[padding] } : {}),
         opacity: disabled ? 0.5 : 1,
@@ -40,58 +42,72 @@ const Button: FC<ButtonProps> = ({
       {...props}
     >
       <Text
-        style={StyleSheet.compose(baseStyles.text, {
+        style={StyleSheet.compose(styles.text, {
           fontSize,
           fontWeight,
         })}
       >
-        {title}
+        {children}
       </Text>
     </Pressable>
   )
 }
 
+export default Button
+
 function getStyles(
   theme: Theme,
-  variant?: ButtonProps["variant"],
-): { press: ViewStyle; text: TextStyle } {
-  if (variant === "text") {
+  variant: Variant,
+): {
+  pressable: ViewStyle
+  text: TextStyle
+} {
+  if (variant === "primary") {
     return StyleSheet.create({
-      press: {},
+      pressable: {
+        margin: theme.spacing.s,
+        padding: theme.spacing.m,
+        borderRadius: 5,
+        backgroundColor: theme.palette.primary.main,
+      },
       text: {
-        color: theme.colors.textDark,
+        fontSize: 21,
+        color: theme.palette.primary.contrast,
       },
     })
   }
 
   if (variant === "secondary") {
     return StyleSheet.create({
-      press: {
+      pressable: {
         margin: theme.spacing.s,
-        paddingHorizontal: theme.spacing.m,
-        paddingVertical: theme.spacing.m,
-        borderColor: theme.colors.secondary,
-        borderWidth: 1,
+        padding: theme.spacing.m,
         borderRadius: 5,
+        backgroundColor: theme.palette.secondary.main,
       },
       text: {
-        color: theme.colors.secondary,
+        fontSize: 21,
+        color: theme.palette.secondary.contrast,
       },
     })
   }
 
-  return StyleSheet.create({
-    press: {
-      margin: theme.spacing.s,
-      paddingHorizontal: theme.spacing.m,
-      paddingVertical: theme.spacing.m,
-      backgroundColor: theme.colors.secondary,
-      borderRadius: 5,
-    },
-    text: {
-      color: theme.colors.textLight,
-    },
-  })
-}
+  if (variant === "outline") {
+    return StyleSheet.create({
+      pressable: {
+        margin: theme.spacing.s,
+        padding: theme.spacing.m - 1,
+        borderRadius: 5,
+        borderWidth: 1,
+        backgroundColor: theme.palette.screen.main,
+        borderColor: theme.palette.screen.contrast,
+      },
+      text: {
+        fontSize: 21,
+        color: theme.palette.screen.contrast,
+      },
+    })
+  }
 
-export default Button
+  throw new Error(`Button: Unknown variant: ${variant}`)
+}

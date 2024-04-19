@@ -1,7 +1,11 @@
+import type { Theme } from "../../design/theme"
 import type { Restaurant } from "../../services/pmo/restaurant"
+import type { TextStyle, ViewStyle } from "react-native"
+
 import { ImageBackground, StyleSheet } from "react-native"
 import Typography from "../../design/Typography"
 import Box from "../../design/Box"
+import { useTheme } from "../../design/theme"
 
 const assetsUrl = process.env.PMO_ASSETS
 
@@ -10,21 +14,23 @@ type Props = {
 }
 
 const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
+  const theme = useTheme()
+  const styles = getStyles(theme)
+
   return (
-    <Box style={styles.restaurantHeader}>
+    <Box>
       <ImageBackground
-        style={styles.hero}
-        source={{
-          uri: `${assetsUrl}/${restaurant?.images.banner}`,
-        }}
+        style={styles.heroBackground}
+        source={{ uri: `${assetsUrl}/${restaurant?.images.banner}` }}
       >
-        <Box padding="m" style={styles.heroTextContainer}>
+        <Box padding={["xs", "m"]} margin={["s", "none"]} style={styles.hero}>
           <Typography variant="heading" style={styles.heroText}>
             {restaurant?.name}
           </Typography>
         </Box>
       </ImageBackground>
-      <Box padding="m" style={styles.info}>
+
+      <Box padding="m">
         {restaurant?.address && (
           <Typography variant="body">
             {restaurant.address.street}
@@ -32,6 +38,7 @@ const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
             {restaurant.address.zip}
           </Typography>
         )}
+
         <Typography variant="body">
           $$$ Hours: M-F 10am-11pm Open Now
         </Typography>
@@ -40,34 +47,28 @@ const RestaurantHeader: React.FC<Props> = ({ restaurant }) => {
   )
 }
 
-const styles = StyleSheet.create({
-  restaurantHeader: {
-    marginBottom: 5,
-  },
-  hero: {
-    width: "100%",
-    maxWidth: 768,
-    height: 180,
-    margin: "auto",
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
-  },
-  heroText: {
-    color: "#ffffff",
-    fontSize: 32,
-  },
-  heroTextContainer: {
-    backgroundColor: "rgba(202, 47, 53, 0.8)",
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    marginBottom: 10,
-    width: "auto",
-  },
-  info: {},
-  background: {},
-  address: {},
-  hoursPrice: {},
-  openNow: {},
-})
+function getStyles(theme: Theme): {
+  heroBackground: ViewStyle
+  hero: ViewStyle
+  heroText: TextStyle
+} {
+  return StyleSheet.create({
+    heroBackground: {
+      width: "100%",
+      maxWidth: 768,
+      height: 180,
+      margin: "auto",
+      justifyContent: "flex-end",
+      alignItems: "flex-start",
+    },
+    hero: {
+      backgroundColor: theme.palette.secondary.main + "bb",
+    },
+    heroText: {
+      color: theme.palette.secondary.contrast,
+      fontSize: 32,
+    },
+  })
+}
 
 export default RestaurantHeader

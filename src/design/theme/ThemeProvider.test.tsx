@@ -25,7 +25,7 @@ describe("ThemeContext context", () => {
 
     return (
       <View>
-        <Text>{theme.colors.background}</Text>
+        <Text>{theme.palette.primary.main}</Text>
       </View>
     )
   }
@@ -33,6 +33,6 @@ describe("ThemeContext context", () => {
   it("context properties are accessible", async () => {
     render(<TestComponent />)
 
-    expect(screen.getByText(/#F0F2F3/)).toBeOnTheScreen()
+    expect(screen.getByText(/#005d63/)).toBeOnTheScreen()
   })
 })

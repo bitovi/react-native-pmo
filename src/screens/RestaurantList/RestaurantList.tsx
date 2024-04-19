@@ -10,6 +10,7 @@ import Typography from "../../design/Typography"
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
 import Tabs from "../../components/Tabs"
+import Screen from "../../design/Screen"
 
 const Map = lazy(() => import("./components/Map"))
 
@@ -60,16 +61,15 @@ const RestaurantList: FC<Props> = ({ route }) => {
         value={tab}
         onChange={setTab}
       />
-      <Box padding="s">
+      <Screen>
         {tab === "list" && (
           <Box padding="s">
             <FlatList
               data={data}
               renderItem={({ item: restaurant }) => (
-                <Button
-                  title={restaurant.name}
-                  onPress={() => navigateToDetails(restaurant.slug)}
-                />
+                <Button onPress={() => navigateToDetails(restaurant.slug)}>
+                  {restaurant.name}
+                </Button>
               )}
               keyExtractor={(item) => item._id}
             />
@@ -80,7 +80,7 @@ const RestaurantList: FC<Props> = ({ route }) => {
             <Map data={data} navigateTo={navigateToDetails} />
           </Suspense>
         )}
-      </Box>
+      </Screen>
     </>
   )
 }

@@ -6,7 +6,7 @@ describe("Button component", () => {
   it("renders title", () => {
     const handleChangeMock = jest.fn()
 
-    render(<Button title="Hello!" onPress={handleChangeMock} />)
+    render(<Button onPress={handleChangeMock}>Hello!</Button>)
 
     expect(screen.getByText(/Hello/)).toBeOnTheScreen()
     fireEvent.press(screen.getByText(/Hello/i))

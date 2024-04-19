@@ -1,80 +1,65 @@
 import type { TextStyle } from "react-native"
 
-const palette = {
-  lightGreen: "#007A82",
-  green: "#005156",
-  darkGreen: "#002A2D",
-  red: "rgb(202, 47, 53)",
-  black: "#000000",
-  charcoal: "#1b1e20",
-  grey: "5e6466",
-  white: "#ffffff",
-  offWhite: "#F0F2F3",
-  lightGray: "#E0E2E3",
+interface Palette {
+  main: string
+  soft: string
+  strong: string
+  contrast: string
 }
 
 export interface Theme {
-  colors: {
-    background: string
-    backgroundDark: string
-    border: string
-    foreground: string
-    primary: string
-    secondary: string
-    success: string
-    danger: string
-    failure: string
-    card: string
-    shadow: string
-    text: string
-    textLight: string
-    textDark: string
-    textLink: string
+  palette: {
+    screen: Palette
+    primary: Palette
+    secondary: Palette
+    // error: Palette
+    // warning: Palette
+    // info: Palette
+    // success: Palette
   }
   spacing: {
-    none: number
+    none: 0
     xs: number
     s: number
     m: number
     l: number
     xl: number
   }
-  textStyles: {
-    heading: {
-      fontSize: TextStyle["fontSize"]
-      fontWeight: TextStyle["fontWeight"]
-    }
-    title: {
-      fontSize: TextStyle["fontSize"]
-      fontWeight: TextStyle["fontWeight"]
-    }
-    body: {
-      fontWeight: TextStyle["fontWeight"]
-    }
-    label: {
-      fontSize: TextStyle["fontSize"]
-      fontWeight: TextStyle["fontWeight"]
-    }
+  typography: {
+    title: TextStyle
+    heading: TextStyle
+    body: TextStyle
+    label: TextStyle
   }
 }
 
+export type ThemeMargin =
+  | keyof Theme["spacing"]
+  | [keyof Theme["spacing"], keyof Theme["spacing"]]
+export type ThemePadding =
+  | keyof Theme["spacing"]
+  | [keyof Theme["spacing"], keyof Theme["spacing"]]
+
 const light: Theme = {
-  colors: {
-    background: palette.offWhite,
-    backgroundDark: palette.charcoal,
-    border: palette.lightGray,
-    foreground: palette.black,
-    primary: palette.red,
-    secondary: palette.green,
-    success: palette.lightGreen,
-    danger: palette.red,
-    failure: palette.red,
-    card: palette.white,
-    shadow: palette.black,
-    text: palette.black,
-    textLight: palette.white,
-    textDark: palette.charcoal,
-    textLink: palette.green,
+  palette: {
+    screen: {
+      main: "#ffffff",
+      soft: "#e0e0e0",
+      strong: "#ffffff",
+      contrast: "#222222",
+    },
+    primary: {
+      main: "#007980",
+      soft: "#00a5ad",
+      strong: "#006166",
+      contrast: "#ffffff",
+    },
+    secondary: {
+      main: "#ca2f35",
+      soft: "#d93237",
+      strong: "#a3262b",
+      contrast: "#ffffff",
+    },
   },
   spacing: {
     none: 0,
@@ -84,17 +69,17 @@ const light: Theme = {
     l: 24,
     xl: 40,
   },
-  textStyles: {
-    heading: {
-      fontSize: 24,
-      fontWeight: "500" as TextStyle["fontWeight"],
-    },
+  typography: {
     title: {
       fontSize: 21,
-      fontWeight: "500" as TextStyle["fontWeight"],
+      fontWeight: "500",
+    },
+    heading: {
+      fontSize: 24,
+      fontWeight: "500",
     },
     body: {
-      fontWeight: "normal" as TextStyle["fontWeight"],
+      fontWeight: "normal",
     },
     label: {
       fontSize: 12,
@@ -105,12 +90,24 @@ const light: Theme = {
 
 const dark: Theme = {
   ...light,
-  colors: {
-    ...light.colors,
-    background: palette.black,
-    foreground: palette.white,
-    textLight: palette.charcoal,
-    textDark: palette.white,
+  palette: {
+    ...light.palette,
+    screen: {
+      main: "#29292c",
+      soft: "#565659",
+      strong: "#000000",
+      contrast: "#ffffff",
+    },
+    primary: {
+      ...light.palette.primary,
+      soft: "#003a3d",
+      strong: light.palette.primary.soft,
+    },
+    secondary: {
+      ...light.palette.secondary,
+      soft: "#811e22",
+      strong: light.palette.secondary.soft,
+    },
   },
 }
 

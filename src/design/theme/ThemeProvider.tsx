@@ -2,6 +2,7 @@ import type { FC } from "react"
 import type { Theme } from "./theme"
 
 import { useState, createContext, useContext, useMemo } from "react"
+import { Appearance } from "react-native"
 
 import themes from "./theme"
 
@@ -15,7 +16,7 @@ interface ThemeContext {
 const Context = createContext<ThemeContext | undefined>(undefined)
 
 const ThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [mode, setMode] = useState<Mode>("light")
+  const [mode, setMode] = useState<Mode>(Appearance.getColorScheme() || "light")
 
   const value = useMemo(() => ({ mode, setMode }), [mode])
 
