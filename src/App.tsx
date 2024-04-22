@@ -150,7 +150,6 @@ const App: FC = () => {
             </AuthProvider>
           </DataMigration>
         </SafeAreaView>
-
       </ThemeProvider>
     </SafeAreaProvider>
   )
