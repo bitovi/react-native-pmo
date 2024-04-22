@@ -13,7 +13,14 @@ interface ThemeContext {
   setMode: (mode: Mode) => void
 }
 
-const Context = createContext<ThemeContext | undefined>(undefined)
+const Context = createContext<ThemeContext | undefined>({
+  mode: "light",
+  setMode: () => {
+    throw new Error(
+      "Theme context cannot be accessed outside of the ThemeProvider.",
+    )
+  },
+})
 
 const ThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mode, setMode] = useState<Mode>(Appearance.getColorScheme() || "light")
