@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react"
 import { apiRequest } from "../api"
-import type { Favorite } from "./interfaces"
 import { storeData, getData } from "../../storage/storage"
+
+interface Favorite {
+  userId: string
+  restaurantId: string
+  favorite: boolean
+  datetimeUpdated: Date
+  _id?: string
+}
 
 interface FavoritesResponse {
   data: Favorite[] | null
@@ -20,7 +27,7 @@ interface LocalStorageFavorites {
   favorites: Favorite[]
 }
 
-export function useFavorites(
+const useFavorites = (
   userId?: string,
   restaurantId?: string,
 ): FavoritesResponse & {
@@ -28,7 +35,7 @@ export function useFavorites(
   favorite: Favorite | undefined
   syncWithServer: () => void
   localFavorites: LocalStorageFavorites | undefined
-} {
+} => {
   const [response, setResponse] = useState<FavoritesResponse>({
     data: null,
     error: null,
@@ -189,3 +196,5 @@ export function useFavorites(
     localFavorites,
   }
 }
+
+export default useFavorites

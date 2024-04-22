@@ -18,6 +18,7 @@ import type { City, State } from "./services/pmo/restaurant"
 import Box from "./components/Box"
 import { Typography } from "./components"
 import { Pressable } from "react-native"
+import { FavoritesSync } from "./services/pmo/favorite"
 
 export type RestaurantsStackParamList = {
   StateList: undefined
@@ -145,6 +146,7 @@ const App: FC = () => {
           <DataMigration>
             <AuthProvider>
               <AppNavigator />
+              <FavoritesSync />
             </AuthProvider>
           </DataMigration>
         </SafeAreaView>

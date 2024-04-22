@@ -1,9 +1,7 @@
 import type { FC } from "react"
-import { useEffect } from "react"
 
 import { StyleSheet } from "react-native"
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
-import { useNetInfo } from "@react-native-community/netinfo"
 
 import {
   useAuthenticated,
@@ -12,7 +10,6 @@ import {
 } from "../../services/auth"
 import useTheme from "../../theme/useTheme"
 import { Box, Press, Typography } from "../../components"
-import { useFavorites } from "../../services/pmo/favorite/hook"
 import { FormSwitch } from "../../components/FormSwitch"
 import Card from "../../components/Card"
 
@@ -20,15 +17,7 @@ const Settings: FC = () => {
   const isAuthenticated = useAuthenticated()
   const { signIn, signOut } = useAuthentication()
   const user = useUser()
-  const { isConnected } = useNetInfo()
-  const { syncWithServer, localFavorites } = useFavorites(user?.id)
   const { mode, setMode } = useTheme()
-
-  useEffect(() => {
-    if (user && isConnected && localFavorites) {
-      syncWithServer()
-    }
-  }, [isConnected, localFavorites, syncWithServer, user])
 
   return (
     <Box padding="s" style={styles.container}>
