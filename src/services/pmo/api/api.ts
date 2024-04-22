@@ -2,10 +2,12 @@ import { getData, storeData } from "../../storage"
 
 const baseUrl = process.env.PMO_API
 
-interface LocalStorageApiRequest<T> {
+export interface LocalStorageApiRequest<T> {
   data: T
-  dateTime: Date
+  dateTime: number
 }
+
+export const keyPrefix = "apiRequest-"
 
 export async function apiRequest<
   Data = never,
@@ -26,18 +28,23 @@ export async function apiRequest<
     const query = params ? stringifyQuery(params) : ""
     const requestUrl = `${baseUrl}${path}?${query}`
 
-    const cachedResponse =
-      await getData<LocalStorageApiRequest<Data>>(requestUrl)
-    if (cachedResponse) {
-      const diff =
-        new Date().valueOf() - new Date(cachedResponse.dateTime).valueOf()
-      //Return Cached data if it's younger than one minute
-      if (diff < 60000) {
-        return {
-          data: cachedResponse.data,
-          error: null,
+    try {
+      const cachedResponse = await getData<LocalStorageApiRequest<Data>>(
+        keyPrefix + requestUrl,
+      )
+
+      if (cachedResponse) {
+        const diff = Date.now() - cachedResponse.dateTime
+        //Return Cached data if it's younger than one minute
+        if (diff < 60000) {
+          return {
+            data: cachedResponse.data,
+            error: null,
+          }
         }
       }
+    } catch (error) {
+      console.error("Failed to get cached value:", error)
     }
 
     const response = await fetch(requestUrl, {
@@ -54,9 +61,9 @@ export async function apiRequest<
       : new Error(`${response.status} (${response.statusText})`)
 
     if (method === "GET" && response.ok) {
-      storeData<LocalStorageApiRequest<Data>>(requestUrl, {
+      storeData<LocalStorageApiRequest<Data>>(keyPrefix + requestUrl, {
         data: data,
-        dateTime: new Date(),
+        dateTime: Date.now(),
       })
     }
 
