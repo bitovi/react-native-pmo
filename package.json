@@ -2,44 +2,21 @@
   "name": "PlaceMyOrder",
   "version": "1.0.0",
   "private": true,
+  "main": "index.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "eslint": "eslint *.ts *.js src",
-    "prettier": "prettier --check *.ts *.js src",
+    "eslint": "eslint *.ts *.cjs src",
+    "prettier": "prettier --check *.ts *.cjs src",
     "depcheck": "depcheck .",
-    "precheck": "npm run typecheck && npm run eslint && npm run prettier && npm run test && npm run depcheck",
-    "start": "react-native start -- --reset-cache",
+    "precheck": "npm run typecheck && npm run eslint && npm run prettier && npm run depcheck && npm run test",
+    "start": "react-native start --reset-cache",
     "android": "react-native run-android",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
-    "clean": "rm -rf tsconfig.tsbuildinfo coverage android/.gradle android/build android/app/build node_modules/.cache/babel-loader/*",
+    "clean": "rm -rf tsconfig.tsbuildinfo coverage android/.gradle android/build android/app/build node_modules/.cache",
     "devtools": "react-devtools",
     "api": "npm run linkLocalhost:android && place-my-order-api --port 7070",
     "linkLocalhost:android": "adb reverse tcp:7070 tcp:7070"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": "@bitovi/eslint-config/react",
-    "settings": {
-      "import/ignore": [
-        "node_modules/react-native/index\\.js$"
-      ]
-    }
-  },
-  "prettier": {
-    "semi": false,
-    "trailingComma": "all"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "moduleNameMapper": {
-      "\\.(jpg)$": "identity-obj-proxy"
-    },
-    "setupFilesAfterEnv": [
-      "./node_modules/@react-native-google-signin/google-signin/jest/build/setup.js",
-      "<rootDir>/jest-setup.ts"
-    ],
-    "transform": {}
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -64,9 +41,7 @@
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.2",
-    "@bitovi/eslint-config": "^1.7.0",
-    "@react-native/babel-preset": "0.73.21",
+    "@bitovi/eslint-config": "^1.8.0",
     "@react-native/metro-config": "0.73.5",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.4.3",

@@ -3,10 +3,14 @@ import { Suspense, lazy, useState } from "react"
 import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useRestaurants } from "../../services/pmo/restaurant"
-import { Box, Loading, Press, Typography } from "../../components"
+import Box from "../../design/Box"
+import Loading from "../../components/Loading"
+import Button from "../../design/Button"
+import Typography from "../../design/Typography"
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
-import Tabs from "../../components/Tabs/Tabs"
+import Tabs from "../../components/Tabs"
+import Screen from "../../design/Screen"
 
 const Map = lazy(() => import("./components/Map"))
 
@@ -31,9 +35,7 @@ const RestaurantList: FC<Props> = ({ route }) => {
   if (error) {
     return (
       <Box padding="s">
-        <Typography variant="heading">
-          Error loading restaurants: {"\n"}
-        </Typography>
+        <Typography variant="heading">Error loading restaurants: </Typography>
         <Typography variant="body">{error.message}</Typography>
       </Box>
     )
@@ -59,16 +61,15 @@ const RestaurantList: FC<Props> = ({ route }) => {
         value={tab}
         onChange={setTab}
       />
-      <Box padding="s">
+      <Screen>
         {tab === "list" && (
           <Box padding="s">
             <FlatList
               data={data}
               renderItem={({ item: restaurant }) => (
-                <Press
-                  title={restaurant.name}
-                  onPress={() => navigateToDetails(restaurant.slug)}
-                />
+                <Button onPress={() => navigateToDetails(restaurant.slug)}>
+                  {restaurant.name}
+                </Button>
               )}
               keyExtractor={(item) => item._id}
             />
@@ -79,7 +80,7 @@ const RestaurantList: FC<Props> = ({ route }) => {
             <Map data={data} navigateTo={navigateToDetails} />
           </Suspense>
         )}
-      </Box>
+      </Screen>
     </>
   )
 }

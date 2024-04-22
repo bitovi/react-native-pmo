@@ -2,9 +2,13 @@ import type { FC } from "react"
 import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useStates } from "../../services/pmo/restaurant"
-import { Box, Loading, Press, Typography } from "../../components"
+import Box from "../../design/Box"
+import Loading from "../../components/Loading"
+import Button from "../../design/Button"
+import Typography from "../../design/Typography"
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
+import Screen from "../../design/Screen"
 
 type Props = StackScreenProps<RestaurantsStackParamList, "StateList">
 
@@ -15,7 +19,7 @@ const StateList: FC<Props> = () => {
   if (error) {
     return (
       <Box padding="s">
-        <Typography variant="heading">Error loading states: {"\n"}</Typography>
+        <Typography variant="heading">Error loading states: </Typography>
         <Typography variant="body">{error.message}</Typography>
       </Box>
     )
@@ -26,22 +30,23 @@ const StateList: FC<Props> = () => {
   }
 
   return (
-    <Box padding="s">
+    <Screen>
       <FlatList
         data={states}
         renderItem={({ item: stateItem }) => (
-          <Press
-            title={stateItem.name}
+          <Button
             onPress={() => {
               navigation.navigate("CityList", {
                 state: stateItem,
               })
             }}
-          />
+          >
+            {stateItem.name}
+          </Button>
         )}
         keyExtractor={(item) => item.short}
       />
-    </Box>
+    </Screen>
   )
 }
 

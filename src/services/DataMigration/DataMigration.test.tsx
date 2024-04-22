@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react-native"
 import DataMigration from "./DataMigration"
-import { Typography } from "../../components"
+import Typography from "../../design/Typography"
 import * as storage from "../storage/storage"
 
 jest.mock("@react-native-async-storage/async-storage", () =>

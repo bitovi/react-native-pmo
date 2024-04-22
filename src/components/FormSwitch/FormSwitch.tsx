@@ -1,8 +1,8 @@
 import type { FC, ReactNode } from "react"
-import { StyleSheet, Switch } from "react-native"
-import Box from "../Box"
-import Typography from "../Typography"
-import useTheme from "../../theme/useTheme"
+import { Switch } from "react-native"
+import Box from "../../design/Box"
+import Typography from "../../design/Typography"
+import { useTheme } from "../../design/theme"
 
 type Props = {
   label: ReactNode
@@ -11,32 +11,30 @@ type Props = {
 }
 
 const FormSwitch: FC<Props> = ({ label, value, onChange }) => {
-  const { theme } = useTheme()
+  const { palette } = useTheme()
 
   return (
-    <Box style={styles.wrapper}>
+    <Box
+      style={{
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginVertical: 8,
+      }}
+    >
       <Typography variant="label">{label}</Typography>
       <Switch
-        onValueChange={onChange}
         value={value}
-        thumbColor={theme.colors.textLight}
+        onValueChange={onChange}
+        thumbColor={palette.primary.contrast}
         trackColor={{
-          true: theme.colors.success,
-          false: theme.colors.border,
+          true: palette.primary.strong,
+          false: palette.screen.soft,
         }}
       ></Switch>
     </Box>
   )
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginVertical: 8,
-  },
-})
 
 export default FormSwitch

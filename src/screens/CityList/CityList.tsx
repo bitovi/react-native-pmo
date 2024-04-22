@@ -3,9 +3,14 @@ import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { useCities } from "../../services/pmo/restaurant"
-import { Box, Loading, Press, Typography } from "../../components"
+import Box from "../../design/Box"
+import Loading from "../../components/Loading"
+import Button from "../../design/Button"
+import Typography from "../../design/Typography"
+
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
+import Screen from "../../design/Screen"
 
 type Props = StackScreenProps<RestaurantsStackParamList, "CityList">
 
@@ -17,7 +22,7 @@ const CityList: FC<Props> = ({ route }) => {
   if (error) {
     return (
       <Box padding="s">
-        <Typography variant="heading">Error loading cities: {"\n"}</Typography>
+        <Typography variant="heading">Error loading cities: </Typography>
         <Typography variant="body">{error.message}</Typography>
       </Box>
     )
@@ -28,23 +33,24 @@ const CityList: FC<Props> = ({ route }) => {
   }
 
   return (
-    <Box padding="m">
+    <Screen>
       <FlatList
         data={cities}
         renderItem={({ item: cityItem }) => (
-          <Press
-            title={cityItem.name}
+          <Button
             onPress={() =>
               navigation.navigate("RestaurantList", {
                 state,
                 city: cityItem,
               })
             }
-          />
+          >
+            {cityItem.name}
+          </Button>
         )}
         keyExtractor={(item) => item.name}
       />
-    </Box>
+    </Screen>
   )
 }
 

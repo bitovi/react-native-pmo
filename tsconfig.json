@@ -1,11 +1,14 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "module": "ES2022",
+
     "declaration": true,
     "composite": true,
     "incremental": true,
     "strict": true,
     "noEmit": true,
+
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
@@ -15,10 +18,8 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "useDefineForClassFields": true,
-    "module": "ES2022"
+    "useDefineForClassFields": true
   },
   "include": ["*.ts", "src"],
   "exclude": ["node_modules"]

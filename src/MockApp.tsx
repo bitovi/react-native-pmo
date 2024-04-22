@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
-import AuthProvider from "./services/auth/auth"
+import AuthProvider from "./services/auth"
 
 const MockNavigation = createStackNavigator()
 

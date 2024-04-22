@@ -1,2 +1,2 @@
-export { default as useFavorites } from "./useFavorites"
-export { default as FavoritesSync } from "./FavoritesSync"
+export { default } from "./favorite"
+export * from "./hooks"

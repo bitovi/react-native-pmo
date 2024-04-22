@@ -1,5 +1,4 @@
 import type { FC } from "react"
-import { StyleSheet } from "react-native"
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 import type { Restaurant } from "../../../../services/pmo/restaurant"
 
@@ -11,7 +10,8 @@ type Props = {
 const Map: FC<Props> = ({ data, navigateTo }) => {
   return (
     <MapView
-      style={styles.mapView}
+      // needs a minHeight to display without error
+      style={{ minHeight: "100%" }}
       provider={PROVIDER_GOOGLE}
       initialRegion={{
         ...data[0].coordinate,
@@ -32,9 +32,5 @@ const Map: FC<Props> = ({ data, navigateTo }) => {
     </MapView>
   )
 }
-
-const styles = StyleSheet.create({
-  mapView: { minHeight: "100%" }, // needs a minHeight to display without error
-})
 
 export default Map

@@ -3,11 +3,12 @@ import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
 
 import { useEffect } from "react"
-import { StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import RestaurantHeader from "../../components/RestaurantHeader"
-import { Box, Loading, Press, Typography } from "../../components"
+import Loading from "../../components/Loading"
+import Button from "../../design/Button"
+import Typography from "../../design/Typography"
 import { useRestaurant } from "../../services/pmo/restaurant"
 import { useFavorites } from "../../services/pmo/favorite"
 import {
@@ -15,6 +16,7 @@ import {
   useUser,
   useAuthentication,
 } from "../../services/auth"
+import Screen from "../../design/Screen"
 
 type Props = StackScreenProps<RestaurantsStackParamList, "RestaurantDetails">
 
@@ -34,12 +36,12 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
 
   if (error) {
     return (
-      <Box padding="s" style={styles.container}>
+      <Screen>
         <Typography variant="heading">
-          Error loading restaurant details: {"\n"}
+          Error loading restaurant details:{" "}
         </Typography>
         <Typography variant="body">{error.message}</Typography>
-      </Box>
+      </Screen>
     )
   }
 
@@ -48,14 +50,9 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   }
 
   return (
-    <Box style={styles.container}>
+    <Screen>
       <RestaurantHeader restaurant={restaurant} />
-      <Press
-        title={
-          isAuthenticated && favorite?.favorite
-            ? "Remove from Favorites"
-            : "Add to favorites"
-        }
+      <Button
         onPress={() => {
           if (isAuthenticated) {
             updateFavorites(restaurant!._id)
@@ -63,19 +60,21 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
             signIn()
           }
         }}
-      ></Press>
-      <Press
-        title="Place an order"
+      >
+        {isAuthenticated && favorite?.favorite
+          ? "Remove from Favorites"
+          : "Add to favorites"}
+      </Button>
+
+      <Button
         onPress={() => {
           navigation.navigate("OrderCreate", { slug: slug })
         }}
-      />
-    </Box>
+      >
+        Place an order
+      </Button>
+    </Screen>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {},
-})
 
 export default RestaurantDetails
