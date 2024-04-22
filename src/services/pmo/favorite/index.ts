@@ -1,2 +1,2 @@
-export * from "./interfaces"
+export { default } from "./favorite"
 export * from "./hooks"

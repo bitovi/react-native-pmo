@@ -6,6 +6,7 @@ import * as storage from "../../storage/storage"
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
 )
+
 describe("Favorite Hook", () => {
   // Mock the apiRequest function
   let apiRequest: jest.SpyInstance<ReturnType<typeof api.apiRequest>>

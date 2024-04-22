@@ -49,6 +49,10 @@ afterAll(() => {
   global.fetch = oldFetch
 })
 
+jest.mock("./services/pmo/favorite", () => ({
+  FavoritesSync: jest.fn().mockReturnValue(null),
+}))
+
 describe("App", () => {
   const mockStateResponse = {
     data: [
@@ -158,7 +162,10 @@ describe("App", () => {
       })
 
     render(<App />)
-    screen.getAllByText(/Place my order/i)
+
+    await waitFor(() => {
+      screen.getAllByText(/Place my order/i)
+    })
     expect(
       await screen.findByText(/Michigan/i, { exact: false }),
     ).toBeOnTheScreen()

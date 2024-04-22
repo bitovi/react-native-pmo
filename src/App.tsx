@@ -13,10 +13,12 @@ import CityList from "./screens/CityList"
 import RestaurantDetails from "./screens/RestaurantDetails"
 import RestaurantList from "./screens/RestaurantList"
 import RestaurantOrder from "./screens/RestaurantOrder"
+import DataMigration from "./services/DataMigration"
 import type { City, State } from "./services/pmo/restaurant"
 import Box from "./design/Box"
 import Typography from "./design/Typography"
 import { Pressable } from "react-native"
+import FavoritesSync from "./services/pmo/favorite"
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -137,15 +139,18 @@ export const AppNavigator: FC = () => {
 const App: FC = () => {
   return (
     <SafeAreaProvider>
-      <ThemeProvider>
+      <SafeAreaView style={{ height: "100%", width: "100%" }}>
         <AuthProvider>
-          <SafeAreaView style={{ height: "100%", width: "100%" }}>
-            <NavigationContainer>
-              <AppNavigator />
-            </NavigationContainer>
-          </SafeAreaView>
+          <ThemeProvider>
+            <DataMigration>
+              <NavigationContainer>
+                <AppNavigator />
+              </NavigationContainer>
+              <FavoritesSync />
+            </DataMigration>
+          </ThemeProvider>
         </AuthProvider>
-      </ThemeProvider>
+      </SafeAreaView>
     </SafeAreaProvider>
   )
 }

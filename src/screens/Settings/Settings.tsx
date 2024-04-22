@@ -1,30 +1,19 @@
 import type { FC } from "react"
-import { useEffect } from "react"
 
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
-import { useNetInfo } from "@react-native-community/netinfo"
 
 import { useAuthentication, useUser } from "../../services/auth"
 import { useThemeMode } from "../../design/theme"
-import Screen from "../../design/Screen"
 import Button from "../../design/Button"
-import Typography from "../../design/Typography"
-import { useFavorites } from "../../services/pmo/favorite"
-import FormSwitch from "../../components/FormSwitch"
 import Card from "../../design/Card"
+import Screen from "../../design/Screen"
+import Typography from "../../design/Typography"
+import FormSwitch from "../../components/FormSwitch"
 
 const Settings: FC = () => {
   const { signIn, signOut } = useAuthentication()
   const user = useUser()
-  const { isConnected } = useNetInfo()
-  const { syncWithServer, localFavorites } = useFavorites(user?.id)
   const { mode, setMode } = useThemeMode()
-
-  useEffect(() => {
-    if (user && isConnected && localFavorites) {
-      syncWithServer()
-    }
-  }, [isConnected, localFavorites, syncWithServer, user])
 
   return (
     <Screen>
