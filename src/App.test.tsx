@@ -140,7 +140,7 @@ describe("App", () => {
     ],
   }
 
-  it.skip("renders and navigates without issue", async () => {
+  it("renders and navigates without issue", async () => {
     mockFetch
       .mockResolvedValueOnce({
         ok: true,
