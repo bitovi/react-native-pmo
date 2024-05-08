@@ -1,14 +1,14 @@
 import type { FC } from "react"
 import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { useStates } from "../../services/pmo/restaurant"
-import Box from "../../design/Box"
-import Loading from "../../components/Loading"
-import Button from "../../design/Button"
-import Typography from "../../design/Typography"
+import { useStates } from "../../shared/services/pmo/restaurant"
+import Box from "../../shared/design/Box"
+import Loading from "../../shared/components/Loading"
+import Button from "../../shared/design/Button"
+import Typography from "../../shared/design/Typography"
 import type { StackScreenProps } from "@react-navigation/stack"
 import type { RestaurantsStackParamList } from "../../App"
-import Screen from "../../design/Screen"
+import Screen from "../../shared/design/Screen"
 
 type Props = StackScreenProps<RestaurantsStackParamList, "StateList">
 

@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react-native"
 
-import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
+import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
 
 import RestaurantOrder from "./RestaurantOrder"
-import MockApp from "../../MockApp"
+import MockApp from "../../App/MockApp"
 
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),

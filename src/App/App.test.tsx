@@ -26,17 +26,17 @@ jest.mock("@react-native-community/netinfo", () => ({
 }))
 
 jest.mock(
-  "./screens/StateList",
+  "../screens/StateList",
   () => jest.requireActual("./screens/StateList").default,
 )
 
 jest.mock(
-  "./screens/CityList",
+  "../screens/CityList",
   () => jest.requireActual("./screens/CityList").default,
 )
 
 jest.mock(
-  "./screens/RestaurantList",
+  "../screens/RestaurantList",
   () => jest.requireActual("./screens/RestaurantList").default,
 )
 
@@ -49,7 +49,7 @@ afterAll(() => {
   global.fetch = oldFetch
 })
 
-jest.mock("./services/pmo/favorite", () => ({
+jest.mock("../shared/services/pmo/favorite", () => ({
   FavoritesSync: jest.fn().mockReturnValue(null),
 }))
 

@@ -5,18 +5,18 @@ import type { RestaurantsStackParamList } from "../../App"
 import { useEffect } from "react"
 import { useNavigation } from "@react-navigation/native"
 
-import RestaurantHeader from "../../components/RestaurantHeader"
-import Loading from "../../components/Loading"
-import Button from "../../design/Button"
-import Typography from "../../design/Typography"
-import { useRestaurant } from "../../services/pmo/restaurant"
-import { useFavorites } from "../../services/pmo/favorite"
+import RestaurantHeader from "../../shared/components/RestaurantHeader"
+import Loading from "../../shared/components/Loading"
+import Button from "../../shared/design/Button"
+import Typography from "../../shared/design/Typography"
+import { useRestaurant } from "../../shared/services/pmo/restaurant"
+import { useFavorites } from "../../shared/services/pmo/favorite"
 import {
   useAuthenticated,
   useUser,
   useAuthentication,
-} from "../../services/auth"
-import Screen from "../../design/Screen"
+} from "../../shared/services/auth"
+import Screen from "../../shared/design/Screen"
 
 type Props = StackScreenProps<RestaurantsStackParamList, "RestaurantDetails">
 
