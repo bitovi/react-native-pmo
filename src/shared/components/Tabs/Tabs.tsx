@@ -1,13 +1,10 @@
-import type { FC } from "react"
-import type { TextStyle, ViewStyle } from "react-native"
-import type { Theme } from "../../design/theme"
+import { TextStyle, ViewStyle, Pressable, StyleSheet } from "react-native"
 
 import Box from "../../design/Box"
-import { Pressable, StyleSheet } from "react-native"
 import Typography from "../../design/Typography"
-import { useTheme } from "../../design/theme"
+import { Theme, useTheme } from "../../design/theme"
 
-type Props = {
+export interface TabsProps {
   options: Array<{
     label: string
     value: string
@@ -16,7 +13,7 @@ type Props = {
   onChange: (value: string) => void
 }
 
-const Tabs: FC<Props> = ({ options, value: activeTab, onChange }) => {
+const Tabs: React.FC<TabsProps> = ({ options, value: activeTab, onChange }) => {
   const theme = useTheme()
   const styles = getStyles(theme)
 

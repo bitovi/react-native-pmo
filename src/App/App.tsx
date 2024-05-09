@@ -1,5 +1,4 @@
 import "react-native-gesture-handler"
-import type { FC } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -14,7 +13,7 @@ import RestaurantDetails from "../screens/RestaurantDetails"
 import RestaurantList from "../screens/RestaurantList"
 import RestaurantOrder from "../screens/RestaurantOrder"
 import DataMigration from "../shared/services/DataMigration"
-import type { City, State } from "../shared/services/pmo/restaurant"
+import { City, State } from "../shared/services/pmo/restaurant"
 import Box from "../shared/design/Box"
 import Typography from "../shared/design/Typography"
 import { Pressable } from "react-native"
@@ -47,7 +46,7 @@ export type RestaurantsStackParamList = {
 }
 
 const RestaurantsStack = createStackNavigator<RestaurantsStackParamList>()
-const RestaurantsNavigator: FC = () => {
+const RestaurantsNavigator: React.FC = () => {
   return (
     <RestaurantsStack.Navigator
       initialRouteName="StateList"
@@ -90,7 +89,7 @@ const RestaurantsNavigator: FC = () => {
 }
 
 const AppTabs = createBottomTabNavigator()
-export const AppNavigator: FC = () => {
+const AppNavigator: React.FC = () => {
   const theme = useTheme()
 
   return (
@@ -136,7 +135,7 @@ export const AppNavigator: FC = () => {
   )
 }
 
-const App: FC = () => {
+const App: React.FC = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ height: "100%", width: "100%" }}>

@@ -1,10 +1,5 @@
-import type { FC } from "react"
-import type { ViewProps, ViewStyle } from "react-native"
-import type { Theme, ThemeMargin, ThemePadding } from "../theme"
-
-import { StyleSheet, View } from "react-native"
-
-import { useTheme } from "../theme"
+import { ViewProps, ViewStyle, StyleSheet, View } from "react-native"
+import { Theme, ThemeMargin, ThemePadding, useTheme } from "../theme"
 
 export interface BoxProps extends ViewProps {
   margin?: ThemeMargin
@@ -12,7 +7,7 @@ export interface BoxProps extends ViewProps {
   fullWidth?: boolean
 }
 
-const Box: FC<BoxProps> = ({
+const Box: React.FC<BoxProps> = ({
   margin,
   padding,
   fullWidth = false,

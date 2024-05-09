@@ -1,25 +1,26 @@
-import type { FC } from "react"
-import type { StackScreenProps } from "@react-navigation/stack"
-import type { RestaurantsStackParamList } from "../../App"
-
 import { useEffect, useState } from "react"
 import { ScrollView } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { useRestaurant } from "../../shared/services/pmo/restaurant"
-import Box from "../../shared/design/Box"
-import Typography from "../../shared/design/Typography"
-import Button from "../../shared/design/Button"
+import { StackScreenProps } from "@react-navigation/stack"
+
+import FormSwitch from "../../shared/components/FormSwitch"
 import FormTextField from "../../shared/components/FormTextField"
 import Loading from "../../shared/components/Loading"
+import Box from "../../shared/design/Box"
+import Button from "../../shared/design/Button"
 import Card from "../../shared/design/Card"
 import Screen from "../../shared/design/Screen"
-import FormSwitch from "../../shared/components/FormSwitch"
+import Typography from "../../shared/design/Typography"
+import { useRestaurant } from "../../shared/services/pmo/restaurant"
 
-type Props = StackScreenProps<RestaurantsStackParamList, "OrderCreate">
+import { RestaurantsStackParamList } from "../../App"
+
+export interface RestaurantOrderProps
+  extends StackScreenProps<RestaurantsStackParamList, "OrderCreate"> {}
 
 type OrderItems = Record<string, number>
 
-const RestaurantOrder: FC<Props> = ({ route }) => {
+const RestaurantOrder: React.FC<RestaurantOrderProps> = ({ route }) => {
   const navigation = useNavigation()
   const { slug } = route.params
 

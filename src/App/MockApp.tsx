@@ -1,13 +1,12 @@
-import type { FC } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import AuthProvider from "../shared/services/auth"
 
 const MockNavigation = createStackNavigator()
 
-const MockApp: FC<{
+const MockApp: React.FC<{
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  component: FC<any>
+  component: React.FC<any>
   params?: Partial<object | undefined>
 }> = ({ component, params }) => {
   return (

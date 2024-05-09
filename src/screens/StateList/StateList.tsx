@@ -1,18 +1,20 @@
-import type { FC } from "react"
 import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { useStates } from "../../shared/services/pmo/restaurant"
-import Box from "../../shared/design/Box"
+import { StackScreenProps } from "@react-navigation/stack"
+
 import Loading from "../../shared/components/Loading"
+import Box from "../../shared/design/Box"
 import Button from "../../shared/design/Button"
-import Typography from "../../shared/design/Typography"
-import type { StackScreenProps } from "@react-navigation/stack"
-import type { RestaurantsStackParamList } from "../../App"
 import Screen from "../../shared/design/Screen"
+import Typography from "../../shared/design/Typography"
+import { useStates } from "../../shared/services/pmo/restaurant"
 
-type Props = StackScreenProps<RestaurantsStackParamList, "StateList">
+import { RestaurantsStackParamList } from "../../App"
 
-const StateList: FC<Props> = () => {
+export interface StateListProps
+  extends StackScreenProps<RestaurantsStackParamList, "StateList"> {}
+
+const StateList: React.FC<StateListProps> = () => {
   const navigation = useNavigation()
   const { data: states, error, isPending } = useStates()
 

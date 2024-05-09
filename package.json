@@ -6,7 +6,9 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "eslint": "eslint *.ts *.cjs src",
+    "eslint:fix": "eslint --fix *.ts *.cjs src",
     "prettier": "prettier --check *.ts *.cjs src",
+    "prettier:fix": "prettier --write *.ts *.cjs src",
     "depcheck": "depcheck .",
     "precheck": "npm run typecheck && npm run eslint && npm run prettier && npm run depcheck && npm run test",
     "start": "react-native start --reset-cache",

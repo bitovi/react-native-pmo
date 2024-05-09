@@ -1,14 +1,10 @@
-import type { FC } from "react"
-import type { BoxProps } from "../Box"
+import Box, { BoxProps } from "../Box"
 
 import { useTheme } from "../theme"
-import Box from "../Box"
 
-export interface ScreenProps extends BoxProps {
-  //
-}
+export interface ScreenProps extends BoxProps {}
 
-const Screen: FC<ScreenProps> = ({ children, style, ...props }) => {
+const Screen: React.FC<ScreenProps> = ({ children, style, ...props }) => {
   const { palette } = useTheme()
 
   return (
