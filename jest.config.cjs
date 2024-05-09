@@ -1,11 +1,11 @@
 module.exports = {
-  preset: "jest-expo",
-  moduleNameMapper: {
-    "\\.(jpg)$": "identity-obj-proxy",
-  },
+  preset: "react-native",
+  clearMocks: true,
   setupFilesAfterEnv: [
     "./node_modules/@react-native-google-signin/google-signin/jest/build/setup.js",
     "<rootDir>/jest-setup.ts",
   ],
-  clearMocks: true,
+  moduleNameMapper: {
+    "\\.(jpg)$": "identity-obj-proxy",
+  },
 }

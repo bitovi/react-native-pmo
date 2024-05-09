@@ -1,11 +1,3 @@
-ignore-dirs:
-  - /dist
-
 ignores:
-  # internals
   - "@types/*"
-  - "@testing-library/*"
-
-  # Used, but not with `import`
   - identity-obj-proxy
-  - react-native-dotenv

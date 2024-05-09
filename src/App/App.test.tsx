@@ -7,11 +7,6 @@ import {
 
 import App from "./App"
 
-jest.mock(
-  "react-native-safe-area-context",
-  () => jest.requireActual("react-native-safe-area-context/jest/mock").default,
-)
-
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
 )
@@ -27,17 +22,17 @@ jest.mock("@react-native-community/netinfo", () => ({
 
 jest.mock(
   "../screens/StateList",
-  () => jest.requireActual("./screens/StateList").default,
+  () => jest.requireActual("../screens/StateList").default,
 )
 
 jest.mock(
   "../screens/CityList",
-  () => jest.requireActual("./screens/CityList").default,
+  () => jest.requireActual("../screens/CityList").default,
 )
 
 jest.mock(
   "../screens/RestaurantList",
-  () => jest.requireActual("./screens/RestaurantList").default,
+  () => jest.requireActual("../screens/RestaurantList").default,
 )
 
 const oldFetch = global.fetch
@@ -140,7 +135,7 @@ describe("App", () => {
     ],
   }
 
-  it.skip("renders and navigates without issue", async () => {
+  it("renders and navigates without issue", async () => {
     mockFetch
       .mockResolvedValueOnce({
         ok: true,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ScrollView } from "react-native"
+import { Alert, ScrollView } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { StackScreenProps } from "@react-navigation/stack"
 
@@ -42,7 +42,7 @@ const RestaurantOrder: React.FC<RestaurantOrderProps> = ({ route }) => {
   }, [restaurant, navigation])
 
   const handleSubmit = () => {
-    alert("Order submitted!")
+    Alert.alert("Order submitted!", "Your order has been submitted. Thank you.")
   }
 
   const setItem = (itemId: string, isChecked: boolean, itemPrice: number) => {
