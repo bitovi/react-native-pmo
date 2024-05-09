@@ -11,6 +11,8 @@ import { useStates } from "../../shared/services/pmo/restaurant"
 
 import { RestaurantsStackParamList } from "../../App"
 
+export interface StateListParams {}
+
 export interface StateListProps
   extends StackScreenProps<RestaurantsStackParamList, "StateList"> {}
 

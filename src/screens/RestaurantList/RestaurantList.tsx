@@ -9,11 +9,20 @@ import Box from "../../shared/design/Box"
 import Button from "../../shared/design/Button"
 import Screen from "../../shared/design/Screen"
 import Typography from "../../shared/design/Typography"
-import { useRestaurants } from "../../shared/services/pmo/restaurant"
+import {
+  City,
+  State,
+  useRestaurants,
+} from "../../shared/services/pmo/restaurant"
 
 import { RestaurantsStackParamList } from "../../App"
 
 const Map = lazy(() => import("./components/Map"))
+
+export interface RestaurantListParams {
+  state: State
+  city: City
+}
 
 export interface RestaurantListProps
   extends StackScreenProps<RestaurantsStackParamList, "RestaurantList"> {}

@@ -13,9 +13,19 @@ import {
   useAuthentication,
 } from "../../shared/services/auth"
 import { useFavorites } from "../../shared/services/pmo/favorite"
-import { useRestaurant } from "../../shared/services/pmo/restaurant"
+import {
+  City,
+  State,
+  useRestaurant,
+} from "../../shared/services/pmo/restaurant"
 
 import { RestaurantsStackParamList } from "../../App"
+
+export interface RestaurantDetailsParams {
+  state: State
+  city: City
+  slug: string
+}
 
 export interface RestaurantDetailsProps
   extends StackScreenProps<RestaurantsStackParamList, "RestaurantDetails"> {}
@@ -68,7 +78,7 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ route }) => {
 
       <Button
         onPress={() => {
-          navigation.navigate("OrderCreate", { slug: slug })
+          navigation.navigate("RestaurantOrder", { slug: slug })
         }}
       >
         Place an order

@@ -15,8 +15,12 @@ import { useRestaurant } from "../../shared/services/pmo/restaurant"
 
 import { RestaurantsStackParamList } from "../../App"
 
+export interface RestaurantOrderParams {
+  slug: string
+}
+
 export interface RestaurantOrderProps
-  extends StackScreenProps<RestaurantsStackParamList, "OrderCreate"> {}
+  extends StackScreenProps<RestaurantsStackParamList, "RestaurantOrder"> {}
 
 type OrderItems = Record<string, number>
 

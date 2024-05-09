@@ -7,9 +7,13 @@ import Box from "../../shared/design/Box"
 import Button from "../../shared/design/Button"
 import Screen from "../../shared/design/Screen"
 import Typography from "../../shared/design/Typography"
-import { useCities } from "../../shared/services/pmo/restaurant"
+import { State, useCities } from "../../shared/services/pmo/restaurant"
 
 import { RestaurantsStackParamList } from "../../App"
+
+export interface CityListParams {
+  state: State
+}
 
 export interface CityListProps
   extends StackScreenProps<RestaurantsStackParamList, "CityList"> {}
