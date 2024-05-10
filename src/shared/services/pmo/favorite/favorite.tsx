@@ -5,7 +5,15 @@ import { useUser } from "../../auth"
 
 import { useFavorites } from "./hooks"
 
-const useFavoritesSync = (): void => {
+const FavoritesSync: React.FC = () => {
+  useFavoritesSync()
+
+  return <></>
+}
+
+export default FavoritesSync
+
+function useFavoritesSync(): void {
   const user = useUser()
   const { isConnected } = useNetInfo()
   const { syncWithServer, localFavorites } = useFavorites(user?.id)
@@ -15,14 +23,4 @@ const useFavoritesSync = (): void => {
       syncWithServer()
     }
   }, [isConnected, localFavorites, syncWithServer, user])
-
-  return
 }
-
-const FavoritesSync: React.FC = () => {
-  useFavoritesSync()
-
-  return null
-}
-
-export default FavoritesSync

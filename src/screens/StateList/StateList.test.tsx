@@ -5,10 +5,6 @@ import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
 import StateList from "./StateList"
 import MockApp from "../../App/MockApp"
 
-jest.mock("@react-native-async-storage/async-storage", () =>
-  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
-)
-
 describe("StateList component", () => {
   // Mock the hooks and components used in StateList
   const mockStateResponse = {

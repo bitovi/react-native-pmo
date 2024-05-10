@@ -1,10 +1,6 @@
 import { apiRequest, stringifyQuery } from "./api"
 import * as storage from "../../storage/storage"
 
-jest.mock("@react-native-async-storage/async-storage", () =>
-  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
-)
-
 const oldFetch = global.fetch
 const mockFetch = jest.fn()
 beforeAll(() => {

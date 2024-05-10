@@ -12,7 +12,7 @@ import FavoritesSync from "../shared/services/pmo/favorite"
 
 import Settings from "../screens/Settings"
 
-import RestaurantsNavigator from "./navigators/RestaurantsNavigator/RestaurantsNavigator"
+import RestaurantsNavigator from "./navigators/RestaurantsNavigator"
 
 const Tabs = createBottomTabNavigator()
 

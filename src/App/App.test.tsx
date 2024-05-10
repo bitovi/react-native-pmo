@@ -7,34 +7,6 @@ import {
 
 import App from "./App"
 
-jest.mock("@react-native-async-storage/async-storage", () =>
-  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
-)
-
-jest.mock("@react-native-community/netinfo", () => ({
-  fetch: jest.fn(),
-  isConnected: {
-    fetch: jest.fn(),
-  },
-  isInternetReachable: jest.fn(),
-  useNetInfo: () => ({ isConnected: true }),
-}))
-
-jest.mock(
-  "../screens/StateList",
-  () => jest.requireActual("../screens/StateList").default,
-)
-
-jest.mock(
-  "../screens/CityList",
-  () => jest.requireActual("../screens/CityList").default,
-)
-
-jest.mock(
-  "../screens/RestaurantList",
-  () => jest.requireActual("../screens/RestaurantList").default,
-)
-
 const oldFetch = global.fetch
 const mockFetch = jest.fn()
 beforeAll(() => {
@@ -44,9 +16,9 @@ afterAll(() => {
   global.fetch = oldFetch
 })
 
-jest.mock("../shared/services/pmo/favorite", () => ({
-  FavoritesSync: jest.fn().mockReturnValue(null),
-}))
+jest.mock("../shared/services/pmo/favorite", () =>
+  jest.fn().mockReturnValue(null),
+)
 
 describe("App", () => {
   const mockStateResponse = {
@@ -56,12 +28,14 @@ describe("App", () => {
       { short: "IL", name: "Illinois" },
     ],
   }
+
   const mockCitiesResponse = {
     data: [
       { name: "Detroit", state: "MI" },
       { name: "Ann Arbor", state: "MI" },
     ],
   }
+
   const mockRestaurantsResponse = {
     data: [
       {

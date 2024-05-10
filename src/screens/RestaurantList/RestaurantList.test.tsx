@@ -16,10 +16,6 @@ const params = {
   },
 }
 
-jest.mock("@react-native-async-storage/async-storage", () =>
-  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
-)
-
 describe("RestaurantList component", () => {
   // Mock the hooks and components used in RestaurantList
 
