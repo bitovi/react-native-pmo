@@ -1,21 +1,9 @@
 import { render, screen } from "@testing-library/react-native"
 
-import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
-import AuthProvider from "../../services/auth"
+import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
+import AuthProvider from "../../shared/services/auth"
 
 import RestaurantDetails from "./RestaurantDetails"
-
-const params = {
-  state: {
-    name: "name",
-    short: "short",
-  },
-  city: {
-    name: "name",
-    state: "state",
-  },
-  slug: "test",
-} as const
 
 jest.mock("@react-navigation/native", () => {
   const actualNav = jest.requireActual("@react-navigation/native")
@@ -27,21 +15,28 @@ jest.mock("@react-navigation/native", () => {
     }),
   }
 })
-jest.mock("@react-native-async-storage/async-storage", () =>
-  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
-)
+
+const useRestaurant: jest.SpyInstance<
+  ReturnType<typeof restaurantHooks.useRestaurant>
+> = jest.spyOn(restaurantHooks, "useRestaurant")
+
+const route = {
+  key: "RestaurantDetails",
+  name: "RestaurantDetails",
+  params: {
+    state: {
+      name: "name",
+      short: "short",
+    },
+    city: {
+      name: "name",
+      state: "state",
+    },
+    slug: "test",
+  },
+} as const
 
 describe("RestaurantDetails component", () => {
-  // Mock the hooks and components used in RestaurantDetails
-
-  let useRestaurant: jest.SpyInstance<
-    ReturnType<typeof restaurantHooks.useRestaurant>
-  >
-  beforeEach(() => {
-    jest.resetAllMocks()
-    useRestaurant = jest.spyOn(restaurantHooks, "useRestaurant")
-  })
-
   const mockRestaurantData = {
     data: {
       _id: "1",
@@ -61,12 +56,13 @@ describe("RestaurantDetails component", () => {
     isPending: false,
     error: null,
   }
+
   it("renders loading state", () => {
     useRestaurant.mockReturnValue({ data: null, isPending: true, error: null })
     render(
       <AuthProvider>
         {/* @ts-ignore */}
-        <RestaurantDetails route={{ params }} />
+        <RestaurantDetails route={route} />
       </AuthProvider>,
     )
 
@@ -79,26 +75,28 @@ describe("RestaurantDetails component", () => {
       isPending: false,
       error: { name: "Error", message: "Mock error" },
     })
+
     render(
       <AuthProvider>
         {/* @ts-ignore */}
-        <RestaurantDetails route={{ params }} />
+        <RestaurantDetails route={route} />
       </AuthProvider>,
     )
+
     expect(
-      screen.getByText(/Error loading restaurant details:/i, {
-        exact: false,
-      }),
+      screen.getByText(/Error loading restaurant details:/i, { exact: false }),
     ).toBeOnTheScreen()
+
     expect(screen.getByText(/Mock error/i)).toBeOnTheScreen()
   })
 
   it("renders the RestaurantHeader and content when data is available", () => {
     useRestaurant.mockReturnValue(mockRestaurantData)
+
     render(
       <AuthProvider>
         {/* @ts-ignore */}
-        <RestaurantDetails route={{ params }} />
+        <RestaurantDetails route={route} />
       </AuthProvider>,
     )
 
@@ -107,10 +105,11 @@ describe("RestaurantDetails component", () => {
 
   it("renders the RestaurantHeader and content when data is not available", () => {
     useRestaurant.mockReturnValue({ ...mockRestaurantData, data: null })
+
     render(
       <AuthProvider>
         {/* @ts-ignore */}
-        <RestaurantDetails route={{ params }} />
+        <RestaurantDetails route={route} />
       </AuthProvider>,
     )
 

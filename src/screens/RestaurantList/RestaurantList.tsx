@@ -1,22 +1,33 @@
-import type { FC } from "react"
 import { Suspense, lazy, useState } from "react"
 import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { useRestaurants } from "../../services/pmo/restaurant"
-import Box from "../../design/Box"
-import Loading from "../../components/Loading"
-import Button from "../../design/Button"
-import Typography from "../../design/Typography"
-import type { StackScreenProps } from "@react-navigation/stack"
-import type { RestaurantsStackParamList } from "../../App"
-import Tabs from "../../components/Tabs"
-import Screen from "../../design/Screen"
+import { StackScreenProps } from "@react-navigation/stack"
+
+import Loading from "../../shared/components/Loading"
+import Tabs from "../../shared/components/Tabs"
+import Box from "../../shared/design/Box"
+import Button from "../../shared/design/Button"
+import Screen from "../../shared/design/Screen"
+import Typography from "../../shared/design/Typography"
+import {
+  City,
+  State,
+  useRestaurants,
+} from "../../shared/services/pmo/restaurant"
+
+import { RestaurantsStackParamList } from "../../App"
 
 const Map = lazy(() => import("./components/Map"))
 
-type Props = StackScreenProps<RestaurantsStackParamList, "RestaurantList">
+export interface RestaurantListParams {
+  state: State
+  city: City
+}
 
-const RestaurantList: FC<Props> = ({ route }) => {
+export interface RestaurantListProps
+  extends StackScreenProps<RestaurantsStackParamList, "RestaurantList"> {}
+
+const RestaurantList: React.FC<RestaurantListProps> = ({ route }) => {
   const navigation = useNavigation()
 
   const { state, city } = route.params
@@ -61,7 +72,8 @@ const RestaurantList: FC<Props> = ({ route }) => {
         value={tab}
         onChange={setTab}
       />
-      <Screen>
+
+      <Screen noScroll>
         {tab === "list" && (
           <Box padding="s">
             <FlatList

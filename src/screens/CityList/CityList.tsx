@@ -1,30 +1,36 @@
-import type { FC } from "react"
 import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import { StackScreenProps } from "@react-navigation/stack"
 
-import { useCities } from "../../services/pmo/restaurant"
-import Box from "../../design/Box"
-import Loading from "../../components/Loading"
-import Button from "../../design/Button"
-import Typography from "../../design/Typography"
+import Loading from "../../shared/components/Loading"
+import Box from "../../shared/design/Box"
+import Button from "../../shared/design/Button"
+import Screen from "../../shared/design/Screen"
+import Typography from "../../shared/design/Typography"
+import { State, useCities } from "../../shared/services/pmo/restaurant"
 
-import type { StackScreenProps } from "@react-navigation/stack"
-import type { RestaurantsStackParamList } from "../../App"
-import Screen from "../../design/Screen"
+import { RestaurantsStackParamList } from "../../App"
 
-type Props = StackScreenProps<RestaurantsStackParamList, "CityList">
+export interface CityListParams {
+  state: State
+}
 
-const CityList: FC<Props> = ({ route }) => {
+export interface CityListProps
+  extends StackScreenProps<RestaurantsStackParamList, "CityList"> {}
+
+const CityList: React.FC<CityListProps> = ({ route }) => {
   const { state } = route.params
   const navigation = useNavigation()
   const { data: cities, error, isPending } = useCities(state.short || "")
 
   if (error) {
     return (
-      <Box padding="s">
-        <Typography variant="heading">Error loading cities: </Typography>
-        <Typography variant="body">{error.message}</Typography>
-      </Box>
+      <Screen>
+        <Box padding="s">
+          <Typography variant="heading">Error loading cities: </Typography>
+          <Typography variant="body">{error.message}</Typography>
+        </Box>
+      </Screen>
     )
   }
 
@@ -33,7 +39,7 @@ const CityList: FC<Props> = ({ route }) => {
   }
 
   return (
-    <Screen>
+    <Screen noScroll>
       <FlatList
         data={cities}
         renderItem={({ item: cityItem }) => (
