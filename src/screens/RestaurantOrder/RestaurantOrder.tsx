@@ -1,25 +1,30 @@
-import type { FC } from "react"
-import type { StackScreenProps } from "@react-navigation/stack"
-import type { RestaurantsStackParamList } from "../../App"
-
 import { useEffect, useState } from "react"
-import { ScrollView } from "react-native"
+import { Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { useRestaurant } from "../../services/pmo/restaurant"
-import Box from "../../design/Box"
-import Typography from "../../design/Typography"
-import Button from "../../design/Button"
-import FormTextField from "../../components/FormTextField"
-import Loading from "../../components/Loading"
-import Card from "../../design/Card"
-import Screen from "../../design/Screen"
-import FormSwitch from "../../components/FormSwitch"
+import { StackScreenProps } from "@react-navigation/stack"
 
-type Props = StackScreenProps<RestaurantsStackParamList, "OrderCreate">
+import FormSwitch from "../../shared/components/FormSwitch"
+import FormTextField from "../../shared/components/FormTextField"
+import Loading from "../../shared/components/Loading"
+import Box from "../../shared/design/Box"
+import Button from "../../shared/design/Button"
+import Card from "../../shared/design/Card"
+import Screen from "../../shared/design/Screen"
+import Typography from "../../shared/design/Typography"
+import { useRestaurant } from "../../shared/services/pmo/restaurant"
+
+import { RestaurantsStackParamList } from "../../App"
+
+export interface RestaurantOrderParams {
+  slug: string
+}
+
+export interface RestaurantOrderProps
+  extends StackScreenProps<RestaurantsStackParamList, "RestaurantOrder"> {}
 
 type OrderItems = Record<string, number>
 
-const RestaurantOrder: FC<Props> = ({ route }) => {
+const RestaurantOrder: React.FC<RestaurantOrderProps> = ({ route }) => {
   const navigation = useNavigation()
   const { slug } = route.params
 
@@ -37,7 +42,7 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
   }, [restaurant, navigation])
 
   const handleSubmit = () => {
-    alert("Order submitted!")
+    Alert.alert("Order submitted!", "Your order has been submitted. Thank you.")
   }
 
   const setItem = (itemId: string, isChecked: boolean, itemPrice: number) => {
@@ -87,62 +92,51 @@ const RestaurantOrder: FC<Props> = ({ route }) => {
   }
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      alwaysBounceVertical={false}
-    >
-      <Screen>
-        <Card title="Lunch Menu">
-          {restaurant.menu.lunch.map(({ name, price }) => (
-            <FormSwitch
-              key={name}
-              label={`${name} ($${price})`}
-              value={name in items}
-              onChange={(value) => setItem(name, value, price)}
-            />
-          ))}
-        </Card>
-
-        <Card title="Dinner Menu">
-          {restaurant.menu.dinner.map(({ name, price }) => (
-            <FormSwitch
-              key={name}
-              label={`${name} ($${price})`}
-              value={name in items}
-              onChange={(value) => setItem(name, value, price)}
-            />
-          ))}
-        </Card>
-
-        <Card title="Order Details">
-          <FormTextField label="Name" onChange={setName} value={name} />
-          <FormTextField
-            label="Address"
-            onChange={setAddress}
-            value={address}
+    <Screen>
+      <Card title="Lunch Menu">
+        {restaurant.menu.lunch.map(({ name, price }) => (
+          <FormSwitch
+            key={name}
+            label={`${name} ($${price})`}
+            value={name in items}
+            onChange={(value) => setItem(name, value, price)}
           />
-          <FormTextField label="Phone" onChange={setPhone} value={phone} />
-        </Card>
+        ))}
+      </Card>
 
-        <Box padding="s">
-          {subtotal === 0 ? (
-            <Typography>Please choose an item.</Typography>
-          ) : (
-            <Typography>{selectedCount} items selected.</Typography>
-          )}
-        </Box>
+      <Card title="Dinner Menu">
+        {restaurant.menu.dinner.map(({ name, price }) => (
+          <FormSwitch
+            key={name}
+            label={`${name} ($${price})`}
+            value={name in items}
+            onChange={(value) => setItem(name, value, price)}
+          />
+        ))}
+      </Card>
 
-        <Box padding="s">
-          <Typography variant="heading">
-            Total: ${subtotal.toFixed(2)}
-          </Typography>
-        </Box>
+      <Card title="Order Details">
+        <FormTextField label="Name" onChange={setName} value={name} />
+        <FormTextField label="Address" onChange={setAddress} value={address} />
+        <FormTextField label="Phone" onChange={setPhone} value={phone} />
+      </Card>
 
-        <Box padding="s">
-          <Button onPress={handleSubmit}>Place My Order!</Button>
-        </Box>
-      </Screen>
-    </ScrollView>
+      <Box padding="s">
+        {subtotal === 0 ? (
+          <Typography>Please choose an item.</Typography>
+        ) : (
+          <Typography>{selectedCount} items selected.</Typography>
+        )}
+      </Box>
+
+      <Box padding="s">
+        <Typography variant="heading">Total: ${subtotal.toFixed(2)}</Typography>
+      </Box>
+
+      <Box padding="s">
+        <Button onPress={handleSubmit}>Place My Order!</Button>
+      </Box>
+    </Screen>
   )
 }
 

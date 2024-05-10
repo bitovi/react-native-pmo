@@ -1,16 +1,15 @@
-import type { FC } from "react"
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
-import type { Restaurant } from "../../../../services/pmo/restaurant"
 
-type Props = {
+import { Restaurant } from "../../../../shared/services/pmo/restaurant"
+
+export interface MapProps {
   data: Restaurant[]
   navigateTo: (slug: string) => void
 }
 
-const Map: FC<Props> = ({ data, navigateTo }) => {
+const Map: React.FC<MapProps> = ({ data, navigateTo }) => {
   return (
     <MapView
-      // needs a minHeight to display without error
       style={{ minHeight: "100%" }}
       provider={PROVIDER_GOOGLE}
       initialRegion={{

@@ -1,16 +1,14 @@
-import type { FC } from "react"
-
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
 
-import { useAuthentication, useUser } from "../../services/auth"
-import { useThemeMode } from "../../design/theme"
-import Button from "../../design/Button"
-import Card from "../../design/Card"
-import Screen from "../../design/Screen"
-import Typography from "../../design/Typography"
-import FormSwitch from "../../components/FormSwitch"
+import FormSwitch from "../../shared/components/FormSwitch"
+import Button from "../../shared/design/Button"
+import Card from "../../shared/design/Card"
+import Screen from "../../shared/design/Screen"
+import Typography from "../../shared/design/Typography"
+import { useThemeMode } from "../../shared/design/theme"
+import { useAuthentication, useUser } from "../../shared/services/auth"
 
-const Settings: FC = () => {
+const Settings: React.FC = () => {
   const { signIn, signOut } = useAuthentication()
   const user = useUser()
   const { mode, setMode } = useThemeMode()
