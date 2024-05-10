@@ -5,8 +5,11 @@ import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
 import StateList from "./StateList"
 import MockApp from "../../App/MockApp"
 
+const useStates: jest.SpyInstance<
+  ReturnType<typeof restaurantHooks.useStates>
+> = jest.spyOn(restaurantHooks, "useStates")
+
 describe("StateList component", () => {
-  // Mock the hooks and components used in StateList
   const mockStateResponse = {
     data: [
       { short: "MI", name: "Michigan" },
@@ -14,12 +17,6 @@ describe("StateList component", () => {
       { short: "IL", name: "Illinois" },
     ],
   }
-
-  let useStates: jest.SpyInstance<ReturnType<typeof restaurantHooks.useStates>>
-  beforeEach(() => {
-    jest.resetAllMocks()
-    useStates = jest.spyOn(restaurantHooks, "useStates")
-  })
 
   it("renders State List", () => {
     useStates.mockReturnValue({
@@ -29,6 +26,7 @@ describe("StateList component", () => {
     })
 
     render(<MockApp component={StateList} />)
+
     expect(screen.getByText(/Michigan/i)).toBeOnTheScreen()
     expect(screen.getByText(/Wisconsin/i)).toBeOnTheScreen()
     expect(screen.getByText(/Illinois/i)).toBeOnTheScreen()
@@ -41,6 +39,7 @@ describe("StateList component", () => {
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
+
   it("renders error state", () => {
     useStates.mockReturnValue({
       data: null,

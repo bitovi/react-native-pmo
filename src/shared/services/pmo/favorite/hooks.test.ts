@@ -3,16 +3,12 @@ import * as api from "../api/api"
 import { useFavorites } from "./hooks"
 import * as storage from "../../storage/storage"
 
-describe("Favorite Hook", () => {
-  // Mock the apiRequest function
-  let apiRequest: jest.SpyInstance<ReturnType<typeof api.apiRequest>>
-  let mockStorage: jest.SpyInstance<ReturnType<typeof storage.getData>>
-  beforeEach(() => {
-    jest.resetAllMocks()
-    apiRequest = jest.spyOn(api, "apiRequest")
-    mockStorage = jest.spyOn(storage, "getData")
-  })
+const apiRequest: jest.SpyInstance<ReturnType<typeof api.apiRequest>> =
+  jest.spyOn(api, "apiRequest")
+const mockStorage: jest.SpyInstance<ReturnType<typeof storage.getData>> =
+  jest.spyOn(storage, "getData")
 
+describe("Favorite Hook", () => {
   describe("useFavorites hook", () => {
     const mockFavorites = [
       {
@@ -30,6 +26,7 @@ describe("Favorite Hook", () => {
         _id: "dmTvyAYw3o0xjAIk",
       },
     ]
+
     it("should return list of favorites from the server", async () => {
       apiRequest.mockResolvedValue({
         data: { data: mockFavorites },
@@ -38,28 +35,26 @@ describe("Favorite Hook", () => {
 
       const { result } = renderHook(() => useFavorites("user-id"))
 
-      await waitFor(() => {
-        expect(result.current.isPending).toBeFalsy()
-      })
-
+      await waitFor(() => expect(result.current.isPending).toBeFalsy())
       expect(result.current.data).toEqual(mockFavorites)
       expect(result.current.error).toBeNull()
     })
+
     it("should return list of favorites from the local storage", async () => {
-      const mockLocalFavorites = {
-        lastSynced: "Date",
-        favorites: mockFavorites,
-      }
       apiRequest.mockResolvedValue({
         data: { data: mockFavorites },
         error: null,
       })
-      mockStorage.mockResolvedValue(mockLocalFavorites)
-      const { result } = renderHook(() => useFavorites("user-id"))
-      await waitFor(() => {
-        expect(result.current.localFavorites).toBeTruthy()
-      })
 
+      const mockLocalFavorites = {
+        lastSynced: "Date",
+        favorites: mockFavorites,
+      }
+      mockStorage.mockResolvedValue(mockLocalFavorites)
+
+      const { result } = renderHook(() => useFavorites("user-id"))
+
+      await waitFor(() => expect(result.current.localFavorites).toBeTruthy())
       expect(result.current.localFavorites).toEqual(mockLocalFavorites)
     })
   })

@@ -1,5 +1,6 @@
 import { getData, storeData } from "../../storage"
 
+const ONE_MINUTE = 60 * 1000
 const baseUrl = process.env.PMO_API
 
 export interface LocalStorageApiRequest<T> {
@@ -34,9 +35,8 @@ export async function apiRequest<
       )
 
       if (cachedResponse) {
-        const diff = Date.now() - cachedResponse.dateTime
-        //Return Cached data if it's younger than one minute
-        if (diff < 60000) {
+        const age = Date.now() - cachedResponse.dateTime
+        if (age < ONE_MINUTE) {
           return {
             data: cachedResponse.data,
             error: null,

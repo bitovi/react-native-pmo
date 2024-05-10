@@ -25,6 +25,7 @@ describe("RestaurantHeader component", () => {
 
   it("does not render an address when not provided", () => {
     render(<RestaurantHeader restaurant={restaurantWithoutAddress} />)
+
     expect(
       screen.queryByText(restaurantWithAddress.address.street),
     ).not.toBeOnTheScreen()

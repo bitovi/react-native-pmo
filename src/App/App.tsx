@@ -14,6 +14,27 @@ import Settings from "../screens/Settings"
 
 import RestaurantsNavigator from "./navigators/RestaurantsNavigator"
 
+const App: React.FC = () => {
+  return (
+    <SafeAreaProvider>
+      <SafeAreaView style={{ height: "100%", width: "100%" }}>
+        <ThemeProvider>
+          <AuthProvider>
+            <DataMigration>
+              <NavigationContainer>
+                <AppNavigator />
+              </NavigationContainer>
+              <FavoritesSync />
+            </DataMigration>
+          </AuthProvider>
+        </ThemeProvider>
+      </SafeAreaView>
+    </SafeAreaProvider>
+  )
+}
+
+export default App
+
 const Tabs = createBottomTabNavigator()
 
 const AppNavigator: React.FC = () => {
@@ -33,7 +54,6 @@ const AppNavigator: React.FC = () => {
         tabBarStyle: {
           backgroundColor: theme.palette.screen.main,
         },
-        // tabBarLabelStyle: { color: theme.palette.screen.contrast },
         tabBarActiveTintColor: theme.palette.primary.strong,
         tabBarInactiveTintColor: theme.palette.screen.contrast,
         tabBarIcon: ({ focused, color }) => {
@@ -61,24 +81,3 @@ const AppNavigator: React.FC = () => {
     </Tabs.Navigator>
   )
 }
-
-const App: React.FC = () => {
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView style={{ height: "100%", width: "100%" }}>
-        <ThemeProvider>
-          <AuthProvider>
-            <DataMigration>
-              <NavigationContainer>
-                <AppNavigator />
-              </NavigationContainer>
-              <FavoritesSync />
-            </DataMigration>
-          </AuthProvider>
-        </ThemeProvider>
-      </SafeAreaView>
-    </SafeAreaProvider>
-  )
-}
-
-export default App

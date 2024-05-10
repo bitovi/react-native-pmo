@@ -10,15 +10,12 @@ afterAll(() => {
   global.fetch = oldFetch
 })
 
-let mockStorage: jest.SpyInstance<ReturnType<typeof storage.getData>>
-beforeEach(() => {
-  mockStorage = jest.spyOn(storage, "getData")
-  mockStorage.mockResolvedValue(undefined)
-})
+const mockStorage: jest.SpyInstance<ReturnType<typeof storage.getData>> =
+  jest.spyOn(storage, "getData")
+mockStorage.mockResolvedValue(undefined)
 
 describe("apiRequest function", () => {
   it("should handle a successful request", async () => {
-    // Mock the fetch response
     mockFetch.mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve({ message: "success" }),
@@ -42,7 +39,6 @@ describe("apiRequest function", () => {
   })
 
   it("should handle a failed request", async () => {
-    // Mock the fetch response
     mockFetch.mockResolvedValueOnce({
       ok: false,
       json: () => Promise.resolve({ message: "error" }),
@@ -62,7 +58,6 @@ describe("apiRequest function", () => {
   })
 
   it("should handle network errors", async () => {
-    // Mock a network error
     mockFetch.mockRejectedValueOnce(new Error("Network Error"))
 
     const response = await apiRequest({

@@ -45,6 +45,8 @@ const RestaurantHeader: React.FC<RestaurantHeaderProps> = ({ restaurant }) => {
   )
 }
 
+export default RestaurantHeader
+
 function getStyles(theme: Theme): {
   heroBackground: ViewStyle
   hero: ViewStyle
@@ -65,5 +67,3 @@ function getStyles(theme: Theme): {
     },
   })
 }
-
-export default RestaurantHeader

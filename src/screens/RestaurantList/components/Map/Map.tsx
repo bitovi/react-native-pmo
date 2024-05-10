@@ -10,7 +10,6 @@ export interface MapProps {
 const Map: React.FC<MapProps> = ({ data, navigateTo }) => {
   return (
     <MapView
-      // needs a minHeight to display without error
       style={{ minHeight: "100%" }}
       provider={PROVIDER_GOOGLE}
       initialRegion={{

@@ -1,9 +1,4 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react-native"
+import { fireEvent, render, screen } from "@testing-library/react-native"
 
 import App from "./App"
 
@@ -132,23 +127,18 @@ describe("App", () => {
 
     render(<App />)
 
-    await waitFor(() => {
-      screen.getAllByText(/Place My Order/i)
-    })
+    await screen.findAllByText(/Place My Order/i)
+
+    const state = await screen.findByText(/Michigan/i, { exact: false })
+    expect(state).toBeOnTheScreen()
+    fireEvent.press(state)
+
+    const city = await screen.findByText(/Detroit/i, { exact: false })
+    expect(city).toBeOnTheScreen()
+    fireEvent.press(city)
+
     expect(
-      await screen.findByText(/Michigan/i, { exact: false }),
+      await screen.findByText(/Bagel Restaurant/i, { exact: false }),
     ).toBeOnTheScreen()
-    fireEvent.press(screen.getByText(/Michigan/i))
-
-    await waitFor(() => {
-      expect(screen.getByText(/Detroit/i, { exact: false })).toBeOnTheScreen()
-    })
-    fireEvent.press(screen.getByText(/Detroit/i))
-
-    await waitFor(() => {
-      expect(
-        screen.getByText(/Bagel Restaurant/i, { exact: false }),
-      ).toBeOnTheScreen()
-    })
   })
 })

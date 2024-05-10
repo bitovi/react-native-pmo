@@ -8,24 +8,6 @@ interface LocalStorageApiRequestV1 {
   dateTime: Date
 }
 
-const migrateDataV1toV2 = async (): Promise<void> => {
-  const keys = await getAllKeys()
-  try {
-    keys.forEach(async (key: string) => {
-      if (key.startsWith(keyPrefix)) {
-        const oldData = (await getData(key)) as LocalStorageApiRequestV1
-        storeData<LocalStorageApiRequest<unknown>>(key, {
-          ...oldData,
-          dateTime: oldData.dateTime.valueOf(),
-        })
-      }
-    })
-  } catch (error) {
-    console.error("'migrateDataV1toV2' failed with error:", error)
-    await clearStorage()
-  }
-}
-
 const DataMigration: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isDone, setMigrationDone] = useState<boolean>(false)
 
@@ -51,3 +33,21 @@ const DataMigration: React.FC<{ children: ReactNode }> = ({ children }) => {
 }
 
 export default DataMigration
+
+const migrateDataV1toV2 = async (): Promise<void> => {
+  const keys = await getAllKeys()
+  try {
+    keys.forEach(async (key: string) => {
+      if (key.startsWith(keyPrefix)) {
+        const oldData = (await getData(key)) as LocalStorageApiRequestV1
+        storeData<LocalStorageApiRequest<unknown>>(key, {
+          ...oldData,
+          dateTime: oldData.dateTime.valueOf(),
+        })
+      }
+    })
+  } catch (error) {
+    console.error("'migrateDataV1toV2' failed with error:", error)
+    await clearStorage()
+  }
+}

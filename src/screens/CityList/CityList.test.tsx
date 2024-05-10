@@ -5,20 +5,17 @@ import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
 import CityList from "./CityList"
 import MockApp from "../../App/MockApp"
 
-describe("CityList component", () => {
-  // Mock the hooks and components used in CityList
+const useCities: jest.SpyInstance<
+  ReturnType<typeof restaurantHooks.useCities>
+> = jest.spyOn(restaurantHooks, "useCities")
 
+describe("CityList component", () => {
   const mockCitiesResponse = {
     data: [
       { name: "Detroit", state: "MI" },
       { name: "Ann Arbor", state: "MI" },
     ],
   }
-  let useCities: jest.SpyInstance<ReturnType<typeof restaurantHooks.useCities>>
-  beforeEach(() => {
-    jest.resetAllMocks()
-    useCities = jest.spyOn(restaurantHooks, "useCities")
-  })
 
   it("renders city List", () => {
     useCities.mockReturnValue({
@@ -33,6 +30,7 @@ describe("CityList component", () => {
         params={{ state: { name: "test", short: "test" } }}
       />,
     )
+
     expect(screen.getByText(/Detroit/i)).toBeOnTheScreen()
     expect(screen.getByText(/Ann Arbor/i)).toBeOnTheScreen()
   })
@@ -49,6 +47,7 @@ describe("CityList component", () => {
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
+
   it("renders error city", () => {
     useCities.mockReturnValue({
       data: null,

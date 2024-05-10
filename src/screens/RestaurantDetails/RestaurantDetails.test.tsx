@@ -16,6 +16,10 @@ jest.mock("@react-navigation/native", () => {
   }
 })
 
+const useRestaurant: jest.SpyInstance<
+  ReturnType<typeof restaurantHooks.useRestaurant>
+> = jest.spyOn(restaurantHooks, "useRestaurant")
+
 const route = {
   key: "RestaurantDetails",
   name: "RestaurantDetails",
@@ -33,15 +37,6 @@ const route = {
 } as const
 
 describe("RestaurantDetails component", () => {
-  let useRestaurant: jest.SpyInstance<
-    ReturnType<typeof restaurantHooks.useRestaurant>
-  >
-
-  beforeEach(() => {
-    jest.resetAllMocks()
-    useRestaurant = jest.spyOn(restaurantHooks, "useRestaurant")
-  })
-
   const mockRestaurantData = {
     data: {
       _id: "1",

@@ -12,10 +12,6 @@ export interface Theme {
     screen: Palette
     primary: Palette
     secondary: Palette
-    // error: Palette
-    // warning: Palette
-    // info: Palette
-    // success: Palette
   }
   spacing: {
     none: 0

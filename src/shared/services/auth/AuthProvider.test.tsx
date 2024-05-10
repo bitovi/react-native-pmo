@@ -1,9 +1,4 @@
-import {
-  render,
-  screen,
-  waitFor,
-  fireEvent,
-} from "@testing-library/react-native"
+import { render, screen, fireEvent } from "@testing-library/react-native"
 import AuthProvider, {
   useAuthenticated,
   useAuthentication,
@@ -50,16 +45,14 @@ describe("AuthProvider", () => {
       </AuthProvider>,
     )
 
-    await waitFor(() => {
-      expect(screen.getByText(/mockId/i)).toBeOnTheScreen()
-    })
+    expect(await screen.findByText(/mockId/i)).toBeOnTheScreen()
+
     fireEvent.press(screen.getByText(/Sign Out/i))
-    await waitFor(() => {
-      expect(screen.getByText(/Mock Sign in with Google/i)).toBeOnTheScreen()
-    })
+    expect(
+      await screen.findByText(/Mock Sign in with Google/i),
+    ).toBeOnTheScreen()
+
     fireEvent.press(screen.getByText(/Mock Sign in with Google/i))
-    await waitFor(() => {
-      expect(screen.getByText(/Sign Out/i)).toBeOnTheScreen()
-    })
+    expect(await screen.findByText(/Sign Out/i)).toBeOnTheScreen()
   })
 })
