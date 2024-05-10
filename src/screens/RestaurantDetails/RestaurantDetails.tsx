@@ -60,30 +60,33 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ route }) => {
   }
 
   return (
-    <Screen>
+    <>
       <RestaurantHeader restaurant={restaurant} />
-      <Button
-        onPress={() => {
-          if (isAuthenticated) {
-            updateFavorites(restaurant!._id)
-          } else {
-            signIn()
-          }
-        }}
-      >
-        {isAuthenticated && favorite?.favorite
-          ? "Remove from Favorites"
-          : "Add to favorites"}
-      </Button>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("RestaurantOrder", { slug: slug })
-        }}
-      >
-        Place an order
-      </Button>
-    </Screen>
+      <Screen>
+        <Button
+          onPress={() => {
+            if (isAuthenticated) {
+              updateFavorites(restaurant!._id)
+            } else {
+              signIn()
+            }
+          }}
+        >
+          {isAuthenticated && favorite?.favorite
+            ? "Remove from Favorites"
+            : "Add to favorites"}
+        </Button>
+
+        <Button
+          onPress={() => {
+            navigation.navigate("RestaurantOrder", { slug: slug })
+          }}
+        >
+          Place an order
+        </Button>
+      </Screen>
+    </>
   )
 }
 

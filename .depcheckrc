@@ -1,3 +1,7 @@
 ignores:
   - "@types/*"
+  - "@babel/*"
+  - "babel-*"
+  - "*-babel"
   - identity-obj-proxy
+  - react-native-dotenv

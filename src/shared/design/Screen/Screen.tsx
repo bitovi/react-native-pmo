@@ -1,17 +1,24 @@
 import Box, { BoxProps } from "../Box"
-
 import { useTheme } from "../theme"
 
-export interface ScreenProps extends BoxProps {}
+export interface ScreenProps extends BoxProps {
+  noScroll?: boolean
+}
 
-const Screen: React.FC<ScreenProps> = ({ children, style, ...props }) => {
+const Screen: React.FC<ScreenProps> = ({
+  noScroll = false,
+  style,
+  children,
+  ...props
+}) => {
   const { palette } = useTheme()
 
   return (
     <Box
+      scrollable={!noScroll}
       padding="s"
       style={{
-        height: "100%",
+        minHeight: "100%",
         backgroundColor: palette.screen.soft,
       }}
       {...props}

@@ -4,28 +4,20 @@ import {
   TextStyle,
   StyleSheet,
   Pressable,
-  Text,
 } from "react-native"
 import { Theme, useTheme } from "../theme"
+import Typography from "../Typography"
 
 type Variant = "primary" | "secondary" | "outline"
 
 export interface ButtonProps extends PressableProps {
   variant?: Variant
-  margin?: keyof Theme["spacing"]
-  padding?: keyof Theme["spacing"]
-  fontSize?: TextStyle["fontSize"]
-  fontWeight?: TextStyle["fontWeight"]
   disabled?: boolean
   children: string
 }
 
 const Button: React.FC<ButtonProps> = ({
   variant = "primary",
-  margin,
-  padding,
-  fontSize = 20,
-  fontWeight = "400",
   disabled,
   children,
   ...props
@@ -35,22 +27,15 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <Pressable
+      disabled={disabled}
       style={StyleSheet.compose(styles.pressable, {
-        ...(margin ? { margin: theme.spacing[margin] } : {}),
-        ...(padding ? { padding: theme.spacing[padding] } : {}),
         opacity: disabled ? 0.5 : 1,
       })}
-      disabled={disabled}
       {...props}
     >
-      <Text
-        style={StyleSheet.compose(styles.text, {
-          fontSize,
-          fontWeight,
-        })}
-      >
+      <Typography variant="button" style={styles.text}>
         {children}
-      </Text>
+      </Typography>
     </Pressable>
   )
 }
@@ -73,7 +58,6 @@ function getStyles(
         backgroundColor: theme.palette.primary.main,
       },
       text: {
-        fontSize: 21,
         color: theme.palette.primary.contrast,
       },
     })
@@ -88,7 +72,6 @@ function getStyles(
         backgroundColor: theme.palette.secondary.main,
       },
       text: {
-        fontSize: 21,
         color: theme.palette.secondary.contrast,
       },
     })
@@ -105,7 +88,6 @@ function getStyles(
         borderColor: theme.palette.screen.contrast,
       },
       text: {
-        fontSize: 21,
         color: theme.palette.screen.contrast,
       },
     })

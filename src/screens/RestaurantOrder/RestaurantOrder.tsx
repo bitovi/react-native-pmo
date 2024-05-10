@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Alert, ScrollView } from "react-native"
+import { Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { StackScreenProps } from "@react-navigation/stack"
 
@@ -92,62 +92,51 @@ const RestaurantOrder: React.FC<RestaurantOrderProps> = ({ route }) => {
   }
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      alwaysBounceVertical={false}
-    >
-      <Screen>
-        <Card title="Lunch Menu">
-          {restaurant.menu.lunch.map(({ name, price }) => (
-            <FormSwitch
-              key={name}
-              label={`${name} ($${price})`}
-              value={name in items}
-              onChange={(value) => setItem(name, value, price)}
-            />
-          ))}
-        </Card>
-
-        <Card title="Dinner Menu">
-          {restaurant.menu.dinner.map(({ name, price }) => (
-            <FormSwitch
-              key={name}
-              label={`${name} ($${price})`}
-              value={name in items}
-              onChange={(value) => setItem(name, value, price)}
-            />
-          ))}
-        </Card>
-
-        <Card title="Order Details">
-          <FormTextField label="Name" onChange={setName} value={name} />
-          <FormTextField
-            label="Address"
-            onChange={setAddress}
-            value={address}
+    <Screen>
+      <Card title="Lunch Menu">
+        {restaurant.menu.lunch.map(({ name, price }) => (
+          <FormSwitch
+            key={name}
+            label={`${name} ($${price})`}
+            value={name in items}
+            onChange={(value) => setItem(name, value, price)}
           />
-          <FormTextField label="Phone" onChange={setPhone} value={phone} />
-        </Card>
+        ))}
+      </Card>
 
-        <Box padding="s">
-          {subtotal === 0 ? (
-            <Typography>Please choose an item.</Typography>
-          ) : (
-            <Typography>{selectedCount} items selected.</Typography>
-          )}
-        </Box>
+      <Card title="Dinner Menu">
+        {restaurant.menu.dinner.map(({ name, price }) => (
+          <FormSwitch
+            key={name}
+            label={`${name} ($${price})`}
+            value={name in items}
+            onChange={(value) => setItem(name, value, price)}
+          />
+        ))}
+      </Card>
 
-        <Box padding="s">
-          <Typography variant="heading">
-            Total: ${subtotal.toFixed(2)}
-          </Typography>
-        </Box>
+      <Card title="Order Details">
+        <FormTextField label="Name" onChange={setName} value={name} />
+        <FormTextField label="Address" onChange={setAddress} value={address} />
+        <FormTextField label="Phone" onChange={setPhone} value={phone} />
+      </Card>
 
-        <Box padding="s">
-          <Button onPress={handleSubmit}>Place My Order!</Button>
-        </Box>
-      </Screen>
-    </ScrollView>
+      <Box padding="s">
+        {subtotal === 0 ? (
+          <Typography>Please choose an item.</Typography>
+        ) : (
+          <Typography>{selectedCount} items selected.</Typography>
+        )}
+      </Box>
+
+      <Box padding="s">
+        <Typography variant="heading">Total: ${subtotal.toFixed(2)}</Typography>
+      </Box>
+
+      <Box padding="s">
+        <Button onPress={handleSubmit}>Place My Order!</Button>
+      </Box>
+    </Screen>
   )
 }
 

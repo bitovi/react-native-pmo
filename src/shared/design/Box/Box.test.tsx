@@ -7,7 +7,7 @@ import Box from "./Box"
 describe("Box component", () => {
   it("renders children components 'Hello!' without issue", () => {
     render(
-      <Box padding="s" margin="s">
+      <Box margin="s" padding="s">
         <Typography>Hello!</Typography>
       </Box>,
     )

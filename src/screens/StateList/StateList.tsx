@@ -22,10 +22,12 @@ const StateList: React.FC<StateListProps> = () => {
 
   if (error) {
     return (
-      <Box padding="s">
-        <Typography variant="heading">Error loading states: </Typography>
-        <Typography variant="body">{error.message}</Typography>
-      </Box>
+      <Screen>
+        <Box padding="s">
+          <Typography variant="heading">Error loading states: </Typography>
+          <Typography variant="body">{error.message}</Typography>
+        </Box>
+      </Screen>
     )
   }
 
@@ -34,7 +36,7 @@ const StateList: React.FC<StateListProps> = () => {
   }
 
   return (
-    <Screen>
+    <Screen noScroll>
       <FlatList
         data={states}
         renderItem={({ item: stateItem }) => (

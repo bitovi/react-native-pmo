@@ -1,22 +1,30 @@
-import { ViewProps, ViewStyle, StyleSheet, View } from "react-native"
+import {
+  ViewProps,
+  ViewStyle,
+  StyleSheet,
+  ScrollView,
+  View as StaticView,
+} from "react-native"
 import { Theme, ThemeMargin, ThemePadding, useTheme } from "../theme"
 
 export interface BoxProps extends ViewProps {
+  scrollable?: boolean
   margin?: ThemeMargin
   padding?: ThemePadding
-  fullWidth?: boolean
 }
 
 const Box: React.FC<BoxProps> = ({
+  scrollable = false,
   margin,
   padding,
-  fullWidth = false,
   style,
   children,
   ...props
 }) => {
   const theme = useTheme()
-  const styles = getStyles(theme, { margin, padding, fullWidth })
+  const styles = getStyles(theme, { margin, padding })
+
+  const View = scrollable ? ScrollView : StaticView
 
   return (
     <View style={StyleSheet.compose(styles.container, style)} {...props}>
@@ -32,11 +40,9 @@ function getStyles(
   {
     margin,
     padding,
-    fullWidth,
   }: {
     margin?: ThemeMargin
     padding?: ThemePadding
-    fullWidth: boolean
   },
 ): {
   container: ViewStyle
@@ -46,17 +52,43 @@ function getStyles(
       {
         display: "flex",
       },
-      typeof margin === "string" && { margin: theme.spacing[margin] },
-      Array.isArray(margin) && {
-        marginVertical: theme.spacing[margin[0]],
-        marginHorizontal: theme.spacing[margin[1]],
-      },
-      typeof padding === "string" && { padding: theme.spacing[padding] },
-      Array.isArray(padding) && {
-        paddingVertical: theme.spacing[padding[0]],
-        paddingHorizontal: theme.spacing[padding[1]],
-      },
-      fullWidth && { width: "100%" },
+      margin && spacingToStyles(theme, "margin", margin),
+      padding && spacingToStyles(theme, "padding", padding),
     ]),
   })
+}
+
+function spacingToStyles(
+  theme: Theme,
+  property: "margin" | "padding",
+  value: ThemeMargin | ThemePadding,
+): ViewStyle {
+  if (typeof value === "string") {
+    return {
+      [property]: theme.spacing[value],
+    }
+  }
+
+  if (value.length === 1) {
+    return {
+      [property]: theme.spacing[value[0]],
+    }
+  }
+
+  if (value.length === 2) {
+    return {
+      [`${property}Vertical`]: theme.spacing[value[0]],
+      [`${property}Horizontal`]: theme.spacing[value[1]],
+    }
+  }
+
+  if (value.length === 3) {
+    return {
+      [`${property}Top`]: theme.spacing[value[0]],
+      [`${property}Horizontal`]: theme.spacing[value[1]],
+      [`${property}Bottom`]: theme.spacing[value[2]],
+    }
+  }
+
+  throw new Error(`Invalid spacing value: ${value}`)
 }

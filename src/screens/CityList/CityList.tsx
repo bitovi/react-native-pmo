@@ -25,10 +25,12 @@ const CityList: React.FC<CityListProps> = ({ route }) => {
 
   if (error) {
     return (
-      <Box padding="s">
-        <Typography variant="heading">Error loading cities: </Typography>
-        <Typography variant="body">{error.message}</Typography>
-      </Box>
+      <Screen>
+        <Box padding="s">
+          <Typography variant="heading">Error loading cities: </Typography>
+          <Typography variant="body">{error.message}</Typography>
+        </Box>
+      </Screen>
     )
   }
 
@@ -37,7 +39,7 @@ const CityList: React.FC<CityListProps> = ({ route }) => {
   }
 
   return (
-    <Screen>
+    <Screen noScroll>
       <FlatList
         data={cities}
         renderItem={({ item: cityItem }) => (

@@ -21,7 +21,7 @@ const RestaurantHeader: React.FC<RestaurantHeaderProps> = ({ restaurant }) => {
         style={styles.heroBackground}
         source={{ uri: `${assetsUrl}/${restaurant?.images.banner}` }}
       >
-        <Box padding={["xs", "m"]} margin={["s", "none"]} style={styles.hero}>
+        <Box margin={["s", "none"]} padding={["xs", "m"]} style={styles.hero}>
           <Typography variant="heading" style={styles.heroText}>
             {restaurant?.name}
           </Typography>
@@ -52,10 +52,7 @@ function getStyles(theme: Theme): {
 } {
   return StyleSheet.create({
     heroBackground: {
-      width: "100%",
-      maxWidth: 768,
       height: 180,
-      margin: "auto",
       justifyContent: "flex-end",
       alignItems: "flex-start",
     },

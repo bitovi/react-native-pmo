@@ -29,16 +29,21 @@ export interface Theme {
     title: TextStyle
     heading: TextStyle
     body: TextStyle
+    button: TextStyle
     label: TextStyle
   }
 }
 
 export type ThemeMargin =
   | keyof Theme["spacing"]
+  | [keyof Theme["spacing"]]
   | [keyof Theme["spacing"], keyof Theme["spacing"]]
+  | [keyof Theme["spacing"], keyof Theme["spacing"], keyof Theme["spacing"]]
 export type ThemePadding =
   | keyof Theme["spacing"]
+  | [keyof Theme["spacing"]]
   | [keyof Theme["spacing"], keyof Theme["spacing"]]
+  | [keyof Theme["spacing"], keyof Theme["spacing"], keyof Theme["spacing"]]
 
 const light: Theme = {
   palette: {
@@ -80,6 +85,9 @@ const light: Theme = {
     },
     body: {
       fontWeight: "normal",
+    },
+    button: {
+      fontSize: 21,
     },
     label: {
       fontSize: 12,

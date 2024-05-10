@@ -13,7 +13,7 @@ const Card: React.FC<CardProps> = ({ title, children, ...props }) => {
   const styles = getStyles(theme)
 
   return (
-    <Box margin={["m", "none"]} style={styles.container} {...props}>
+    <Box margin="s" style={styles.container} {...props}>
       {title && (
         <Box padding="m" style={styles.title}>
           <Typography variant="title">{title}</Typography>
@@ -33,7 +33,6 @@ function getStyles(theme: Theme): {
 } {
   return StyleSheet.create({
     container: {
-      width: "100%",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.25,
 

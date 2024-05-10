@@ -1,6 +1,6 @@
 import "react-native-gesture-handler"
 
-import { SafeAreaView } from "react-native"
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
 import Icon from "react-native-vector-icons/Ionicons"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
@@ -21,7 +21,7 @@ const AppNavigator: React.FC = () => {
 
   return (
     <Tabs.Navigator
-      initialRouteName="RestaurantsStack"
+      initialRouteName="Restaurants"
       screenOptions={({ route }) => ({
         headerStyle: {
           backgroundColor: theme.palette.screen.main,
@@ -64,18 +64,20 @@ const AppNavigator: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <SafeAreaView style={{ height: "100%", width: "100%" }}>
-      <ThemeProvider>
-        <AuthProvider>
-          <DataMigration>
-            <NavigationContainer>
-              <AppNavigator />
-            </NavigationContainer>
-            <FavoritesSync />
-          </DataMigration>
-        </AuthProvider>
-      </ThemeProvider>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ height: "100%", width: "100%" }}>
+        <ThemeProvider>
+          <AuthProvider>
+            <DataMigration>
+              <NavigationContainer>
+                <AppNavigator />
+              </NavigationContainer>
+              <FavoritesSync />
+            </DataMigration>
+          </AuthProvider>
+        </ThemeProvider>
+      </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
 

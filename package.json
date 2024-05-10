@@ -6,8 +6,8 @@
     "typecheck": "tsc --noEmit",
     "eslint": "eslint *.ts *.cjs src",
     "eslint:fix": "eslint --fix *.ts *.cjs src",
-    "prettier": "prettier --check *.ts *.cjs src",
-    "prettier:fix": "prettier --write *.ts *.cjs src",
+    "prettier": "prettier --check *.ts *.cjs *.json src",
+    "prettier:fix": "prettier --write *.ts *.cjs *.json src",
     "depcheck": "depcheck .",
     "test": "jest --watch",
     "test:ci": "jest",
@@ -18,7 +18,7 @@
     "api": "npm run linkLocalhost:android && place-my-order-api --port 7070",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start --reset-cache"
+    "start": "react-native start --reset-cache --experimental-debugger"
   },
   "engines": {
     "node": ">=20"
@@ -34,6 +34,8 @@
     "react-native": "0.74.1",
     "react-native-gesture-handler": "^2.16.2",
     "react-native-maps": "^1.15.1",
+    "react-native-safe-area-context": "^4.10.1",
+    "react-native-screens": "^3.31.1",
     "react-native-vector-icons": "^10.1.0"
   },
   "devDependencies": {
@@ -44,7 +46,6 @@
     "@react-native/babel-preset": "0.74.83",
     "@react-native/metro-config": "0.74.83",
     "@react-native/typescript-config": "0.74.83",
-    "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.5.0",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.6",
@@ -58,7 +59,8 @@
     "place-my-order-api": "^1.7.0",
     "prettier": "^3.2.5",
     "react-devtools": "^5.2.0",
+    "react-native-dotenv": "^3.4.11",
     "react-test-renderer": "18.2.0",
-    "typescript": "5.3"
+    "typescript": "^5.3.0"
   }
 }
