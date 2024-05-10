@@ -1,26 +1,36 @@
-import type { FC } from "react"
-import type { StackScreenProps } from "@react-navigation/stack"
-import type { RestaurantsStackParamList } from "../../App"
-
 import { useEffect } from "react"
 import { useNavigation } from "@react-navigation/native"
+import { StackScreenProps } from "@react-navigation/stack"
 
-import RestaurantHeader from "../../components/RestaurantHeader"
-import Loading from "../../components/Loading"
-import Button from "../../design/Button"
-import Typography from "../../design/Typography"
-import { useRestaurant } from "../../services/pmo/restaurant"
-import { useFavorites } from "../../services/pmo/favorite"
+import Loading from "../../shared/components/Loading"
+import RestaurantHeader from "../../shared/components/RestaurantHeader"
+import Button from "../../shared/design/Button"
+import Screen from "../../shared/design/Screen"
+import Typography from "../../shared/design/Typography"
 import {
   useAuthenticated,
   useUser,
   useAuthentication,
-} from "../../services/auth"
-import Screen from "../../design/Screen"
+} from "../../shared/services/auth"
+import { useFavorites } from "../../shared/services/pmo/favorite"
+import {
+  City,
+  State,
+  useRestaurant,
+} from "../../shared/services/pmo/restaurant"
 
-type Props = StackScreenProps<RestaurantsStackParamList, "RestaurantDetails">
+import { RestaurantsStackParamList } from "../../App"
 
-const RestaurantDetails: FC<Props> = ({ route }) => {
+export interface RestaurantDetailsParams {
+  state: State
+  city: City
+  slug: string
+}
+
+export interface RestaurantDetailsProps
+  extends StackScreenProps<RestaurantsStackParamList, "RestaurantDetails"> {}
+
+const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ route }) => {
   const { slug } = route.params
   const navigation = useNavigation()
   const { data: restaurant, error, isPending } = useRestaurant(slug)
@@ -50,30 +60,33 @@ const RestaurantDetails: FC<Props> = ({ route }) => {
   }
 
   return (
-    <Screen>
+    <>
       <RestaurantHeader restaurant={restaurant} />
-      <Button
-        onPress={() => {
-          if (isAuthenticated) {
-            updateFavorites(restaurant!._id)
-          } else {
-            signIn()
-          }
-        }}
-      >
-        {isAuthenticated && favorite?.favorite
-          ? "Remove from Favorites"
-          : "Add to favorites"}
-      </Button>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("OrderCreate", { slug: slug })
-        }}
-      >
-        Place an order
-      </Button>
-    </Screen>
+      <Screen>
+        <Button
+          onPress={() => {
+            if (isAuthenticated) {
+              updateFavorites(restaurant!._id)
+            } else {
+              signIn()
+            }
+          }}
+        >
+          {isAuthenticated && favorite?.favorite
+            ? "Remove from Favorites"
+            : "Add to favorites"}
+        </Button>
+
+        <Button
+          onPress={() => {
+            navigation.navigate("RestaurantOrder", { slug: slug })
+          }}
+        >
+          Place an order
+        </Button>
+      </Screen>
+    </>
   )
 }
 

@@ -1,17 +1,15 @@
 import { render, screen } from "@testing-library/react-native"
 
-import * as restaurantHooks from "../../services/pmo/restaurant/hooks"
+import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
 
 import RestaurantOrder from "./RestaurantOrder"
-import MockApp from "../../MockApp"
+import MockApp from "../../App/MockApp"
 
-jest.mock("@react-native-async-storage/async-storage", () =>
-  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
-)
+const useRestaurant: jest.SpyInstance<
+  ReturnType<typeof restaurantHooks.useRestaurant>
+> = jest.spyOn(restaurantHooks, "useRestaurant")
 
 describe("RestaurantOrder component", () => {
-  // Mock the hooks and components used in RestaurantOrder
-
   const mockRestaurantResponse = {
     data: {
       name: "Bagel Restaurant",
@@ -52,14 +50,6 @@ describe("RestaurantOrder component", () => {
     },
   }
 
-  let useRestaurant: jest.SpyInstance<
-    ReturnType<typeof restaurantHooks.useRestaurant>
-  >
-  beforeEach(() => {
-    jest.resetAllMocks()
-    useRestaurant = jest.spyOn(restaurantHooks, "useRestaurant")
-  })
-
   it("renders restaurant order form", () => {
     useRestaurant.mockReturnValue({
       ...mockRestaurantResponse,
@@ -73,6 +63,7 @@ describe("RestaurantOrder component", () => {
         params={{ restaurantId: "bagel-restaurant" }}
       />,
     )
+
     expect(screen.getByText(/Lunch Menu/i)).toBeOnTheScreen()
     expect(
       screen.getByText(mockRestaurantResponse.data.menu.lunch[0].name, {
@@ -96,8 +87,10 @@ describe("RestaurantOrder component", () => {
         params={{ restaurantId: "bagel-restaurant" }}
       />,
     )
+
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
+
   it("renders error restaurant", () => {
     useRestaurant.mockReturnValue({
       data: null,
