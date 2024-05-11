@@ -15,6 +15,6 @@ describe("Settings component", () => {
       </AuthProvider>,
     )
 
-    expect(screen.getByText(/dark mode/i)).toBeOnTheScreen()
+    expect(screen.getByText(/Mock Sign in with Google/i)).toBeOnTheScreen()
   })
 })
