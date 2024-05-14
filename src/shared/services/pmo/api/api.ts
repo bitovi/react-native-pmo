@@ -3,6 +3,8 @@ import { getData, storeData } from "../../storage"
 const ONE_MINUTE = 60 * 1000
 const baseUrl = process.env.PMO_API
 
+type QueryParams = Partial<Record<string, string | null | undefined>>
+
 export interface LocalStorageApiRequest<T> {
   data: T
   dateTime: number
@@ -12,7 +14,7 @@ export const keyPrefix = "apiRequest-"
 
 export async function apiRequest<
   Data = never,
-  Params = unknown,
+  Params extends QueryParams = QueryParams,
   Body = unknown,
 >({
   method,
@@ -26,8 +28,7 @@ export async function apiRequest<
   body?: Body
 }): Promise<{ data: Data | null; error: Error | null }> {
   try {
-    const query = params ? stringifyQuery(params) : ""
-    const requestUrl = `${baseUrl}${path}?${query}`
+    const requestUrl = `${baseUrl}${path}${stringifyQuery(params)}`
 
     try {
       const cachedResponse = await getData<LocalStorageApiRequest<Data>>(
@@ -80,9 +81,7 @@ export async function apiRequest<
   }
 }
 
-export function stringifyQuery(
-  input: Record<string, string | null | undefined>,
-): string {
+export function stringifyQuery(input: QueryParams = {}): string {
   const output: string[] = []
 
   for (const [key, value] of Object.entries(input)) {
@@ -91,5 +90,5 @@ export function stringifyQuery(
     }
   }
 
-  return output.join("&")
+  return output ? `?${output.join("&")}` : ""
 }

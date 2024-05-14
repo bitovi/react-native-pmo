@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react-native"
 
+import MockApp from "../../App/MockApp"
 import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
 
 import RestaurantList from "./RestaurantList"
-import MockApp from "../../App/MockApp"
 
 const useRestaurants: jest.SpyInstance<
   ReturnType<typeof restaurantHooks.useRestaurants>
