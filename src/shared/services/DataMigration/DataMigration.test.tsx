@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react-native"
-import DataMigration from "./DataMigration"
+
 import Typography from "../../design/Typography"
 import * as storage from "../storage/storage"
+
+import DataMigration from "./DataMigration"
 
 const mockStorageGetData: jest.SpyInstance<ReturnType<typeof storage.getData>> =
   jest.spyOn(storage, "getData")

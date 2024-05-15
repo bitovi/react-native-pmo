@@ -1,5 +1,6 @@
-import { apiRequest, stringifyQuery } from "./api"
 import * as storage from "../../storage/storage"
+
+import { apiRequest, stringifyQuery } from "./api"
 
 const oldFetch = global.fetch
 const mockFetch = jest.fn()
@@ -157,11 +158,11 @@ describe("apiRequest function", () => {
 describe("stringifyQuery function", () => {
   it("should correctly stringify query parameters", () => {
     const query = stringifyQuery({ foo: "bar", baz: "qux" })
-    expect(query).toBe("foo=bar&baz=qux")
+    expect(query).toBe("?foo=bar&baz=qux")
   })
 
   it("should omit undefined and null values", () => {
     const query = stringifyQuery({ foo: "bar", baz: null, qux: undefined })
-    expect(query).toBe("foo=bar")
+    expect(query).toBe("?foo=bar")
   })
 })

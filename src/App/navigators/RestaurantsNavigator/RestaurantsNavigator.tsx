@@ -1,19 +1,18 @@
+import { createStackNavigator } from "@react-navigation/stack"
 import { Pressable } from "react-native"
 import Icon from "react-native-vector-icons/Ionicons"
-import { createStackNavigator } from "@react-navigation/stack"
 
-import StateList, { StateListParams } from "../../../screens/StateList"
 import CityList, { CityListParams } from "../../../screens/CityList"
-import RestaurantList, {
-  RestaurantListParams,
-} from "../../../screens/RestaurantList"
 import RestaurantDetails, {
   RestaurantDetailsParams,
 } from "../../../screens/RestaurantDetails"
+import RestaurantList, {
+  RestaurantListParams,
+} from "../../../screens/RestaurantList"
 import RestaurantOrder, {
   RestaurantOrderParams,
 } from "../../../screens/RestaurantOrder"
-
+import StateList, { StateListParams } from "../../../screens/StateList"
 import Box from "../../../shared/design/Box"
 import Typography from "../../../shared/design/Typography"
 

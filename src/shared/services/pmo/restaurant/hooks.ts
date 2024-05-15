@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
+
 import { apiRequest } from "../api"
+
 import { City, Restaurant, State } from "./interfaces"
 
 interface CitiesResponse {

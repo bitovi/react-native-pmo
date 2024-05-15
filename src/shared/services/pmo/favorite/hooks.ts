@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { apiRequest } from "../api"
+
 import { storeData, getData } from "../../storage/storage"
+import { apiRequest } from "../api"
 
 interface Favorite {
   userId: string
@@ -136,8 +137,8 @@ export const useFavorites = (
         method: "GET",
         path: "/favorites",
         params: {
-          userId: userId,
-          "datetimeUpdated[$gt]": localFavorites?.lastSynced,
+          userId,
+          "datetimeUpdated[$gt]": localFavorites?.lastSynced.toISOString(),
         },
       })
 

@@ -1,8 +1,9 @@
-import { Suspense, lazy, useState } from "react"
-import { FlatList } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { StackScreenProps } from "@react-navigation/stack"
+import { Suspense, lazy, useState } from "react"
+import { FlatList } from "react-native"
 
+import { RestaurantsStackParamList } from "../../App"
 import Loading from "../../shared/components/Loading"
 import Tabs from "../../shared/components/Tabs"
 import Box from "../../shared/design/Box"
@@ -14,8 +15,6 @@ import {
   State,
   useRestaurants,
 } from "../../shared/services/pmo/restaurant"
-
-import { RestaurantsStackParamList } from "../../App"
 
 const Map = lazy(() => import("./components/Map"))
 

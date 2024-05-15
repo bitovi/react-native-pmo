@@ -2,8 +2,8 @@ import { useId } from "react"
 import { TextInput } from "react-native"
 
 import Box from "../../design/Box"
-import Typography from "../../design/Typography"
 import { useTheme } from "../../design/theme"
+import Typography from "../../design/Typography"
 
 export interface FormTextFieldProps {
   label: string

@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
 
@@ -32,7 +32,7 @@ jobs:
         env:
           EXPO_PUBLIC_PMO_API: ${{ vars.PMO_API }}
           EXPO_PUBLIC_PMO_ASSETS: ${{ vars.PMO_ASSETS }}
-        run: npm run test:ci
+        run: npm run test
 
       # - name: Build
       #   env:

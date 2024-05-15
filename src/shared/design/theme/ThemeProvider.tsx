@@ -1,7 +1,7 @@
-import themes, { Theme } from "./theme"
-
 import { useState, createContext, useContext, useMemo } from "react"
 import { Appearance } from "react-native"
+
+import themes, { Theme } from "./theme"
 
 type Mode = keyof typeof themes
 

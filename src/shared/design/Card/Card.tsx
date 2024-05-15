@@ -1,7 +1,7 @@
 import { ViewStyle, StyleSheet } from "react-native"
-import { Theme, useTheme } from "../theme"
-import Box, { BoxProps } from "../Box"
 
+import Box, { BoxProps } from "../Box"
+import { Theme, useTheme } from "../theme"
 import Typography from "../Typography"
 
 export interface CardProps extends BoxProps {

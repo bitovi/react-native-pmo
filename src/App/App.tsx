@@ -1,16 +1,15 @@
 import "react-native-gesture-handler"
 
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
-import Icon from "react-native-vector-icons/Ionicons"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
+import Icon from "react-native-vector-icons/Ionicons"
 
+import Settings from "../screens/Settings"
 import ThemeProvider, { useTheme } from "../shared/design/theme"
 import AuthProvider from "../shared/services/auth"
 import DataMigration from "../shared/services/DataMigration"
 import FavoritesSync from "../shared/services/pmo/favorite"
-
-import Settings from "../screens/Settings"
 
 import RestaurantsNavigator from "./navigators/RestaurantsNavigator"
 

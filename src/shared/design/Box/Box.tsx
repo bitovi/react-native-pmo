@@ -5,6 +5,7 @@ import {
   ScrollView,
   View as StaticView,
 } from "react-native"
+
 import { Theme, ThemeMargin, ThemePadding, useTheme } from "../theme"
 
 export interface BoxProps extends ViewProps {
