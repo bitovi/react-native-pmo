@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { useId } from "react"
 import { Switch } from "react-native"
 
 import Box from "../../design/Box"
@@ -6,13 +6,20 @@ import { useTheme } from "../../design/theme"
 import Typography from "../../design/Typography"
 
 export interface FormSwitchProps {
-  label: ReactNode
+  label: string
+  hint?: string
   value: boolean
   onChange: (value: boolean) => void
 }
 
-const FormSwitch: React.FC<FormSwitchProps> = ({ label, value, onChange }) => {
+const FormSwitch: React.FC<FormSwitchProps> = ({
+  label,
+  hint,
+  value,
+  onChange,
+}) => {
   const { palette } = useTheme()
+  const id = useId()
 
   return (
     <Box
@@ -24,10 +31,15 @@ const FormSwitch: React.FC<FormSwitchProps> = ({ label, value, onChange }) => {
         marginVertical: 8,
       }}
     >
-      <Typography variant="label">{label}</Typography>
+      <Typography nativeID={id} variant="label">
+        {label}
+      </Typography>
       <Switch
-        value={value}
+        accessibilityLabel={label}
+        accessibilityLabelledBy={id}
+        accessibilityHint={hint}
         onValueChange={onChange}
+        value={value}
         thumbColor={palette.primary.contrast}
         trackColor={{
           true: palette.primary.strong,

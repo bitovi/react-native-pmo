@@ -6,21 +6,23 @@ import { useTheme } from "../../design/theme"
 import Typography from "../../design/Typography"
 
 export interface FormTextFieldProps {
-  label: string
-  placeholder?: string
   type?: "text"
+  label: string
+  hint?: string
+  placeholder?: string
   value: string
   onChange?: (value: string) => void
 }
 
 const FormTextField: React.FC<FormTextFieldProps> = ({
   label,
+  hint,
   placeholder,
   value,
   onChange,
 }) => {
-  const id = useId()
   const theme = useTheme()
+  const id = useId()
 
   return (
     <Box style={{ marginVertical: 8 }}>
@@ -28,8 +30,9 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
         {label}
       </Typography>
       <TextInput
-        accessibilityLabel="input"
+        accessibilityLabel={label}
         accessibilityLabelledBy={id}
+        accessibilityHint={hint}
         onChangeText={onChange}
         value={value}
         placeholder={placeholder}
