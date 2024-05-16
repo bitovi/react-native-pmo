@@ -18,7 +18,7 @@ const FormSwitch: React.FC<FormSwitchProps> = ({
   value,
   onChange,
 }) => {
-  const { palette } = useTheme()
+  const theme = useTheme()
   const id = useId()
 
   return (
@@ -40,10 +40,10 @@ const FormSwitch: React.FC<FormSwitchProps> = ({
         accessibilityHint={hint}
         onValueChange={onChange}
         value={value}
-        thumbColor={palette.primary.contrast}
+        thumbColor={theme.palette.primary.contrast}
         trackColor={{
-          true: palette.primary.strong,
-          false: palette.screen.soft,
+          true: theme.palette.primary.strong,
+          false: theme.palette.screen.soft,
         }}
       ></Switch>
     </Box>

@@ -11,7 +11,7 @@ const Screen: React.FC<ScreenProps> = ({
   children,
   ...props
 }) => {
-  const { palette } = useTheme()
+  const theme = useTheme()
 
   return (
     <Box
@@ -19,7 +19,7 @@ const Screen: React.FC<ScreenProps> = ({
       padding="s"
       style={{
         minHeight: "100%",
-        backgroundColor: palette.screen.soft,
+        backgroundColor: theme.palette.screen.soft,
       }}
       {...props}
     >
