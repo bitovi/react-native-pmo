@@ -132,7 +132,7 @@ describe("RestaurantList component", () => {
 
     render(<MockApp component={RestaurantList} params={params} />)
 
-    expect(screen.getByText(/Error loading restaurants:/)).toBeOnTheScreen()
+    expect(screen.getByText(/Error loading restaurants/)).toBeOnTheScreen()
     expect(screen.getByText(/This is the error/)).toBeOnTheScreen()
   })
 })

@@ -18,7 +18,7 @@ const Screen: React.FC<ScreenProps> = ({
       scrollable={!noScroll}
       padding="s"
       style={{
-        minHeight: "100%",
+        flex: 1,
         backgroundColor: theme.palette.screen.soft,
       }}
       {...props}
