@@ -1,13 +1,11 @@
 import { useNavigation } from "@react-navigation/native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { Suspense, lazy, useState } from "react"
-import { FlatList } from "react-native"
 
 import { RestaurantsStackParamList } from "../../App"
 import Loading from "../../shared/components/Loading"
 import Tabs from "../../shared/components/Tabs"
 import Box from "../../shared/design/Box"
-import Button from "../../shared/design/Button"
 import Screen from "../../shared/design/Screen"
 import Typography from "../../shared/design/Typography"
 import {
@@ -15,6 +13,8 @@ import {
   State,
   useRestaurants,
 } from "../../shared/services/pmo/restaurant"
+
+import List from "./components/List"
 
 const Map = lazy(() => import("./components/Map"))
 
@@ -42,17 +42,17 @@ const RestaurantList: React.FC<RestaurantListProps> = ({ route }) => {
     })
   }
 
-  if (error) {
-    return (
-      <Box padding="s">
-        <Typography variant="heading">Error loading restaurants: </Typography>
-        <Typography variant="body">{error.message}</Typography>
-      </Box>
-    )
-  }
-
   if (isPending) {
     return <Loading />
+  }
+
+  if (error || !data) {
+    return (
+      <Box padding="s">
+        <Typography variant="heading">Error loading restaurants</Typography>
+        {error && <Typography variant="body">{error.message}</Typography>}
+      </Box>
+    )
   }
 
   return (
@@ -74,21 +74,11 @@ const RestaurantList: React.FC<RestaurantListProps> = ({ route }) => {
 
       <Screen noScroll>
         {tab === "list" && (
-          <Box padding="s">
-            <FlatList
-              data={data}
-              renderItem={({ item: restaurant }) => (
-                <Button onPress={() => navigateToDetails(restaurant.slug)}>
-                  {restaurant.name}
-                </Button>
-              )}
-              keyExtractor={(item) => item._id}
-            />
-          </Box>
+          <List data={data} navigateToRestaurant={navigateToDetails} />
         )}
         {tab === "map" && data && (
           <Suspense fallback={<Loading />}>
-            <Map data={data} navigateTo={navigateToDetails} />
+            <Map data={data} navigateToRestaurant={navigateToDetails} />
           </Suspense>
         )}
       </Screen>

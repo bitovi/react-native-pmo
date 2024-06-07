@@ -11,15 +11,15 @@ const Screen: React.FC<ScreenProps> = ({
   children,
   ...props
 }) => {
-  const { palette } = useTheme()
+  const theme = useTheme()
 
   return (
     <Box
       scrollable={!noScroll}
       padding="s"
       style={{
-        minHeight: "100%",
-        backgroundColor: palette.screen.soft,
+        flex: 1,
+        backgroundColor: theme.palette.screen.soft,
       }}
       {...props}
     >

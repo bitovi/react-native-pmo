@@ -4,10 +4,10 @@ import { Restaurant } from "../../../../shared/services/pmo/restaurant"
 
 export interface MapProps {
   data: Restaurant[]
-  navigateTo: (slug: string) => void
+  navigateToRestaurant: (slug: string) => void
 }
 
-const Map: React.FC<MapProps> = ({ data, navigateTo }) => {
+const Map: React.FC<MapProps> = ({ data, navigateToRestaurant }) => {
   return (
     <MapView
       style={{ minHeight: "100%" }}
@@ -19,13 +19,13 @@ const Map: React.FC<MapProps> = ({ data, navigateTo }) => {
       }}
       loadingEnabled
     >
-      {data?.map((restaurant, index) => (
+      {data.map((restaurant, index) => (
         <Marker
           key={index}
           coordinate={restaurant.coordinate}
           title={restaurant.name}
           description={restaurant.address?.street}
-          onCalloutPress={() => navigateTo(restaurant.slug)}
+          onCalloutPress={() => navigateToRestaurant(restaurant.slug)}
         />
       ))}
     </MapView>

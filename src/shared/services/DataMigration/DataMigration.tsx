@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 import Loading from "../../components/Loading"
 import { LocalStorageApiRequest, keyPrefix } from "../pmo/api"
@@ -9,7 +9,9 @@ interface LocalStorageApiRequestV1 {
   dateTime: Date
 }
 
-const DataMigration: React.FC<{ children: ReactNode }> = ({ children }) => {
+const DataMigration: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [isDone, setMigrationDone] = useState<boolean>(false)
 
   useEffect(() => {
