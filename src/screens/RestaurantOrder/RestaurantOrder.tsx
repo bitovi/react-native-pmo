@@ -3,7 +3,7 @@ import { StackScreenProps } from "@react-navigation/stack"
 import { useEffect, useState } from "react"
 import { Alert } from "react-native"
 
-import { RestaurantsStackParamList } from "../../App"
+import { RestaurantsStackParamList } from "../../OldApp"
 import FormSwitch from "../../shared/components/FormSwitch"
 import FormTextField from "../../shared/components/FormTextField"
 import Loading from "../../shared/components/Loading"

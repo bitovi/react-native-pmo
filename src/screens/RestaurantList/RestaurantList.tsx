@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { Suspense, lazy, useState } from "react"
 
-import { RestaurantsStackParamList } from "../../App"
+import { RestaurantsStackParamList } from "../../OldApp"
 import Loading from "../../shared/components/Loading"
 import Tabs from "../../shared/components/Tabs"
 import Box from "../../shared/design/Box"

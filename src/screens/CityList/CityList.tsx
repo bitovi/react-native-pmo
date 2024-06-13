@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { FlatList } from "react-native"
 
-import { RestaurantsStackParamList } from "../../App"
+import { RestaurantsStackParamList } from "../../OldApp"
 import Loading from "../../shared/components/Loading"
 import Box from "../../shared/design/Box"
 import Button from "../../shared/design/Button"
