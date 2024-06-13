@@ -34,7 +34,17 @@ jobs:
           EXPO_PUBLIC_PMO_ASSETS: ${{ vars.PMO_ASSETS }}
         run: npm run test
 
-      # - name: Build
+      # - name: Build Android
       #   env:
-      #     PUBLIC_PMO_API: ${{ vars.PMO_API }}
-      #   run: npm run build
+      #     EXPO_PUBLIC_PMO_API: ${{ vars.PMO_API }}
+      #     EXPO_PUBLIC_PMO_ASSETS: ${{ vars.PMO_ASSETS }}
+      #     EXPO_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      #     EXPO_PUBLIC_GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+      #   run: npm run android:build
+      # - name: Build iOS
+      #   env:
+      #     EXPO_PUBLIC_PMO_API: ${{ vars.PMO_API }}
+      #     EXPO_PUBLIC_PMO_ASSETS: ${{ vars.PMO_ASSETS }}
+      #     EXPO_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      #     EXPO_PUBLIC_GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+      #   run: npm run ios:build

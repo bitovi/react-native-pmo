@@ -1,5 +1,5 @@
 module.exports = {
-  preset: "react-native",
+  preset: "jest-expo",
   clearMocks: true,
   setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
   transformIgnorePatterns: [

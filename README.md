@@ -175,7 +175,7 @@ npm run android
 
 You can also use `npm run start` and then press `a`, `i`, or `w` to run Android, iOS, or Web. The advantage of this method is you can multiple platforms from the same terminal by pressing multiple letters.
 
-*Note:*
+_Note:_
 
 - When running iOS, it just runs.
 - When running Web, it just runs.
@@ -184,15 +184,15 @@ You can also use `npm run start` and then press `a`, `i`, or `w` to run Android,
 ### Debugging with React DevTools
 
 You can run React Devtools with `npm run react-devtools`. This will start the DevTools up which will be ready to open with Metro's in-app dev menu. In running Metro app make sure to hit press 'd' to open the dev menu in React DevTools.
-Alternatively, if you start up the Emulator after React DevTools is running it'll automatically watch the emulator. If for some reason it doesn't watch it, press 'd' on the terminal that opens for the Metro Dev server. 
+Alternatively, if you start up the Emulator after React DevTools is running it'll automatically watch the emulator. If for some reason it doesn't watch it, press 'd' on the terminal that opens for the Metro Dev server.
 
 While using the emulator if you wish to use the element inspector, run the `adb shell input keyevent 82` in the terminal.
 
 ### Running the local place-my-order-api server for the android emulator
 
 By default, the Android emulator won't be able to access your localhost server.
-In order to connect it to the emulator run the `adb reverse tcp:7070 tcp:7070` command. 
-Make sure if you're running the place-my-order-api on a different port to replace the `7070` with `port` 
+In order to connect it to the emulator run the `adb reverse tcp:7070 tcp:7070` command.
+Make sure if you're running the place-my-order-api on a different port to replace the `7070` with `port`
 e.g. if you're running on port 3030, run `adb reverse tcp:3030 tcp:3030`
 
 ### Cleaning build cache
@@ -202,10 +202,9 @@ To amend this, shut off the emulator and use the `npm run clean` command. After 
 
 ### Common Emulator Issues
 
-When using the `npm run android` command, if an existing instance of the emulator is running it will add a message that says so. Be sure the terminal window that was hosting the React Native dev server isn't still on. 
+When using the `npm run android` command, if an existing instance of the emulator is running it will add a message that says so. Be sure the terminal window that was hosting the React Native dev server isn't still on.
 
 When turning off the emulator, use `Ctrl+C` to stop the server from running before closing the terminal window. If you're struggling to run the emulator because there is another instance running, there is a chance you may have closed the terminal before stopping the server. In this case, you may have to use Task Manager or Activity Monitor to close the rogue instance of the server. Finally, if none of the proposed solutions work, just try restarting your work system.
-
 
 ## Links to documentation
 

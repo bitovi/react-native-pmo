@@ -5,7 +5,7 @@ import { Theme, useTheme } from "../../design/theme"
 import Typography from "../../design/Typography"
 import { Restaurant } from "../../services/pmo/restaurant"
 
-const assetsUrl = process.env.PMO_ASSETS
+const assetsUrl = process.env.EXPO_PUBLIC_PMO_ASSETS
 
 export interface RestaurantHeaderProps {
   restaurant: Restaurant | null

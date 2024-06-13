@@ -1,7 +1,14 @@
 ignores:
   - "@types/*"
   - "@babel/*"
-  - "babel-*"
-  - "*-babel"
+  - expo-system-ui
   - identity-obj-proxy
-  - react-native-dotenv
+  - react-dom
+  - react-native-gesture-handler
+  - react-native-web
+
+  # temp
+  - "@expo/vector-icons"
+  - expo-font
+  - expo-splash-screen
+  - expo-web-browser

@@ -3,6 +3,7 @@ module.exports = {
   extends: "@bitovi/eslint-config/react",
   settings: {
     "import/ignore": ["node_modules/react-native/index\\.js$"],
+    "import/internal-regex": "^@shared/",
   },
   rules: {
     "jest/prefer-hooks-in-order": "off",

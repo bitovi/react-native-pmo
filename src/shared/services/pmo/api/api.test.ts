@@ -2,6 +2,8 @@ import * as storage from "../../storage/storage"
 
 import { apiRequest, stringifyQuery } from "./api"
 
+const baseUrl = process.env.EXPO_PUBLIC_PMO_API
+
 const oldFetch = global.fetch
 const mockFetch = jest.fn()
 beforeAll(() => {
@@ -30,7 +32,7 @@ describe("apiRequest function", () => {
     })
 
     expect(response).toEqual({ data: { message: "success" }, error: null })
-    expect(mockFetch).toHaveBeenCalledWith(`${process.env.PMO_API}/test?`, {
+    expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}/test?`, {
       method: "GET",
       body: undefined,
       headers: {
@@ -86,7 +88,7 @@ describe("apiRequest function", () => {
       })
 
       expect(response).toEqual({ data: { message: "success" }, error: null })
-      expect(mockFetch).toHaveBeenCalledWith(`${process.env.PMO_API}/test?`, {
+      expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}/test?`, {
         method: "GET",
         body: undefined,
         headers: {
@@ -144,7 +146,7 @@ describe("apiRequest function", () => {
       })
 
       expect(response).toEqual({ data: { message: "success" }, error: null })
-      expect(mockFetch).toHaveBeenCalledWith(`${process.env.PMO_API}/test?`, {
+      expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}/test?`, {
         method: "GET",
         body: undefined,
         headers: {

@@ -1,7 +1,7 @@
 import { getData, storeData } from "../../storage"
 
 const ONE_MINUTE = 60 * 1000
-const baseUrl = process.env.PMO_API
+const baseUrl = process.env.EXPO_PUBLIC_PMO_API
 
 type QueryParams = Partial<Record<string, string | null | undefined>>
 
