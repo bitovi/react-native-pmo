@@ -4,15 +4,12 @@ import Box from "../../../../shared/design/Box"
 import Button from "../../../../shared/design/Button"
 import { Restaurant } from "../../../../shared/services/pmo/restaurant"
 
-export interface RestaurantListProps {
+export interface ListProps {
   data: Restaurant[]
   navigateToRestaurant: (slug: string) => void
 }
 
-const RestaurantList: React.FC<RestaurantListProps> = ({
-  data,
-  navigateToRestaurant,
-}) => {
+const List: React.FC<ListProps> = ({ data, navigateToRestaurant }) => {
   return (
     <Box padding="s">
       <FlatList
@@ -28,4 +25,4 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
   )
 }
 
-export default RestaurantList
+export default List

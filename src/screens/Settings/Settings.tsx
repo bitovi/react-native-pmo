@@ -1,4 +1,4 @@
-import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
+// import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
 
 import FormSwitch from "../../shared/components/FormSwitch"
 import Button from "../../shared/design/Button"
@@ -22,7 +22,8 @@ const Settings: React.FC = () => {
             <Button onPress={signOut}>Sign Out</Button>
           </>
         ) : (
-          <GoogleSigninButton onPress={signIn} style={{ width: "100%" }} />
+          <Button onPress={signIn}>Sign In</Button>
+          // <GoogleSigninButton onPress={signIn} style={{ width: "100%" }} />
         )}
       </Card>
 

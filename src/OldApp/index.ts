@@ -1,3 +1,6 @@
 export { default } from "./App"
 
-export type { RestaurantsStackParamList } from "./navigators/RestaurantsNavigator"
+export type {
+  RestaurantsStackParamList,
+  StackScreenProps,
+} from "./navigators/RestaurantsNavigator"

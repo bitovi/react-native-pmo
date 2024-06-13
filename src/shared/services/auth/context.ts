@@ -1,5 +1,18 @@
-import { User as UserInfo } from "@react-native-google-signin/google-signin"
+// import { User as UserInfo } from "@react-native-google-signin/google-signin"
 import { createContext, useContext } from "react"
+
+export interface UserInfo {
+  user: {
+    id: string
+    name: string | null
+    email: string
+    photo: string | null
+    familyName: string | null
+    givenName: string | null
+  }
+  scopes?: string[]
+  idToken: string | null
+}
 
 export interface AuthContext {
   /** Initiate the Google Auth flow. Return boolean success. */

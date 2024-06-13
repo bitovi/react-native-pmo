@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native"
-import { StackScreenProps } from "@react-navigation/stack"
+// import { StackScreenProps } from "@react-navigation/stack"
 import { useEffect, useState } from "react"
 import { Alert } from "react-native"
 
-import { RestaurantsStackParamList } from "../../OldApp"
+import { RestaurantsStackParamList, StackScreenProps } from "../../OldApp"
 import FormSwitch from "../../shared/components/FormSwitch"
 import FormTextField from "../../shared/components/FormTextField"
 import Loading from "../../shared/components/Loading"
