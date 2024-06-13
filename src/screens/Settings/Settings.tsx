@@ -22,7 +22,7 @@ const Settings: React.FC = () => {
             <Button onPress={signOut}>Sign Out</Button>
           </>
         ) : (
-          <Button onPress={signIn}>Sign In</Button>
+          <Button onPress={signIn}>Mock Sign in with Google</Button>
           // <GoogleSigninButton onPress={signIn} style={{ width: "100%" }} />
         )}
       </Card>

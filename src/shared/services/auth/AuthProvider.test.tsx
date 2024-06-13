@@ -34,7 +34,9 @@ describe("AuthProvider", () => {
         <Text>{user?.givenName}</Text>
         <Text>{user?.familyName}</Text>
         {isAuthenticated && <Button onPress={signOut}>Sign Out</Button>}
-        {isAuthenticated === false && <Button onPress={signIn}>Sign In</Button>}
+        {isAuthenticated === false && (
+          <Button onPress={signIn}>Mock Sign in with Google</Button>
+        )}
         {/* {isAuthenticated === false && <GoogleSigninButton onPress={signIn} />} */}
       </View>
     )

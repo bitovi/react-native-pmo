@@ -36,7 +36,7 @@ const RestaurantOrder: React.FC<RestaurantOrderProps> = ({ route }) => {
 
   useEffect(() => {
     if (restaurant) {
-      navigation.setOptions({ title: `Order from ${restaurant.name}` })
+      // navigation.setOptions({ title: `Order from ${restaurant.name}` })
     }
   }, [restaurant, navigation])
 

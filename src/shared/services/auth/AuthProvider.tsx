@@ -20,7 +20,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       const userInfo = {
         user: {
-          id: "id",
+          id: "mockId",
           name: "name",
           email: "email",
           photo: "photo",
@@ -55,7 +55,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     async function run() {
       const userInfo = {
         user: {
-          id: "id",
+          id: "mockId",
           name: "name",
           email: "email",
           photo: "photo",
