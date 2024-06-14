@@ -12,12 +12,25 @@ jest.mock("@react-native-async-storage/async-storage", () =>
 // jest.mock("@react-native-community/netinfo", () => mockRNCNetInfo)
 // jest.mock("react-native-safe-area-context", () => mockSafeAreaContext)
 
-// jest.mock("react-native", () => {
-//   const rn = jest.requireActual("react-native")
-//   const spy = jest.spyOn(rn.Animated, "createAnimatedComponent")
-//   spy.mockImplementation(() => jest.fn((Component) => Component))
-//   return rn
-// })
+jest.mock("expo-router", () => {
+  const mockLink = jest.fn()
+  const mockScreen = jest.fn()
+
+  return {
+    Link: (props: Record<string, unknown>) => {
+      mockLink(props)
+      return props.children
+    },
+    Stack: {
+      Screen: (props: Record<string, unknown>) => {
+        mockScreen(props)
+        return props.children
+      },
+    },
+    mockLink,
+    mockScreen,
+  }
+})
 
 const consoleError = console.error
 console.error = (message, ...args) => {

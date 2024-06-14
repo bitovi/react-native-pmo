@@ -8,17 +8,6 @@ const useRestaurants: jest.SpyInstance<
   ReturnType<typeof restaurantHooks.useRestaurants>
 > = jest.spyOn(restaurantHooks, "useRestaurants")
 
-const params = {
-  state: {
-    short: "",
-    name: "",
-  },
-  city: {
-    name: "",
-    state: "",
-  },
-}
-
 describe("RestaurantList component", () => {
   const mockRestaurantsResponse = {
     data: [
@@ -104,32 +93,36 @@ describe("RestaurantList component", () => {
   it("renders restaurant List", () => {
     useRestaurants.mockReturnValue({
       ...mockRestaurantsResponse,
-      error: null,
+      error: undefined,
       isPending: false,
     })
 
-    render(<RestaurantList route={{ params }} />)
+    render(<RestaurantList state="TEST" city="Test City" />)
 
     expect(screen.getByText(/Bagel Restaurant/i)).toBeOnTheScreen()
     expect(screen.getByText(/Brunch Barn/i)).toBeOnTheScreen()
   })
 
   it("renders loading restaurant", () => {
-    useRestaurants.mockReturnValue({ data: null, error: null, isPending: true })
+    useRestaurants.mockReturnValue({
+      data: undefined,
+      error: undefined,
+      isPending: true,
+    })
 
-    render(<RestaurantList route={{ params }} />)
+    render(<RestaurantList state="TEST" city="Test City" />)
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
 
   it("renders error restaurant", () => {
     useRestaurants.mockReturnValue({
-      data: null,
+      data: undefined,
       error: { name: "Oops", message: "This is the error" },
       isPending: false,
     })
 
-    render(<RestaurantList route={{ params }} />)
+    render(<RestaurantList state="TEST" city="Test City" />)
 
     expect(screen.getByText(/Error loading restaurants/)).toBeOnTheScreen()
     expect(screen.getByText(/This is the error/)).toBeOnTheScreen()

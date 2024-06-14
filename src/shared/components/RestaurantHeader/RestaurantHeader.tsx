@@ -8,7 +8,7 @@ import { Restaurant } from "../../services/pmo/restaurant"
 const assetsUrl = process.env.EXPO_PUBLIC_PMO_ASSETS
 
 export interface RestaurantHeaderProps {
-  restaurant: Restaurant | null
+  restaurant?: Restaurant
 }
 
 const RestaurantHeader: React.FC<RestaurantHeaderProps> = ({ restaurant }) => {

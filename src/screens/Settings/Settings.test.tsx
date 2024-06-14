@@ -1,4 +1,3 @@
-import { NavigationContainer } from "@react-navigation/native"
 import { render, screen } from "@testing-library/react-native"
 
 import AuthProvider from "../../shared/services/auth"
@@ -9,9 +8,7 @@ describe("Settings component", () => {
   it("renders Settings Page", async () => {
     render(
       <AuthProvider>
-        <NavigationContainer>
-          <Settings />
-        </NavigationContainer>
+        <Settings />
       </AuthProvider>,
     )
 

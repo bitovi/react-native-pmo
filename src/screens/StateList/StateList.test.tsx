@@ -20,11 +20,11 @@ describe("StateList component", () => {
   it("renders State List", () => {
     useStates.mockReturnValue({
       ...mockStateResponse,
-      error: null,
+      error: undefined,
       isPending: false,
     })
 
-    render(<StateList route={{ params: {} }} />)
+    render(<StateList />)
 
     expect(screen.getByText(/Michigan/i)).toBeOnTheScreen()
     expect(screen.getByText(/Wisconsin/i)).toBeOnTheScreen()
@@ -32,21 +32,25 @@ describe("StateList component", () => {
   })
 
   it("renders loading state", () => {
-    useStates.mockReturnValue({ data: null, error: null, isPending: true })
+    useStates.mockReturnValue({
+      data: undefined,
+      error: undefined,
+      isPending: true,
+    })
 
-    render(<StateList route={{ params: {} }} />)
+    render(<StateList />)
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
 
   it("renders error state", () => {
     useStates.mockReturnValue({
-      data: null,
+      data: undefined,
       error: { name: "Oops", message: "This is the error" },
       isPending: false,
     })
 
-    render(<StateList route={{ params: {} }} />)
+    render(<StateList />)
 
     expect(screen.getByText(/Error loading states:/)).toBeOnTheScreen()
     expect(screen.getByText(/This is the error/)).toBeOnTheScreen()

@@ -3,6 +3,17 @@ import { useEffect, useState } from "react"
 import { storeData, getData } from "../../storage/storage"
 import { apiRequest } from "../api"
 
+type HookResult<Data> = {
+  data?: Data
+  error?: Error
+  isPending: boolean
+}
+
+interface LocalStorageFavorites {
+  lastSynced: Date
+  favorites: Favorite[]
+}
+
 interface Favorite {
   userId: string
   restaurantId: string
@@ -11,22 +22,8 @@ interface Favorite {
   _id?: string
 }
 
-interface FavoritesResponse {
-  data: Favorite[] | null
-  error: Error | null
-  isPending: boolean
-}
-
-interface FavoriteResponse {
-  data: Favorite | null
-  error: Error | null
-  isPending: boolean
-}
-
-interface LocalStorageFavorites {
-  lastSynced: Date
-  favorites: Favorite[]
-}
+type FavoritesResponse = HookResult<Favorite[]>
+type FavoriteResponse = HookResult<Favorite>
 
 export const useFavorites = (
   userId?: string,
@@ -38,8 +35,8 @@ export const useFavorites = (
   localFavorites: LocalStorageFavorites | undefined
 } => {
   const [response, setResponse] = useState<FavoritesResponse>({
-    data: null,
-    error: null,
+    data: undefined,
+    error: undefined,
     isPending: true,
   })
   const [localFavorites, setLocalFavorites] = useState<
@@ -52,7 +49,7 @@ export const useFavorites = (
       const localFavorites = await getData<LocalStorageFavorites>("my-favorite")
       setLocalFavorites(localFavorites)
 
-      const { data, error } = await apiRequest<FavoritesResponse>({
+      const { data, error } = await apiRequest<Favorite[]>({
         method: "GET",
         path: "/favorites",
         params: {
@@ -61,8 +58,8 @@ export const useFavorites = (
       })
 
       setResponse({
-        data: data?.data || null,
-        error: error,
+        data,
+        error,
         isPending: false,
       })
     }
@@ -110,14 +107,14 @@ export const useFavorites = (
         newFavorites[favoriteIndex] = newFavorite as Favorite
       }
 
-      const { data: postRes, error } = await apiRequest<FavoriteResponse>({
+      const { data: postRes, error } = await apiRequest<Favorite>({
         method: "POST",
         path: "/favorites",
         body: newFavorite,
       })
 
-      if (!("_id" in newFavorite) && postRes && postRes.data) {
-        newFavorites[newFavorites.length - 1]._id = postRes.data._id
+      if (!("_id" in newFavorite) && postRes) {
+        newFavorites[newFavorites.length - 1]._id = postRes._id
       }
 
       const newLocalFavorites = {

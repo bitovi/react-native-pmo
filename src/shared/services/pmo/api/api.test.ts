@@ -31,7 +31,30 @@ describe("apiRequest function", () => {
       path: "/test",
     })
 
-    expect(response).toEqual({ data: { message: "success" }, error: null })
+    expect(response).toEqual({ data: { message: "success" }, error: undefined })
+    expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}/test?`, {
+      method: "GET",
+      body: undefined,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  })
+
+  it("should handle a successful request with nested data", async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ data: { message: "success" } }),
+      statusText: "OK",
+      status: 200,
+    })
+
+    const response = await apiRequest({
+      method: "GET",
+      path: "/test",
+    })
+
+    expect(response).toEqual({ data: { message: "success" }, error: undefined })
     expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}/test?`, {
       method: "GET",
       body: undefined,
@@ -68,7 +91,10 @@ describe("apiRequest function", () => {
       path: "/test",
     })
 
-    expect(response).toEqual({ data: null, error: new Error("Network Error") })
+    expect(response).toEqual({
+      data: undefined,
+      error: new Error("Network Error"),
+    })
   })
 
   describe("requests and cache", () => {
@@ -87,7 +113,10 @@ describe("apiRequest function", () => {
         path: "/test",
       })
 
-      expect(response).toEqual({ data: { message: "success" }, error: null })
+      expect(response).toEqual({
+        data: { message: "success" },
+        error: undefined,
+      })
       expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}/test?`, {
         method: "GET",
         body: undefined,
@@ -119,7 +148,7 @@ describe("apiRequest function", () => {
         path: "/test",
       })
 
-      expect(response).toEqual({ data: mockNewStorage.data, error: null })
+      expect(response).toEqual({ data: mockNewStorage.data, error: undefined })
       expect(mockFetch).not.toHaveBeenCalled()
     })
 
@@ -145,7 +174,10 @@ describe("apiRequest function", () => {
         path: "/test",
       })
 
-      expect(response).toEqual({ data: { message: "success" }, error: null })
+      expect(response).toEqual({
+        data: { message: "success" },
+        error: undefined,
+      })
       expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}/test?`, {
         method: "GET",
         body: undefined,

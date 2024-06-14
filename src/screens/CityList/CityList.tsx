@@ -1,26 +1,18 @@
-import { useNavigation } from "@react-navigation/native"
-// import { StackScreenProps } from "@react-navigation/stack"
 import { FlatList } from "react-native"
 
-import { RestaurantsStackParamList, StackScreenProps } from "../../OldApp"
 import Loading from "../../shared/components/Loading"
 import Box from "../../shared/design/Box"
 import Button from "../../shared/design/Button"
 import Screen from "../../shared/design/Screen"
 import Typography from "../../shared/design/Typography"
-import { State, useCities } from "../../shared/services/pmo/restaurant"
+import { useCities } from "../../shared/services/pmo/restaurant"
 
-export interface CityListParams {
-  state: State
+export interface CityListProps {
+  state: string
 }
 
-export interface CityListProps
-  extends StackScreenProps<RestaurantsStackParamList, "CityList"> {}
-
-const CityList: React.FC<CityListProps> = ({ route }) => {
-  const { state } = route.params
-  const navigation = useNavigation()
-  const { data: cities, error, isPending } = useCities(state.short || "")
+const CityList: React.FC<CityListProps> = ({ state }) => {
+  const { data: cities, error, isPending } = useCities(state)
 
   if (error) {
     return (
@@ -41,17 +33,8 @@ const CityList: React.FC<CityListProps> = ({ route }) => {
     <Screen noScroll>
       <FlatList
         data={cities}
-        renderItem={({ item: cityItem }) => (
-          <Button
-            onPress={() =>
-              navigation.navigate("RestaurantList", {
-                state,
-                city: cityItem,
-              })
-            }
-          >
-            {cityItem.name}
-          </Button>
+        renderItem={({ item: city }) => (
+          <Button href={`/choose/${state}/${city.name}`}>{city.name}</Button>
         )}
         keyExtractor={(item) => item.name}
       />

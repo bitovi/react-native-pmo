@@ -7,16 +7,15 @@ import { Restaurant } from "../../../../shared/services/pmo/restaurant"
 
 export interface MapProps {
   data: Restaurant[]
-  navigateToRestaurant: (slug: string) => void
 }
 
-const Map: React.FC<MapProps> = ({ data, navigateToRestaurant }) => {
+const Map: React.FC<MapProps> = ({ data }) => {
   return (
     <Box padding="s">
       <FlatList
         data={data}
         renderItem={({ item: restaurant }) => (
-          <Button onPress={() => navigateToRestaurant(restaurant.slug)}>
+          <Button href={`/restaurants/${restaurant.slug}`}>
             {restaurant.name}
           </Button>
         )}

@@ -20,22 +20,6 @@ const useRestaurant: jest.SpyInstance<
   ReturnType<typeof restaurantHooks.useRestaurant>
 > = jest.spyOn(restaurantHooks, "useRestaurant")
 
-const route = {
-  key: "RestaurantDetails",
-  name: "RestaurantDetails",
-  params: {
-    state: {
-      name: "name",
-      short: "short",
-    },
-    city: {
-      name: "name",
-      state: "state",
-    },
-    slug: "test",
-  },
-} as const
-
 describe("RestaurantDetails component", () => {
   const mockRestaurantData = {
     data: {
@@ -54,15 +38,18 @@ describe("RestaurantDetails component", () => {
       coordinate: { latitude: 0, longitude: 0 },
     },
     isPending: false,
-    error: null,
+    error: undefined,
   }
 
   it("renders loading state", () => {
-    useRestaurant.mockReturnValue({ data: null, isPending: true, error: null })
+    useRestaurant.mockReturnValue({
+      data: undefined,
+      isPending: true,
+      error: undefined,
+    })
     render(
       <AuthProvider>
-        {/* @ts-ignore */}
-        <RestaurantDetails route={route} />
+        <RestaurantDetails slug="test-restaurant" />
       </AuthProvider>,
     )
 
@@ -71,15 +58,14 @@ describe("RestaurantDetails component", () => {
 
   it("renders error state", () => {
     useRestaurant.mockReturnValue({
-      data: null,
+      data: undefined,
       isPending: false,
       error: { name: "Error", message: "Mock error" },
     })
 
     render(
       <AuthProvider>
-        {/* @ts-ignore */}
-        <RestaurantDetails route={route} />
+        <RestaurantDetails slug="test-restaurant" />
       </AuthProvider>,
     )
 
@@ -95,8 +81,7 @@ describe("RestaurantDetails component", () => {
 
     render(
       <AuthProvider>
-        {/* @ts-ignore */}
-        <RestaurantDetails route={route} />
+        <RestaurantDetails slug="test-restaurant" />
       </AuthProvider>,
     )
 
@@ -104,12 +89,11 @@ describe("RestaurantDetails component", () => {
   })
 
   it("renders the RestaurantHeader and content when data is not available", () => {
-    useRestaurant.mockReturnValue({ ...mockRestaurantData, data: null })
+    useRestaurant.mockReturnValue({ ...mockRestaurantData, data: undefined })
 
     render(
       <AuthProvider>
-        {/* @ts-ignore */}
-        <RestaurantDetails route={route} />
+        <RestaurantDetails slug="test-restaurant" />
       </AuthProvider>,
     )
 

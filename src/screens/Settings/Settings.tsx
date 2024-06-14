@@ -8,9 +8,11 @@ import { useThemeMode } from "../../shared/design/theme"
 import Typography from "../../shared/design/Typography"
 import { useAuthentication, useUser } from "../../shared/services/auth"
 
-const Settings: React.FC = () => {
-  const { signIn, signOut } = useAuthentication()
+export interface SettingsProps {}
+
+const Settings: React.FC<SettingsProps> = () => {
   const user = useUser()
+  const { signIn, signOut } = useAuthentication()
   const { mode, setMode } = useThemeMode()
 
   return (

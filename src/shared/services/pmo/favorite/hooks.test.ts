@@ -30,23 +30,17 @@ describe("Favorite Hook", () => {
     ]
 
     it("should return list of favorites from the server", async () => {
-      apiRequest.mockResolvedValue({
-        data: { data: mockFavorites },
-        error: null,
-      })
+      apiRequest.mockResolvedValue({ data: mockFavorites, error: undefined })
 
       const { result } = renderHook(() => useFavorites("user-id"))
 
       await waitFor(() => expect(result.current.isPending).toBeFalsy())
       expect(result.current.data).toEqual(mockFavorites)
-      expect(result.current.error).toBeNull()
+      expect(result.current.error).toBeUndefined()
     })
 
     it("should return list of favorites from the local storage", async () => {
-      apiRequest.mockResolvedValue({
-        data: { data: mockFavorites },
-        error: null,
-      })
+      apiRequest.mockResolvedValue({ data: mockFavorites, error: undefined })
 
       const mockLocalFavorites = {
         lastSynced: "Date",

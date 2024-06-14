@@ -1,3 +1,4 @@
+import { Link } from "expo-router"
 import {
   PressableProps,
   ViewStyle,
@@ -14,17 +15,29 @@ type Variant = "primary" | "secondary" | "outline"
 export interface ButtonProps extends PressableProps {
   variant?: Variant
   disabled?: boolean
+  href?: string
   children: string
 }
 
 const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   disabled,
+  href,
   children,
   ...props
 }) => {
   const theme = useTheme()
   const styles = getStyles(theme, variant)
+
+  if (href) {
+    return (
+      <Link href={href} asChild>
+        <Button variant={variant} disabled={disabled} {...props}>
+          {children}
+        </Button>
+      </Link>
+    )
+  }
 
   return (
     <Pressable

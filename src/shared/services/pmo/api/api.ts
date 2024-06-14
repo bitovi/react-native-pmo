@@ -26,7 +26,7 @@ export async function apiRequest<
   params?: Params
   path: string
   body?: Body
-}): Promise<{ data: Data | null; error: Error | null }> {
+}): Promise<{ data?: Data; error?: Error }> {
   try {
     const requestUrl = `${baseUrl}${path}${stringifyQuery(params)}`
 
@@ -40,7 +40,7 @@ export async function apiRequest<
         if (age < ONE_MINUTE) {
           return {
             data: cachedResponse.data,
-            error: null,
+            error: undefined,
           }
         }
       }
@@ -58,7 +58,7 @@ export async function apiRequest<
 
     const data = await response.json()
     const error = response.ok
-      ? null
+      ? undefined
       : new Error(`${response.status} (${response.statusText})`)
 
     if (method === "GET" && response.ok) {
@@ -69,12 +69,12 @@ export async function apiRequest<
     }
 
     return {
-      data: data,
+      data: "data" in data ? data.data : data,
       error: error,
     }
   } catch (error) {
     return {
-      data: null,
+      data: undefined,
       error:
         error instanceof Error ? error : new Error("An unknown error occurred"),
     }
