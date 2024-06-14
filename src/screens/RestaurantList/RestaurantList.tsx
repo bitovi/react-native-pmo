@@ -1,11 +1,11 @@
 import { Suspense, lazy, useState } from "react"
 
-import Loading from "../../shared/components/Loading"
-import Tabs from "../../shared/components/Tabs"
-import Box from "../../shared/design/Box"
-import Screen from "../../shared/design/Screen"
-import Typography from "../../shared/design/Typography"
-import { useRestaurants } from "../../shared/services/pmo/restaurant"
+import Loading from "@shared/components/Loading"
+import Tabs from "@shared/components/Tabs"
+import Box from "@shared/design/Box"
+import Screen from "@shared/design/Screen"
+import Typography from "@shared/design/Typography"
+import { useRestaurants } from "@shared/services/pmo/restaurant"
 
 import List from "./components/List"
 

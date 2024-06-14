@@ -1,8 +1,8 @@
 import { FlatList } from "react-native"
 
-import Box from "../../../../shared/design/Box"
-import Button from "../../../../shared/design/Button"
-import { Restaurant } from "../../../../shared/services/pmo/restaurant"
+import Box from "@shared/design/Box"
+import Button from "@shared/design/Button"
+import { Restaurant } from "@shared/services/pmo/restaurant"
 
 export interface ListProps {
   data: Restaurant[]

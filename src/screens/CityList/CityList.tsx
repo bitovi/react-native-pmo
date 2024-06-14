@@ -1,11 +1,11 @@
 import { FlatList } from "react-native"
 
-import Loading from "../../shared/components/Loading"
-import Box from "../../shared/design/Box"
-import Button from "../../shared/design/Button"
-import Screen from "../../shared/design/Screen"
-import Typography from "../../shared/design/Typography"
-import { useCities } from "../../shared/services/pmo/restaurant"
+import Loading from "@shared/components/Loading"
+import Box from "@shared/design/Box"
+import Button from "@shared/design/Button"
+import Screen from "@shared/design/Screen"
+import Typography from "@shared/design/Typography"
+import { useCities } from "@shared/services/pmo/restaurant"
 
 export interface CityListProps {
   state: string

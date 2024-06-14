@@ -1,9 +1,9 @@
 // import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 import { FlatList } from "react-native"
 
-import Box from "../../../../shared/design/Box"
-import Button from "../../../../shared/design/Button"
-import { Restaurant } from "../../../../shared/services/pmo/restaurant"
+import Box from "@shared/design/Box"
+import Button from "@shared/design/Button"
+import { Restaurant } from "@shared/services/pmo/restaurant"
 
 export interface MapProps {
   data: Restaurant[]

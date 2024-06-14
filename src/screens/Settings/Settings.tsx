@@ -1,12 +1,12 @@
 // import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
 
-import FormSwitch from "../../shared/components/FormSwitch"
-import Button from "../../shared/design/Button"
-import Card from "../../shared/design/Card"
-import Screen from "../../shared/design/Screen"
-import { useThemeMode } from "../../shared/design/theme"
-import Typography from "../../shared/design/Typography"
-import { useAuthentication, useUser } from "../../shared/services/auth"
+import FormSwitch from "@shared/components/FormSwitch"
+import Button from "@shared/design/Button"
+import Card from "@shared/design/Card"
+import Screen from "@shared/design/Screen"
+import { useThemeMode } from "@shared/design/theme"
+import Typography from "@shared/design/Typography"
+import { useAuthentication, useUser } from "@shared/services/auth"
 
 export interface SettingsProps {}
 

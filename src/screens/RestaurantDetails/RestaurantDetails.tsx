@@ -1,11 +1,11 @@
-import Loading from "../../shared/components/Loading"
-import RestaurantHeader from "../../shared/components/RestaurantHeader"
-import Button from "../../shared/design/Button"
-import Screen from "../../shared/design/Screen"
-import Typography from "../../shared/design/Typography"
-import { useUser, useAuthentication } from "../../shared/services/auth"
-import { useFavorites } from "../../shared/services/pmo/favorite"
-import { useRestaurant } from "../../shared/services/pmo/restaurant"
+import Loading from "@shared/components/Loading"
+import RestaurantHeader from "@shared/components/RestaurantHeader"
+import Button from "@shared/design/Button"
+import Screen from "@shared/design/Screen"
+import Typography from "@shared/design/Typography"
+import { useUser, useAuthentication } from "@shared/services/auth"
+import { useFavorites } from "@shared/services/pmo/favorite"
+import { useRestaurant } from "@shared/services/pmo/restaurant"
 
 export interface RestaurantDetailsProps {
   slug: string

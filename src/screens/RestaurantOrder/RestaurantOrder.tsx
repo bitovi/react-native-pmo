@@ -1,15 +1,15 @@
 import { useState } from "react"
 import { Alert } from "react-native"
 
-import FormSwitch from "../../shared/components/FormSwitch"
-import FormTextField from "../../shared/components/FormTextField"
-import Loading from "../../shared/components/Loading"
-import Box from "../../shared/design/Box"
-import Button from "../../shared/design/Button"
-import Card from "../../shared/design/Card"
-import Screen from "../../shared/design/Screen"
-import Typography from "../../shared/design/Typography"
-import { useRestaurant } from "../../shared/services/pmo/restaurant"
+import FormSwitch from "@shared/components/FormSwitch"
+import FormTextField from "@shared/components/FormTextField"
+import Loading from "@shared/components/Loading"
+import Box from "@shared/design/Box"
+import Button from "@shared/design/Button"
+import Card from "@shared/design/Card"
+import Screen from "@shared/design/Screen"
+import Typography from "@shared/design/Typography"
+import { useRestaurant } from "@shared/services/pmo/restaurant"
 
 export interface RestaurantOrderProps {
   slug: string

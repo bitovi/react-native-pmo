@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react-native"
 
-import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
+import * as restaurantHooks from "@shared/services/pmo/restaurant/hooks"
 
 import RestaurantList from "./RestaurantList"
 

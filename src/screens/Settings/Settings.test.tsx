@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react-native"
 
-import AuthProvider from "../../shared/services/auth"
+import AuthProvider from "@shared/services/auth"
 
 import Settings from "./Settings"
 
