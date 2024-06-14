@@ -1,9 +1,9 @@
 import { Tabs } from "expo-router"
 
-import { useTheme } from "@shared/design/theme"
+// import { useTheme } from "@shared/design/theme"
 
 const AppLayout: React.FC = () => {
-  const theme = useTheme()
+  // const theme = useTheme()
 
   return (
     <Tabs
