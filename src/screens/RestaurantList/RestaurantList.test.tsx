@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react-native"
 
-import MockApp from "../../OldApp/MockApp"
 import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
 
 import RestaurantList from "./RestaurantList"
@@ -109,7 +108,7 @@ describe("RestaurantList component", () => {
       isPending: false,
     })
 
-    render(<MockApp component={RestaurantList} params={params} />)
+    render(<RestaurantList route={{ params }} />)
 
     expect(screen.getByText(/Bagel Restaurant/i)).toBeOnTheScreen()
     expect(screen.getByText(/Brunch Barn/i)).toBeOnTheScreen()
@@ -118,7 +117,7 @@ describe("RestaurantList component", () => {
   it("renders loading restaurant", () => {
     useRestaurants.mockReturnValue({ data: null, error: null, isPending: true })
 
-    render(<MockApp component={RestaurantList} params={params} />)
+    render(<RestaurantList route={{ params }} />)
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
@@ -130,7 +129,7 @@ describe("RestaurantList component", () => {
       isPending: false,
     })
 
-    render(<MockApp component={RestaurantList} params={params} />)
+    render(<RestaurantList route={{ params }} />)
 
     expect(screen.getByText(/Error loading restaurants/)).toBeOnTheScreen()
     expect(screen.getByText(/This is the error/)).toBeOnTheScreen()

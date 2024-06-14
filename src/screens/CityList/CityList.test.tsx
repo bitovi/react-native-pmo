@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react-native"
 
-import MockApp from "../../OldApp/MockApp"
 import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
 
 import CityList from "./CityList"
@@ -25,9 +24,8 @@ describe("CityList component", () => {
     })
 
     render(
-      <MockApp
-        component={CityList}
-        params={{ state: { name: "test", short: "test" } }}
+      <CityList
+        route={{ params: { state: { name: "test", short: "test" } } }}
       />,
     )
 
@@ -39,9 +37,8 @@ describe("CityList component", () => {
     useCities.mockReturnValue({ data: null, error: null, isPending: true })
 
     render(
-      <MockApp
-        component={CityList}
-        params={{ state: { name: "test", short: "test" } }}
+      <CityList
+        route={{ params: { state: { name: "test", short: "test" } } }}
       />,
     )
 
@@ -56,9 +53,8 @@ describe("CityList component", () => {
     })
 
     render(
-      <MockApp
-        component={CityList}
-        params={{ state: { name: "test", short: "test" } }}
+      <CityList
+        route={{ params: { state: { name: "test", short: "test" } } }}
       />,
     )
 

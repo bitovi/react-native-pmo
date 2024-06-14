@@ -1,12 +1,16 @@
+import { Stack } from "expo-router"
+
 import Box, { BoxProps } from "../Box"
 import { useTheme } from "../theme"
 
 export interface ScreenProps extends BoxProps {
   noScroll?: boolean
+  title?: string
 }
 
 const Screen: React.FC<ScreenProps> = ({
   noScroll = false,
+  title,
   style,
   children,
   ...props
@@ -23,6 +27,8 @@ const Screen: React.FC<ScreenProps> = ({
       }}
       {...props}
     >
+      {title && <Stack.Screen options={{ title }} />}
+
       {children}
     </Box>
   )

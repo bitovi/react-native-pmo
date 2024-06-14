@@ -1,17 +1,7 @@
-import { Text, View } from "react-native"
+import { Redirect } from "expo-router"
 
-const Index: React.FC = () => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  )
+const IndexPage: React.FC = () => {
+  return <Redirect href="/choose" />
 }
 
-export default Index
+export default IndexPage

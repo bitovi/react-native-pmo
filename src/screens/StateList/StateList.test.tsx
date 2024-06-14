@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react-native"
 
-import MockApp from "../../OldApp/MockApp"
 import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
 
 import StateList from "./StateList"
@@ -25,7 +24,7 @@ describe("StateList component", () => {
       isPending: false,
     })
 
-    render(<MockApp component={StateList} />)
+    render(<StateList route={{ params: {} }} />)
 
     expect(screen.getByText(/Michigan/i)).toBeOnTheScreen()
     expect(screen.getByText(/Wisconsin/i)).toBeOnTheScreen()
@@ -35,7 +34,7 @@ describe("StateList component", () => {
   it("renders loading state", () => {
     useStates.mockReturnValue({ data: null, error: null, isPending: true })
 
-    render(<MockApp component={StateList} />)
+    render(<StateList route={{ params: {} }} />)
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
@@ -47,7 +46,7 @@ describe("StateList component", () => {
       isPending: false,
     })
 
-    render(<MockApp component={StateList} />)
+    render(<StateList route={{ params: {} }} />)
 
     expect(screen.getByText(/Error loading states:/)).toBeOnTheScreen()
     expect(screen.getByText(/This is the error/)).toBeOnTheScreen()

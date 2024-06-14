@@ -10,7 +10,7 @@
 /coverage/
 /db-data/
 /node_modules/
-/expo-env.d.ts
+expo-env.d.ts
 
 # Cache and ?ogs
 /.expo/
