@@ -12,7 +12,6 @@ describe("Settings component", () => {
       </AuthProvider>,
     )
 
-    expect(screen.getByText(/Welcome back, name/i)).toBeOnTheScreen()
-    // expect(screen.getByText(/Mock Sign in with Google/i)).toBeOnTheScreen()
+    expect(screen.getByText(/Mock Sign in with Google/i)).toBeOnTheScreen()
   })
 })

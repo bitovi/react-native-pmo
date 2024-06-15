@@ -1,7 +1,7 @@
 import "@testing-library/react-native/extend-expect"
 
 // import "react-native-gesture-handler/jestSetup"
-// import "@react-native-google-signin/google-signin/jest/build/setup"
+import "@react-native-google-signin/google-signin/jest/build/jest/setup"
 // import mockRNCNetInfo from "@react-native-community/netinfo/jest/netinfo-mock"
 // import mockSafeAreaContext from "react-native-safe-area-context/jest/mock"
 

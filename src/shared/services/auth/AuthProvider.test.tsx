@@ -1,4 +1,4 @@
-// import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
+import { GoogleSigninButton } from "@react-native-google-signin/google-signin"
 import { render, screen, fireEvent } from "@testing-library/react-native"
 import { View, Text } from "react-native"
 
@@ -34,10 +34,7 @@ describe("AuthProvider", () => {
         <Text>{user?.givenName}</Text>
         <Text>{user?.familyName}</Text>
         {isAuthenticated && <Button onPress={signOut}>Sign Out</Button>}
-        {isAuthenticated === false && (
-          <Button onPress={signIn}>Mock Sign in with Google</Button>
-        )}
-        {/* {isAuthenticated === false && <GoogleSigninButton onPress={signIn} />} */}
+        {isAuthenticated === false && <GoogleSigninButton onPress={signIn} />}
       </View>
     )
   }

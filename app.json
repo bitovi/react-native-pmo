@@ -9,7 +9,15 @@
     "userInterfaceStyle": "automatic",
     "scheme": "pmo",
     "icon": "./assets/icons/icon.png",
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.43379174472-fug03flskrv4amumejbnt79a7nnek7ah"
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     },

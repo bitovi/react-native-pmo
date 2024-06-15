@@ -1,15 +1,20 @@
-// import { User as UserInfo, GoogleSignin } from "@react-native-google-signin/google-signin"
+import {
+  User as UserInfo,
+  GoogleSignin,
+} from "@react-native-google-signin/google-signin"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
-/* eslint-disable import/no-duplicates */
 import { AuthContext, AuthContextProvider, useAuthContext } from "./context"
-import { UserInfo } from "./context"
 
-// const googleOauthwebClientId = process.env.EXPO_PUBLIC_GOOGLE_OAUTH_CLIENT_ID
-// GoogleSignin.configure({
-//   scopes: ["openid", "profile", "email"],
-//   webClientId: googleOauthwebClientId,
-// })
+const googleOauthWebClientId =
+  process.env.EXPO_PUBLIC_GOOGLE_OAUTH_WEB_CLIENT_ID
+const googleOauthIosClientId =
+  process.env.EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID
+GoogleSignin.configure({
+  scopes: ["openid", "profile", "email"],
+  webClientId: googleOauthWebClientId,
+  iosClientId: googleOauthIosClientId,
+})
 
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -18,19 +23,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const signIn = useCallback(async () => {
     try {
-      const userInfo = {
-        user: {
-          id: "mockId",
-          name: "name",
-          email: "email",
-          photo: "photo",
-          familyName: "familyName",
-          givenName: "givenName",
-        },
-        scopes: [],
-        idToken: "token",
-      }
-      // const userInfo = await GoogleSignin.signIn()
+      const userInfo = await GoogleSignin.signIn()
       setUserInfo(userInfo)
       return userInfo.user
     } catch (error) {
@@ -42,7 +35,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const signOut = useCallback(async () => {
     try {
-      // await GoogleSignin.signOut()
+      await GoogleSignin.signOut()
       setUserInfo(null)
       return true
     } catch (error) {
@@ -53,19 +46,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     async function run() {
-      const userInfo = {
-        user: {
-          id: "mockId",
-          name: "name",
-          email: "email",
-          photo: "photo",
-          familyName: "familyName",
-          givenName: "givenName",
-        },
-        scopes: [],
-        idToken: "token",
-      }
-      // const userInfo = await GoogleSignin.getCurrentUser()
+      const userInfo = await GoogleSignin.getCurrentUser()
       setUserInfo(userInfo)
     }
 
