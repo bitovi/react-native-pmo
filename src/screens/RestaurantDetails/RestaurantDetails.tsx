@@ -21,7 +21,7 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ slug }) => {
 
   if (error) {
     return (
-      <Screen>
+      <Screen title="Restaurant">
         <Typography variant="heading">
           Error loading restaurant details:{" "}
         </Typography>
@@ -31,7 +31,11 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ slug }) => {
   }
 
   if (isPending) {
-    return <Loading />
+    return (
+      <Screen title="Restaurant">
+        <Loading />
+      </Screen>
+    )
   }
 
   return (

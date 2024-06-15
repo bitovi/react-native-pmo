@@ -1,30 +1,21 @@
 import { Stack } from "expo-router"
 
+import { useTheme } from "@shared/design/theme"
+
 const ChooseLayout: React.FC = () => {
+  const theme = useTheme()
+
   return (
     <Stack
       screenOptions={{
         headerBackTitleVisible: false,
-        // header: ({ route, navigation }) => {
-        //   if (!navigation.canGoBack()) return null
-        //
-        //   return (
-        //     <Pressable onPress={navigation.goBack}>
-        //       <Box
-        //         padding="m"
-        //         style={{ flexDirection: "row", gap: 8, alignItems: "center" }}
-        //       >
-        //         <Icon name="arrow-back" size={20} />
-        //         <Typography variant="heading">
-        //           {/* @ts-ignore */}
-        //           {[route.params?.city?.name, route.params?.state?.name]
-        //             .filter(Boolean)
-        //             .join(", ")}
-        //         </Typography>
-        //       </Box>
-        //     </Pressable>
-        //   )
-        // },
+        headerStyle: {
+          backgroundColor: theme.palette.screen.main,
+        },
+        headerTitleStyle: {
+          color: theme.palette.screen.contrast,
+          ...theme.typography.title,
+        },
       }}
     >
       <Stack.Screen name="index" />

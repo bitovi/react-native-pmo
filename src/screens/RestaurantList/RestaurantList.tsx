@@ -22,15 +22,21 @@ const RestaurantList: React.FC<RestaurantListProps> = ({ state, city }) => {
   const [tab, setTab] = useState<string>("list")
 
   if (isPending) {
-    return <Loading />
+    return (
+      <Screen title="Choose a Restaurant">
+        <Loading />
+      </Screen>
+    )
   }
 
   if (error || !restaurants) {
     return (
-      <Box padding="s">
-        <Typography variant="heading">Error loading restaurants</Typography>
-        {error && <Typography variant="body">{error.message}</Typography>}
-      </Box>
+      <Screen title="Choose a Restaurant">
+        <Box padding="s">
+          <Typography variant="heading">Error loading restaurants</Typography>
+          {error && <Typography variant="body">{error.message}</Typography>}
+        </Box>
+      </Screen>
     )
   }
 
@@ -51,7 +57,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({ state, city }) => {
         onChange={setTab}
       />
 
-      <Screen noScroll>
+      <Screen noScroll title="Choose a Restaurant">
         {tab === "list" && <List restaurants={restaurants} />}
         {tab === "map" && (
           <Suspense fallback={<Loading />}>

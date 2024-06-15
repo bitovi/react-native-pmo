@@ -24,7 +24,11 @@ const StateList: React.FC<StateListProps> = () => {
   }
 
   if (isPending) {
-    return <Loading />
+    return (
+      <Screen title="Choose a State">
+        <Loading />
+      </Screen>
+    )
   }
 
   return (

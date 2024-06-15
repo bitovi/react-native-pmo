@@ -54,24 +54,32 @@ const RestaurantOrder: React.FC<RestaurantOrderProps> = ({ slug }) => {
 
   if (error) {
     return (
-      <Box padding="s">
-        <Typography variant="heading">
-          Error loading restaurant order:{" "}
-        </Typography>
-        <Typography variant="body">{error.message}</Typography>
-      </Box>
+      <Screen title="Order from Restaurant">
+        <Box padding="s">
+          <Typography variant="heading">
+            Error loading restaurant order:{" "}
+          </Typography>
+          <Typography variant="body">{error.message}</Typography>
+        </Box>
+      </Screen>
     )
   }
 
   if (isPending) {
-    return <Loading />
+    return (
+      <Screen title="Order from Restaurant">
+        <Loading />
+      </Screen>
+    )
   }
 
   if (!restaurant) {
     return (
-      <Box padding="s">
-        <Typography variant="heading">Restaurant not found</Typography>
-      </Box>
+      <Screen title="Order from Restaurant">
+        <Box padding="s">
+          <Typography variant="heading">Restaurant not found</Typography>
+        </Box>
+      </Screen>
     )
   }
 

@@ -16,7 +16,7 @@ const CityList: React.FC<CityListProps> = ({ state }) => {
 
   if (error) {
     return (
-      <Screen>
+      <Screen title="Choose a City">
         <Box padding="s">
           <Typography variant="heading">Error loading cities: </Typography>
           <Typography variant="body">{error.message}</Typography>
@@ -26,11 +26,15 @@ const CityList: React.FC<CityListProps> = ({ state }) => {
   }
 
   if (isPending) {
-    return <Loading />
+    return (
+      <Screen title="Choose a City">
+        <Loading />
+      </Screen>
+    )
   }
 
   return (
-    <Screen noScroll>
+    <Screen noScroll title="Choose a City">
       <FlatList
         data={cities}
         renderItem={({ item: city }) => (
