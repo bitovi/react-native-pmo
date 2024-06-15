@@ -5,14 +5,14 @@ import LinkButton from "@shared/design/LinkButton"
 import { Restaurant } from "@shared/services/pmo/restaurant"
 
 export interface ListProps {
-  data: Restaurant[]
+  restaurants: Restaurant[]
 }
 
-const List: React.FC<ListProps> = ({ data }) => {
+const List: React.FC<ListProps> = ({ restaurants }) => {
   return (
     <Box padding="s">
       <FlatList
-        data={data}
+        data={restaurants}
         renderItem={({ item: restaurant }) => (
           <LinkButton href={`/restaurants/${restaurant.slug}`}>
             {restaurant.name}

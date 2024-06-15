@@ -17,7 +17,7 @@ export interface RestaurantListProps {
 }
 
 const RestaurantList: React.FC<RestaurantListProps> = ({ state, city }) => {
-  const { data, error, isPending } = useRestaurants(state, city)
+  const { data: restaurants, error, isPending } = useRestaurants(state, city)
 
   const [tab, setTab] = useState<string>("list")
 
@@ -25,7 +25,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({ state, city }) => {
     return <Loading />
   }
 
-  if (error || !data) {
+  if (error || !restaurants) {
     return (
       <Box padding="s">
         <Typography variant="heading">Error loading restaurants</Typography>
@@ -52,10 +52,10 @@ const RestaurantList: React.FC<RestaurantListProps> = ({ state, city }) => {
       />
 
       <Screen noScroll>
-        {tab === "list" && <List data={data} />}
-        {tab === "map" && data && (
+        {tab === "list" && <List restaurants={restaurants} />}
+        {tab === "map" && (
           <Suspense fallback={<Loading />}>
-            <Map data={data} />
+            <Map restaurants={restaurants} />
           </Suspense>
         )}
       </Screen>
