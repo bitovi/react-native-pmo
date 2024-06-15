@@ -1,15 +1,7 @@
-import { Link } from "expo-router"
-import { Text } from "react-native"
-
-import Screen from "@shared/design/Screen"
+import StateList from "@screens/StateList"
 
 const StatesPage: React.FC = () => {
-  return (
-    <Screen title="Choose a State">
-      <Text>States</Text>
-      <Link href="/choose/IL">Illinois</Link>
-    </Screen>
-  )
+  return <StateList />
 }
 
 export default StatesPage

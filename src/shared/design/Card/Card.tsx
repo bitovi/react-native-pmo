@@ -8,12 +8,12 @@ export interface CardProps extends BoxProps {
   title?: string
 }
 
-const Card: React.FC<CardProps> = ({ title, children, ...props }) => {
+const Card: React.FC<CardProps> = ({ title, style, children, ...props }) => {
   const theme = useTheme()
   const styles = getStyles(theme)
 
   return (
-    <Box margin="s" style={styles.container} {...props}>
+    <Box {...props} margin="s" style={[styles.container, style]}>
       {title && (
         <Box padding="m" style={styles.title}>
           <Typography variant="title">{title}</Typography>

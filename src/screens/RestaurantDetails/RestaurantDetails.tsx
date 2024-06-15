@@ -1,6 +1,7 @@
 import Loading from "@shared/components/Loading"
 import RestaurantHeader from "@shared/components/RestaurantHeader"
 import Button from "@shared/design/Button"
+import LinkButton from "@shared/design/LinkButton"
 import Screen from "@shared/design/Screen"
 import Typography from "@shared/design/Typography"
 import { useUser, useAuthentication } from "@shared/services/auth"
@@ -52,7 +53,9 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ slug }) => {
             : "Add to favorites"}
         </Button>
 
-        <Button href={`/restaurants/${slug}/order`}>Place an order</Button>
+        <LinkButton href={`/restaurants/${slug}/order`}>
+          Place an order
+        </LinkButton>
       </Screen>
     </>
   )

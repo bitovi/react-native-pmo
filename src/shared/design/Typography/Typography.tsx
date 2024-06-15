@@ -7,8 +7,8 @@ export interface TypographyProps extends TextProps {
 }
 
 const Typography: React.FC<TypographyProps> = ({
-  style,
   variant = "body",
+  style,
   children,
   ...props
 }) => {
@@ -16,7 +16,7 @@ const Typography: React.FC<TypographyProps> = ({
   const styles = getStyles(theme, variant)
 
   return (
-    <Text style={StyleSheet.compose(styles.text, style)} {...props}>
+    <Text {...props} style={[styles.text, style]}>
       {children}
     </Text>
   )

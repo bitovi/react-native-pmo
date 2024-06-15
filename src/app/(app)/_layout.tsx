@@ -34,8 +34,14 @@ const AppLayout: React.FC = () => {
       //   },
       // })}
     >
-      <Tabs.Screen name="choose" options={{ title: "Place My Order" }} />
-      <Tabs.Screen name="settings" options={{ headerShown: true }} />
+      <Tabs.Screen
+        name="choose"
+        options={{ headerShown: false, tabBarLabel: "Place My Order" }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{ headerShown: true, tabBarLabel: "Settings" }}
+      />
       <Tabs.Screen name="restaurants" options={{ href: null }} />
     </Tabs>
   )

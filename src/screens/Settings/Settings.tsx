@@ -16,7 +16,7 @@ const Settings: React.FC<SettingsProps> = () => {
   const { mode, setMode } = useThemeMode()
 
   return (
-    <Screen>
+    <Screen title="Settings">
       <Card>
         {user ? (
           <>

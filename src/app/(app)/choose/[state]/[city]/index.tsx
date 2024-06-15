@@ -1,19 +1,11 @@
-import { Link, useLocalSearchParams } from "expo-router"
-import { Text } from "react-native"
+import { useLocalSearchParams } from "expo-router"
 
-import Screen from "@shared/design/Screen"
+import RestaurantList from "@screens/RestaurantList"
 
 const RestaurantsPage: React.FC = () => {
   const { state, city } = useLocalSearchParams()
 
-  return (
-    <Screen title="Choose a Restaurant">
-      <Text>
-        Restaurants in {city}, {state}
-      </Text>
-      <Link href={`/restaurants/poutine-palace`}>Poutine Place</Link>
-    </Screen>
-  )
+  return <RestaurantList state={state as string} city={city as string} />
 }
 
 export default RestaurantsPage

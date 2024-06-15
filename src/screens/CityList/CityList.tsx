@@ -2,7 +2,7 @@ import { FlatList } from "react-native"
 
 import Loading from "@shared/components/Loading"
 import Box from "@shared/design/Box"
-import Button from "@shared/design/Button"
+import LinkButton from "@shared/design/LinkButton"
 import Screen from "@shared/design/Screen"
 import Typography from "@shared/design/Typography"
 import { useCities } from "@shared/services/pmo/restaurant"
@@ -34,7 +34,9 @@ const CityList: React.FC<CityListProps> = ({ state }) => {
       <FlatList
         data={cities}
         renderItem={({ item: city }) => (
-          <Button href={`/choose/${state}/${city.name}`}>{city.name}</Button>
+          <LinkButton href={`/choose/${state}/${city.name}`}>
+            {city.name}
+          </LinkButton>
         )}
         keyExtractor={(item) => item.name}
       />

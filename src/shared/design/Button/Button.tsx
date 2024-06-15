@@ -1,10 +1,11 @@
-import { Link } from "expo-router"
+import { forwardRef } from "react"
 import {
   PressableProps,
   ViewStyle,
   TextStyle,
   StyleSheet,
   Pressable,
+  View,
 } from "react-native"
 
 import { Theme, useTheme } from "../theme"
@@ -15,37 +16,27 @@ type Variant = "primary" | "secondary" | "outline"
 export interface ButtonProps extends PressableProps {
   variant?: Variant
   disabled?: boolean
-  href?: string
   children: string
 }
 
-const Button: React.FC<ButtonProps> = ({
-  variant = "primary",
-  disabled,
-  href,
-  children,
-  ...props
-}) => {
+const Button: React.ForwardRefRenderFunction<View, ButtonProps> = (
+  { variant = "primary", disabled, children, ...props },
+  ref,
+) => {
   const theme = useTheme()
   const styles = getStyles(theme, variant)
 
-  if (href) {
-    return (
-      <Link href={href} asChild>
-        <Button variant={variant} disabled={disabled} {...props}>
-          {children}
-        </Button>
-      </Link>
-    )
-  }
-
   return (
     <Pressable
-      disabled={disabled}
-      style={StyleSheet.compose(styles.pressable, {
-        opacity: disabled ? 0.5 : 1,
-      })}
+      ref={ref}
       {...props}
+      disabled={disabled}
+      style={[
+        styles.pressable,
+        {
+          opacity: disabled ? 0.5 : 1,
+        },
+      ]}
     >
       <Typography variant="button" style={styles.text}>
         {children}
@@ -54,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
   )
 }
 
-export default Button
+export default forwardRef(Button)
 
 function getStyles(
   theme: Theme,

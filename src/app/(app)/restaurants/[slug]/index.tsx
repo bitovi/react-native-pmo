@@ -1,15 +1,11 @@
-import { Link, useLocalSearchParams } from "expo-router"
+import { useLocalSearchParams } from "expo-router"
 
-import Screen from "@shared/design/Screen"
+import RestaurantDetails from "@screens/RestaurantDetails"
 
 const RestaurantPage: React.FC = () => {
   const { slug } = useLocalSearchParams()
 
-  return (
-    <Screen title="<Restaurant Name>">
-      <Link href={`/restaurants/${slug}/order`}>Order</Link>
-    </Screen>
-  )
+  return <RestaurantDetails slug={slug as string} />
 }
 
 export default RestaurantPage

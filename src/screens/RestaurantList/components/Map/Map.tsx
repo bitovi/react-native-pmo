@@ -2,7 +2,7 @@
 import { FlatList } from "react-native"
 
 import Box from "@shared/design/Box"
-import Button from "@shared/design/Button"
+import LinkButton from "@shared/design/LinkButton"
 import { Restaurant } from "@shared/services/pmo/restaurant"
 
 export interface MapProps {
@@ -15,9 +15,9 @@ const Map: React.FC<MapProps> = ({ data }) => {
       <FlatList
         data={data}
         renderItem={({ item: restaurant }) => (
-          <Button href={`/restaurants/${restaurant.slug}`}>
+          <LinkButton href={`/restaurants/${restaurant.slug}`}>
             {restaurant.name}
-          </Button>
+          </LinkButton>
         )}
         keyExtractor={(item) => item._id}
       />

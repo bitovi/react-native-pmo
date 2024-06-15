@@ -1,13 +1,7 @@
-import { Text } from "react-native"
-
-import Screen from "@shared/design/Screen"
+import Settings from "@screens/Settings"
 
 const SettingsPage: React.FC = () => {
-  return (
-    <Screen title="Settings">
-      <Text>Settings</Text>
-    </Screen>
-  )
+  return <Settings />
 }
 
 export default SettingsPage

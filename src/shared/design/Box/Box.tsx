@@ -28,7 +28,7 @@ const Box: React.FC<BoxProps> = ({
   const View = scrollable ? ScrollView : StaticView
 
   return (
-    <View style={StyleSheet.compose(styles.container, style)} {...props}>
+    <View {...props} style={[styles.container, style]}>
       {children}
     </View>
   )

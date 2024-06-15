@@ -2,7 +2,7 @@ import { FlatList } from "react-native"
 
 import Loading from "@shared/components/Loading"
 import Box from "@shared/design/Box"
-import Button from "@shared/design/Button"
+import LinkButton from "@shared/design/LinkButton"
 import Screen from "@shared/design/Screen"
 import Typography from "@shared/design/Typography"
 import { useStates } from "@shared/services/pmo/restaurant"
@@ -14,7 +14,7 @@ const StateList: React.FC<StateListProps> = () => {
 
   if (error) {
     return (
-      <Screen>
+      <Screen title="Choose a State">
         <Box padding="s">
           <Typography variant="heading">Error loading states: </Typography>
           <Typography variant="body">{error.message}</Typography>
@@ -28,11 +28,11 @@ const StateList: React.FC<StateListProps> = () => {
   }
 
   return (
-    <Screen noScroll>
+    <Screen noScroll title="Choose a State">
       <FlatList
         data={states}
         renderItem={({ item: state }) => (
-          <Button href={`/choose/${state.short}`}>{state.name}</Button>
+          <LinkButton href={`/choose/${state.short}`}>{state.name}</LinkButton>
         )}
         keyExtractor={(item) => item.short}
       />

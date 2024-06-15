@@ -19,13 +19,16 @@ const Screen: React.FC<ScreenProps> = ({
 
   return (
     <Box
+      {...props}
       scrollable={!noScroll}
       padding="s"
-      style={{
-        flex: 1,
-        backgroundColor: theme.palette.screen.soft,
-      }}
-      {...props}
+      style={[
+        {
+          flex: 1,
+          backgroundColor: theme.palette.screen.soft,
+        },
+        style,
+      ]}
     >
       {title && <Stack.Screen options={{ title }} />}
 
