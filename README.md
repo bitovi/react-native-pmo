@@ -9,13 +9,19 @@ To run this repo, you must have one of these two operating systems:
 
 The setup steps below will walk you through installing these dependencies across both operating systems:
 
-- Node 18 or newer
-- npm 9 or newer
-- JDK 17 or equivalent
-- Android Studio
-- Android SDK
-- Android SDK Platform
-- Android Virtual Device
+- Node.js 20
+- npm 10
+- for Android:
+  - JDK 17 or equivalent
+  - Android Studio
+  - Android SDK
+  - Android SDK Platform
+  - Android Virtual Device
+- for iOS:
+  - macOS
+  - Xcode or Xcode Command Line Tools
+  - Xcode iOS Platform
+  - Xcode iOS Simulator
 
 Specific to macOS:
 
@@ -159,27 +165,33 @@ npm ci
 
 Follow the instructions in the “Using a virtual device” section (under “Preparing the Android device”) of the quickstart guide.
 
-The Android Emulator must be running before you build the app.
+### Install the development build
 
-### Build and launch the app
-
-Run the app in the Android Emulator with:
+Install the app in the emulator with:
 
 ```
 npm run android
 ```
 
+and/or
+
+```
+npm run ios
+```
+
+It will open the emulator or browser for you as needed but it will not start the dev server, so the app will show an error. As long as the app opens on the device, this was a success.
+
 ### Running
 
-`npm run <android|ios|web>`
+Start the development server with:
 
-You can also use `npm run start` and then press `a`, `i`, or `w` to run Android, iOS, or Web. The advantage of this method is you can multiple platforms from the same terminal by pressing multiple letters.
+```
+npm run start
+```
 
-_Note:_
+and ensure it says "Using **development build**". If it says "Using **Expo Go**", press `s` to switch to the development build.
 
-- When running iOS, it just runs.
-- When running Web, it just runs.
-- When running Android, run the virtual device first.
+You can then press `a`, `i`, or `w` to run Android, iOS, or Web. You can run any or all of them at the same time. It will open the emulator or browser for you as needed.
 
 ### Debugging with React DevTools
 

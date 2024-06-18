@@ -3,6 +3,7 @@ ignores:
   - "@babel/*"
   - "@shared/*"
   - "@screens/*"
+  - expo-dev-client
   - expo-system-ui
   - identity-obj-proxy
   - react-dom

@@ -5,12 +5,11 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo prebuild && expo start --clear",
+    "api": "place-my-order-api --port 7070",
     "android": "expo prebuild --platform android && expo run:android --no-bundler",
     "android:linkLocalhost": "adb reverse tcp:7070 tcp:7070",
     "ios": "expo prebuild --platform ios && expo run:ios --no-bundler",
-    "api": "place-my-order-api --port 7070",
     "web": "expo start --web",
-    "web:build": "expo export --platform web",
     "typecheck": "tsc --noEmit",
     "eslint": "eslint .",
     "eslint:fix": "eslint --fix .",
