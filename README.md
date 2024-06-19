@@ -37,9 +37,9 @@ Specific to Windows:
 
 ### macOS
 
-Follow the [React Native CLI Quickstart](https://reactnative.dev/docs/environment-setup?guide=native&os=macos&platform=android) instructions for macOS.
+Follow the [React Native Environment Setup](https://reactnative.dev/docs/set-up-your-environment) instructions for macOS with Android as well as iOS target OS.
 
-Be sure to follow the quickstart instructions for:
+Be sure to follow the setup instructions for:
 
 - Watchman
 - Java Development Kit
@@ -92,23 +92,27 @@ brew info --cask zulu17
 
 > After you install the JDK, update your JAVA_HOME environment variable. If you used above steps, JDK will likely be at /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 
+```
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+```
+
 #### Install Android Studio
 
-Follow the instructions in the quickstart guide.
+Follow the instructions in the setup guide.
 
 #### Install the Android SDK
 
-Follow the instructions in the quickstart guide.
+Follow the instructions in the setup guide.
 
 #### Configure the ANDROID_HOME environment variable
 
-Follow the instructions in the quickstart guide.
+Follow the instructions in the setup guide.
 
 ### Windows
 
-Follow the [React Native CLI Quickstart](https://reactnative.dev/docs/environment-setup?guide=native&os=windows&platform=android) instructions for your operating system.
+Follow the [React Native Environment Setup](https://reactnative.dev/docs/set-up-your-environment) instructions for your operating system with Android as the target OS.
 
-Be sure to follow the quickstart instructions for:
+Be sure to follow the setup instructions for:
 
 - JDK
 - Install Android Studio
@@ -133,23 +137,23 @@ For some of the instructions, you may need to [open the command prompt or PowerS
 
 #### JDK
 
-Follow the instructions in the quickstart guide.
+Follow the instructions in the setup guide.
 
 #### Install Android Studio
 
-Follow the instructions in the quickstart guide.
+Follow the instructions in the setup guide.
 
 #### Install the Android SDK
 
-Follow the instructions in the quickstart guide.
+Follow the instructions in the setup guide.
 
 #### Configure the ANDROID_HOME environment variable
 
-Follow the instructions in the quickstart guide.
+Follow the instructions in the setup guide.
 
 #### Add platform-tools to Path
 
-Follow the instructions in the quickstart guide.
+Follow the instructions in the setup guide.
 
 ## Running the app
 
@@ -189,19 +193,23 @@ and ensure it says "Using **development build**". If it says "Using **Expo Go**"
 
 You can then press `a`, `i`, or `w` to run Android, iOS, or Web. You can run any or all of them at the same time. It will open the emulator or browser for you as needed.
 
+Start the API server in a separate terminal with:
+
+```
+npm run api
+```
+
+By default, the Android emulator won't be able to access your localhost server.
+In order to connect it to the emulator run the `adb reverse tcp:7070 tcp:7070` command.
+Make sure if you're running the place-my-order-api on a different port to replace the `7070` with `port`
+e.g. if you're running on port 3030, run `adb reverse tcp:3030 tcp:3030`
+
 ### Debugging with React DevTools
 
 You can run React Devtools with `npm run react-devtools`. This will start the DevTools up which will be ready to open with Metro's in-app dev menu. In running Metro app make sure to hit press 'd' to open the dev menu in React DevTools.
 Alternatively, if you start up the Emulator after React DevTools is running it'll automatically watch the emulator. If for some reason it doesn't watch it, press 'd' on the terminal that opens for the Metro Dev server.
 
 While using the emulator if you wish to use the element inspector, run the `adb shell input keyevent 82` in the terminal.
-
-### Running the local place-my-order-api server for the android emulator
-
-By default, the Android emulator won't be able to access your localhost server.
-In order to connect it to the emulator run the `adb reverse tcp:7070 tcp:7070` command.
-Make sure if you're running the place-my-order-api on a different port to replace the `7070` with `port`
-e.g. if you're running on port 3030, run `adb reverse tcp:3030 tcp:3030`
 
 ### Cleaning build cache
 
