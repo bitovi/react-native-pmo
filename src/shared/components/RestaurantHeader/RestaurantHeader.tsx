@@ -20,6 +20,7 @@ const RestaurantHeader: React.FC<RestaurantHeaderProps> = ({ restaurant }) => {
       <ImageBackground
         style={styles.heroBackground}
         source={{ uri: `${assetsUrl}/${restaurant?.images.banner}` }}
+        alt="Restaurant cover picture"
       >
         <Box margin={["s", "none"]} padding={["xs", "m"]} style={styles.hero}>
           <Typography variant="heading" style={styles.heroText}>
