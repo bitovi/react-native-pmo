@@ -1,9 +1,11 @@
+import { forwardRef } from "react"
 import {
   PressableProps,
   ViewStyle,
   TextStyle,
   StyleSheet,
   Pressable,
+  View,
 } from "react-native"
 
 import { Theme, useTheme } from "../theme"
@@ -17,22 +19,24 @@ export interface ButtonProps extends PressableProps {
   children: string
 }
 
-const Button: React.FC<ButtonProps> = ({
-  variant = "primary",
-  disabled,
-  children,
-  ...props
-}) => {
+const Button: React.ForwardRefRenderFunction<View, ButtonProps> = (
+  { variant = "primary", disabled, children, ...props },
+  ref,
+) => {
   const theme = useTheme()
   const styles = getStyles(theme, variant)
 
   return (
     <Pressable
-      disabled={disabled}
-      style={StyleSheet.compose(styles.pressable, {
-        opacity: disabled ? 0.5 : 1,
-      })}
+      ref={ref}
       {...props}
+      disabled={disabled}
+      style={[
+        styles.pressable,
+        {
+          opacity: disabled ? 0.5 : 1,
+        },
+      ]}
     >
       <Typography variant="button" style={styles.text}>
         {children}
@@ -41,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
   )
 }
 
-export default Button
+export default forwardRef(Button)
 
 function getStyles(
   theme: Theme,

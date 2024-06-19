@@ -22,11 +22,11 @@ export interface Theme {
     xl: number
   }
   typography: {
-    title: TextStyle
-    heading: TextStyle
-    body: TextStyle
-    button: TextStyle
-    label: TextStyle
+    title: Pick<TextStyle, "fontFamily" | "fontSize" | "fontWeight">
+    heading: Pick<TextStyle, "fontFamily" | "fontSize" | "fontWeight">
+    body: Pick<TextStyle, "fontFamily" | "fontSize" | "fontWeight">
+    button: Pick<TextStyle, "fontFamily" | "fontSize" | "fontWeight">
+    label: Pick<TextStyle, "fontFamily" | "fontSize" | "fontWeight">
   }
 }
 

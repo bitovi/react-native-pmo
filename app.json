@@ -1,4 +1,48 @@
 {
-  "name": "PlaceMyOrder",
-  "displayName": "PlaceMyOrder"
+  "expo": {
+    "name": "PlaceMyOrder",
+    "slug": "react-native-pmo",
+    "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
+    "githubUrl": "https://github.com/bitovi/react-native-pmo",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "pmo",
+    "icon": "./assets/icons/icon.png",
+    "plugins": [
+      "expo-router",
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.43379174472-fug03flskrv4amumejbnt79a7nnek7ah"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "splash": {
+      "backgroundColor": "#ffffff",
+      "resizeMode": "contain",
+      "image": "./assets/icons/splash.png"
+    },
+    "android": {
+      "package": "com.bitovi.react_native_pmo",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "monochromeImage": "./assets/icons/android-monochrome.png",
+        "foregroundImage": "./assets/icons/android-adaptive.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.bitovi.react-native-pmo",
+      "buildNumber": "1"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/icons/favicon.png"
+    }
+  }
 }

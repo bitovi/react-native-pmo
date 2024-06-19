@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react-native"
 
-import MockApp from "../../App/MockApp"
-import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
+import * as restaurantHooks from "@shared/services/pmo/restaurant/hooks"
 
 import RestaurantOrder from "./RestaurantOrder"
 
@@ -53,16 +52,11 @@ describe("RestaurantOrder component", () => {
   it("renders restaurant order form", () => {
     useRestaurant.mockReturnValue({
       ...mockRestaurantResponse,
-      error: null,
+      error: undefined,
       isPending: false,
     })
 
-    render(
-      <MockApp
-        component={RestaurantOrder}
-        params={{ restaurantId: "bagel-restaurant" }}
-      />,
-    )
+    render(<RestaurantOrder slug="bagel-restaurant" />)
 
     expect(screen.getByText(/Lunch Menu/i)).toBeOnTheScreen()
     expect(
@@ -79,31 +73,25 @@ describe("RestaurantOrder component", () => {
   })
 
   it("renders loading restaurant", () => {
-    useRestaurant.mockReturnValue({ data: null, error: null, isPending: true })
+    useRestaurant.mockReturnValue({
+      data: undefined,
+      error: undefined,
+      isPending: true,
+    })
 
-    render(
-      <MockApp
-        component={RestaurantOrder}
-        params={{ restaurantId: "bagel-restaurant" }}
-      />,
-    )
+    render(<RestaurantOrder slug="bagel-restaurant" />)
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
 
   it("renders error restaurant", () => {
     useRestaurant.mockReturnValue({
-      data: null,
+      data: undefined,
       error: { name: "Oops", message: "This is the error" },
       isPending: false,
     })
 
-    render(
-      <MockApp
-        component={RestaurantOrder}
-        params={{ restaurantId: "bagel-restaurant" }}
-      />,
-    )
+    render(<RestaurantOrder slug="bagel-restaurant" />)
 
     expect(
       screen.getByText(/Error loading restaurant order:/),

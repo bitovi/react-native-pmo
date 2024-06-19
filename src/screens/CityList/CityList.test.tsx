@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react-native"
 
-import MockApp from "../../App/MockApp"
-import * as restaurantHooks from "../../shared/services/pmo/restaurant/hooks"
+import * as restaurantHooks from "@shared/services/pmo/restaurant/hooks"
 
 import CityList from "./CityList"
 
@@ -20,47 +19,36 @@ describe("CityList component", () => {
   it("renders city List", () => {
     useCities.mockReturnValue({
       ...mockCitiesResponse,
-      error: null,
+      error: undefined,
       isPending: false,
     })
 
-    render(
-      <MockApp
-        component={CityList}
-        params={{ state: { name: "test", short: "test" } }}
-      />,
-    )
+    render(<CityList state="TEST" />)
 
     expect(screen.getByText(/Detroit/i)).toBeOnTheScreen()
     expect(screen.getByText(/Ann Arbor/i)).toBeOnTheScreen()
   })
 
   it("renders loading city", () => {
-    useCities.mockReturnValue({ data: null, error: null, isPending: true })
+    useCities.mockReturnValue({
+      data: undefined,
+      error: undefined,
+      isPending: true,
+    })
 
-    render(
-      <MockApp
-        component={CityList}
-        params={{ state: { name: "test", short: "test" } }}
-      />,
-    )
+    render(<CityList state="TEST" />)
 
     expect(screen.getByText(/Loading/i)).toBeOnTheScreen()
   })
 
   it("renders error city", () => {
     useCities.mockReturnValue({
-      data: null,
+      data: undefined,
       error: { name: "Oops", message: "This is the error" },
       isPending: false,
     })
 
-    render(
-      <MockApp
-        component={CityList}
-        params={{ state: { name: "test", short: "test" } }}
-      />,
-    )
+    render(<CityList state="TEST" />)
 
     expect(screen.getByText(/Error loading cities:/)).toBeOnTheScreen()
     expect(screen.getByText(/This is the error/)).toBeOnTheScreen()

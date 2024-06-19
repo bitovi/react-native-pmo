@@ -1,26 +1,22 @@
 import { FlatList } from "react-native"
 
-import Box from "../../../../shared/design/Box"
-import Button from "../../../../shared/design/Button"
-import { Restaurant } from "../../../../shared/services/pmo/restaurant"
+import Box from "@shared/design/Box"
+import LinkButton from "@shared/design/LinkButton"
+import { Restaurant } from "@shared/services/pmo/restaurant"
 
-export interface RestaurantListProps {
-  data: Restaurant[]
-  navigateToRestaurant: (slug: string) => void
+export interface ListProps {
+  restaurants: Restaurant[]
 }
 
-const RestaurantList: React.FC<RestaurantListProps> = ({
-  data,
-  navigateToRestaurant,
-}) => {
+const List: React.FC<ListProps> = ({ restaurants }) => {
   return (
     <Box padding="s">
       <FlatList
-        data={data}
+        data={restaurants}
         renderItem={({ item: restaurant }) => (
-          <Button onPress={() => navigateToRestaurant(restaurant.slug)}>
+          <LinkButton href={`/restaurants/${restaurant.slug}`}>
             {restaurant.name}
-          </Button>
+          </LinkButton>
         )}
         keyExtractor={(item) => item._id}
       />
@@ -28,4 +24,4 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
   )
 }
 
-export default RestaurantList
+export default List

@@ -1,51 +1,27 @@
-import { useNavigation } from "@react-navigation/native"
-import { StackScreenProps } from "@react-navigation/stack"
-import { useEffect } from "react"
+import Loading from "@shared/components/Loading"
+import RestaurantHeader from "@shared/components/RestaurantHeader"
+import Button from "@shared/design/Button"
+import LinkButton from "@shared/design/LinkButton"
+import Screen from "@shared/design/Screen"
+import Typography from "@shared/design/Typography"
+import { useUser, useAuthentication } from "@shared/services/auth"
+import { useFavorites } from "@shared/services/pmo/favorite"
+import { useRestaurant } from "@shared/services/pmo/restaurant"
 
-import { RestaurantsStackParamList } from "../../App"
-import Loading from "../../shared/components/Loading"
-import RestaurantHeader from "../../shared/components/RestaurantHeader"
-import Button from "../../shared/design/Button"
-import Screen from "../../shared/design/Screen"
-import Typography from "../../shared/design/Typography"
-import {
-  useAuthenticated,
-  useUser,
-  useAuthentication,
-} from "../../shared/services/auth"
-import { useFavorites } from "../../shared/services/pmo/favorite"
-import {
-  City,
-  State,
-  useRestaurant,
-} from "../../shared/services/pmo/restaurant"
-
-export interface RestaurantDetailsParams {
-  state: State
-  city: City
+export interface RestaurantDetailsProps {
   slug: string
 }
 
-export interface RestaurantDetailsProps
-  extends StackScreenProps<RestaurantsStackParamList, "RestaurantDetails"> {}
-
-const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ route }) => {
-  const { slug } = route.params
-  const navigation = useNavigation()
-  const { data: restaurant, error, isPending } = useRestaurant(slug)
-  const isAuthenticated = useAuthenticated()
+const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ slug }) => {
   const user = useUser()
   const { signIn } = useAuthentication()
+
+  const { data: restaurant, error, isPending } = useRestaurant(slug)
   const { updateFavorites, favorite } = useFavorites(user?.id, restaurant?._id)
-  useEffect(() => {
-    if (restaurant) {
-      navigation.setOptions({ title: `${restaurant.name}` })
-    }
-  }, [restaurant, navigation])
 
   if (error) {
     return (
-      <Screen>
+      <Screen title="Restaurant">
         <Typography variant="heading">
           Error loading restaurant details:{" "}
         </Typography>
@@ -55,35 +31,35 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({ route }) => {
   }
 
   if (isPending) {
-    return <Loading />
+    return (
+      <Screen title="Restaurant">
+        <Loading />
+      </Screen>
+    )
   }
 
   return (
     <>
       <RestaurantHeader restaurant={restaurant} />
 
-      <Screen>
+      <Screen title={`${restaurant?.name}`}>
         <Button
           onPress={() => {
-            if (isAuthenticated) {
+            if (user) {
               updateFavorites(restaurant!._id)
             } else {
               signIn()
             }
           }}
         >
-          {isAuthenticated && favorite?.favorite
+          {user && favorite?.favorite
             ? "Remove from Favorites"
             : "Add to favorites"}
         </Button>
 
-        <Button
-          onPress={() => {
-            navigation.navigate("RestaurantOrder", { slug: slug })
-          }}
-        >
+        <LinkButton href={`/restaurants/${slug}/order`}>
           Place an order
-        </Button>
+        </LinkButton>
       </Screen>
     </>
   )

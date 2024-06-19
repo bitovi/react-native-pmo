@@ -1,14 +1,13 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json",
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "module": "ES2022",
-    "types": ["react-native", "jest", "node"],
+    "paths": {
+      "@shared/*": ["./src/shared/*"],
+      "@screens/*": ["./src/screens/*"]
+    },
 
-    "declaration": true,
-    "composite": true,
-    "incremental": true,
+    "module": "ESNext",
     "strict": true,
-    "noEmit": true,
 
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
@@ -22,6 +21,5 @@
     "skipLibCheck": true,
     "useDefineForClassFields": true
   },
-  "include": ["@types", "*.ts", "src"],
-  "exclude": ["node_modules"]
+  "include": [".expo/types/**/*.ts", "@types", "expo-env.d.ts", "*.ts", "src"]
 }

@@ -9,13 +9,19 @@ To run this repo, you must have one of these two operating systems:
 
 The setup steps below will walk you through installing these dependencies across both operating systems:
 
-- Node 18 or newer
-- npm 9 or newer
-- JDK 17 or equivalent
-- Android Studio
-- Android SDK
-- Android SDK Platform
-- Android Virtual Device
+- Node.js 20
+- npm 10
+- for Android:
+  - JDK 17 or equivalent
+  - Android Studio
+  - Android SDK
+  - Android SDK Platform
+  - Android Virtual Device
+- for iOS:
+  - macOS
+  - Xcode or Xcode Command Line Tools
+  - Xcode iOS Platform
+  - Xcode iOS Simulator
 
 Specific to macOS:
 
@@ -155,44 +161,46 @@ Clone this repo and run:
 npm ci
 ```
 
-### Start the emulator
+### Install the development build
 
-Follow the instructions in the “Using a virtual device” section (under “Preparing the Android device”) of the quickstart guide.
-
-The Android Emulator must be running before you build the app.
-
-### Build and launch the app
-
-Run the app in the Android Emulator with:
+Install the app in the emulator with:
 
 ```
 npm run android
 ```
 
+and/or
+
+```
+npm run ios
+```
+
+It will open the emulator or browser for you as needed but it will not start the dev server, so the app will show the error "There was a problem loading the project. Failed to connect." As long as the app opens on the device, this was a success.
+
 ### Running
 
-`npm run <android|ios|web>`
+Start the development server with:
 
-You can also use `npm run start` and then press `a`, `i`, or `w` to run Android, iOS, or Web. The advantage of this method is you can multiple platforms from the same terminal by pressing multiple letters.
+```
+npm run start
+```
 
-*Note:*
+and ensure it says "Using **development build**". If it says "Using **Expo Go**", press `s` to switch to the development build.
 
-- When running iOS, it just runs.
-- When running Web, it just runs.
-- When running Android, run the virtual device first.
+You can then press `a`, `i`, or `w` to run Android, iOS, or Web. You can run any or all of them at the same time. It will open the emulator or browser for you as needed.
 
 ### Debugging with React DevTools
 
 You can run React Devtools with `npm run react-devtools`. This will start the DevTools up which will be ready to open with Metro's in-app dev menu. In running Metro app make sure to hit press 'd' to open the dev menu in React DevTools.
-Alternatively, if you start up the Emulator after React DevTools is running it'll automatically watch the emulator. If for some reason it doesn't watch it, press 'd' on the terminal that opens for the Metro Dev server. 
+Alternatively, if you start up the Emulator after React DevTools is running it'll automatically watch the emulator. If for some reason it doesn't watch it, press 'd' on the terminal that opens for the Metro Dev server.
 
 While using the emulator if you wish to use the element inspector, run the `adb shell input keyevent 82` in the terminal.
 
 ### Running the local place-my-order-api server for the android emulator
 
 By default, the Android emulator won't be able to access your localhost server.
-In order to connect it to the emulator run the `adb reverse tcp:7070 tcp:7070` command. 
-Make sure if you're running the place-my-order-api on a different port to replace the `7070` with `port` 
+In order to connect it to the emulator run the `adb reverse tcp:7070 tcp:7070` command.
+Make sure if you're running the place-my-order-api on a different port to replace the `7070` with `port`
 e.g. if you're running on port 3030, run `adb reverse tcp:3030 tcp:3030`
 
 ### Cleaning build cache
@@ -200,12 +208,22 @@ e.g. if you're running on port 3030, run `adb reverse tcp:3030 tcp:3030`
 While developing or making changes to the `.env` the emulator will use cached results, so you may not see your changes.
 To amend this, shut off the emulator and use the `npm run clean` command. After starting up the emulator should take the new `.env` variables.
 
-### Common Emulator Issues
+## Troubleshooting
 
-When using the `npm run android` command, if an existing instance of the emulator is running it will add a message that says so. Be sure the terminal window that was hosting the React Native dev server isn't still on. 
+### Android
 
-When turning off the emulator, use `Ctrl+C` to stop the server from running before closing the terminal window. If you're struggling to run the emulator because there is another instance running, there is a chance you may have closed the terminal before stopping the server. In this case, you may have to use Task Manager or Activity Monitor to close the rogue instance of the server. Finally, if none of the proposed solutions work, just try restarting your work system.
+1. In the Virtual Device Manager, confirm that your image is running Android 14 with API 34.
+2. In the Virtual Device Manager, click the 3 dots menu and "Wipe Data".
+3. In the local repo, run npm run clean.
+4. Run `npm run android` to install the app shell. It should launch the emulator with the error "There was a problem loading the project. Failed to connect."
+5. Run `npm run start` and press `a` to load the app into the shell.
 
+### iOS
+
+1. In the iOS Simulator, go to Device >> Erase All Content and Settings...
+1. In the local repo, run npm run clean.
+1. Run `npm run ios` to install the app shell. It should launch the emulator with the error "There was a problem loading the project. Failed to connect."
+1. Run `npm run start` and press `i` to load the app into the shell.
 
 ## Links to documentation
 

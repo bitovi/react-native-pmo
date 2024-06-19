@@ -6,10 +6,14 @@ import { useCallback, useEffect, useMemo, useState } from "react"
 
 import { AuthContext, AuthContextProvider, useAuthContext } from "./context"
 
-const googleOauthwebClientId = process.env.GOOGLE_OAUTH_CLIENT_ID
+const googleOauthWebClientId =
+  process.env.EXPO_PUBLIC_GOOGLE_OAUTH_WEB_CLIENT_ID
+const googleOauthIosClientId =
+  process.env.EXPO_PUBLIC_GOOGLE_OAUTH_IOS_CLIENT_ID
 GoogleSignin.configure({
   scopes: ["openid", "profile", "email"],
-  webClientId: googleOauthwebClientId,
+  webClientId: googleOauthWebClientId,
+  iosClientId: googleOauthIosClientId,
 })
 
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
