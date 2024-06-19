@@ -161,10 +161,6 @@ Clone this repo and run:
 npm ci
 ```
 
-### Start the emulator
-
-Follow the instructions in the “Using a virtual device” section (under “Preparing the Android device”) of the quickstart guide.
-
 ### Install the development build
 
 Install the app in the emulator with:
@@ -179,7 +175,7 @@ and/or
 npm run ios
 ```
 
-It will open the emulator or browser for you as needed but it will not start the dev server, so the app will show an error. As long as the app opens on the device, this was a success.
+It will open the emulator or browser for you as needed but it will not start the dev server, so the app will show the error "There was a problem loading the project. Failed to connect." As long as the app opens on the device, this was a success.
 
 ### Running
 
@@ -212,11 +208,22 @@ e.g. if you're running on port 3030, run `adb reverse tcp:3030 tcp:3030`
 While developing or making changes to the `.env` the emulator will use cached results, so you may not see your changes.
 To amend this, shut off the emulator and use the `npm run clean` command. After starting up the emulator should take the new `.env` variables.
 
-### Common Emulator Issues
+## Troubleshooting
 
-When using the `npm run android` command, if an existing instance of the emulator is running it will add a message that says so. Be sure the terminal window that was hosting the React Native dev server isn't still on.
+### Android
 
-When turning off the emulator, use `Ctrl+C` to stop the server from running before closing the terminal window. If you're struggling to run the emulator because there is another instance running, there is a chance you may have closed the terminal before stopping the server. In this case, you may have to use Task Manager or Activity Monitor to close the rogue instance of the server. Finally, if none of the proposed solutions work, just try restarting your work system.
+1. In the Virtual Device Manager, confirm that your image is running Android 14 with API 34.
+2. In the Virtual Device Manager, click the 3 dots menu and "Wipe Data".
+3. In the local repo, run npm run clean.
+4. Run `npm run android` to install the app shell. It should launch the emulator with the error "There was a problem loading the project. Failed to connect."
+5. Run `npm run start` and press `a` to load the app into the shell.
+
+### iOS
+
+1. In the iOS Simulator, go to Device >> Erase All Content and Settings...
+1. In the local repo, run npm run clean.
+1. Run `npm run ios` to install the app shell. It should launch the emulator with the error "There was a problem loading the project. Failed to connect."
+1. Run `npm run start` and press `i` to load the app into the shell.
 
 ## Links to documentation
 
