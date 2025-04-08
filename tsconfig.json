@@ -5,6 +5,7 @@
       "@shared/*": ["./src/shared/*"],
       "@screens/*": ["./src/screens/*"]
     },
+    "types": ["react-native", "jest", "node"],
 
     "module": "ESNext",
     "strict": true,

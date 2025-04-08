@@ -55,7 +55,10 @@ function getStyles(theme: Theme): {
 } {
   return StyleSheet.create({
     heroBackground: {
+      width: "100%",
+      maxWidth: 768,
       height: 180,
+      margin: "auto",
       justifyContent: "flex-end",
       alignItems: "flex-start",
     },
