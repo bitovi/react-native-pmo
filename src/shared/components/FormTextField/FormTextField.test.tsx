@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, userEvent } from "@testing-library/react-native"
+import { render, screen, userEvent } from "@testing-library/react-native"
 
 import FormTextField from "./FormTextField"
 
