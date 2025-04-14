@@ -6,21 +6,34 @@ import {
   StyleSheet,
   Pressable,
   View,
+  Text,
 } from "react-native"
 
 import { Theme, useTheme } from "../theme"
-import Typography from "../Typography"
 
 type Variant = "primary" | "secondary" | "outline"
 
 export interface ButtonProps extends PressableProps {
   variant?: Variant
+  margin?: keyof Theme["spacing"]
+  padding?: keyof Theme["spacing"]
+  fontSize?: TextStyle["fontSize"]
+  fontWeight?: TextStyle["fontWeight"]
   disabled?: boolean
   children: string
 }
 
 const Button: React.ForwardRefRenderFunction<View, ButtonProps> = (
-  { variant = "primary", disabled, children, ...props },
+  {
+    variant = "primary",
+    margin,
+    padding,
+    fontSize = 20,
+    fontWeight = "400",
+    disabled,
+    children,
+    ...props
+  },
   ref,
 ) => {
   const theme = useTheme()
@@ -28,19 +41,23 @@ const Button: React.ForwardRefRenderFunction<View, ButtonProps> = (
 
   return (
     <Pressable
-      ref={ref}
       {...props}
+      ref={ref}
+      style={StyleSheet.compose(styles.pressable, {
+        ...(margin ? { margin: theme.spacing[margin] } : {}),
+        ...(padding ? { padding: theme.spacing[padding] } : {}),
+        opacity: disabled ? 0.5 : 1,
+      })}
       disabled={disabled}
-      style={[
-        styles.pressable,
-        {
-          opacity: disabled ? 0.5 : 1,
-        },
-      ]}
     >
-      <Typography variant="button" style={styles.text}>
+      <Text
+        style={StyleSheet.compose(styles.text, {
+          fontSize,
+          fontWeight,
+        })}
+      >
         {children}
-      </Typography>
+      </Text>
     </Pressable>
   )
 }

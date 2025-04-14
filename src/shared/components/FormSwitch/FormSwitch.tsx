@@ -7,17 +7,11 @@ import Typography from "../../design/Typography"
 
 export interface FormSwitchProps {
   label: string
-  hint?: string
   value: boolean
   onChange: (value: boolean) => void
 }
 
-const FormSwitch: React.FC<FormSwitchProps> = ({
-  label,
-  hint,
-  value,
-  onChange,
-}) => {
+const FormSwitch: React.FC<FormSwitchProps> = ({ label, value, onChange }) => {
   const theme = useTheme()
   const id = useId()
 
@@ -37,7 +31,6 @@ const FormSwitch: React.FC<FormSwitchProps> = ({
       <Switch
         accessibilityLabel={label}
         accessibilityLabelledBy={id}
-        accessibilityHint={hint}
         onValueChange={onChange}
         value={value}
         thumbColor={theme.palette.primary.contrast}

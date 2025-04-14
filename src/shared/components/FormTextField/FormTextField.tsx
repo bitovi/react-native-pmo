@@ -8,16 +8,12 @@ import Typography from "../../design/Typography"
 export interface FormTextFieldProps {
   type?: "text"
   label: string
-  hint?: string
-  placeholder?: string
   value: string
   onChange?: (value: string) => void
 }
 
 const FormTextField: React.FC<FormTextFieldProps> = ({
   label,
-  hint,
-  placeholder,
   value,
   onChange,
 }) => {
@@ -32,10 +28,8 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
       <TextInput
         accessibilityLabel={label}
         accessibilityLabelledBy={id}
-        accessibilityHint={hint}
         onChangeText={onChange}
         value={value}
-        placeholder={placeholder}
         style={{
           flex: 1,
           paddingVertical: 0,

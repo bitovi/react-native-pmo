@@ -19,35 +19,65 @@ GoogleSignin.configure({
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [error, setError] = useState<Error | undefined>()
+  const [isPending, setIsPending] = useState<boolean>(true)
   const [userInfo, setUserInfo] = useState<UserInfo | null>()
 
   const signIn = useCallback(async () => {
     try {
+      setError(undefined)
+      setIsPending(true)
       const userInfo = await GoogleSignin.signIn()
+      setIsPending(false)
       setUserInfo(userInfo)
       return userInfo.user
     } catch (error) {
       setUserInfo(null)
       console.error("GoogleSignin.signIn() error", error)
+      setError(error as Error)
+      setIsPending(false)
+      setUserInfo(null)
       return false
     }
   }, [])
 
   const signOut = useCallback(async () => {
     try {
+      setError(undefined)
+      setIsPending(true)
+
       await GoogleSignin.signOut()
+      setIsPending(false)
       setUserInfo(null)
+
       return true
     } catch (error) {
       console.error("GoogleSignin.signOut() error", error)
+      setError(error as Error)
+
       return false
     }
   }, [])
 
   useEffect(() => {
     async function run() {
-      const userInfo = await GoogleSignin.getCurrentUser()
-      setUserInfo(userInfo)
+      try {
+        setError(undefined)
+        setIsPending(true)
+
+        const userInfo = await GoogleSignin.getCurrentUser()
+
+        setIsPending(false)
+        setUserInfo(userInfo || undefined)
+      } catch (error) {
+        console.error(
+          "Call to GoogleSignin.getCurrentUser() failed with error:",
+          error,
+        )
+
+        setError(error as Error)
+        setIsPending(false)
+      }
     }
 
     run()
@@ -57,7 +87,9 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     () => ({
       signIn,
       signOut,
+      error,
       isAuthenticated: userInfo ? true : userInfo === null ? false : undefined,
+      isPending,
       user: userInfo?.user,
       scopes: userInfo?.scopes,
       idToken: userInfo?.idToken,
