@@ -53,43 +53,16 @@ function getStyles(
       {
         display: "flex",
       },
-      margin && spacingToStyles(theme, "margin", margin),
-      padding && spacingToStyles(theme, "padding", padding),
+      typeof margin === "string" && { margin: theme.spacing[margin] },
+      Array.isArray(margin) && {
+        marginVertical: theme.spacing[margin[0]],
+        marginHorizontal: theme.spacing[margin[1]],
+      },
+      typeof padding === "string" && { padding: theme.spacing[padding] },
+      Array.isArray(padding) && {
+        paddingVertical: theme.spacing[padding[0]],
+        paddingHorizontal: theme.spacing[padding[1]],
+      },
     ]),
   })
-}
-
-function spacingToStyles(
-  theme: Theme,
-  property: "margin" | "padding",
-  value: ThemeMargin | ThemePadding,
-): ViewStyle {
-  if (typeof value === "string") {
-    return {
-      [property]: theme.spacing[value],
-    }
-  }
-
-  if (value.length === 1) {
-    return {
-      [property]: theme.spacing[value[0]],
-    }
-  }
-
-  if (value.length === 2) {
-    return {
-      [`${property}Vertical`]: theme.spacing[value[0]],
-      [`${property}Horizontal`]: theme.spacing[value[1]],
-    }
-  }
-
-  if (value.length === 3) {
-    return {
-      [`${property}Top`]: theme.spacing[value[0]],
-      [`${property}Horizontal`]: theme.spacing[value[1]],
-      [`${property}Bottom`]: theme.spacing[value[2]],
-    }
-  }
-
-  throw new Error(`Invalid spacing value: ${value}`)
 }

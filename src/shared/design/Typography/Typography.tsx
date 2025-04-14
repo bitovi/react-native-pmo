@@ -16,7 +16,7 @@ const Typography: React.FC<TypographyProps> = ({
   const styles = getStyles(theme, variant)
 
   return (
-    <Text {...props} style={[styles.text, style]}>
+    <Text {...props} style={StyleSheet.compose(styles.text, style)}>
       {children}
     </Text>
   )

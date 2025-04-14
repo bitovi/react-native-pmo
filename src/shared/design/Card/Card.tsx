@@ -33,6 +33,7 @@ function getStyles(theme: Theme): {
 } {
   return StyleSheet.create({
     container: {
+      width: "100%",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.25,
 
