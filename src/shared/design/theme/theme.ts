@@ -36,7 +36,7 @@ export type ThemeMargin =
 export type ThemePadding =
   | keyof Theme["spacing"]
   | [keyof Theme["spacing"], keyof Theme["spacing"]]
-  
+
 const light: Theme = {
   palette: {
     screen: {

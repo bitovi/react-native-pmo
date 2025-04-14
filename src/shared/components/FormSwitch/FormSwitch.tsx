@@ -11,11 +11,7 @@ export interface FormSwitchProps {
   onChange: (value: boolean) => void
 }
 
-const FormSwitch: React.FC<FormSwitchProps> = ({
-  label,
-  value,
-  onChange,
-}) => {
+const FormSwitch: React.FC<FormSwitchProps> = ({ label, value, onChange }) => {
   const theme = useTheme()
   const id = useId()
 

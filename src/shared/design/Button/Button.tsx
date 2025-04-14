@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Pressable,
   View,
-  Text
+  Text,
 } from "react-native"
 
 import { Theme, useTheme } from "../theme"
@@ -23,17 +23,18 @@ export interface ButtonProps extends PressableProps {
   children: string
 }
 
-const Button: React.ForwardRefRenderFunction<View, ButtonProps> = ({
-  variant = "primary",
-  margin,
-  padding,
-  fontSize = 20,
-  fontWeight = "400",
-  disabled,
-  children,
-  ...props
- },
- ref,
+const Button: React.ForwardRefRenderFunction<View, ButtonProps> = (
+  {
+    variant = "primary",
+    margin,
+    padding,
+    fontSize = 20,
+    fontWeight = "400",
+    disabled,
+    children,
+    ...props
+  },
+  ref,
 ) => {
   const theme = useTheme()
   const styles = getStyles(theme, variant)
